@@ -1,4 +1,4 @@
-package loginprototype.DB;
+package loginprototype.DB.Model;
 
 public class User {
   String name;

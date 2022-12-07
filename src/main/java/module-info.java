@@ -4,8 +4,10 @@ module loginprototype {
   requires java.sql;
   requires spring.security.core;
 
-  opens loginprototype.UI to javafx.fxml;
-  exports loginprototype.UI;
-  opens loginprototype.BL to javafx.fxml;
-  exports loginprototype.BL;
+  exports loginprototype.BL.Facade;
+  opens loginprototype.BL.Facade to javafx.fxml;
+  exports loginprototype.UI.Frame;
+  opens loginprototype.UI.Frame to javafx.fxml;
+  exports loginprototype.UI.Controller;
+  opens loginprototype.UI.Controller to javafx.fxml;
 }

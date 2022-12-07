@@ -1,11 +1,13 @@
-package loginprototype.BL;
+package loginprototype.UI.Controller;
 
+import loginprototype.BL.Facade.UserFacade;
 import loginprototype.DB.*;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import loginprototype.DB.DAO.UserDAO;
 
 public class LoginController {
   @FXML

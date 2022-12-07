@@ -1,4 +1,4 @@
-package loginprototype.UI;
+package loginprototype.UI.Frame;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

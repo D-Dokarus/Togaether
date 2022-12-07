@@ -1,8 +1,9 @@
-package loginprototype.DB;
+package loginprototype.DB.DAO;
+
+import loginprototype.DB.Model.User;
 
 import java.sql.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface UserDAO {

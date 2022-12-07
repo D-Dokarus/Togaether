@@ -1,6 +1,8 @@
-package loginprototype.DB;
+package loginprototype.DB.Postgres.DAO;
 
-import javafx.geometry.Pos;
+import loginprototype.DB.DAO.UserDAO;
+import loginprototype.DB.Model.User;
+import loginprototype.DB.Postgres.PostgresFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +15,7 @@ public class UserDAOPostgres implements UserDAO {
 
   PostgresFactory postgres;
 
-  UserDAOPostgres(PostgresFactory postgres) {
+  public UserDAOPostgres(PostgresFactory postgres) {
     this.postgres = postgres;
   }
   

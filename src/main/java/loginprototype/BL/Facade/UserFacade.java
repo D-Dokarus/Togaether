@@ -1,8 +1,8 @@
-package loginprototype.BL;
+package loginprototype.BL.Facade;
 
 import loginprototype.DB.AbstractFactory;
-import loginprototype.DB.User;
-import loginprototype.DB.UserDAO;
+import loginprototype.DB.Model.User;
+import loginprototype.DB.DAO.UserDAO;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.sql.SQLException;
@@ -12,9 +12,9 @@ public class UserFacade {
 
   static private User user = null;
 
-  static final String LOGIN_SUCCESS = "LOGIN_SUCCESS";
-  static final String BAD_EMAIL = "BAD_EMAIL";
-  static final String BAD_PASSWORD = "BAD_PASSWORD";
+  static final public String LOGIN_SUCCESS = "LOGIN_SUCCESS";
+  static final public String BAD_EMAIL = "BAD_EMAIL";
+  static final public String BAD_PASSWORD = "BAD_PASSWORD";
 
   static public String login(String email, String password) {
     UserDAO userDB = AbstractFactory.getUserDAO();
