@@ -34,7 +34,6 @@ public class UserDAOPostgres implements UserDAO {
 
   public ResultSet findByName(String user_name) throws SQLException{
     try (Connection connection = this.postgres.getConnection()){
-      System.out.println("heho1224535111");
       String query = "SELECT * FROM users WHERE user_name =?";
       try(PreparedStatement statement = connection.prepareStatement(query);){
         statement.setString(1,user_name);

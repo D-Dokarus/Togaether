@@ -1,5 +1,6 @@
 package loginprototype.DB.Postgres;
 
+import loginprototype.DB.AbstractFactory;
 import loginprototype.DB.DAO.UserDAO;
 import loginprototype.DB.Postgres.DAO.UserDAOPostgres;
 
@@ -7,7 +8,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class PostgresFactory {
+public class PostgresFactory extends AbstractFactory {
 
   ConnectionToBD connection;
 
@@ -18,7 +19,7 @@ public class PostgresFactory {
     return new UserDAOPostgres(this);
   }
 
-  public Connection getConnection() throws SQLException {
+   public Connection getConnection() throws SQLException {
     return this.connection.getConnection();
   }
 

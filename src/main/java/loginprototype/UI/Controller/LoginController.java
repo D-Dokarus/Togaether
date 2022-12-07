@@ -1,6 +1,9 @@
 package loginprototype.UI.Controller;
 
+import loginprototype.BL.Facade.DBNotFoundException;
+import loginprototype.BL.Facade.UserBadPasswordException;
 import loginprototype.BL.Facade.UserFacade;
+import loginprototype.BL.Facade.UserNotFoundException;
 import loginprototype.DB.*;
 
 import javafx.fxml.FXML;
@@ -18,13 +21,19 @@ public class LoginController {
   private Button seConnecter;
 
   public void onLoginButtonClick() {
-    UserDAO userDB = AbstractFactory.getUserDAO();
-    String response = UserFacade.login(email.getText(), password.getText());
-    if(response.equals(UserFacade.LOGIN_SUCCESS))
+    try {
+      UserFacade.createInstance().login(email.getText(), password.getText());
       System.out.println("Login réussi");
-    else if (response.equals(UserFacade.BAD_PASSWORD))
-      System.out.println("Mauvais mot de passe");
-    else if (response.equals(UserFacade.BAD_EMAIL))
+    }
+    catch (UserNotFoundException e) {
       System.out.println("Cet utilisateur n'existe pas");
+    }
+    catch (UserBadPasswordException e) {
+      System.out.println("Mauvais mot de passe");
+    }
+    catch (DBNotFoundException e) {
+      System.out.println("Erreur lors de la connexion à la DB");
+    }
+
   }
 }

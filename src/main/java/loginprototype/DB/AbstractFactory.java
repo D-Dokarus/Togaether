@@ -6,11 +6,9 @@ import loginprototype.DB.Postgres.PostgresFactory;
 public abstract class AbstractFactory {
   static private PostgresFactory instance = new PostgresFactory();
 
-  static final public UserDAO getUserDAO() {
-    return instance.getUserDAO();
-  }
+  abstract public UserDAO getUserDAO();
 
-  static void createInstance() {
-
+  public static AbstractFactory createInstance() {
+    return instance;
   }
 }

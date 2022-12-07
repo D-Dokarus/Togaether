@@ -12,28 +12,30 @@ public class UserFacade {
 
   static private User user = null;
 
-  static final public String LOGIN_SUCCESS = "LOGIN_SUCCESS";
-  static final public String BAD_EMAIL = "BAD_EMAIL";
-  static final public String BAD_PASSWORD = "BAD_PASSWORD";
+  static private UserFacade instance = new UserFacade();
 
-  static public String login(String email, String password) {
-    UserDAO userDB = AbstractFactory.getUserDAO();
+  static public void login(String email, String password) throws UserNotFoundException, UserBadPasswordException, DBNotFoundException {
+    AbstractFactory fact = AbstractFactory.createInstance();
+    UserDAO userDB = fact.getUserDAO();
+
     try {
       List<User> u = userDB.findByEmail(email);
       if(u.size() > 0) {
         if (BCrypt.checkpw(password, u.get(0).getPassword())) {
           UserFacade.user = u.get(0);
-          return UserFacade.LOGIN_SUCCESS;
         }
         else
-          return UserFacade.BAD_PASSWORD;
+          throw new UserBadPasswordException();
       }
       else
-        return UserFacade.BAD_EMAIL;
+        throw new UserNotFoundException();
 
     } catch (SQLException e) {
-      System.out.println(e);
+      throw new DBNotFoundException();
     }
-    return "ERROR";
+  }
+
+  public static UserFacade createInstance() {
+    return instance;
   }
 }
