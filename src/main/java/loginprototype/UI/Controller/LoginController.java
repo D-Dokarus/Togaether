@@ -12,6 +12,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import loginprototype.DB.DAO.UserDAO;
 
+/**
+ * Controller de l'interface graphique Login
+ */
 public class LoginController {
   @FXML
   private TextField email;
@@ -20,6 +23,9 @@ public class LoginController {
   @FXML
   private Button seConnecter;
 
+  /**
+   * Action effectuée lors d'une tentative de login
+   */
   public void onLoginButtonClick() {
     try {
       UserFacade.createInstance().login(email.getText(), password.getText());

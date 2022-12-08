@@ -1,5 +1,8 @@
-package loginprototype.DB.Model;
+package loginprototype.BL.Model;
 
+/**
+ * Model d'un user
+ */
 public class User {
   String name;
   String email;

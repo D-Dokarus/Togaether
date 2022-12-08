@@ -1,19 +1,30 @@
 package loginprototype.BL.Facade;
 
 import loginprototype.DB.AbstractFactory;
-import loginprototype.DB.Model.User;
+import loginprototype.BL.Model.User;
 import loginprototype.DB.DAO.UserDAO;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Classe singleton regroupant différentes foncionnalité lié à l'utilisateur courant
+ */
 public class UserFacade {
 
   static private User user = null;
 
   static private UserFacade instance = new UserFacade();
 
+  /**
+   * Méthode vérifiant les identifiants données par l'utilisateur. Si les identifiants ne correspondent pas, ou si une erreur se produit, une exception est levée
+   * @param email
+   * @param password
+   * @throws UserNotFoundException
+   * @throws UserBadPasswordException
+   * @throws DBNotFoundException
+   */
   static public void login(String email, String password) throws UserNotFoundException, UserBadPasswordException, DBNotFoundException {
     AbstractFactory fact = AbstractFactory.createInstance();
     UserDAO userDB = fact.getUserDAO();

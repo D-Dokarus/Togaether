@@ -1,7 +1,7 @@
 package loginprototype.DB.Postgres.DAO;
 
 import loginprototype.DB.DAO.UserDAO;
-import loginprototype.DB.Model.User;
+import loginprototype.BL.Model.User;
 import loginprototype.DB.Postgres.PostgresFactory;
 
 import java.sql.Connection;
@@ -18,7 +18,8 @@ public class UserDAOPostgres implements UserDAO {
   public UserDAOPostgres(PostgresFactory postgres) {
     this.postgres = postgres;
   }
-  
+
+  @Override
   public void insertUser(String user_name, String user_email, String password)  throws SQLException {
     try (Connection connection = this.postgres.getConnection()){
       String query = "INSERT INTO users(user_name, user_email, password) VALUES(?,?, crypt(?,gen_salt('bf', 8)))";
@@ -32,6 +33,7 @@ public class UserDAOPostgres implements UserDAO {
     }
   }
 
+  @Override
   public ResultSet findByName(String user_name) throws SQLException{
     try (Connection connection = this.postgres.getConnection()){
       String query = "SELECT * FROM users WHERE user_name =?";
@@ -45,6 +47,8 @@ public class UserDAOPostgres implements UserDAO {
       }
     }
   }
+
+  @Override
   public List<User> findByEmail(String user_email) throws SQLException{
     try (Connection connection = this.postgres.getConnection()){
       String query = "SELECT * FROM users WHERE user_email =?;";
@@ -59,6 +63,8 @@ public class UserDAOPostgres implements UserDAO {
       }
     }
   }
+
+  @Override
   public void deleteUserByUser(int user_id)  throws SQLException {
     try (Connection connection = this.postgres.getConnection()){
       String query = "DELETE FROM users WHERE user_id=?;";
@@ -70,6 +76,7 @@ public class UserDAOPostgres implements UserDAO {
     }
   }
 
+  @Override
   public ResultSet getAll() throws SQLException {
     try (Connection connection = this.postgres.getConnection()){
       String query = "SELECT * FROM users";

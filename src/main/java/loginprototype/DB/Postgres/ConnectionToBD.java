@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Classe donnant l'accès à la base de données
+ */
 public class ConnectionToBD {
   static String url = "jdbc:postgresql://localhost:5432/toaegether_db";
   static String user = "postgres";

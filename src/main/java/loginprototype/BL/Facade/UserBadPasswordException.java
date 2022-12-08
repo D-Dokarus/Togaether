@@ -1,5 +1,8 @@
 package loginprototype.BL.Facade;
 
+/**
+ * Exception levée lorsque l'utilisateur a donné un mauvais mot de passe
+ */
 public class UserBadPasswordException extends Exception {
   UserBadPasswordException() {
     super();
