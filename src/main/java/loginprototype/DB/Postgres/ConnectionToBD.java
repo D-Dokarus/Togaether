@@ -8,8 +8,8 @@ import java.sql.SQLException;
  * Classe donnant l'accès à la base de données
  */
 public class ConnectionToBD {
-  static String url = "jdbc:postgresql://localhost:5432/toaegether_db";
-  static String user = "postgres";
+  static String url = "jdbc:postgresql://postgresql-togaether-db.alwaysdata.net/togaether-db_db";
+  static String user = "togaether-db";
   static String password = "postgres";
 
   protected Connection getConnection() throws SQLException {
