@@ -1,6 +1,6 @@
-package loginprototype.DB.DAO;
+package togaether.DB;
 
-import loginprototype.BL.Model.User;
+import togaether.BL.Model.User;
 
 import java.sql.*;
 

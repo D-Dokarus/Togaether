@@ -1,8 +1,7 @@
-package loginprototype.DB.Postgres.DAO;
+package togaether.DB.Postgres;
 
-import loginprototype.DB.DAO.UserDAO;
-import loginprototype.BL.Model.User;
-import loginprototype.DB.Postgres.PostgresFactory;
+import togaether.DB.UserDAO;
+import togaether.BL.Model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

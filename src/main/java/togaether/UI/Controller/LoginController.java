@@ -1,16 +1,14 @@
-package loginprototype.UI.Controller;
+package togaether.UI.Controller;
 
-import loginprototype.BL.Facade.DBNotFoundException;
-import loginprototype.BL.Facade.UserBadPasswordException;
-import loginprototype.BL.Facade.UserFacade;
-import loginprototype.BL.Facade.UserNotFoundException;
-import loginprototype.DB.*;
+import togaether.BL.Facade.DBNotFoundException;
+import togaether.BL.Facade.UserBadPasswordException;
+import togaether.BL.Facade.UserFacade;
+import togaether.BL.Facade.UserNotFoundException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import loginprototype.DB.DAO.UserDAO;
 
 /**
  * Controller de l'interface graphique Login

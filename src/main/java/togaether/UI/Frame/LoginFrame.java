@@ -1,4 +1,4 @@
-package loginprototype.UI.Frame;
+package togaether.UI.Frame;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

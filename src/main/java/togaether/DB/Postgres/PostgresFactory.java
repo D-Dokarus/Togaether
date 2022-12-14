@@ -1,11 +1,9 @@
-package loginprototype.DB.Postgres;
+package togaether.DB.Postgres;
 
-import loginprototype.DB.AbstractFactory;
-import loginprototype.DB.DAO.UserDAO;
-import loginprototype.DB.Postgres.DAO.UserDAOPostgres;
+import togaether.DB.AbstractFactory;
+import togaether.DB.UserDAO;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**

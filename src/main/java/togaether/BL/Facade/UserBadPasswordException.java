@@ -1,4 +1,4 @@
-package loginprototype.BL.Facade;
+package togaether.BL.Facade;
 
 /**
  * Exception levée lorsque l'utilisateur a donné un mauvais mot de passe

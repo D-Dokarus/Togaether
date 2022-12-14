@@ -1,8 +1,8 @@
-package loginprototype.BL.Facade;
+package togaether.BL.Facade;
 
-import loginprototype.DB.AbstractFactory;
-import loginprototype.BL.Model.User;
-import loginprototype.DB.DAO.UserDAO;
+import togaether.DB.AbstractFactory;
+import togaether.BL.Model.User;
+import togaether.DB.UserDAO;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.sql.SQLException;

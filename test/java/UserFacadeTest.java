@@ -1,6 +1,6 @@
-import loginprototype.BL.Model.User;
-import loginprototype.DB.AbstractFactory;
-import loginprototype.DB.DAO.UserDAO;
+import togaether.BL.Model.User;
+import togaether.DB.AbstractFactory;
+import togaether.DB.UserDAO;
 import org.junit.jupiter.api.*;
 
 import java.sql.*;

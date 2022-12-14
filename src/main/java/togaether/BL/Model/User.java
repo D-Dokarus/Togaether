@@ -1,4 +1,4 @@
-package loginprototype.BL.Model;
+package togaether.BL.Model;
 
 /**
  * Model d'un user

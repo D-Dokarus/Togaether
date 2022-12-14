@@ -1,7 +1,6 @@
-package loginprototype.DB;
+package togaether.DB;
 
-import loginprototype.DB.DAO.UserDAO;
-import loginprototype.DB.Postgres.PostgresFactory;
+import togaether.DB.Postgres.PostgresFactory;
 
 /**
  * Classe abstraite singleton produisant différents DAO

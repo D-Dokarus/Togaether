@@ -1,4 +1,4 @@
-package loginprototype.BL.Facade;
+package togaether.BL.Facade;
 
 /**
  * Exception levée lorsque le programme n'arrive pas à se connecter à la base de données

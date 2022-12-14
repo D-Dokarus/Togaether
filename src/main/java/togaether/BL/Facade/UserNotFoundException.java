@@ -1,4 +1,4 @@
-package loginprototype.BL.Facade;
+package togaether.BL.Facade;
 
 /**
  * Exception levée lorsqu'un utilisateur n'est pas trouver dans la base de données

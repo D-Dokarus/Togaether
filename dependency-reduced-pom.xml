@@ -18,7 +18,7 @@
               <shadedArtifactAttached>true</shadedArtifactAttached>
               <transformers>
                 <transformer>
-                  <mainClass>loginprototype.DB.DAO</mainClass>
+                  <mainClass>togaether.DB.DAO</mainClass>
                 </transformer>
               </transformers>
             </configuration>

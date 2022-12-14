@@ -65,7 +65,7 @@
                             <shadedArtifactAttached>true</shadedArtifactAttached>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>loginprototype.DB.Postgres.ConnectionToBD</mainClass>
+                                    <mainClass>togaether.DB.Postgres.ConnectionToBD</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

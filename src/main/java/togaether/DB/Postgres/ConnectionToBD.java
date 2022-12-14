@@ -1,4 +1,4 @@
-package loginprototype.DB.Postgres;
+package togaether.DB.Postgres;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
