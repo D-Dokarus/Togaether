@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class UserFacade {
 
-  static private User user = null;
+  static private User connectedUser = null;
 
   static private UserFacade instance = new UserFacade();
 
@@ -31,9 +31,9 @@ public class UserFacade {
 
     try {
       List<User> u = userDB.findByEmail(email);
-      if(u.size() > 0) {
+      if(u.size() == 1) {
         if (BCrypt.checkpw(password, u.get(0).getPassword())) {
-          UserFacade.user = u.get(0);
+          UserFacade.connectedUser = u.get(0);
         }
         else
           throw new UserBadPasswordException();
