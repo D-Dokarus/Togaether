@@ -25,7 +25,7 @@ public class UserFacade {
    * @throws UserBadPasswordException
    * @throws DBNotFoundException
    */
-  static public void login(String email, String password) throws UserNotFoundException, UserBadPasswordException, DBNotFoundException {
+  public void login(String email, String password) throws UserNotFoundException, UserBadPasswordException, DBNotFoundException {
     AbstractFactory fact = AbstractFactory.createInstance();
     UserDAO userDB = fact.getUserDAO();
 

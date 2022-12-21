@@ -26,7 +26,7 @@ public interface UserDAO {
    * @return
    * @throws SQLException
    */
-  public ResultSet findByName(String user_name) throws SQLException;
+  public List<User> findByName(String user_name) throws SQLException;
 
   /**
    * Retourne le résultat d'une recherche d'utilisateur filtré par mail
@@ -41,12 +41,12 @@ public interface UserDAO {
    * @param user_id
    * @throws SQLException
    */
-  public void deleteUserByUser(int user_id)  throws SQLException;
+  public void deleteUserByUserId(int user_id)  throws SQLException;
 
   /**
    * Retourne toutes les données de User
    * @return
    * @throws SQLException
    */
-  public ResultSet getAll() throws SQLException;
+  public List<User> getAll() throws SQLException;
 }

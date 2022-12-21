@@ -33,15 +33,22 @@ public class UserDAOPostgres implements UserDAO {
   }
 
   @Override
-  public ResultSet findByName(String user_name) throws SQLException{
+  public List<User> findByName(String user_name) throws SQLException{
     try (Connection connection = this.postgres.getConnection()){
       String query = "SELECT * FROM users WHERE user_name =?";
       try(PreparedStatement statement = connection.prepareStatement(query);){
         statement.setString(1,user_name);
         try (ResultSet resultSet = statement.executeQuery()) {
+
+          ArrayList<User> users = new ArrayList<>();
+          while(resultSet.next())
+            users.add(new User(resultSet.getString("user_name"), resultSet.getString("user_email"), resultSet.getString("password")));
+          return users;
+          /*
           System.out.println("heho");
           System.out.println(resultSet);
           return resultSet;
+          */
         }
       }
     }
@@ -64,7 +71,7 @@ public class UserDAOPostgres implements UserDAO {
   }
 
   @Override
-  public void deleteUserByUser(int user_id)  throws SQLException {
+  public void deleteUserByUserId(int user_id)  throws SQLException {
     try (Connection connection = this.postgres.getConnection()){
       String query = "DELETE FROM users WHERE user_id=?;";
       try(PreparedStatement statement =
@@ -76,12 +83,15 @@ public class UserDAOPostgres implements UserDAO {
   }
 
   @Override
-  public ResultSet getAll() throws SQLException {
+  public List<User> getAll() throws SQLException {
     try (Connection connection = this.postgres.getConnection()){
       String query = "SELECT * FROM users";
       try(PreparedStatement statement = connection.prepareStatement(query);){
         try (ResultSet resultSet = statement.executeQuery()) {
-          return resultSet;
+          ArrayList<User> users = new ArrayList<>();
+          while(resultSet.next())
+            users.add(new User(resultSet.getString("user_name"), resultSet.getString("user_email"), resultSet.getString("password")));
+          return users;
         }
       }
     }

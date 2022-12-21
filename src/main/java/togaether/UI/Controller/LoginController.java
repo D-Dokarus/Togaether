@@ -13,7 +13,7 @@ import javafx.scene.control.TextField;
 /**
  * Controller de l'interface graphique Login
  */
-public class LoginController {
+public class  LoginController {
   @FXML
   private TextField email;
   @FXML
