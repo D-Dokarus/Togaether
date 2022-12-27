@@ -49,4 +49,6 @@ public class UserFacade {
   public static UserFacade createInstance() {
     return instance;
   }
+
+  public static User getConnectedUser(){return connectedUser;}
 }

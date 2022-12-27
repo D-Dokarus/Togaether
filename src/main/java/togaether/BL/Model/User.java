@@ -4,6 +4,7 @@ package togaether.BL.Model;
  * Model d'un user
  */
 public class User {
+  private int idUser;
   String name;
   String email;
   String password;
@@ -12,6 +13,17 @@ public class User {
     this.name = name;
     this.email = email;
     this.password = password;
+  }
+
+  public User(int idUser, String name, String email, String password) {
+    this.idUser = idUser;
+    this.name = name;
+    this.email = email;
+    this.password = password;
+  }
+
+  public int getIdUser() {
+    return idUser;
   }
 
   public String getName() {

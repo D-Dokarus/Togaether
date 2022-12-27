@@ -1,6 +1,7 @@
 package togaether.DB.Postgres;
 
 import togaether.DB.AbstractFactory;
+import togaether.DB.NotificationDAO;
 import togaether.DB.UserDAO;
 
 import java.sql.Connection;
@@ -19,6 +20,8 @@ public class PostgresFactory extends AbstractFactory {
   public UserDAO getUserDAO() {
     return new UserDAOPostgres(this);
   }
+  @Override
+  public NotificationDAO getNotificationDAO(){ return new NotificationDAOPostgres(this);}
 
    public Connection getConnection() throws SQLException {
     return this.connection.getConnection();
