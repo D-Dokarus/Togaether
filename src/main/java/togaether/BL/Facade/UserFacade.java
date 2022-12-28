@@ -30,10 +30,10 @@ public class UserFacade {
     UserDAO userDB = fact.getUserDAO();
 
     try {
-      List<User> u = userDB.findByEmail(email);
-      if(u.size() == 1) {
-        if (BCrypt.checkpw(password, u.get(0).getPassword())) {
-          UserFacade.connectedUser = u.get(0);
+      User u = userDB.findByEmail(email);
+      if(u != null) {
+        if (BCrypt.checkpw(password, u.getPassword())) {
+          UserFacade.connectedUser = u;
         }
         else
           throw new UserBadPasswordException();
@@ -46,11 +46,9 @@ public class UserFacade {
     }
   }
 
-  public static User getConnectedUser() {
-    return connectedUser;
-  }
-
   public static UserFacade createInstance() {
     return instance;
   }
+
+  public static User getConnectedUser(){ return connectedUser; }
 }

@@ -67,7 +67,8 @@ public class UserDAOPostgres implements UserDAO {
   }
 
   @Override
-  public List<User> findByEmail(String user_email) throws SQLException{
+  public User findByEmail(String user_email) throws SQLException{
+    User u = null;
     try (Connection connection = this.postgres.getConnection()){
       String query = "SELECT * FROM public.user WHERE user_email =?;";
       try(PreparedStatement statement = connection.prepareStatement(query);){
@@ -75,11 +76,11 @@ public class UserDAOPostgres implements UserDAO {
         try (ResultSet resultSet = statement.executeQuery()) {
           ArrayList<User> users = new ArrayList<>();
           while(resultSet.next())
-            users.add(new User(resultSet.getInt("user_id"), resultSet.getString("user_name"), resultSet.getString("user_email"), resultSet.getString("password")));
-          return users;
+            u = new User(resultSet.getInt("user_id"), resultSet.getString("user_name"), resultSet.getString("user_email"), resultSet.getString("password"));
         }
       }
     }
+    return u;
   }
 
   @Override

@@ -30,11 +30,12 @@ public interface UserDAO {
 
   /**
    * Retourne le résultat d'une recherche d'utilisateur filtré par mail
+   *
    * @param user_email
    * @return
    * @throws SQLException
    */
-  public List<User> findByEmail(String user_email) throws SQLException;
+  public User findByEmail(String user_email) throws SQLException;
 
   public User findByUserId(int idUser) throws SQLException;
 

@@ -4,10 +4,11 @@ package togaether.BL.Model;
  * Model d'un user
  */
 public class User {
+
   int id;
-  String name;
-  String email;
-  String password;
+  private String name;
+  private String email;
+  private String password;
 
   public User(int id, String name, String email, String password) {
     this.id = id;

@@ -42,7 +42,8 @@ public class Message {
 
   public String toString() {
     LocalDateTime t = this.getDate().toLocalDateTime();
-    String date = t.getDayOfMonth()+"/"+t.getMonthValue()+"/"+t.getYear()+" "+t.getHour()+":"+t.getMinute();
+    String minute = ((t.getMinute()+"").length() > 1 ? ""+t.getMinute() : "0"+t.getMinute()); //car par exemple si il est 12h07, getMinute renvoie juste 7
+    String date = t.getDayOfMonth()+"/"+t.getMonthValue()+"/"+t.getYear()+" "+t.getHour()+":"+minute;
     String text = date + " " + this.getUser().getName() + " : " + this.getContent();
     return text;
   }

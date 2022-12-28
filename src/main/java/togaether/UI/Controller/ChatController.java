@@ -70,7 +70,14 @@ public class ChatController {
       Boolean success = chat.sendMessage(text);
       if(success) {
         this.inputMessage.clear();
-        if(chatClient!=null) chatClient.handleMessageFromChatController(formatText(text));
+        String userName = "";
+        if(UserFacade.createInstance().getConnectedUser() != null)
+          userName = UserFacade.createInstance().getConnectedUser().getName();
+        //TravelDAO travelDB = fact.getTravelDAO();
+        //TO DO
+        //Travel t = travelDB.findByTravelId(id);
+        Integer t = 1;
+        if(chatClient!=null) chatClient.handleMessageFromChatController(new Message(0, t, UserFacade.createInstance().getConnectedUser(), text, new Timestamp(System.currentTimeMillis())).toString());
       }
       else
         this.displayInfo("Attention : Le message n'a pas pu être envoyé, veuillez réessayer");
@@ -82,7 +89,8 @@ public class ChatController {
     if(UserFacade.createInstance().getConnectedUser() != null)
       userName = UserFacade.createInstance().getConnectedUser().getName();
     LocalDateTime t = new Timestamp(System.currentTimeMillis()).toLocalDateTime();
-    String date = t.getDayOfMonth()+"/"+t.getMonthValue()+"/"+t.getYear()+" "+t.getHour()+":"+t.getMinute();
+    String minute = ((t.getMinute()+"").length() > 1 ? ""+t.getMinute() : "0"+t.getMinute()); //car par exemple si il est 12h07, getMinute renvoie juste 7
+    String date = t.getDayOfMonth()+"/"+t.getMonthValue()+"/"+t.getYear()+" "+t.getHour()+":"+ minute;
     String text = date + " " + userName + " : " + str;
     return text;
   }

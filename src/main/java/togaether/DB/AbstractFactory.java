@@ -10,10 +10,24 @@ public abstract class AbstractFactory {
 
   /**
    * Retourne un DAO de User
-   * @return
+   * @return UserDAO
    */
   abstract public UserDAO getUserDAO();
+  /**
+   * Retourne un DAO de Message
+   * @return MessageDAO
+   */
   abstract public MessageDAO getMessageDAO();
+  /**
+   * Retourne un DAO de Notification
+   * @return NotificationDAO
+   */
+  abstract public NotificationDAO getNotificationDAO();
+  /**
+   * Retourne un DAO de Travel
+   * @return TravelDAO
+   */
+  abstract public TravelDAO getTravelDAO();
 
   /**
    * Retourne l'instance de la classe implémentant AbstractFactory
