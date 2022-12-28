@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.*;
 
 public class ChatFacade {
-  static private ArrayList<Message> messages;
   static private ChatFacade instance = new ChatFacade();
 
   public static ChatFacade createInstance() {
