@@ -18,7 +18,7 @@ public interface UserDAO {
    * @param password
    * @throws SQLException
    */
-  public void insertUser(String user_name, String user_email, String password)  throws SQLException;
+  public void insertUser(String user_name, String user_email, String password) throws SQLException;
 
   /**
    * Retourne le résultat d'une recherche d'utilisateur filtré par nom
@@ -35,6 +35,8 @@ public interface UserDAO {
    * @throws SQLException
    */
   public List<User> findByEmail(String user_email) throws SQLException;
+
+  public User findByUserId(int idUser) throws SQLException;
 
   /**
    * Supprime un utilisateur par son id

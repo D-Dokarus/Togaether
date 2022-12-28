@@ -1,9 +1,6 @@
 package togaether.UI.Controller;
 
-import togaether.BL.Facade.DBNotFoundException;
-import togaether.BL.Facade.UserBadPasswordException;
-import togaether.BL.Facade.UserFacade;
-import togaether.BL.Facade.UserNotFoundException;
+import togaether.BL.Facade.*;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
