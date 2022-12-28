@@ -1,7 +1,5 @@
 package togaether.DB.Postgres;
 
-import togaether.BL.Model.Notification;
-import togaether.BL.Model.NotificationCategory;
 import togaether.BL.Model.Travel;
 import togaether.BL.Model.User;
 import togaether.DB.TravelDAO;
@@ -21,7 +19,7 @@ public class TravelDAOPostgres implements TravelDAO {
     @Override
     public void createTravel(Travel travel) throws SQLException {
         try (Connection connection = this.postgres.getConnection()){
-            String query = "INSERT INTO travel(owner,nameTravel,descriptionTravel,dateStart,dateEnd,isArchive) VALUES(?,?,?,?,?,?);";
+            String query = "INSERT INTO travel(owner,name_travel,description_travel,date_start,date_end,is_archive) VALUES(?,?,?,?,?,?);";
             try(PreparedStatement statement = connection.prepareStatement(query);){
                 statement.setInt(1,travel.getOwner().getId());
                 statement.setString(2,travel.getNameTravel());
@@ -29,7 +27,7 @@ public class TravelDAOPostgres implements TravelDAO {
                 statement.setDate(4, (Date) travel.getDateStart());
                 statement.setDate(5, (Date) travel.getDateEnd());
                 statement.setBoolean(6,travel.isArchive());
-                statement.executeQuery();
+                statement.executeUpdate();
             }
         }
         finally {
@@ -119,7 +117,7 @@ public class TravelDAOPostgres implements TravelDAO {
     public void updateTravel(Travel travel) throws SQLException {
 
         try(Connection connection = this.postgres.getConnection()){
-            String query = "UPDATE travel SET  nameTravel = ? , descriptionTravel = ? , dateStart = ? , dateEnd = ? WHERE travel_id = ? ;";
+            String query = "UPDATE travel SET  nameTravel = ? , description_travel = ? , date_start = ? , date_end = ? WHERE travel_id = ? ;";
             try(PreparedStatement statement = connection.prepareStatement(query)){
                 statement.setInt(5,travel.getIdTravel());
                 statement.setString(1,travel.getNameTravel());
@@ -154,7 +152,7 @@ public class TravelDAOPostgres implements TravelDAO {
     public void archiveTravel(Travel travel) throws SQLException {
 
         try(Connection connection = this.postgres.getConnection()){
-            String query = "UPDATE travel SET isArchive = ? WHERE travel_id = ? ;";
+            String query = "UPDATE travel SET is_archive = ? WHERE travel_id = ? ;";
             try(PreparedStatement statement = connection.prepareStatement(query)){
                 statement.setBoolean(1,true);
                 statement.setInt(2,travel.getIdTravel());
@@ -171,7 +169,7 @@ public class TravelDAOPostgres implements TravelDAO {
     public void unarchiveTravel(Travel travel) throws SQLException {
 
         try(Connection connection = this.postgres.getConnection()){
-            String query = "UPDATE travel SET isArchive = ? WHERE travel_id = ? ;";
+            String query = "UPDATE travel SET is_archive = ? WHERE travel_id = ? ;";
             try(PreparedStatement statement = connection.prepareStatement(query)){
                 statement.setBoolean(1,false);
                 statement.setInt(2,travel.getIdTravel());
