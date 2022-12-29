@@ -5,16 +5,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import togaether.BL.Facade.ChatFacade;
 import togaether.BL.Facade.TravelFacade;
-import togaether.BL.Facade.UserFacade;
-import togaether.BL.Model.Message;
 import togaether.BL.Model.Travel;
 import togaether.BL.Model.User;
 
-import java.sql.Timestamp;
 import java.util.Date;
-import java.time.Instant;
 
 public class TravelCreateController {
 
@@ -82,7 +77,4 @@ public class TravelCreateController {
 
     }
 
-    public void close() {
-        System.exit(1);
-    }
 }

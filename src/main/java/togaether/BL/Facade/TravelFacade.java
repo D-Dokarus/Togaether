@@ -1,9 +1,7 @@
 package togaether.BL.Facade;
 
-import togaether.BL.Model.Message;
 import togaether.BL.Model.Notification;
 import togaether.BL.Model.Travel;
-import togaether.BL.Model.User;
 import togaether.DB.*;
 
 import java.sql.SQLException;
@@ -76,7 +74,7 @@ public class TravelFacade {
     }
 
     /**
-     * Query the supression of a specific travel (given in parameters) in DB
+     * Query the creation of a specific travel (given in parameters) in DB
      * @param travel
      */
     public void createTravel(Travel travel) throws DBNotFoundException{
@@ -90,6 +88,39 @@ public class TravelFacade {
             throw new DBNotFoundException();
         }
     }
+
+    /**
+     * Query the update of a specific travel (given in parameters) in DB
+     * @param travel
+     */
+    public void updateTravel(Travel travel) throws DBNotFoundException{
+        AbstractFactory fact = AbstractFactory.createInstance();
+        TravelDAO travelDB = fact.getTravelDAO();
+
+        try {
+            travelDB.updateTravel(travel);
+        } catch (SQLException e) {
+            System.out.println(e);
+            throw new DBNotFoundException();
+        }
+    }
+
+    /**
+     * Query the search for a specific path by an Id (given in parameters) in the DB
+     * @param Id
+     */
+    public Travel findTravelById(Integer Id) throws DBNotFoundException{
+        AbstractFactory fact = AbstractFactory.createInstance();
+        TravelDAO travelDB = fact.getTravelDAO();
+
+        try {
+            return travelDB.findTravelById(Id);
+        } catch (SQLException e) {
+            System.out.println(e);
+            throw new DBNotFoundException();
+        }
+    }
+
 
     /**
      * Query the supression of a specific travel (given in parameters) in DB

@@ -55,22 +55,23 @@ public class TravelDAOPostgres implements TravelDAO {
     public Travel findTravelById(int Id) throws SQLException {
 
         try(Connection connection = this.postgres.getConnection()){
-            String query = "SELECT FROM travel WHERE travel_id=?;";
+            String query = "SELECT * FROM travel INNER JOIN public.user u ON travel.owner=u.user_id WHERE travel_id=?;";
             try(PreparedStatement statement = connection.prepareStatement(query)){
                 statement.setInt(1,Id);
                 try(ResultSet resultSet = statement.executeQuery()){
                     resultSet.next();
-                    User owner = new User(Integer.valueOf(resultSet.getString("owner")), // à vérifier
-                                            resultSet.getString(9),
-                                            resultSet.getString(10),
-                                            resultSet.getString(11));
+                    /*User owner = new User(Integer.valueOf(resultSet.getString("owner")),
+                            resultSet.getString(9),
+                            resultSet.getString(10),
+                            resultSet.getString(11));*/
+                    User user = new User(resultSet.getInt("owner"), resultSet.getString("user_name"), resultSet.getString("user_email"), resultSet.getString("user_password"));
                     Travel travel = new Travel(resultSet.getInt("travel_id"),
-                                                owner,
-                                                resultSet.getString("nameTravel"),
-                                                resultSet.getString("descriptionTravel"),
-                                                resultSet.getDate("dateStart"),
-                                                resultSet.getDate("dateEnd"),
-                                                resultSet.getBoolean("isArchive"));
+                                user,
+                                resultSet.getString("name_travel"),
+                                resultSet.getString("description_travel"),
+                                resultSet.getDate("date_start"),
+                                resultSet.getDate("date_end"),
+                                resultSet.getBoolean("is_archive"));
                     return travel;
                 }
             }
@@ -91,11 +92,11 @@ public class TravelDAOPostgres implements TravelDAO {
                     while(resultSet.next()){
                         Travel travel = new Travel(resultSet.getInt("travel_id"),
                                 null,
-                                resultSet.getString("nameTravel"),
-                                resultSet.getString("descriptionTravel"),
-                                resultSet.getDate("dateStart"),
-                                resultSet.getDate("dateEnd"),
-                                resultSet.getBoolean("isArchive"));
+                                resultSet.getString("name_travel"),
+                                resultSet.getString("description_travel"),
+                                resultSet.getDate("date_start"),
+                                resultSet.getDate("date_end"),
+                                resultSet.getBoolean("is_archive"));
 
                         travels.add(travel);
                     }
@@ -117,7 +118,7 @@ public class TravelDAOPostgres implements TravelDAO {
     public void updateTravel(Travel travel) throws SQLException {
 
         try(Connection connection = this.postgres.getConnection()){
-            String query = "UPDATE travel SET  nameTravel = ? , description_travel = ? , date_start = ? , date_end = ? WHERE travel_id = ? ;";
+            String query = "UPDATE travel SET  name_travel = ? , description_travel = ? , date_start = ? , date_end = ? WHERE travel_id = ? ;";
             try(PreparedStatement statement = connection.prepareStatement(query)){
                 statement.setInt(5,travel.getIdTravel());
                 statement.setString(1,travel.getNameTravel());
