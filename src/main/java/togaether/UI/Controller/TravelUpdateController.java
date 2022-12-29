@@ -34,10 +34,6 @@ public class TravelUpdateController {
     @FXML
     private CheckBox nonDefineEnd;
 
-    /**
-     * The connected user
-     */
-    User user;
 
     /**
      * The connected Travel
