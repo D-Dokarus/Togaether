@@ -29,16 +29,11 @@ public class UserFacade {
   public void login(String email, String password) throws UserNotFoundException, UserBadPasswordException, DBNotFoundException {
     AbstractFactory fact = AbstractFactory.createInstance();
     UserDAO userDB = fact.getUserDAO();
-    System.out.println("aa");
 
     try {
-      System.out.println("bb");
       User u = userDB.findByEmail(email);
-        System.out.println(u);
       if(u != null) {
-        System.out.println("cc");
         if (BCrypt.checkpw(password, u.getPassword())) {
-            System.out.println("dd");
           UserFacade.connectedUser = u;
         }
         else
