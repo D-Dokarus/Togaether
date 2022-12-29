@@ -70,9 +70,6 @@ public class ChatController {
       Boolean success = chat.sendMessage(text);
       if(success) {
         this.inputMessage.clear();
-        String userName = "";
-        if(UserFacade.createInstance().getConnectedUser() != null)
-          userName = UserFacade.createInstance().getConnectedUser().getName();
         //TravelDAO travelDB = fact.getTravelDAO();
         //TO DO
         //Travel t = travelDB.findByTravelId(id);

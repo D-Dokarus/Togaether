@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class UserFacade {
 
-  static private User connectedUser = null;
+  private User connectedUser = null;
 
   static private UserFacade instance = new UserFacade();
 
@@ -34,7 +34,7 @@ public class UserFacade {
       User u = userDB.findByEmail(email);
       if(u != null) {
         if (BCrypt.checkpw(password, u.getPassword())) {
-          UserFacade.connectedUser = u;
+          this.connectedUser = u;
         }
         else
           throw new UserBadPasswordException();
@@ -46,6 +46,7 @@ public class UserFacade {
       throw new DBNotFoundException();
     }
   }
+  public User getConnectedUser(){ return connectedUser; }
 
   public void register(String name, String surname, String pseudo, String email, String password, String confirmPassword, String country) throws UserBadPasswordException, UserBadConfirmPasswordException, UserAlreadyExistException, UserPseudoAlreadyExistException, DBNotFoundException {
     AbstractFactory fact = AbstractFactory.createInstance();
@@ -77,5 +78,4 @@ public class UserFacade {
     return instance;
   }
 
-  public static User getConnectedUser(){ return connectedUser; }
 }
