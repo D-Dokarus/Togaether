@@ -4,6 +4,7 @@ import togaether.DB.AbstractFactory;
 import togaether.BL.Model.User;
 import togaether.DB.UserDAO;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import java.time.LocalDateTime;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -46,6 +47,32 @@ public class UserFacade {
     }
   }
   public User getConnectedUser(){ return connectedUser; }
+
+  public void register(String name, String surname, String pseudo, String email, String password, String confirmPassword, String country) throws UserBadPasswordException, UserBadConfirmPasswordException, UserAlreadyExistException, UserPseudoAlreadyExistException, DBNotFoundException {
+    AbstractFactory fact = AbstractFactory.createInstance();
+    UserDAO userDB = fact.getUserDAO();
+
+    if(!password.equals(confirmPassword))
+      throw new UserBadConfirmPasswordException();
+
+    if(password.length() < 8)
+      throw new UserBadPasswordException();
+
+    try {
+      if(userDB.findByEmail(email) != null)
+        throw new UserAlreadyExistException();
+
+      if(userDB.findByPseudo(pseudo) != null)
+        throw new UserPseudoAlreadyExistException();
+
+      User u = new User(name, surname, pseudo, email, BCrypt.hashpw(password, BCrypt.gensalt()), country);
+      userDB.insertUser(u);
+    } catch (SQLException e) {
+      throw new DBNotFoundException();
+    }
+  }
+
+
 
   public static UserFacade createInstance() {
     return instance;

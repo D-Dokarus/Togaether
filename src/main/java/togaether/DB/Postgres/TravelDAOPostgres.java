@@ -60,11 +60,14 @@ public class TravelDAOPostgres implements TravelDAO {
                 statement.setInt(1,Id);
                 try(ResultSet resultSet = statement.executeQuery()){
                     resultSet.next();
+
+
                     /*User owner = new User(Integer.valueOf(resultSet.getString("owner")),
                             resultSet.getString(9),
                             resultSet.getString(10),
                             resultSet.getString(11));*/
                     User user = new User(resultSet.getInt("owner"), resultSet.getString("user_name"), resultSet.getString("user_email"), resultSet.getString("user_password"));
+
                     Travel travel = new Travel(resultSet.getInt("travel_id"),
                                 user,
                                 resultSet.getString("name_travel"),

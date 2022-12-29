@@ -41,7 +41,7 @@ public class MessageDAOPostgres implements MessageDAO {
         try (ResultSet resultSet = statement.executeQuery()) {
 
           while (resultSet.next()) {
-            User user = new User(resultSet.getInt("user_id"), resultSet.getString("user_name"), resultSet.getString("user_email"), resultSet.getString("password"));
+            User user = new User(resultSet.getInt("user_id"), resultSet.getString("user_name"), resultSet.getString("user_email"), resultSet.getString("user_password"));
             messages.add(new Message(resultSet.getInt("message_id"), resultSet.getInt("travel_id"), user, resultSet.getString("message_content"), resultSet.getTimestamp("message_date")));
           }
         }
@@ -59,7 +59,7 @@ public class MessageDAOPostgres implements MessageDAO {
         statement.setInt(1,travel_id);
         try (ResultSet resultSet = statement.executeQuery()) {
           while (resultSet.next()) {
-            User user = new User(resultSet.getInt("user_id"), resultSet.getString("user_name"), resultSet.getString("user_email"), resultSet.getString("password"));
+            User user = new User(resultSet.getInt("user_id"), resultSet.getString("user_name"), resultSet.getString("user_email"), resultSet.getString("user_password"));
             messages.add(new Message(resultSet.getInt("message_id"), resultSet.getInt("travel_id"), user, resultSet.getString("message_content"), resultSet.getTimestamp("message_date")));
           }
         }
@@ -79,7 +79,7 @@ public class MessageDAOPostgres implements MessageDAO {
         try (ResultSet resultSet = statement.executeQuery()) {
 
           while (resultSet.next()) {
-            User user = new User(resultSet.getInt("user_id"), resultSet.getString("user_name"), resultSet.getString("user_email"), resultSet.getString("password"));
+            User user = new User(resultSet.getInt("user_id"), resultSet.getString("user_name"), resultSet.getString("user_email"), resultSet.getString("user_password"));
             messages.add(new Message(resultSet.getInt("message_id"), resultSet.getInt("travel_id"), user, resultSet.getString("message_content"), resultSet.getTimestamp("message_date")));
           }
         }
