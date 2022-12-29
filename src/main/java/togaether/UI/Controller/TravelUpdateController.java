@@ -47,7 +47,6 @@ public class TravelUpdateController {
         TravelFacade travelFacade = TravelFacade.createInstance();
         try {
             this.travel = travelFacade.findTravelById(4);
-            // Fermer la page pour revenir à la page principale
         } catch (Exception e) {
             System.out.println("Attention : Le voyage n'a pas pu être trouvé, veuillez réessayer");
             this.labelError.setText("Attention : Le voyage n'a pas pu être trouvé, veuillez réessayer");
@@ -122,9 +121,9 @@ public class TravelUpdateController {
 
         if(start!=null && end!=null && end.before(start)){
             this.labelError.setText("Attention : Les dates séléctionnées ne sont pas valide,\nveuillez mettre une date de départ précédent une date de fin.");
-        } else if (start != null && this.travel.getDateEnd() != null && this.travel.getDateEnd().before(start)) {
+        } else if (start != null && !this.nonDefineEnd.isSelected() && this.travel.getDateEnd().before(start)) {
             this.labelError.setText("Attention : La date de début séléctionnée n'est pas valide,\nveuillez mettre une date de départ précédent une date de fin.");
-        } else if (end !=null && this.travel.getDateStart()!=null && !this.travel.getDateStart().before(end)) {
+        } else if (end !=null && !this.nonDefineStart.isSelected() && !this.travel.getDateStart().before(end)) {
             this.labelError.setText("Attention : La date de fin séléctionnée n'est pas valide,\nveuillez mettre une date de départ précédent une date de fin.");
         } else {
             this.travel.setDateStart(start);

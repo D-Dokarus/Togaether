@@ -16,9 +16,9 @@
       <Button fx:id="confirmedButton" layoutX="254.0" layoutY="198.0" mnemonicParsing="false" onAction="#onConfirmedButtonClicked" text="Confirmer" />
       <Text layoutX="27.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Un voyage désarchivé devient accessible à la modification par tous ses collaborateurs" textAlignment="CENTER" wrappingWidth="347.7109375" />
       <Label layoutX="52.0" layoutY="56.0" text="Voyage" />
-      <Label fx:id="nameVoyage" layoutX="118.0" layoutY="56.0" text="nomVoyage" />
+      <Label fx:id="nameTravel" layoutX="118.0" layoutY="56.0" text="nomVoyage" />
       <Label layoutX="51.0" layoutY="80.0" text="Description" />
-      <Text fx:id="descriptionVoyage" layoutX="118.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DescriptionVoyage" wrappingWidth="232.7109375" />
+      <Text fx:id="descriptionTravel" layoutX="118.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DescriptionVoyage" wrappingWidth="232.7109375" />
       <Label fx:id="labelError" layoutX="181.0" layoutY="181.0" textAlignment="CENTER" textFill="RED" />
    </children>
 </AnchorPane>

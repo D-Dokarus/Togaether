@@ -9,9 +9,9 @@ import togaether.BL.Model.Travel;
 
 public class TravelUnarchiveController {
     @FXML
-    private Label nameVoyage;
+    private Label nameTravel;
     @FXML
-    private Text descriptionVoyage;
+    private Text descriptionTravel;
     @FXML
     private Button cancelButton;
     @FXML
@@ -36,8 +36,8 @@ public class TravelUnarchiveController {
             System.out.println("Attention : Le voyage n'a pas pu être trouvé, veuillez réessayer");
             throw new RuntimeException(e);
         }
-        this.nameVoyage.setText(this.travel.getNameTravel());
-        this.descriptionVoyage.setText(this.travel.getDescriptionTravel());
+        this.nameTravel.setText(this.travel.getNameTravel());
+        this.descriptionTravel.setText(this.travel.getDescriptionTravel());
     }
 
     public void onCancelButtonClicked() {
