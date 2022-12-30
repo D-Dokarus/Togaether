@@ -72,6 +72,121 @@ public class UserFacade {
     }
   }
 
+  public void deleteAccount(String password) throws UserBadPasswordException, DBNotFoundException {
+    AbstractFactory fact = AbstractFactory.createInstance();
+    UserDAO userDB = fact.getUserDAO();
+
+    if(!BCrypt.checkpw(password, connectedUser.getPassword()))
+      throw new UserBadPasswordException();
+
+    try {
+      userDB.deleteUserByUserId(connectedUser.getId());
+    } catch (SQLException e) {
+      throw new DBNotFoundException();
+    }
+  }
+
+  /*public void updateUser(String name, String surname, String pseudo, String email, String password, String confirmPassword, String country) throws UserBadPasswordException, UserBadConfirmPasswordException, UserAlreadyExistException, UserPseudoAlreadyExistException, DBNotFoundException {
+    AbstractFactory fact = AbstractFactory.createInstance();
+    UserDAO userDB = fact.getUserDAO();
+
+    try {
+      if(userDB.findByEmail(email) != null)
+        throw new UserAlreadyExistException();
+
+      if(userDB.findByPseudo(pseudo) != null)
+        throw new UserPseudoAlreadyExistException();
+
+        if(!password.equals(confirmPassword))
+          throw new UserBadConfirmPasswordException();
+
+      User u = new User(name, surname, pseudo, email, BCrypt.hashpw(password, BCrypt.gensalt()), country);
+      System.out.println(u.getName());
+      userDB.updateUser(u, 6);
+    } catch (SQLException e) {
+      throw new DBNotFoundException();
+    }
+  }*/
+
+  public void updateName(String name) throws DBNotFoundException {
+    AbstractFactory fact = AbstractFactory.createInstance();
+    UserDAO userDB = fact.getUserDAO();
+
+    try {
+      userDB.updateName(name, 6);
+    } catch (SQLException e) {
+      throw new DBNotFoundException();
+    }
+  }
+
+    public void updateSurname(String surname) throws DBNotFoundException {
+        AbstractFactory fact = AbstractFactory.createInstance();
+        UserDAO userDB = fact.getUserDAO();
+
+        try {
+        userDB.updateSurname(surname, 6);
+        } catch (SQLException e) {
+        throw new DBNotFoundException();
+        }
+    }
+
+    public void updatePseudo(String pseudo) throws DBNotFoundException, UserPseudoAlreadyExistException {
+      AbstractFactory fact = AbstractFactory.createInstance();
+      UserDAO userDB = fact.getUserDAO();
+
+      try {
+        if (userDB.findByPseudo(pseudo) != null)
+          throw new UserPseudoAlreadyExistException();
+
+        userDB.updatePseudo(pseudo, 6);
+      } catch (SQLException e) {
+        throw new DBNotFoundException();
+      }
+
+    }
+
+    public void updateEmail(String email) throws DBNotFoundException, UserAlreadyExistException {
+        AbstractFactory fact = AbstractFactory.createInstance();
+        UserDAO userDB = fact.getUserDAO();
+
+        try {
+          if(userDB.findByEmail(email) != null)
+            throw new UserAlreadyExistException();
+
+        userDB.updateEmail(email, 6);
+        } catch (SQLException e) {
+        throw new DBNotFoundException();
+        }
+    }
+
+    public void updatePassword(String password, String confirmPassword) throws DBNotFoundException, UserBadConfirmPasswordException, UserBadPasswordException {
+        AbstractFactory fact = AbstractFactory.createInstance();
+        UserDAO userDB = fact.getUserDAO();
+
+        if(!password.equals(confirmPassword))
+          throw new UserBadConfirmPasswordException();
+
+        if(password.length() < 8)
+            throw new UserBadPasswordException();
+
+        try {
+        userDB.updatePassword(BCrypt.hashpw(password, BCrypt.gensalt()), connectedUser.getId());
+        } catch (SQLException e) {
+        throw new DBNotFoundException();
+        }
+    }
+
+    public void updateCountry(String country) throws DBNotFoundException {
+        AbstractFactory fact = AbstractFactory.createInstance();
+        UserDAO userDB = fact.getUserDAO();
+
+        try {
+        userDB.updateCountry(country, 6);
+        } catch (SQLException e) {
+        throw new DBNotFoundException();
+        }
+    }
+
 
 
   public static UserFacade createInstance() {

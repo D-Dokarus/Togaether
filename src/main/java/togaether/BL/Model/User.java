@@ -47,9 +47,10 @@ public class User {
 
     public String createDate() {
         LocalDateTime t = LocalDateTime.now();
-        String date = t.getDayOfMonth()+"/"+t.getMonthValue()+"/"+t.getYear();
+        String date = t.getDayOfMonth() + "/" + t.getMonthValue() + "/" + t.getYear();
         return date;
     }
+
     public int getId() {
         return id;
     }
@@ -77,7 +78,9 @@ public class User {
     public String getCountry() {
         return country;
     }
+
     public String getDateCreation() {
         return dateCreation;
     }
+
 }
