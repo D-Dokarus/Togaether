@@ -86,28 +86,6 @@ public class UserFacade {
     }
   }
 
-  /*public void updateUser(String name, String surname, String pseudo, String email, String password, String confirmPassword, String country) throws UserBadPasswordException, UserBadConfirmPasswordException, UserAlreadyExistException, UserPseudoAlreadyExistException, DBNotFoundException {
-    AbstractFactory fact = AbstractFactory.createInstance();
-    UserDAO userDB = fact.getUserDAO();
-
-    try {
-      if(userDB.findByEmail(email) != null)
-        throw new UserAlreadyExistException();
-
-      if(userDB.findByPseudo(pseudo) != null)
-        throw new UserPseudoAlreadyExistException();
-
-        if(!password.equals(confirmPassword))
-          throw new UserBadConfirmPasswordException();
-
-      User u = new User(name, surname, pseudo, email, BCrypt.hashpw(password, BCrypt.gensalt()), country);
-      System.out.println(u.getName());
-      userDB.updateUser(u, 6);
-    } catch (SQLException e) {
-      throw new DBNotFoundException();
-    }
-  }*/
-
   public void updateName(String name) throws DBNotFoundException {
     AbstractFactory fact = AbstractFactory.createInstance();
     UserDAO userDB = fact.getUserDAO();
