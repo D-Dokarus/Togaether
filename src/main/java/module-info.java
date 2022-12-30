@@ -1,4 +1,4 @@
-module loginprototype {
+module Togaether {
   requires javafx.controls;
   requires javafx.fxml;
   requires java.sql;
@@ -10,4 +10,6 @@ module loginprototype {
   opens togaether.UI.Frame to javafx.fxml;
   exports togaether.UI.Controller;
   opens togaether.UI.Controller to javafx.fxml;
+  exports togaether.DB;
+  exports togaether.BL.Model;
 }

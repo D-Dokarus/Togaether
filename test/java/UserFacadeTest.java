@@ -13,8 +13,7 @@ public class UserFacadeTest {
     UserDAO userDB = fact.getUserDAO();
 
     try {
-      List<User> u = userDB.findByEmail("dorian.752@live.fr");
-      Assertions.assertEquals(u.size(), 1);
+      User u = userDB.findByEmail("dorian.752@live.fr");
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }

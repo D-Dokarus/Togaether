@@ -138,6 +138,17 @@ public class TravelFacade {
         }
     }
 
+    public Travel findLatestCreatedTravel() throws DBNotFoundException{
+        AbstractFactory fact = AbstractFactory.createInstance();
+        TravelDAO travelDB = fact.getTravelDAO();
+        try {
+            return travelDB.findLatestCreatedTravel();
+        } catch (SQLException e) {
+            System.out.println(e);
+            throw new DBNotFoundException();
+        }
+    }
+
     /**
      * Query the creation of a specific notification (given in parameters) in DB
      * @param notification

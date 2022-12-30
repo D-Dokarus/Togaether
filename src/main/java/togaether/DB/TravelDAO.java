@@ -25,4 +25,6 @@ public interface TravelDAO {
 
     public void unarchiveTravel(Travel travel) throws SQLException;
 
+    public Travel findLatestCreatedTravel() throws SQLException;
+
 }
