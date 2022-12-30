@@ -38,7 +38,7 @@ public class ChatController {
   }
 
   public void reloadMessages() {
-    ChatFacade chat = ChatFacade.createInstance();
+    ChatFacade chat = ChatFacade.getInstance();
     //TO DO
     //TravelFacade travel = TravelFacade.createInstance();
     //ArrayList<Message> liste = chat.getMessagesByTravelId(travel.getId());
@@ -66,7 +66,7 @@ public class ChatController {
     else if(text.length() > 255)
       this.displayInfo("Attention : Nombre de caractères trop grand (supérieur à 255)");
     else {
-      ChatFacade chat = ChatFacade.createInstance();
+      ChatFacade chat = ChatFacade.getInstance();
       Boolean success = chat.sendMessage(text);
       if(success) {
         this.inputMessage.clear();
@@ -74,7 +74,7 @@ public class ChatController {
         //TO DO
         //Travel t = travelDB.findByTravelId(id);
         Integer t = 1;
-        if(chatClient!=null) chatClient.handleMessageFromChatController(new Message(0, t, UserFacade.createInstance().getConnectedUser(), text, new Timestamp(System.currentTimeMillis())).toString());
+        if(chatClient!=null) chatClient.handleMessageFromChatController(new Message(0, t, UserFacade.getInstance().getConnectedUser(), text, new Timestamp(System.currentTimeMillis())).toString());
       }
       else
         this.displayInfo("Attention : Le message n'a pas pu être envoyé, veuillez réessayer");
@@ -83,8 +83,8 @@ public class ChatController {
 
   private String formatText(String str) {
     String userName = "";
-    if(UserFacade.createInstance().getConnectedUser() != null)
-      userName = UserFacade.createInstance().getConnectedUser().getName();
+    if(UserFacade.getInstance().getConnectedUser() != null)
+      userName = UserFacade.getInstance().getConnectedUser().getName();
     LocalDateTime t = new Timestamp(System.currentTimeMillis()).toLocalDateTime();
     String minute = ((t.getMinute()+"").length() > 1 ? ""+t.getMinute() : "0"+t.getMinute()); //car par exemple si il est 12h07, getMinute renvoie juste 7
     String date = t.getDayOfMonth()+"/"+t.getMonthValue()+"/"+t.getYear()+" "+t.getHour()+":"+ minute;

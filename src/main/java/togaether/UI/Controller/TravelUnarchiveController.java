@@ -28,7 +28,7 @@ public class TravelUnarchiveController {
     protected void initialize() {
         // Récupérer user connected
         // Récupérer travel connected
-        TravelFacade travelFacade = TravelFacade.createInstance();
+        TravelFacade travelFacade = TravelFacade.getInstance();
         try {
             this.travel = travelFacade.findTravelById(4);
             // Fermer la page pour revenir à la page principale
@@ -46,7 +46,7 @@ public class TravelUnarchiveController {
     }
 
     public void onConfirmedButtonClicked() {
-        TravelFacade travelFacade = TravelFacade.createInstance();
+        TravelFacade travelFacade = TravelFacade.getInstance();
         try {
             travelFacade.unarchiveTravel(this.travel);
             // Fermer la page pour revenir à la page principale

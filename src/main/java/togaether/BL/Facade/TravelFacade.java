@@ -17,7 +17,7 @@ public class TravelFacade {
 
     static private TravelFacade instance = new TravelFacade();
 
-    public static TravelFacade createInstance() {
+    public static TravelFacade getInstance() {
         return instance;
     }
 

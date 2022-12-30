@@ -8,12 +8,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import togaether.BL.Facade.DBNotFoundException;
 import togaether.BL.Facade.UserBadPasswordException;
 import togaether.BL.Facade.UserFacade;
-import togaether.BL.Facade.UserNotFoundException;
 
 import java.io.IOException;
 
@@ -39,7 +37,7 @@ public class DeleteAccountController {
      */
     public void onDeleteButtonClick() {
         try {
-            UserFacade.createInstance().deleteAccount(password.getText());
+            UserFacade.getInstance().deleteAccount(password.getText());
             System.out.println("Compte supprimé");
         } catch (UserBadPasswordException e) {
             System.out.println("Mauvais mot de passe");

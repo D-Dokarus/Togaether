@@ -1,13 +1,10 @@
-import org.springframework.cglib.core.Local;
 import togaether.BL.Facade.DBNotFoundException;
 import togaether.BL.Facade.TravelFacade;
 import org.junit.jupiter.api.*;
 import togaether.BL.Model.Travel;
 import togaether.BL.Model.User;
 
-import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.Date;
 
 
 public class TravelFacadeTest{
@@ -30,8 +27,8 @@ public class TravelFacadeTest{
 
         int res = 0;
         try{
-            TravelFacade.createInstance().createTravel(this.travelToCreate);
-            Travel latestCreated = TravelFacade.createInstance().findLatestCreatedTravel();
+            TravelFacade.getInstance().createTravel(this.travelToCreate);
+            Travel latestCreated = TravelFacade.getInstance().findLatestCreatedTravel();
 
             if(latestCreated.getNameTravel().equals(this.travelToCreate.getNameTravel())){
                 this.idOfNewTravelCreated = latestCreated.getIdTravel();
@@ -49,7 +46,7 @@ public class TravelFacadeTest{
     int findTravelById(){
         int res = 0;
         try{
-            Travel latest = TravelFacade.createInstance().findTravelById(this.createdTravel.getIdTravel());
+            Travel latest = TravelFacade.getInstance().findTravelById(this.createdTravel.getIdTravel());
             if(this.createdTravel.getIdTravel() == latest.getIdTravel()){
                 res = 1;
             }
@@ -65,7 +62,7 @@ public class TravelFacadeTest{
     int findLatestCreatedTravel(){
         int res = 0;
         try{
-            Travel latest = TravelFacade.createInstance().findLatestCreatedTravel();
+            Travel latest = TravelFacade.getInstance().findLatestCreatedTravel();
             if(this.travelToCreate.getNameTravel().equals(latest.getNameTravel())){
                 res = 1;
             }
@@ -80,8 +77,8 @@ public class TravelFacadeTest{
         int res = 0;
         try{
             this.createdTravel.setDescriptionTravel("MODIFIED_DESCRIPTION");
-            TravelFacade.createInstance().updateTravel(this.createdTravel);
-            Travel latest = TravelFacade.createInstance().findTravelById(this.createdTravel.getIdTravel());
+            TravelFacade.getInstance().updateTravel(this.createdTravel);
+            Travel latest = TravelFacade.getInstance().findTravelById(this.createdTravel.getIdTravel());
             if(latest.getDescriptionTravel().equals(this.createdTravel.getDescriptionTravel())){
                 res = 1;
             }
@@ -95,8 +92,8 @@ public class TravelFacadeTest{
     int archiveTravel(){
         int res = 0;
         try{
-            TravelFacade.createInstance().archiveTravel(this.createdTravel);
-            Travel latest = TravelFacade.createInstance().findTravelById(this.createdTravel.getIdTravel());
+            TravelFacade.getInstance().archiveTravel(this.createdTravel);
+            Travel latest = TravelFacade.getInstance().findTravelById(this.createdTravel.getIdTravel());
             if(true == latest.isArchive()){
                 res = 1;
             }
@@ -111,8 +108,8 @@ public class TravelFacadeTest{
     int unarchiveTravel(){
         int res = 0;
         try{
-            TravelFacade.createInstance().unarchiveTravel(this.createdTravel);
-            Travel latest = TravelFacade.createInstance().findTravelById(this.createdTravel.getIdTravel());
+            TravelFacade.getInstance().unarchiveTravel(this.createdTravel);
+            Travel latest = TravelFacade.getInstance().findTravelById(this.createdTravel.getIdTravel());
             if(false == latest.isArchive()){
                 res = 1;
             }
@@ -126,12 +123,12 @@ public class TravelFacadeTest{
     int deleteTravel(){
         int res = 0;
         try{
-            TravelFacade.createInstance().deleteTravel(this.createdTravel);
+            TravelFacade.getInstance().deleteTravel(this.createdTravel);
         }catch(DBNotFoundException e){
             res = 0;
         }
         try{
-            Travel latest = TravelFacade.createInstance().findTravelById(this.createdTravel.getIdTravel());
+            Travel latest = TravelFacade.getInstance().findTravelById(this.createdTravel.getIdTravel());
         }catch(DBNotFoundException e ){
             System.out.println("It hasn't found the previous instance => has been deleted");
             res = 1;

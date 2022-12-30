@@ -10,14 +10,14 @@ import java.util.*;
 public class ChatFacade {
   static private ChatFacade instance = new ChatFacade();
 
-  public static ChatFacade createInstance() {
+  public static ChatFacade getInstance() {
     return instance;
   }
 
   public boolean sendMessage(String text) {
     //TO DO
     //TravelFacade travelFacade = TravelFacade.createInstance();
-    UserFacade userFacade = UserFacade.createInstance();
+    UserFacade userFacade = UserFacade.getInstance();
 
     AbstractFactory fact = AbstractFactory.createInstance();
     MessageDAO messageDB = fact.getMessageDAO();

@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Hyperlink;
 import javafx.stage.Stage;
 import togaether.BL.Facade.*;
 
@@ -42,7 +41,7 @@ public class LoginController {
      */
     public void onLoginButtonClick() {
         try {
-            UserFacade.createInstance().login(email.getText(), password.getText());
+            UserFacade.getInstance().login(email.getText(), password.getText());
             System.out.println("Login réussi");
         } catch (UserNotFoundException e) {
             System.out.println("Cet utilisateur n'existe pas");

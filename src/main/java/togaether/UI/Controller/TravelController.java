@@ -6,10 +6,6 @@ import javafx.scene.text.Text;
 import togaether.BL.Facade.TravelFacade;
 import togaether.BL.Model.Travel;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-
 public class TravelController {
 
     @FXML
@@ -51,7 +47,7 @@ public class TravelController {
     protected void initialize() {
         // Récupérer user connected
         // Récupérer travel connected
-        TravelFacade travelFacade = TravelFacade.createInstance();
+        TravelFacade travelFacade = TravelFacade.getInstance();
         try {
             this.travel = travelFacade.findTravelById(4);
         } catch (Exception e) {
