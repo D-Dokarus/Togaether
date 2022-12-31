@@ -6,6 +6,7 @@ import togaether.BL.Facade.*;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import togaether.BL.Model.Collaborator;
 import togaether.BL.Model.Message;
 
 import java.io.IOException;
@@ -35,6 +36,8 @@ public class ChatController {
     } catch (IOException e) {
       this.displayInfo("Attention : connection au chat en direct échouée");
     }
+    //Scroller tout en bas du chat, pour voir les messages les plus récents
+    Platform.runLater( () -> this.messageList.scrollTo(this.messageList.getItems().size()-1));
   }
 
   public void reloadMessages() {
@@ -70,11 +73,13 @@ public class ChatController {
       Boolean success = chat.sendMessage(text);
       if(success) {
         this.inputMessage.clear();
-        //TravelDAO travelDB = fact.getTravelDAO();
         //TO DO
-        //Travel t = travelDB.findByTravelId(id);
+        //TravelFacade travelFacade = TravelFacade.getInstance();
+        //Travel t = travelFacade.getTravel();
+        //Collaborator c = travelFacade.getCollaborator();
         Integer t = 1;
-        if(chatClient!=null) chatClient.handleMessageFromChatController(new Message(0, t, UserFacade.createInstance().getConnectedUser(), text, new Timestamp(System.currentTimeMillis())).toString());
+        Collaborator c = new Collaborator(0,0,0, "ProvisoireTODO");
+        if(chatClient!=null) chatClient.handleMessageFromChatController(new Message(0, t, c, text, new Timestamp(System.currentTimeMillis())).toString());
       }
       else
         this.displayInfo("Attention : Le message n'a pas pu être envoyé, veuillez réessayer");

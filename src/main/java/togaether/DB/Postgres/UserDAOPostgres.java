@@ -1,5 +1,6 @@
 package togaether.DB.Postgres;
 
+import togaether.BL.Model.Collaborator;
 import togaether.DB.UserDAO;
 import togaether.BL.Model.User;
 
@@ -17,7 +18,7 @@ public class UserDAOPostgres implements UserDAO {
   @Override
   public void insertUser(String user_name, String user_email, String password)  throws SQLException {
     try (Connection connection = this.postgres.getConnection()){
-      String query = "INSERT INTO public.user(user_name, user_email, password) VALUES(?,?, crypt(?,gen_salt('bf', 8)))";
+      String query = "INSERT INTO public.user(user_name, user_email, user_password) VALUES(?,?, crypt(?,gen_salt('bf', 8)))";
       try(PreparedStatement statement =
                   connection.prepareStatement(query);){
         statement.setString(1,user_name);
@@ -38,7 +39,7 @@ public class UserDAOPostgres implements UserDAO {
 
           ArrayList<User> users = new ArrayList<>();
           while(resultSet.next())
-            users.add(new User(resultSet.getInt("user_id"), resultSet.getString("user_name"), resultSet.getString("user_email"), resultSet.getString("password")));
+            users.add(new User(resultSet.getInt("user_id"), resultSet.getString("user_name"), resultSet.getString("user_email"), resultSet.getString("user_password")));
           return users;
           /*
           System.out.println("heho");
@@ -59,7 +60,7 @@ public class UserDAOPostgres implements UserDAO {
         statement.setInt(1,idUser);
         try (ResultSet resultSet = statement.executeQuery()) {
           while(resultSet.next())
-            u = new User(resultSet.getInt("user_id"), resultSet.getString("user_name"), resultSet.getString("user_email"), resultSet.getString("password"));
+            u = new User(resultSet.getInt("user_id"), resultSet.getString("user_name"), resultSet.getString("user_email"), resultSet.getString("user_password"));
         }
       }
     }
@@ -76,7 +77,7 @@ public class UserDAOPostgres implements UserDAO {
         try (ResultSet resultSet = statement.executeQuery()) {
           ArrayList<User> users = new ArrayList<>();
           while(resultSet.next())
-            u = new User(resultSet.getInt("user_id"), resultSet.getString("user_name"), resultSet.getString("user_email"), resultSet.getString("password"));
+            u = new User(resultSet.getInt("user_id"), resultSet.getString("user_name"), resultSet.getString("user_email"), resultSet.getString("user_password"));
         }
       }
     }
@@ -103,7 +104,7 @@ public class UserDAOPostgres implements UserDAO {
         try (ResultSet resultSet = statement.executeQuery()) {
           ArrayList<User> users = new ArrayList<>();
           while(resultSet.next())
-            users.add(new User(resultSet.getInt("user_id"), resultSet.getString("user_name"), resultSet.getString("user_email"), resultSet.getString("password")));
+            users.add(new User(resultSet.getInt("user_id"), resultSet.getString("user_name"), resultSet.getString("user_email"), resultSet.getString("user_password")));
           return users;
         }
       }

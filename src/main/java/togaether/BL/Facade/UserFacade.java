@@ -1,12 +1,11 @@
 package togaether.BL.Facade;
 
-import togaether.DB.AbstractFactory;
 import togaether.BL.Model.User;
+import togaether.DB.AbstractFactory;
 import togaether.DB.UserDAO;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.sql.SQLException;
-import java.util.List;
 
 /**
  * Classe singleton regroupant différentes foncionnalité lié à l'utilisateur courant
