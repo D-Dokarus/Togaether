@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="258.0" prefWidth="390.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="togaether.UI.Controller.TravelUnarchiveController">
+   <children>
+      <Label layoutX="39.0" layoutY="27.0" text="Souhaitez vous vraiment désarchiver ce voyage ?">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Button fx:id="cancelButton" layoutX="52.0" layoutY="198.0" mnemonicParsing="false" onAction="#onCancelButtonClicked" text="Annuler" />
+      <Button fx:id="confirmedButton" layoutX="254.0" layoutY="198.0" mnemonicParsing="false" onAction="#onConfirmedButtonClicked" text="Confirmer" />
+      <Text layoutX="27.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Un voyage désarchivé devient accessible à la modification par tous ses collaborateurs" textAlignment="CENTER" wrappingWidth="347.7109375" />
+      <Label layoutX="52.0" layoutY="56.0" text="Voyage" />
+      <Label fx:id="nameTravel" layoutX="118.0" layoutY="56.0" text="nomVoyage" />
+      <Label layoutX="51.0" layoutY="80.0" text="Description" />
+      <Text fx:id="descriptionTravel" layoutX="118.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DescriptionVoyage" wrappingWidth="232.7109375" />
+      <Label fx:id="labelError" layoutX="181.0" layoutY="181.0" textAlignment="CENTER" textFill="RED" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<?import javafx.scene.control.PasswordField?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="togaether.UI.Controller.SettingsController">
+   <children>
+      <Text layoutX="206.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings">
+         <font>
+            <Font size="39.0" />
+         </font>
+      </Text>
+      <Button fx:id="returnButton" layoutX="20.0" layoutY="24.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="102.0" text="Return">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <Pane layoutX="98.0" layoutY="108.0" prefHeight="241.0" prefWidth="375.0" style="-fx-background-color: lightgrey;">
+         <children>
+            <GridPane layoutX="42.0" layoutY="18.0" prefHeight="128.0" prefWidth="292.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TextField fx:id="newname" promptText="Name" />
+                  <TextField fx:id="newsurname" promptText="Surname" GridPane.columnIndex="1" />
+                  <TextField fx:id="newpseudo" promptText="Pseudo" GridPane.rowIndex="1" />
+                  <TextField fx:id="newemail" promptText="Email" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <PasswordField fx:id="newpassword" promptText="Password" GridPane.rowIndex="2" />
+                  <PasswordField fx:id="newconfirmPassword" prefWidth="134.0" promptText="Confirm New Password" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="newcountry" promptText="Country" GridPane.rowIndex="3" />
+               </children>
+            </GridPane>
+            <Button fx:id="saveChangeButton" onAction="#onSaveChangeButtonClick" layoutX="107.0" layoutY="184.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="162.0" style="-fx-background-color: lightgreen; -fx-border-color: black;" text="Change Information" />
+         </children>
+      </Pane>
+      <Button fx:id="deleteAccountButton" onAction="#switchToDeleteAccountFrame" layoutX="456.0" layoutY="360.0" mnemonicParsing="false" style="-fx-background-color: pink; -fx-border-color: black;" text="Delete Account" />
+   </children>
+</AnchorPane>

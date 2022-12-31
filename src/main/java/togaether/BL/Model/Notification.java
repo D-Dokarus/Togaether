@@ -171,7 +171,6 @@ public class Notification {
     public static  void main(String args[]){
         User u1 = new User(4,"Maxime","maxime@gmail.com","mdp");
         User u2 = new User(1,"Dorian","dorian@gmail.com","mdp");
-
         NotificationCategory n1 = NotificationCategory.createNotification("friendInvitation");
         NotificationCategory n2 = NotificationCategory.createNotification("serverNotification");
 

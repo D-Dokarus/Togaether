@@ -1,35 +1,32 @@
 package togaether.UI.Controller;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Hyperlink;
-import javafx.stage.Stage;
-import togaether.BL.Facade.*;
-
-import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import togaether.BL.Facade.DBNotFoundException;
+import togaether.BL.Facade.UserBadPasswordException;
+import togaether.BL.Facade.UserFacade;
+import togaether.BL.Facade.UserNotFoundException;
 
 import java.io.IOException;
 
 /**
  * Controller de l'interface graphique Login
  */
-public class LoginController {
-    @FXML
-    private TextField email;
+public class DeleteAccountController {
     @FXML
     private PasswordField password;
     @FXML
-    private Button seConnecter;
+    private Button deleteAccountButton;
     @FXML
-    private Button register;
-    @FXML
-    private Button forgotPassword;
+    private Button cancelButton;
     @FXML
     private Stage stage;
     @FXML
@@ -40,12 +37,10 @@ public class LoginController {
     /**
      * Action effectuée lors d'une tentative de login
      */
-    public void onLoginButtonClick() {
+    public void onDeleteButtonClick() {
         try {
-            UserFacade.createInstance().login(email.getText(), password.getText());
-            System.out.println("Login réussi");
-        } catch (UserNotFoundException e) {
-            System.out.println("Cet utilisateur n'existe pas");
+            UserFacade.createInstance().deleteAccount(password.getText());
+            System.out.println("Compte supprimé");
         } catch (UserBadPasswordException e) {
             System.out.println("Mauvais mot de passe");
         } catch (DBNotFoundException e) {
@@ -61,4 +56,5 @@ public class LoginController {
         stage.setScene(scene);
         stage.show();
     }
+
 }
