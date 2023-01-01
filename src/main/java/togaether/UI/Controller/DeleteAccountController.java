@@ -14,6 +14,7 @@ import togaether.BL.Facade.DBNotFoundException;
 import togaether.BL.Facade.UserBadPasswordException;
 import togaether.BL.Facade.UserFacade;
 import togaether.BL.Facade.UserNotFoundException;
+import togaether.UI.SceneController;
 
 import java.io.IOException;
 
@@ -37,7 +38,7 @@ public class DeleteAccountController {
     /**
      * Action effectuée lors d'une tentative de login
      */
-    public void onDeleteButtonClick() {
+    public void onDeleteButtonClick(ActionEvent event) {
         try {
             UserFacade.createInstance().deleteAccount(password.getText());
             System.out.println("Compte supprimé");
@@ -49,12 +50,8 @@ public class DeleteAccountController {
 
     }
 
-    public void switchToSceneRegisterFrame(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Register.fxml"));
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    public void switchToSceneRegisterFrame(ActionEvent event) {
+        SceneController.getInstance().switchToRegister(event);
     }
 
 }

@@ -1,5 +1,6 @@
 package togaether.UI.Controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -8,6 +9,7 @@ import javafx.scene.control.TextArea;
 import togaether.BL.Facade.TravelFacade;
 import togaether.BL.Model.Travel;
 import togaether.BL.Model.User;
+import togaether.UI.SceneController;
 
 import java.util.Date;
 
@@ -31,19 +33,15 @@ public class TravelCreateController {
     private Label labelError;
 
 
-    public void onReturnButtonClicked() {
-        //TO DO retourner HomePage
-        System.exit(1);
-
+    public void onReturnButtonClicked(ActionEvent event) {
+        SceneController.getInstance().switchToHomePage(event);
     }
 
-    public void onCancelButtonClicked() {
-        //TO DO retourner HomePage
-        System.exit(1);
-
+    public void onCancelButtonClicked(ActionEvent event) {
+        SceneController.getInstance().switchToHomePage(event);
     }
 
-    public void onConfirmedButtonClicked() {
+    public void onConfirmedButtonClicked(ActionEvent event) {
         if(!this.nameTravel.getText().isEmpty() && !this.descriptionTravel.getText().isEmpty()){
             Date start = null;
             Date end = null;
@@ -63,7 +61,10 @@ public class TravelCreateController {
                 TravelFacade travelFacade = TravelFacade.createInstance();
                 try {
                     travelFacade.createTravel(newTravel);
-                    // Aller à la page du nouveau voyage créé
+                    /*
+                    travelFacade.setTravel();
+                    SceneController.getInstance().switchToTravel(event);*/
+                    SceneController.getInstance().switchToHomePage(event);
                     System.out.println("Voyage créé !");
                 } catch (Exception e) {
                     System.out.println("Attention : Le voyage n'a pas pu être créé, veuillez réessayer");

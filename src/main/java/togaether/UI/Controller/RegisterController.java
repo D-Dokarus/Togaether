@@ -3,18 +3,21 @@ package togaether.UI.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import togaether.App;
 import togaether.BL.Facade.DBNotFoundException;
 import togaether.BL.Facade.UserBadPasswordException;
 import togaether.BL.Facade.UserBadConfirmPasswordException;
 import togaether.BL.Facade.UserFacade;
 import togaether.BL.Facade.UserAlreadyExistException;
 import togaether.BL.Facade.UserPseudoAlreadyExistException;
+import togaether.UI.SceneController;
 
 import java.io.IOException;
 
@@ -48,9 +51,10 @@ public class RegisterController {
     /**
      * Action effectuée lors d'une tentative de Register
      */
-    public void onRegisterButtonClick() {
+    public void onRegisterButtonClick(ActionEvent event) {
         try {
             UserFacade.createInstance().register(name.getText(), surname.getText(), pseudo.getText(), email.getText(), password.getText(), confirmPassword.getText(), country.getText());
+            SceneController.getInstance().switchToLogin(event);
             System.out.println("Inscription réussie");
         } catch (UserBadPasswordException e) {
             System.out.println("Mauvais mot de passe");
@@ -66,11 +70,7 @@ public class RegisterController {
 
     }
 
-    public void switchToSceneLoginFrame(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("Login.fxml"));
-        stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    public void switchToSceneLoginFrame(ActionEvent event) {
+        SceneController.getInstance().switchToLogin(event);
     }
 }

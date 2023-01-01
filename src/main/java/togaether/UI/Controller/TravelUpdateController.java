@@ -1,10 +1,15 @@
 package togaether.UI.Controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
+import togaether.App;
 import togaether.BL.Facade.TravelFacade;
 import togaether.BL.Model.Travel;
 import togaether.BL.Model.User;
+import togaether.UI.SceneController;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -90,19 +95,15 @@ public class TravelUpdateController {
         }
     }
 
-    public void onReturnButtonClicked() {
-        //TO DO return HomePage
-        System.exit(1);
-
+    public void onReturnButtonClicked(ActionEvent event) {
+        SceneController.getInstance().switchToHomePage(event);
     }
 
-    public void onCancelButtonClicked() {
-        //TO DO return HomePage
-        System.exit(1);
-
+    public void onCancelButtonClicked(ActionEvent event) {
+        SceneController.getInstance().switchToHomePage(event);
     }
 
-    public void onConfirmedButtonClicked() {
+    public void onConfirmedButtonClicked(ActionEvent event) {
         // Récupérer userconnected
         if(!this.nameTravel.getText().isEmpty()){
             this.travel.setNameTravel(this.nameTravel.getText());
@@ -132,7 +133,7 @@ public class TravelUpdateController {
             TravelFacade travelFacade = TravelFacade.createInstance();
             try {
                 travelFacade.updateTravel(this.travel);
-                // Fermer la page pour revenir à la page principale
+                SceneController.getInstance().switchToHomePage(event);
                 System.out.println("Voyage modifié !");
             } catch (Exception e) {
                 System.out.println("Attention : Le voyage n'a pas pu être modifié, veuillez réessayer");
@@ -142,4 +143,5 @@ public class TravelUpdateController {
         }
 
     }
+
 }

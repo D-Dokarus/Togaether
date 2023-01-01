@@ -1,6 +1,10 @@
 package togaether.UI.Controller;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.scene.Node;
+import javafx.stage.Stage;
+import togaether.App;
 import togaether.BL.ChatClient;
 import togaether.BL.Facade.*;
 
@@ -8,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import togaether.BL.Model.Collaborator;
 import togaether.BL.Model.Message;
+import togaether.UI.SceneController;
 
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -26,6 +31,9 @@ public class ChatController {
   @FXML
   private Label infoLabel;
 
+  /**
+   * Service permettant de voir les nouveaux messages en direct (nécessite un ChatServer actif)
+   */
   private ChatClient chatClient = null;
 
   @FXML
@@ -58,11 +66,11 @@ public class ChatController {
     }
   }
 
-  public void onReturnButtonClicked() {
+  public void onReturnButtonClicked(ActionEvent event) {
     this.close();
-    //TO DO
+    SceneController.getInstance().switchToTravel(event);
   }
-  public void onSendButtonClicked() {
+  public void onSendButtonClicked(ActionEvent event) {
     String text = this.inputMessage.getText();
     if(text.length() == 0)
       this.displayInfo("Attention : Message vide");

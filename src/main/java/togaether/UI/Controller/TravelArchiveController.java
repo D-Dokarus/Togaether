@@ -1,11 +1,13 @@
 package togaether.UI.Controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import togaether.BL.Facade.TravelFacade;
 import togaether.BL.Model.Travel;
+import togaether.UI.SceneController;
 
 public class TravelArchiveController {
     @FXML
@@ -40,16 +42,15 @@ public class TravelArchiveController {
         this.descriptionTravel.setText(this.travel.getDescriptionTravel());
     }
 
-    public void onCancelButtonClicked() {
-        //TO DO retourner HomePage
-        System.exit(1);
+    public void onCancelButtonClicked(ActionEvent event) {
+        SceneController.getInstance().switchToHomePage(event);
     }
 
-    public void onConfirmedButtonClicked() {
+    public void onConfirmedButtonClicked(ActionEvent event) {
         TravelFacade travelFacade = TravelFacade.createInstance();
         try {
             travelFacade.archiveTravel(this.travel);
-            // Fermer la page pour revenir à la page principale
+            SceneController.getInstance().switchToHomePage(event);
             System.out.println("Voyage archivé !");
         } catch (Exception e) {
             System.out.println("Attention : Le voyage n'a pas pu être archivé, veuillez réessayer");

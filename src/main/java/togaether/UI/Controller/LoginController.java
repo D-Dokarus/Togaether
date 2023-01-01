@@ -7,12 +7,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Hyperlink;
 import javafx.stage.Stage;
+import togaether.App;
 import togaether.BL.Facade.*;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import togaether.UI.SceneController;
 
 import java.io.IOException;
 
@@ -40,9 +42,10 @@ public class LoginController {
     /**
      * Action effectuée lors d'une tentative de login
      */
-    public void onLoginButtonClick() {
+    public void onLoginButtonClick(ActionEvent event) {
         try {
             UserFacade.createInstance().login(email.getText(), password.getText());
+            SceneController.getInstance().switchToHomePage(event);
             System.out.println("Login réussi");
         } catch (UserNotFoundException e) {
             System.out.println("Cet utilisateur n'existe pas");
@@ -53,12 +56,7 @@ public class LoginController {
         }
 
     }
-
-    public void switchToSceneRegisterFrame(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Register.fxml"));
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    public void switchToSceneRegisterFrame(ActionEvent event) {
+        SceneController.getInstance().switchToRegister(event);
     }
 }
