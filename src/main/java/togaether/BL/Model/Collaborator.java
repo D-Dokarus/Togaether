@@ -19,6 +19,16 @@ public class Collaborator {
     this.name = name;
   }
 
+  public Collaborator(int id, Travel travel, String name) {
+    this.id = id;
+    this.travel = travel;
+    this.name = name;
+  }
+
+  public Collaborator(Travel travel, String name) {
+    this.travel = travel;
+    this.name = name;
+  }
   public int getId() {
     return id;
   }
@@ -45,5 +55,13 @@ public class Collaborator {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  @Override
+  public String toString() {
+    return "{id : " + getId()
+            + "; Travel : " + getTravel()
+            + "; Name : " + getName()
+            + "; User : " + getUser() +"}";
   }
 }

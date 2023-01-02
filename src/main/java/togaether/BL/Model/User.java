@@ -38,6 +38,25 @@ public class User {
         this.dateCreation = createDate();
     }
 
+    public User(String name, String surname, String pseudo, String email, String country) {
+        this.name = name;
+        this.surname = surname;
+        this.pseudo = pseudo;
+        this.email = email;
+        this.country = country;
+        this.dateCreation = createDate();
+    }
+
+    public User(int id, String name, String surname, String pseudo, String email, String country) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.pseudo = pseudo;
+        this.email = email;
+        this.country = country;
+        this.dateCreation = createDate();
+    }
+
     public User(int id, String name, String email, String password) {
         this.id = id;
         this.name = name;

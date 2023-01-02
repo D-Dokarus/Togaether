@@ -12,7 +12,7 @@ public class NotificationFrame extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(LoginFrame.class.getResource("NotificationCenter.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Togaether");
+        stage.setTitle("Notifications");
         stage.setScene(scene);
         stage.show();
     }
