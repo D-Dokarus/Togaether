@@ -34,7 +34,11 @@ public class HomePageController {
   @FXML
   private Button archivedTravelsButton;
   @FXML
+  private Button createTravel;
+  @FXML
   private ListView travelList;
+  @FXML
+  private Label labelError;
 
   @FXML
   protected void initialize() {
@@ -122,6 +126,13 @@ public class HomePageController {
   public void onArchivedTravelsButtonClicked(ActionEvent event) {
     SceneController.getInstance().switchToListArchivedTravel(event);
   }
+  public void onCreateTravelButtonClicked(ActionEvent event) { SceneController.getInstance().switchToCreateTravel(event);}
+  public void onSearchTravelButtonClicked(ActionEvent event) {
+    // FAIRE LA RECHERCHE
+  }
 
+  public void error(Exception e) {
+    this.labelError.setText("Problème lors du chargement de la page, veuillez réessayer plus tard...");
+  }
 
 }

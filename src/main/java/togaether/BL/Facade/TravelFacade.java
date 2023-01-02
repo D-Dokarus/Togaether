@@ -140,6 +140,20 @@ public class TravelFacade {
         }
     }
 
+    /**
+     * Query the archiving of the actual travel in DB
+     */
+    public List<Travel> travelsArchived(int Id) throws DBNotFoundException {
+        AbstractFactory fact = AbstractFactory.createInstance();
+        TravelDAO travelDB = fact.getTravelDAO();
+        try {
+             return travelDB.travelsArchived(Id);
+        } catch (SQLException e) {
+            System.out.println(e);
+            throw new DBNotFoundException();
+        }
+    }
+
     public Travel findLatestCreatedTravel() throws DBNotFoundException{
         AbstractFactory fact = AbstractFactory.createInstance();
         TravelDAO travelDB = fact.getTravelDAO();
@@ -151,21 +165,6 @@ public class TravelFacade {
         }
     }
 
-    /**
-     * Query the creation of a specific notification (given in parameters) in DB
-     * @param notification
-     */
-    // ou créer la notif en fonction du voyage actuel et non du paramètre notification
-    public void createNotification(Notification notification){
-        AbstractFactory fact = AbstractFactory.createInstance();
-        NotificationDAO notificationDB = fact.getNotificationDAO();
-
-        try{
-            notificationDB.createNotification(notification);
-        }catch(SQLException e){
-            System.out.println(e);
-        }
-    }
 
     public List<Travel> findTravelsByUserId(int id) {
         ArrayList<Travel> liste = new ArrayList<>();

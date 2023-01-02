@@ -4,10 +4,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
 import togaether.BL.Facade.TravelFacade;
+import togaether.BL.Facade.UserFacade;
 import togaether.BL.Model.Travel;
 import togaether.UI.SceneController;
+
+import java.util.ArrayList;
 
 public class TravelArchiveController {
     @FXML
@@ -18,6 +22,7 @@ public class TravelArchiveController {
     private Button cancelButton;
     @FXML
     private Button confirmedButton;
+
     @FXML
     private Label labelError;
 
@@ -31,8 +36,9 @@ public class TravelArchiveController {
         // Récupérer user connected
         // Récupérer travel connected
         TravelFacade travelFacade = TravelFacade.getInstance();
+
         try {
-            this.travel = travelFacade.findTravelById(4);
+            this.travel = travelFacade.findTravelById(travelFacade.getTravel().getIdTravel());
             // Fermer la page pour revenir à la page principale
         } catch (Exception e) {
             System.out.println("Attention : Le voyage n'a pas pu être trouvé, veuillez réessayer");
@@ -59,4 +65,11 @@ public class TravelArchiveController {
         }
     }
 
+    public void onReturnButtonClicked(ActionEvent event) {
+        SceneController.getInstance().switchToHomePage(event);
+    }
+
+    public void onNotificationsButtonClicked(ActionEvent event) {
+        SceneController.getInstance().switchToNotificationCenter(event);
+    }
 }

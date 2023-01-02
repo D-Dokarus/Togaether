@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import togaether.App;
 import togaether.BL.Facade.TravelFacade;
+import togaether.BL.Facade.UserFacade;
 import togaether.BL.Model.Travel;
 import togaether.BL.Model.User;
 import togaether.UI.SceneController;
@@ -105,6 +106,7 @@ public class TravelUpdateController {
 
     public void onConfirmedButtonClicked(ActionEvent event) {
         // Récupérer userconnected
+        UserFacade userFacade = UserFacade.getInstance();
         if(!this.nameTravel.getText().isEmpty()){
             this.travel.setNameTravel(this.nameTravel.getText());
         }

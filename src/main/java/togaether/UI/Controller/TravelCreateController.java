@@ -7,8 +7,12 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import togaether.BL.Facade.TravelFacade;
+import togaether.BL.Facade.UserFacade;
 import togaether.BL.Model.Travel;
 import togaether.BL.Model.User;
+import togaether.DB.AbstractFactory;
+import togaether.DB.CollaboratorDAO;
+import togaether.DB.Postgres.PostgresFactory;
 import togaether.UI.SceneController;
 
 import java.util.Date;
@@ -32,6 +36,11 @@ public class TravelCreateController {
     @FXML
     private Label labelError;
 
+    @FXML
+    protected void initialize() {
+        UserFacade userFacade = UserFacade.getInstance();
+        AbstractFactory abstractFactory = PostgresFactory.createInstance();
+    }
 
     public void onReturnButtonClicked(ActionEvent event) {
         SceneController.getInstance().switchToHomePage(event);
@@ -42,6 +51,8 @@ public class TravelCreateController {
     }
 
     public void onConfirmedButtonClicked(ActionEvent event) {
+        UserFacade userFacade = UserFacade.getInstance();
+
         if(!this.nameTravel.getText().isEmpty() && !this.descriptionTravel.getText().isEmpty()){
             Date start = null;
             Date end = null;
@@ -55,8 +66,7 @@ public class TravelCreateController {
                 this.labelError.setText("Attention : La date de départ du voyage précède la date de fin,\n veuillez les changer ou les laisser vide.");
             } else {
                 // Récupérer userconnected
-                User owner = new User(1, "Lau", "lau@SE.com", "1234");
-                Travel newTravel = new Travel(owner, this.nameTravel.getText(), this.descriptionTravel.getText(), start, end, false);
+                Travel newTravel = new Travel(userFacade.getConnectedUser(), this.nameTravel.getText(), this.descriptionTravel.getText(), start, end, false);
 
                 TravelFacade travelFacade = TravelFacade.getInstance();
                 try {

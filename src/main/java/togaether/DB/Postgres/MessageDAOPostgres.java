@@ -43,7 +43,7 @@ public class MessageDAOPostgres implements MessageDAO {
         try (ResultSet resultSet = statement.executeQuery()) {
 
           while (resultSet.next()) {
-            User user = new User(resultSet.getInt("user_id"), "Lau", "lau@SE.com", "1234");
+            User user = new User(resultSet.getInt("user_id"), "", "", "");
             Travel travel = new Travel(resultSet.getInt("travel_id"),user,"test_name","test_desc",new Date(), new Date(),false);
             Collaborator collaborator = new Collaborator(resultSet.getInt("collaborator_id"), travel, user, resultSet.getString("collaborator_name"));
             messages.add(new Message(resultSet.getInt("message_id"), resultSet.getInt("travel_id"), collaborator, resultSet.getString("message_content"), resultSet.getTimestamp("message_date")));

@@ -15,6 +15,8 @@ public interface TravelDAO {
 
     public List<Travel> findTravelsByUserId(int Id) throws SQLException;
 
+    public List<Travel> travelsArchived(int Id) throws SQLException;
+
     public List<Travel> findTravelsByUserIdAndString(int Id, String str) throws SQLException;
 
     public void updateTravel(Travel travel) throws SQLException;
