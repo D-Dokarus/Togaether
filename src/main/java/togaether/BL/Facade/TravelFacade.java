@@ -19,7 +19,7 @@ public class TravelFacade {
 
     static private TravelFacade instance = new TravelFacade();
 
-    public static TravelFacade createInstance() {
+    public static TravelFacade getInstance() {
         return instance;
     }
 
@@ -134,6 +134,17 @@ public class TravelFacade {
 
         try {
             travelDB.deleteTravelById(travel.getIdTravel());
+        } catch (SQLException e) {
+            System.out.println(e);
+            throw new DBNotFoundException();
+        }
+    }
+
+    public Travel findLatestCreatedTravel() throws DBNotFoundException{
+        AbstractFactory fact = AbstractFactory.createInstance();
+        TravelDAO travelDB = fact.getTravelDAO();
+        try {
+            return travelDB.findLatestCreatedTravel();
         } catch (SQLException e) {
             System.out.println(e);
             throw new DBNotFoundException();

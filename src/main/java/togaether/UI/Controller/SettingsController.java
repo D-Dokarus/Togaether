@@ -53,22 +53,22 @@ public class SettingsController {
         try {
             //Update if not empty
             if(!newname.getText().isEmpty()){
-                UserFacade.createInstance().updateName(newname.getText());
+                UserFacade.getInstance().updateName(newname.getText());
             }
             if(!newsurname.getText().isEmpty()){
-                UserFacade.createInstance().updateSurname(newsurname.getText());
+                UserFacade.getInstance().updateSurname(newsurname.getText());
             }
             if(!newemail.getText().isEmpty()){
-                UserFacade.createInstance().updateEmail(newemail.getText());
+                UserFacade.getInstance().updateEmail(newemail.getText());
             }
             if(!newpseudo.getText().isEmpty()){
-                UserFacade.createInstance().updatePseudo(newpseudo.getText());
+                UserFacade.getInstance().updatePseudo(newpseudo.getText());
             }
             if(!newpassword.getText().isEmpty()){
-                UserFacade.createInstance().updatePassword(newpassword.getText(), newconfirmPassword.getText());
+                UserFacade.getInstance().updatePassword(newpassword.getText(), newconfirmPassword.getText());
             }
             if(!newcountry.getText().isEmpty()){
-                UserFacade.createInstance().updateCountry(newcountry.getText());
+                UserFacade.getInstance().updateCountry(newcountry.getText());
             }
             System.out.println("Update réussi");
         } catch (UserBadPasswordException e) {

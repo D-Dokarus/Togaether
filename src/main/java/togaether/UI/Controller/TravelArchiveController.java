@@ -30,7 +30,7 @@ public class TravelArchiveController {
     protected void initialize() {
         // Récupérer user connected
         // Récupérer travel connected
-        TravelFacade travelFacade = TravelFacade.createInstance();
+        TravelFacade travelFacade = TravelFacade.getInstance();
         try {
             this.travel = travelFacade.findTravelById(4);
             // Fermer la page pour revenir à la page principale
@@ -47,7 +47,7 @@ public class TravelArchiveController {
     }
 
     public void onConfirmedButtonClicked(ActionEvent event) {
-        TravelFacade travelFacade = TravelFacade.createInstance();
+        TravelFacade travelFacade = TravelFacade.getInstance();
         try {
             travelFacade.archiveTravel(this.travel);
             SceneController.getInstance().switchToHomePage(event);

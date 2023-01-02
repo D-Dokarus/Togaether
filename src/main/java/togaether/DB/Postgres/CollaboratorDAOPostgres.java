@@ -1,10 +1,8 @@
 package togaether.DB.Postgres;
 
-import togaether.BL.Model.Collaborator;
+import togaether.BL.Model.*;
 
 import togaether.BL.Model.Collaborator;
-import togaether.BL.Model.Message;
-import togaether.BL.Model.User;
 import togaether.DB.CollaboratorDAO;
 import togaether.DB.MessageDAO;
 
@@ -28,7 +26,7 @@ public class CollaboratorDAOPostgres implements CollaboratorDAO {
         try (ResultSet resultSet = statement.executeQuery()) {
 
           while (resultSet.next()) {
-             collaborator = new Collaborator(resultSet.getInt("collaborator_id"), resultSet.getInt("travel_id"), resultSet.getInt("user_id"), resultSet.getString("collaborator_name"));
+             collaborator = new Collaborator(resultSet.getInt("collaborator_id"), new Travel(resultSet.getInt("travel_id"), null,null, "", null, null, false), new User(resultSet.getInt("user_id"),"","",""), resultSet.getString("collaborator_name"));
           }
         }
       }

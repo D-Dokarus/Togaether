@@ -185,4 +185,35 @@ public class TravelDAOPostgres implements TravelDAO {
         }
 
     }
+
+    public Travel findLatestCreatedTravel() throws SQLException {
+
+        try(Connection connection = this.postgres.getConnection()){
+            String query = "SELECT * FROM travel INNER JOIN public.user u ON travel.owner=u.user_id ORDER BY travel_id DESC LIMIT 1;";
+            try(PreparedStatement statement = connection.prepareStatement(query)){
+                try(ResultSet resultSet = statement.executeQuery()){
+                    resultSet.next();
+
+
+                    /*User owner = new User(Integer.valueOf(resultSet.getString("owner")),
+                            resultSet.getString(9),
+                            resultSet.getString(10),
+                            resultSet.getString(11));*/
+                    User user = new User(resultSet.getInt("owner"), resultSet.getString("user_name"), resultSet.getString("user_email"), resultSet.getString("user_password"));
+
+                    Travel travel = new Travel(resultSet.getInt("travel_id"),
+                            user,
+                            resultSet.getString("name_travel"),
+                            resultSet.getString("description_travel"),
+                            resultSet.getDate("date_start"),
+                            resultSet.getDate("date_end"),
+                            resultSet.getBoolean("is_archive"));
+                    return travel;
+                }
+            }
+        }
+        finally{
+            this.postgres.getConnection().close();
+        }
+    }
 }

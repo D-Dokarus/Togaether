@@ -53,7 +53,7 @@ public class RegisterController {
      */
     public void onRegisterButtonClick(ActionEvent event) {
         try {
-            UserFacade.createInstance().register(name.getText(), surname.getText(), pseudo.getText(), email.getText(), password.getText(), confirmPassword.getText(), country.getText());
+            UserFacade.getInstance().register(name.getText(), surname.getText(), pseudo.getText(), email.getText(), password.getText(), confirmPassword.getText(), country.getText());
             SceneController.getInstance().switchToLogin(event);
             System.out.println("Inscription réussie");
         } catch (UserBadPasswordException e) {

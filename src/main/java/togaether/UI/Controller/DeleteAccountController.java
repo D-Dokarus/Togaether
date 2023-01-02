@@ -40,7 +40,7 @@ public class DeleteAccountController {
      */
     public void onDeleteButtonClick(ActionEvent event) {
         try {
-            UserFacade.createInstance().deleteAccount(password.getText());
+            UserFacade.getInstance().deleteAccount(password.getText());
             System.out.println("Compte supprimé");
         } catch (UserBadPasswordException e) {
             System.out.println("Mauvais mot de passe");

@@ -58,7 +58,7 @@ public class TravelCreateController {
                 User owner = new User(1, "Lau", "lau@SE.com", "1234");
                 Travel newTravel = new Travel(owner, this.nameTravel.getText(), this.descriptionTravel.getText(), start, end, false);
 
-                TravelFacade travelFacade = TravelFacade.createInstance();
+                TravelFacade travelFacade = TravelFacade.getInstance();
                 try {
                     travelFacade.createTravel(newTravel);
                     /*

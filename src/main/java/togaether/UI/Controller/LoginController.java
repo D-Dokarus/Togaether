@@ -44,7 +44,7 @@ public class LoginController {
      */
     public void onLoginButtonClick(ActionEvent event) {
         try {
-            UserFacade.createInstance().login(email.getText(), password.getText());
+            UserFacade.getInstance().login(email.getText(), password.getText());
             SceneController.getInstance().switchToHomePage(event);
             System.out.println("Login réussi");
         } catch (UserNotFoundException e) {

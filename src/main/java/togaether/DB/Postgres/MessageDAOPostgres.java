@@ -2,11 +2,13 @@ package togaether.DB.Postgres;
 
 import togaether.BL.Model.Collaborator;
 import togaether.BL.Model.Message;
+import togaether.BL.Model.Travel;
 import togaether.BL.Model.User;
 import togaether.DB.MessageDAO;
 
 import java.sql.*;
 import java.util.*;
+import java.util.Date;
 
 public class MessageDAOPostgres implements MessageDAO {
 
@@ -41,7 +43,9 @@ public class MessageDAOPostgres implements MessageDAO {
         try (ResultSet resultSet = statement.executeQuery()) {
 
           while (resultSet.next()) {
-            Collaborator collaborator = new Collaborator(resultSet.getInt("collaborator_id"), resultSet.getInt("travel_id"), resultSet.getInt("user_id"), resultSet.getString("collaborator_name"));
+            User user = new User(resultSet.getInt("user_id"), "Lau", "lau@SE.com", "1234");
+            Travel travel = new Travel(resultSet.getInt("travel_id"),user,"test_name","test_desc",new Date(), new Date(),false);
+            Collaborator collaborator = new Collaborator(resultSet.getInt("collaborator_id"), travel, user, resultSet.getString("collaborator_name"));
             messages.add(new Message(resultSet.getInt("message_id"), resultSet.getInt("travel_id"), collaborator, resultSet.getString("message_content"), resultSet.getTimestamp("message_date")));
           }
         }
@@ -59,7 +63,9 @@ public class MessageDAOPostgres implements MessageDAO {
         try (ResultSet resultSet = statement.executeQuery()) {
 
           while (resultSet.next()) {
-            Collaborator collaborator = new Collaborator(resultSet.getInt("collaborator_id"), resultSet.getInt("travel_id"), resultSet.getInt("user_id"), resultSet.getString("collaborator_name"));
+            User user = new User(resultSet.getInt("user_id"), "Lau", "lau@SE.com", "1234");
+            Travel travel = new Travel(resultSet.getInt("travel_id"),user,"test_name","test_desc",new Date(), new Date(),false);
+            Collaborator collaborator = new Collaborator(resultSet.getInt("collaborator_id"), travel,user, resultSet.getString("collaborator_name"));
             messages.add(new Message(resultSet.getInt("message_id"), resultSet.getInt("travel_id"), collaborator, resultSet.getString("message_content"), resultSet.getTimestamp("message_date")));
           }
         }
@@ -77,7 +83,9 @@ public class MessageDAOPostgres implements MessageDAO {
         statement.setInt(1,travel_id);
         try (ResultSet resultSet = statement.executeQuery()) {
           while (resultSet.next()) {
-            Collaborator collaborator = new Collaborator(resultSet.getInt("collaborator_id"), resultSet.getInt("travel_id"), resultSet.getInt("user_id"), resultSet.getString("collaborator_name"));
+            User user = new User(resultSet.getInt("user_id"), "Lau", "lau@SE.com", "1234");
+            Travel travel = new Travel(resultSet.getInt("travel_id"),user,"test_name","test_desc",new Date(), new Date(),false);
+            Collaborator collaborator = new Collaborator(resultSet.getInt("collaborator_id"), travel, user, resultSet.getString("collaborator_name"));
             messages.add(new Message(resultSet.getInt("message_id"), resultSet.getInt("travel_id"), collaborator, resultSet.getString("message_content"), resultSet.getTimestamp("message_date")));
           }
         }
@@ -97,7 +105,9 @@ public class MessageDAOPostgres implements MessageDAO {
         try (ResultSet resultSet = statement.executeQuery()) {
 
           while (resultSet.next()) {
-            Collaborator collaborator = new Collaborator(resultSet.getInt("collaborator_id"), resultSet.getInt("travel_id"), resultSet.getInt("user_id"), resultSet.getString("collaborator_name"));
+            User user = new User(resultSet.getInt("user_id"), "Lau", "lau@SE.com", "1234");
+            Travel travel = new Travel(resultSet.getInt("travel_id"),user,"test_name","test_desc",new Date(), new Date(),false);
+            Collaborator collaborator = new Collaborator(resultSet.getInt("collaborator_id"), travel, user, resultSet.getString("collaborator_name"));
             messages.add(new Message(resultSet.getInt("message_id"), resultSet.getInt("travel_id"), collaborator, resultSet.getString("message_content"), resultSet.getTimestamp("message_date")));
           }
         }

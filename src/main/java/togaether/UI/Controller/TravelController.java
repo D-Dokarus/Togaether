@@ -16,10 +16,6 @@ import togaether.DB.Postgres.PostgresFactory;
 import togaether.DB.UserDAO;
 import togaether.UI.SceneController;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-
 public class TravelController {
 
     @FXML
@@ -54,10 +50,11 @@ public class TravelController {
 
     @FXML
     protected void initialize() {
-        TravelFacade travelFacade = TravelFacade.createInstance();
-        UserFacade userFacade = UserFacade.createInstance();
+        TravelFacade travelFacade = TravelFacade.getInstance();
+        UserFacade userFacade = UserFacade.getInstance();
         AbstractFactory abstractFactory = PostgresFactory.createInstance();
         CollaboratorDAO collaboratorDB = abstractFactory.getCollaboratorDAO();
+
         try {
             travelFacade.setCollaborator(collaboratorDB.getCollaboratorByUserIdAndTravelId(userFacade.getConnectedUser().getId(), travelFacade.getTravel().getIdTravel()));
         } catch (Exception e) {
@@ -69,7 +66,7 @@ public class TravelController {
     }
 
     public void initializeInfo(){
-        TravelFacade travelFacade = TravelFacade.createInstance();
+        TravelFacade travelFacade = TravelFacade.getInstance();
         Travel travel = travelFacade.getTravel();
         String dateString = "";
         if(travel.getDateStart()!=null){

@@ -12,4 +12,6 @@ module Togaether {
   opens togaether.UI.Frame to javafx.fxml;
   exports togaether.UI.Controller;
   opens togaether.UI.Controller to javafx.fxml;
+  exports togaether.DB;
+  exports togaether.BL.Model;
 }

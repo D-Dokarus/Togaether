@@ -42,8 +42,8 @@ public class HomePageController {
   }
 
   private void loadTravels() {
-    TravelFacade travelFacade = TravelFacade.createInstance();
-    ArrayList<Travel> travels = (ArrayList<Travel>) travelFacade.findTravelsByUserId(UserFacade.createInstance().getConnectedUser().getId());
+    TravelFacade travelFacade = TravelFacade.getInstance();
+    ArrayList<Travel> travels = (ArrayList<Travel>) travelFacade.findTravelsByUserId(UserFacade.getInstance().getConnectedUser().getId());
 
     ObservableList<Travel> observableTravels = FXCollections.observableArrayList();
     for(Travel travel : travels){
@@ -76,19 +76,19 @@ public class HomePageController {
             //BUTTON GOTRAVEL
             Button btnGoTravel = new Button("Voir");
             btnGoTravel.setOnAction(event -> {
-              TravelFacade.createInstance().setTravel(travel);
+              TravelFacade.getInstance().setTravel(travel);
               SceneController.getInstance().switchToTravel(event);
             });
             //BUTTON ARCHIVETRAVEL
             Button btnArchiveTravel = new Button("Archiver");
             btnArchiveTravel.setOnAction(event -> {
-              TravelFacade.createInstance().setTravel(travel);
+              TravelFacade.getInstance().setTravel(travel);
               SceneController.getInstance().switchToArchiveTravel(event);
             });
             //BUTTON DELETETRAVEL
             Button btnDeleteTravel = new Button("Supprimer");
             btnDeleteTravel.setOnAction(event -> {
-              TravelFacade.createInstance().setTravel(travel);
+              TravelFacade.getInstance().setTravel(travel);
               //TO DO pop-up delete
             });
             root.getChildren().addAll(btnGoTravel, btnArchiveTravel, btnDeleteTravel);

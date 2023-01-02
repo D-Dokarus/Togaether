@@ -7,15 +7,14 @@ import togaether.BL.Facade.*;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import togaether.BL.Model.Collaborator;
-import togaether.BL.Model.Message;
-import togaether.BL.Model.Travel;
+import togaether.BL.Model.*;
 import togaether.UI.SceneController;
 
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ChatController {
   @FXML
@@ -47,9 +46,9 @@ public class ChatController {
   }
 
   public void reloadMessages() {
-    ChatFacade chat = ChatFacade.createInstance();
+    ChatFacade chat = ChatFacade.getInstance();
+    TravelFacade travelfacade = TravelFacade.getInstance();
 
-    TravelFacade travelfacade = TravelFacade.createInstance();
     try {
       ArrayList<Message> liste = (ArrayList<Message>) chat.getMessagesByTravelId(travelfacade.getTravel().getIdTravel());
       for(Message m : liste) {
@@ -74,12 +73,12 @@ public class ChatController {
     else if(text.length() > 255)
       this.displayInfo("Attention : Nombre de caractères trop grand (supérieur à 255)");
     else {
-      ChatFacade chat = ChatFacade.createInstance();
+      ChatFacade chat = ChatFacade.getInstance();
       Boolean success = chat.sendMessage(text);
       if(success) {
         this.inputMessage.clear();
 
-        TravelFacade travelFacade = TravelFacade.createInstance();
+        TravelFacade travelFacade = TravelFacade.getInstance();
         Travel t = travelFacade.getTravel();
         Collaborator c = travelFacade.getCollaborator();
         if(chatClient!=null) chatClient.handleMessageFromChatController(new Message(0, t.getIdTravel(), c, text, new Timestamp(System.currentTimeMillis())).toString());
@@ -91,8 +90,8 @@ public class ChatController {
 
   private String formatText(String str) {
     String userName = "";
-    if(UserFacade.createInstance().getConnectedUser() != null)
-      userName = UserFacade.createInstance().getConnectedUser().getName();
+    if(UserFacade.getInstance().getConnectedUser() != null)
+      userName = UserFacade.getInstance().getConnectedUser().getName();
     LocalDateTime t = new Timestamp(System.currentTimeMillis()).toLocalDateTime();
     String minute = ((t.getMinute()+"").length() > 1 ? ""+t.getMinute() : "0"+t.getMinute()); //car par exemple si il est 12h07, getMinute renvoie juste 7
     String date = t.getDayOfMonth()+"/"+t.getMonthValue()+"/"+t.getYear()+" "+t.getHour()+":"+ minute;
