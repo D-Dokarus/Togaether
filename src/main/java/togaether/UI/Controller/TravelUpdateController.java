@@ -49,7 +49,7 @@ public class TravelUpdateController {
     protected void initialize() {
         // Récupérer user connected
         // Récupérer travel connected
-        TravelFacade travelFacade = TravelFacade.createInstance();
+        TravelFacade travelFacade = TravelFacade.getInstance();
         try {
             this.travel = travelFacade.findTravelById(4);
         } catch (Exception e) {
@@ -130,7 +130,7 @@ public class TravelUpdateController {
             this.travel.setDateStart(start);
             this.travel.setDateEnd(end);
 
-            TravelFacade travelFacade = TravelFacade.createInstance();
+            TravelFacade travelFacade = TravelFacade.getInstance();
             try {
                 travelFacade.updateTravel(this.travel);
                 SceneController.getInstance().switchToHomePage(event);
