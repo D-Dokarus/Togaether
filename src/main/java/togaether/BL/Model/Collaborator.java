@@ -2,12 +2,18 @@ package togaether.BL.Model;
 
 public class Collaborator {
   private int id;
-  private int travel;
-  private int user;
+  private Travel travel;
+  private User user;
   private String name;
 
-  public Collaborator(int id, int travel, int user, String name) {
+  public Collaborator(int id, Travel travel, User user, String name) {
     this.id = id;
+    this.travel = travel;
+    this.user = user;
+    this.name = name;
+  }
+
+  public Collaborator( Travel travel, User user, String name) {
     this.travel = travel;
     this.user = user;
     this.name = name;
@@ -17,23 +23,19 @@ public class Collaborator {
     return id;
   }
 
-  public void setId(int id) {
-    this.id = id;
-  }
-
-  public int getTravel() {
+  public Travel getTravel() {
     return travel;
   }
 
-  public void setTravel(int travel) {
+  public void setTravel(Travel travel) {
     this.travel = travel;
   }
 
-  public int getUser() {
+  public User getUser() {
     return user;
   }
 
-  public void setUser(int user) {
+  public void setUser(User user) {
     this.user = user;
   }
 

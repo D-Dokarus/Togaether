@@ -4,6 +4,7 @@ import togaether.BL.Model.*;
 import togaether.DB.*;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.*;
 
 public class ChatFacade {
@@ -39,7 +40,9 @@ public class ChatFacade {
 
     try {
       //Collaborator c = collaboratorDB.findByCollaboratorId(id);
-      Collaborator c = new Collaborator(0,0,0, "");
+      User user = new User(0, "Lau", "lau@SE.com", "1234");
+      Travel t = new Travel(0,user,"test_name","test_desc",new Date(), new Date(),false);
+      Collaborator c = new Collaborator(0,t,user, "");
       if(!(c == null)) {
         List<Message> liste = messageDB.findMessagesByCollaboratorId(id);
         return liste;

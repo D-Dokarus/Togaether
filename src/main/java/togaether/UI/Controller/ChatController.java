@@ -12,12 +12,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import togaether.BL.Model.Collaborator;
 import togaether.BL.Model.Message;
+import togaether.BL.Model.Travel;
+import togaether.BL.Model.User;
 import togaether.UI.SceneController;
 
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ChatController {
   @FXML
@@ -86,7 +89,9 @@ public class ChatController {
         //Travel t = travelFacade.getTravel();
         //Collaborator c = travelFacade.getCollaborator();
         Integer t = 1;
-        Collaborator c = new Collaborator(0,0,0, "ProvisoireTODO");
+        User user = new User(0, "Lau", "lau@SE.com", "1234");
+        Travel travel = new Travel(0,user,"test_name","test_desc",new Date(), new Date(),false);
+        Collaborator c = new Collaborator(0,travel,user, "ProvisoireTODO");
         if(chatClient!=null) chatClient.handleMessageFromChatController(new Message(0, t, c, text, new Timestamp(System.currentTimeMillis())).toString());
       }
       else
