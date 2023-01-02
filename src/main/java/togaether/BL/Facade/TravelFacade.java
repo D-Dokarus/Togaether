@@ -1,19 +1,21 @@
 package togaether.BL.Facade;
 
+import togaether.BL.Model.Collaborator;
 import togaether.BL.Model.Notification;
 import togaether.BL.Model.Travel;
 import togaether.DB.*;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TravelFacade {
 
     private Travel travel = null;
 
-    private String collaborator = null;
+    private Collaborator collaborator = null;
 
-    private List<String> collaborators = null;
+    private List<Collaborator> collaborators = null;
 
     static private TravelFacade instance = new TravelFacade();
 
@@ -29,19 +31,19 @@ public class TravelFacade {
         this.travel = travel;
     }
 
-    public String getCollaborator() {
+    public Collaborator getCollaborator() {
         return collaborator;
     }
 
-    public void setCollaborator(String collaborator) {
+    public void setCollaborator(Collaborator collaborator) {
         this.collaborator = collaborator;
     }
 
-    public List<String> getCollaborators() {
+    public List<Collaborator> getCollaborators() {
         return collaborators;
     }
 
-    public void setCollaborators(List<String> collaborators) {
+    public void setCollaborators(List<Collaborator> collaborators) {
         this.collaborators = collaborators;
     }
 
@@ -152,5 +154,14 @@ public class TravelFacade {
         }catch(SQLException e){
             System.out.println(e);
         }
+    }
+
+    public List<Travel> findTravelsByUserId(int id) {
+        ArrayList<Travel> liste = new ArrayList<>();
+        TravelDAO travelDB = AbstractFactory.createInstance().getTravelDAO();
+        try {
+            liste = (ArrayList<Travel>) travelDB.findTravelsByUserId(id);
+        } catch (SQLException e) {}
+        return liste;
     }
 }

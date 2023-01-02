@@ -2,9 +2,6 @@ package togaether.UI.Controller;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.scene.Node;
-import javafx.stage.Stage;
-import togaether.App;
 import togaether.BL.ChatClient;
 import togaether.BL.Facade.*;
 
@@ -12,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import togaether.BL.Model.Collaborator;
 import togaether.BL.Model.Message;
+import togaether.BL.Model.Travel;
 import togaether.UI.SceneController;
 
 import java.io.IOException;
@@ -50,11 +48,10 @@ public class ChatController {
 
   public void reloadMessages() {
     ChatFacade chat = ChatFacade.createInstance();
-    //TO DO
-    //TravelFacade travel = TravelFacade.createInstance();
-    //ArrayList<Message> liste = chat.getMessagesByTravelId(travel.getId());
+
+    TravelFacade travelfacade = TravelFacade.createInstance();
     try {
-      ArrayList<Message> liste = (ArrayList<Message>) chat.getMessagesByTravelId(1);
+      ArrayList<Message> liste = (ArrayList<Message>) chat.getMessagesByTravelId(travelfacade.getTravel().getIdTravel());
       for(Message m : liste) {
         addMessage(m.toString());
       }
@@ -81,13 +78,11 @@ public class ChatController {
       Boolean success = chat.sendMessage(text);
       if(success) {
         this.inputMessage.clear();
-        //TO DO
-        //TravelFacade travelFacade = TravelFacade.getInstance();
-        //Travel t = travelFacade.getTravel();
-        //Collaborator c = travelFacade.getCollaborator();
-        Integer t = 1;
-        Collaborator c = new Collaborator(0,0,0, "ProvisoireTODO");
-        if(chatClient!=null) chatClient.handleMessageFromChatController(new Message(0, t, c, text, new Timestamp(System.currentTimeMillis())).toString());
+
+        TravelFacade travelFacade = TravelFacade.createInstance();
+        Travel t = travelFacade.getTravel();
+        Collaborator c = travelFacade.getCollaborator();
+        if(chatClient!=null) chatClient.handleMessageFromChatController(new Message(0, t.getIdTravel(), c, text, new Timestamp(System.currentTimeMillis())).toString());
       }
       else
         this.displayInfo("Attention : Le message n'a pas pu être envoyé, veuillez réessayer");

@@ -8,7 +8,12 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import togaether.App;
 import togaether.BL.Facade.TravelFacade;
+import togaether.BL.Facade.UserFacade;
 import togaether.BL.Model.Travel;
+import togaether.DB.AbstractFactory;
+import togaether.DB.CollaboratorDAO;
+import togaether.DB.Postgres.PostgresFactory;
+import togaether.DB.UserDAO;
 import togaether.UI.SceneController;
 
 import java.time.Instant;
@@ -47,18 +52,14 @@ public class TravelController {
     @FXML
     private Button showChat;
 
-    /**
-     * The connected Travel
-     */
-    Travel travel;
-
     @FXML
     protected void initialize() {
-        // Récupérer user connected
-        // Récupérer travel connected
         TravelFacade travelFacade = TravelFacade.createInstance();
+        UserFacade userFacade = UserFacade.createInstance();
+        AbstractFactory abstractFactory = PostgresFactory.createInstance();
+        CollaboratorDAO collaboratorDB = abstractFactory.getCollaboratorDAO();
         try {
-            this.travel = travelFacade.findTravelById(4);
+            travelFacade.setCollaborator(collaboratorDB.getCollaboratorByUserIdAndTravelId(userFacade.getConnectedUser().getId(), travelFacade.getTravel().getIdTravel()));
         } catch (Exception e) {
             System.out.println("Attention : Le voyage n'a pas pu être trouvé, veuillez réessayer");
             this.labelError.setText("Attention : Le voyage n'a pas pu être trouvé, veuillez réessayer");
@@ -68,22 +69,24 @@ public class TravelController {
     }
 
     public void initializeInfo(){
+        TravelFacade travelFacade = TravelFacade.createInstance();
+        Travel travel = travelFacade.getTravel();
         String dateString = "";
-        if(this.travel.getDateStart()!=null){
-            dateString = this.travel.getDateStart().toString();
+        if(travel.getDateStart()!=null){
+            dateString = travel.getDateStart().toString();
         } else {
             dateString = "Date de début indéfini";
         }
         dateString += " - ";
-        if(this.travel.getDateEnd()!=null){
-            dateString += this.travel.getDateEnd().toString();
+        if(travel.getDateEnd()!=null){
+            dateString += travel.getDateEnd().toString();
         } else {
             dateString += "Date de fin indéfini";
         }
         this.dateTravel.setText(dateString);
-        this.nameTravel.setText(this.travel.getNameTravel());
-        this.descriptionTravel.setText(this.travel.getDescriptionTravel());
-        this.collaborator.setText("Collaborateurs :\n"+this.travel.getOwner().getName());
+        this.nameTravel.setText(travel.getNameTravel());
+        this.descriptionTravel.setText(travel.getDescriptionTravel());
+        this.collaborator.setText("Collaborateurs :\n"+travel.getOwner().getName());
     }
 
     public void onReturnButtonClicked(ActionEvent event) {

@@ -24,7 +24,10 @@ public class PostgresFactory extends AbstractFactory {
   @Override
   public TravelDAO getTravelDAO(){ return new TravelDAOPostgres(this);}
 
-   public Connection getConnection() throws SQLException {
+  @Override
+  public CollaboratorDAO getCollaboratorDAO() { return new CollaboratorDAOPostgres(this);}
+
+  public Connection getConnection() throws SQLException {
     return this.connection.getConnection();
   }
 
