@@ -8,10 +8,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import togaether.BL.Facade.DBNotFoundException;
 import togaether.BL.Facade.UserBadPasswordException;
 import togaether.BL.Facade.UserFacade;
+import togaether.BL.Facade.UserNotFoundException;
+import togaether.UI.SceneController;
 
 import java.io.IOException;
 
@@ -35,9 +38,9 @@ public class DeleteAccountController {
     /**
      * Action effectuée lors d'une tentative de login
      */
-    public void onDeleteButtonClick() {
+    public void onDeleteButtonClick(ActionEvent event) {
         try {
-            UserFacade.getInstance().deleteAccount(password.getText());
+            UserFacade.createInstance().deleteAccount(password.getText());
             System.out.println("Compte supprimé");
         } catch (UserBadPasswordException e) {
             System.out.println("Mauvais mot de passe");
@@ -47,12 +50,8 @@ public class DeleteAccountController {
 
     }
 
-    public void switchToSceneRegisterFrame(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Register.fxml"));
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    public void switchToSceneRegisterFrame(ActionEvent event) {
+        SceneController.getInstance().switchToRegister(event);
     }
 
 }

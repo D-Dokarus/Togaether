@@ -4,6 +4,8 @@ module Togaether {
   requires java.sql;
   requires spring.security.core;
 
+  exports togaether;
+  opens togaether to javafx.fxml;
   exports togaether.BL.Facade;
   opens togaether.BL.Facade to javafx.fxml;
   exports togaether.UI.Frame;

@@ -1,12 +1,18 @@
 package togaether.UI.Controller;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.scene.Node;
+import javafx.stage.Stage;
+import togaether.App;
 import togaether.BL.ChatClient;
 import togaether.BL.Facade.*;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import togaether.BL.Model.Collaborator;
 import togaether.BL.Model.Message;
+import togaether.UI.SceneController;
 
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -25,6 +31,9 @@ public class ChatController {
   @FXML
   private Label infoLabel;
 
+  /**
+   * Service permettant de voir les nouveaux messages en direct (nécessite un ChatServer actif)
+   */
   private ChatClient chatClient = null;
 
   @FXML
@@ -35,10 +44,12 @@ public class ChatController {
     } catch (IOException e) {
       this.displayInfo("Attention : connection au chat en direct échouée");
     }
+    //Scroller tout en bas du chat, pour voir les messages les plus récents
+    Platform.runLater( () -> this.messageList.scrollTo(this.messageList.getItems().size()-1));
   }
 
   public void reloadMessages() {
-    ChatFacade chat = ChatFacade.getInstance();
+    ChatFacade chat = ChatFacade.createInstance();
     //TO DO
     //TravelFacade travel = TravelFacade.createInstance();
     //ArrayList<Message> liste = chat.getMessagesByTravelId(travel.getId());
@@ -55,26 +66,28 @@ public class ChatController {
     }
   }
 
-  public void onReturnButtonClicked() {
+  public void onReturnButtonClicked(ActionEvent event) {
     this.close();
-    //TO DO
+    SceneController.getInstance().switchToTravel(event);
   }
-  public void onSendButtonClicked() {
+  public void onSendButtonClicked(ActionEvent event) {
     String text = this.inputMessage.getText();
     if(text.length() == 0)
       this.displayInfo("Attention : Message vide");
     else if(text.length() > 255)
       this.displayInfo("Attention : Nombre de caractères trop grand (supérieur à 255)");
     else {
-      ChatFacade chat = ChatFacade.getInstance();
+      ChatFacade chat = ChatFacade.createInstance();
       Boolean success = chat.sendMessage(text);
       if(success) {
         this.inputMessage.clear();
-        //TravelDAO travelDB = fact.getTravelDAO();
         //TO DO
-        //Travel t = travelDB.findByTravelId(id);
+        //TravelFacade travelFacade = TravelFacade.getInstance();
+        //Travel t = travelFacade.getTravel();
+        //Collaborator c = travelFacade.getCollaborator();
         Integer t = 1;
-        if(chatClient!=null) chatClient.handleMessageFromChatController(new Message(0, t, UserFacade.getInstance().getConnectedUser(), text, new Timestamp(System.currentTimeMillis())).toString());
+        Collaborator c = new Collaborator(0,0,0, "ProvisoireTODO");
+        if(chatClient!=null) chatClient.handleMessageFromChatController(new Message(0, t, c, text, new Timestamp(System.currentTimeMillis())).toString());
       }
       else
         this.displayInfo("Attention : Le message n'a pas pu être envoyé, veuillez réessayer");
@@ -83,8 +96,8 @@ public class ChatController {
 
   private String formatText(String str) {
     String userName = "";
-    if(UserFacade.getInstance().getConnectedUser() != null)
-      userName = UserFacade.getInstance().getConnectedUser().getName();
+    if(UserFacade.createInstance().getConnectedUser() != null)
+      userName = UserFacade.createInstance().getConnectedUser().getName();
     LocalDateTime t = new Timestamp(System.currentTimeMillis()).toLocalDateTime();
     String minute = ((t.getMinute()+"").length() > 1 ? ""+t.getMinute() : "0"+t.getMinute()); //car par exemple si il est 12h07, getMinute renvoie juste 7
     String date = t.getDayOfMonth()+"/"+t.getMonthValue()+"/"+t.getYear()+" "+t.getHour()+":"+ minute;

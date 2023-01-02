@@ -1,14 +1,13 @@
 package togaether.BL.Facade;
 
-import togaether.BL.Model.Message;
-import togaether.BL.Model.User;
+import togaether.BL.Model.*;
 import togaether.DB.*;
 
 import java.sql.SQLException;
 import java.util.*;
 
 public class ChatFacade {
-  static private ChatFacade instance = new ChatFacade();
+  static private final ChatFacade instance = new ChatFacade();
 
   public static ChatFacade getInstance() {
     return instance;
@@ -24,7 +23,7 @@ public class ChatFacade {
 
     try {
       //TO DO
-      //messageDB.insertMessage(1, userFacade.getConnectedUser().getId(), sqlDate, text);
+      //messageDB.insertMessage(1, travelFacade.getCollaborator().getId(), sqlDate, text);
       messageDB.insertMessage(1, 1, text);
     } catch (SQLException e) {
       return false;
@@ -32,6 +31,25 @@ public class ChatFacade {
     return true;
   }
 
+  public List<Message> getMessagesByCollaboratorId(int id) throws CollaboratorNotFoundException, DBNotFoundException {
+    AbstractFactory fact = AbstractFactory.createInstance();
+    MessageDAO messageDB = fact.getMessageDAO();
+    //TO DO
+    //CollaboeDAO userDB = fact.getUserDAO();
+
+    try {
+      //Collaborator c = collaboratorDB.findByCollaboratorId(id);
+      Collaborator c = new Collaborator(0,0,0, "");
+      if(!(c == null)) {
+        List<Message> liste = messageDB.findMessagesByCollaboratorId(id);
+        return liste;
+      }
+      else
+        throw new CollaboratorNotFoundException();
+    } catch (SQLException e) {
+      throw new DBNotFoundException();
+    }
+  }
   public List<Message> getMessagesByUserId(int id) throws UserNotFoundException, DBNotFoundException {
     AbstractFactory fact = AbstractFactory.createInstance();
     MessageDAO messageDB = fact.getMessageDAO();

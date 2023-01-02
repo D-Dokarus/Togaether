@@ -1,7 +1,7 @@
 package togaether.BL.Facade;
 
-import togaether.DB.AbstractFactory;
 import togaether.BL.Model.User;
+import togaether.DB.AbstractFactory;
 import togaether.DB.UserDAO;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 

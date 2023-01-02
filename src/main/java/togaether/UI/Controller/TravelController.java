@@ -1,10 +1,15 @@
 package togaether.UI.Controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import togaether.App;
 import togaether.BL.Facade.TravelFacade;
 import togaether.BL.Model.Travel;
+import togaether.UI.SceneController;
 
 public class TravelController {
 
@@ -77,44 +82,42 @@ public class TravelController {
         this.collaborator.setText("Collaborateurs :\n"+this.travel.getOwner().getName());
     }
 
-    public void onReturnButtonClicked() {
-        //TO DO return HomePage
-        System.exit(1);
+    public void onReturnButtonClicked(ActionEvent event) {
+       SceneController.getInstance().switchToHomePage(event);
     }
 
-    public void editBudget(){
+    public void editBudget(ActionEvent event){
         //TO DO return budget
         System.exit(1);
     }
 
-    public void showExpense(){
+    public void showExpense(ActionEvent event){
         //TO DO return expense
         System.exit(1);
     }
 
-    public void showCollaborator(){
+    public void showCollaborator(ActionEvent event){
         //TO DO return collaborator
         System.exit(1);
     }
 
-    public void showItinerary(){
+    public void showItinerary(ActionEvent event){
         //TO DO return itinerary
         System.exit(1);
     }
 
-    public void showDocument(){
+    public void showDocument(ActionEvent event){
         //TO DO return document
         System.exit(1);
     }
 
-    public void showActivity(){
+    public void showActivity(ActionEvent event){
         //TO DO return activity
         System.exit(1);
     }
 
-    public void showChat(){
-        //TO DO return chat
-        System.exit(1);
+    public void showChat(ActionEvent event){
+        SceneController.getInstance().switchToChat(event);
     }
 
 }

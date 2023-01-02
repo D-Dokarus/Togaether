@@ -1,5 +1,6 @@
 package togaether.DB.Postgres;
 
+import togaether.BL.Model.Collaborator;
 import togaether.DB.UserDAO;
 import togaether.BL.Model.User;
 
@@ -8,25 +9,12 @@ import java.util.*;
 
 public class UserDAOPostgres implements UserDAO {
 
-    PostgresFactory postgres;
+  PostgresFactory postgres;
 
-    public UserDAOPostgres(PostgresFactory postgres) {
-        this.postgres = postgres;
-    }
+  public UserDAOPostgres(PostgresFactory postgres) {
+    this.postgres = postgres;
+  }
 
-    /* Old Version
-    public void insertUser(String user_name, String user_email, String user_password)  throws SQLException {
-      try (Connection connection = this.postgres.getConnection()){
-        String query = "INSERT INTO public.user(user_name, user_email, user_password) VALUES(?,?, crypt(?,gen_salt('bf', 8)))";
-        try(PreparedStatement statement =
-                    connection.prepareStatement(query);){
-          statement.setString(1,user_name);
-          statement.setString(2,user_email);
-          statement.setString(3,user_password);
-          statement.executeUpdate();
-        }
-      }
-    }*/
     @Override
     public void insertUser(String user_name, String user_surname, String user_pseudo, String user_country, String user_dateCreation, String user_email, String user_password) throws SQLException {
         try (Connection connection = this.postgres.getConnection()) {
@@ -73,15 +61,11 @@ public class UserDAOPostgres implements UserDAO {
                     while (resultSet.next())
                         users.add(new User(resultSet.getInt("user_id"), resultSet.getString("user_name"), resultSet.getString("user_email"), resultSet.getString("user_password")));
                     return users;
-          /*
-          System.out.println("heho");
-          System.out.println(resultSet);
-          return resultSet;
-          */
                 }
             }
         }
     }
+
 
     @Override
     public User findByPseudo(String user_pseudo) throws SQLException {
@@ -116,6 +100,7 @@ public class UserDAOPostgres implements UserDAO {
         return u;
     }
 
+
     @Override
     public User findByEmail(String user_email) throws SQLException {
         User u = null;
@@ -144,6 +129,22 @@ public class UserDAOPostgres implements UserDAO {
             }
         }
     }
+
+  @Override
+  public List<User> getAll() throws SQLException {
+
+    ArrayList<User> users = new ArrayList<>();
+    try (Connection connection = this.postgres.getConnection()) {
+      String query = "SELECT * FROM public.user";
+      try (PreparedStatement statement = connection.prepareStatement(query);) {
+        try (ResultSet resultSet = statement.executeQuery()) {
+          while (resultSet.next())
+            users.add(new User(resultSet.getInt("user_id"), resultSet.getString("user_name"), resultSet.getString("user_email"), resultSet.getString("user_password")));
+        }
+      }
+    }
+    return users;
+  }
 
     public void updateUser(User user, int userId) throws SQLException {
         try (Connection connection = this.postgres.getConnection()) {
@@ -244,7 +245,6 @@ public class UserDAOPostgres implements UserDAO {
             }
         }
     }
-
     @Override
     public void updatePassword(String user_password, int user_id) throws SQLException {
         try (Connection connection = this.postgres.getConnection()) {
@@ -259,19 +259,5 @@ public class UserDAOPostgres implements UserDAO {
     }
 
 
-    @Override
 
-    public List<User> getAll() throws SQLException {
-        try (Connection connection = this.postgres.getConnection()) {
-            String query = "SELECT * FROM public.user";
-            try (PreparedStatement statement = connection.prepareStatement(query);) {
-                try (ResultSet resultSet = statement.executeQuery()) {
-                    ArrayList<User> users = new ArrayList<>();
-                    while (resultSet.next())
-                        users.add(new User(resultSet.getInt("user_id"), resultSet.getString("user_name"), resultSet.getString("user_email"), resultSet.getString("user_password")));
-                    return users;
-                }
-            }
-        }
-    }
 }

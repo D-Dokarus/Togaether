@@ -1,11 +1,13 @@
 package togaether.UI.Controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import togaether.BL.Facade.TravelFacade;
 import togaether.BL.Model.Travel;
+import togaether.UI.SceneController;
 
 public class TravelUnarchiveController {
     @FXML
@@ -28,10 +30,9 @@ public class TravelUnarchiveController {
     protected void initialize() {
         // Récupérer user connected
         // Récupérer travel connected
-        TravelFacade travelFacade = TravelFacade.getInstance();
+        TravelFacade travelFacade = TravelFacade.createInstance();
         try {
             this.travel = travelFacade.findTravelById(4);
-            // Fermer la page pour revenir à la page principale
         } catch (Exception e) {
             System.out.println("Attention : Le voyage n'a pas pu être trouvé, veuillez réessayer");
             throw new RuntimeException(e);
@@ -40,16 +41,15 @@ public class TravelUnarchiveController {
         this.descriptionTravel.setText(this.travel.getDescriptionTravel());
     }
 
-    public void onCancelButtonClicked() {
-        //TO DO retourner HomePage
-        System.exit(1);
+    public void onCancelButtonClicked(ActionEvent event) {
+        SceneController.getInstance().switchToHomePage(event);
     }
 
-    public void onConfirmedButtonClicked() {
-        TravelFacade travelFacade = TravelFacade.getInstance();
+    public void onConfirmedButtonClicked(ActionEvent event) {
+        TravelFacade travelFacade = TravelFacade.createInstance();
         try {
             travelFacade.unarchiveTravel(this.travel);
-            // Fermer la page pour revenir à la page principale
+            SceneController.getInstance().switchToHomePage(event);
             System.out.println("Voyage désarchivé !");
         } catch (Exception e) {
             System.out.println("Attention : Le voyage n'a pas pu être archivé, veuillez réessayer");
