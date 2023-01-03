@@ -30,6 +30,8 @@ public class HomePageController {
   @FXML
   private Button trophiesButton;
   @FXML
+  private Button trophiesAdminButton;
+  @FXML
   private Button friendsButton;
   @FXML
   private Button archivedTravelsButton;
@@ -43,6 +45,8 @@ public class HomePageController {
   @FXML
   protected void initialize() {
     this.loadTravels();
+    //Cacher le bouton pour gérer les trophées si non admin
+    this.trophiesAdminButton.setVisible(UserFacade.getInstance().getConnectedUser().getIsAdmin());
   }
 
   private void loadTravels() {
@@ -120,6 +124,9 @@ public class HomePageController {
   }
   public void onTrophiesButtonClicked(ActionEvent event) {
     SceneController.getInstance().switchToTrophy(event);
+  }
+  public void onTrophiesAdminButtonClicked(ActionEvent event) {
+    SceneController.getInstance().switchToAdminTrophy(event);
   }
   public void onFriendsButtonClicked(ActionEvent event) {
     SceneController.getInstance().switchToFriend(event);

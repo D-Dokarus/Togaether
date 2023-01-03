@@ -15,6 +15,7 @@ public class User {
     private String password;
     private String country;
     private String dateCreation;
+    private Boolean isAdmin = true;
 
 
     public User(int id, String name, String surname, String pseudo, String email, String password, String country, String dateCreation) {
@@ -26,6 +27,7 @@ public class User {
         this.password = password;
         this.country = country;
         this.dateCreation = dateCreation;
+        this.isAdmin = true;
     }
 
     public User(String name, String surname, String pseudo, String email, String password, String country) {
@@ -36,6 +38,7 @@ public class User {
         this.password = password;
         this.country = country;
         this.dateCreation = createDate();
+        this.isAdmin = true;
     }
 
     public User(String name, String surname, String pseudo, String email, String country) {
@@ -100,6 +103,9 @@ public class User {
 
     public String getDateCreation() {
         return dateCreation;
+    }
+    public Boolean getIsAdmin() {
+        return isAdmin;
     }
 
 }

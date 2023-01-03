@@ -18,6 +18,7 @@ public abstract class AbstractFactory {
    * @return MessageDAO
    */
   abstract public MessageDAO getMessageDAO();
+  abstract public TrophyDAO getTrophyDAO();
   /**
    * Retourne un DAO de Notification
    * @return NotificationDAO
