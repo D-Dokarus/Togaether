@@ -15,17 +15,13 @@ public class ChatFacade {
   }
 
   public boolean sendMessage(String text) {
-    //TO DO
-    //TravelFacade travelFacade = TravelFacade.createInstance();
-    UserFacade userFacade = UserFacade.getInstance();
+    TravelFacade travelFacade = TravelFacade.getInstance();
 
     AbstractFactory fact = AbstractFactory.createInstance();
     MessageDAO messageDB = fact.getMessageDAO();
 
     try {
-      //TO DO
-      //messageDB.insertMessage(1, travelFacade.getCollaborator().getId(), sqlDate, text);
-      messageDB.insertMessage(1, 1, text);
+      messageDB.insertMessage(travelFacade.getTravel().getIdTravel(), travelFacade.getCollaborator().getId(), text);
     } catch (SQLException e) {
       return false;
     }
@@ -35,20 +31,9 @@ public class ChatFacade {
   public List<Message> getMessagesByCollaboratorId(int id) throws CollaboratorNotFoundException, DBNotFoundException {
     AbstractFactory fact = AbstractFactory.createInstance();
     MessageDAO messageDB = fact.getMessageDAO();
-    //TO DO
-    //CollaboeDAO userDB = fact.getUserDAO();
 
     try {
-      //Collaborator c = collaboratorDB.findByCollaboratorId(id);
-      User user = new User(0, "Lau", "lau@SE.com", "1234");
-      Travel t = new Travel(0,user,"test_name","test_desc",new Date(), new Date(),false);
-      Collaborator c = new Collaborator(0,t,user, "");
-      if(!(c == null)) {
-        List<Message> liste = messageDB.findMessagesByCollaboratorId(id);
-        return liste;
-      }
-      else
-        throw new CollaboratorNotFoundException();
+      return messageDB.findMessagesByCollaboratorId(id);
     } catch (SQLException e) {
       throw new DBNotFoundException();
     }
@@ -71,17 +56,14 @@ public class ChatFacade {
     }
   }
   public List<Message> getMessagesByTravelId(int id) throws TravelNotFoundException, DBNotFoundException{
-    AbstractFactory fact = AbstractFactory.createInstance();
-    MessageDAO messageDB = fact.getMessageDAO();
-    //TO DO
-    //TravelDAO travelDB = fact.getTravelDAO();
-
+    List<Message> liste;
     try {
-      //TO DO
-      //Travel t = travelDB.findByTravelId(id);
-      Integer t = 1;
+      AbstractFactory abstractFactory = AbstractFactory.createInstance();
+      TravelDAO travelDB = abstractFactory.getTravelDAO();
+      MessageDAO messageDB = abstractFactory.getMessageDAO();
+      Travel t = travelDB.findTravelById(id);
       if(t != null) {
-        return messageDB.findMessagesByTravelId(id);
+        liste = messageDB.findMessagesByTravelId(id);
       }
       else
         throw new TravelNotFoundException();
@@ -89,18 +71,16 @@ public class ChatFacade {
       System.out.println(e);
       throw new DBNotFoundException();
     }
+    return liste;
   }
   public List<Message> getMessagesByUserIdAndTravelId(int idUser, int idTravel) throws UserNotFoundException,TravelNotFoundException, DBNotFoundException{
     AbstractFactory fact = AbstractFactory.createInstance();
     MessageDAO messageDB = fact.getMessageDAO();
-    //TO DO
-    //TravelDAO travelDB = fact.getTravelDAO();
+    TravelDAO travelDB = fact.getTravelDAO();
     UserDAO userDB = fact.getUserDAO();
 
     try {
-      //TO DO
-      //Travel t = travelDB.findByTravelId(idTravel);
-      Integer t = 1;
+      Travel t = travelDB.findTravelById(idTravel);
       User u = userDB.findByUserId(idUser);
       if(t != null && u != null) {
         List<Message> liste = messageDB.findMessagesByUserIdAndTravelId(idUser, idTravel);

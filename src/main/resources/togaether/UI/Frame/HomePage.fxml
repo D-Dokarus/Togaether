@@ -61,5 +61,10 @@
             <Font name="Garamond" size="14.0" />
          </font>
       </Button>
+      <Button fx:id="trophiesAdminButton" layoutX="14.0" layoutY="359.0" mnemonicParsing="false" onAction="#onTrophiesAdminButtonClicked" prefHeight="33.0" prefWidth="103.0" text="Gérer Trophées">
+         <font>
+            <Font name="Garamond" size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
