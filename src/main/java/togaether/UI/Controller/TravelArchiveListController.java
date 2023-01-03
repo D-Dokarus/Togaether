@@ -2,6 +2,7 @@ package togaether.UI.Controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -28,6 +29,8 @@ public class TravelArchiveListController {
     private Label labelError;
     @FXML
     private ListView travelList;
+    @FXML
+    private Button unusable;
 
     @FXML
     private Button returnButton;
@@ -36,6 +39,7 @@ public class TravelArchiveListController {
 
     @FXML
     protected void initialize() {
+        this.unusable.setDisable(true);
         TravelFacade travelFacade = TravelFacade.getInstance();
         UserFacade userFacade = UserFacade.getInstance();
         try {
@@ -44,12 +48,10 @@ public class TravelArchiveListController {
             this.labelError.setText("Problème lors du chargement des voyages archivés, veuillez réessayer plus tard...");
             throw new RuntimeException(e);
         }
-
         ObservableList<Travel> observableTravels = FXCollections.observableArrayList();
         for(Travel travel : travelsArchived){
             observableTravels.add(travel);
         }
-
         this.travelList.setCellFactory((Callback<ListView<Travel>, ListCell<Travel>>) param -> {
             return new ListCell<Travel>() {
                 @Override
@@ -73,17 +75,11 @@ public class TravelArchiveListController {
                         HBox.setHgrow(region, Priority.ALWAYS);
                         root.getChildren().add(region);
 
-                        //BUTTON GOTRAVEL
-                        Button btnGoTravel = new Button("Voir");
-                        btnGoTravel.setOnAction(event -> {
-                            TravelFacade.getInstance().setTravel(travel);
-                            SceneController.getInstance().switchToTravel(event);
-                        });
                         //BUTTON ARCHIVETRAVEL
-                        Button btnArchiveTravel = new Button("Archiver");
+                        Button btnArchiveTravel = new Button("Désarchiver");
                         btnArchiveTravel.setOnAction(event -> {
                             TravelFacade.getInstance().setTravel(travel);
-                            SceneController.getInstance().switchToArchiveTravel(event);
+                            SceneController.getInstance().switchToUnarchiveTravel(event);
                         });
                         //BUTTON DELETETRAVEL
                         Button btnDeleteTravel = new Button("Supprimer");
@@ -91,7 +87,7 @@ public class TravelArchiveListController {
                             TravelFacade.getInstance().setTravel(travel);
                             //TO DO pop-up delete
                         });
-                        root.getChildren().addAll(btnGoTravel, btnArchiveTravel, btnDeleteTravel);
+                        root.getChildren().addAll(btnArchiveTravel, btnDeleteTravel);
 
                         // Finally, set our cell to display the root HBox
                         setText(null);
@@ -102,5 +98,13 @@ public class TravelArchiveListController {
             };
 
         });
+
+        // Set our users to display in the ListView
+        travelList.setItems(observableTravels);
     }
+
+    public void onReturnButtonClicked(ActionEvent event) {
+        SceneController.getInstance().switchToHomePage(event);
+    }
+
 }

@@ -6,10 +6,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="togaether.UI.Controller.TravelArchiveController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="togaether.UI.Controller.TravelArchiveListController">
    <children>
-      <Button layoutX="15.0" layoutY="81.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="570.0" />
-      <Label fx:id="labelError" layoutX="22.0" layoutY="367.0" prefHeight="17.0" prefWidth="384.0" textFill="RED" />
+      <Button fx:id="unusable" layoutX="15.0" layoutY="81.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="570.0" />
+      <Label fx:id="labelError" layoutX="300.0" layoutY="35.0" prefHeight="17.0" prefWidth="226.0" textFill="RED" />
       <Label layoutX="34.0" layoutY="99.0" prefHeight="17.0" prefWidth="37.0" text="Date">
          <font>
             <Font name="Garamond" size="14.0" />
@@ -29,11 +29,6 @@
             <Font name="Garamond" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="notificationsButton" layoutX="550.0" layoutY="19.0" mnemonicParsing="false" onAction="#onNotificationsButtonClicked" prefHeight="33.0" prefWidth="37.0" text="🔔">
-         <font>
-            <Font name="Garamond" size="14.0" />
-         </font>
-      </Button>
       <Label layoutX="152.0" layoutY="31.0" prefHeight="25.0" prefWidth="129.0" text="Voyages archivés">
          <font>
             <Font name="Garamond" size="18.0" />

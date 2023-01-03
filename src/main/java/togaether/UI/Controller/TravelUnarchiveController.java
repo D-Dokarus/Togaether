@@ -24,21 +24,14 @@ public class TravelUnarchiveController {
     /**
      * The connected Travel
      */
-    Travel travel;
+    TravelFacade travelFacade;
 
     @FXML
     protected void initialize() {
-        // Récupérer user connected
         // Récupérer travel connected
-        TravelFacade travelFacade = TravelFacade.getInstance();
-        try {
-            this.travel = travelFacade.findTravelById(4);
-        } catch (Exception e) {
-            System.out.println("Attention : Le voyage n'a pas pu être trouvé, veuillez réessayer");
-            throw new RuntimeException(e);
-        }
-        this.nameTravel.setText(this.travel.getNameTravel());
-        this.descriptionTravel.setText(this.travel.getDescriptionTravel());
+        this.travelFacade = TravelFacade.getInstance();
+        this.nameTravel.setText(travelFacade.getTravel().getNameTravel());
+        this.descriptionTravel.setText(travelFacade.getTravel().getDescriptionTravel());
     }
 
     public void onCancelButtonClicked(ActionEvent event) {
@@ -46,9 +39,8 @@ public class TravelUnarchiveController {
     }
 
     public void onConfirmedButtonClicked(ActionEvent event) {
-        TravelFacade travelFacade = TravelFacade.getInstance();
         try {
-            travelFacade.unarchiveTravel(this.travel);
+            this.travelFacade.unarchiveTravel(this.travelFacade.getTravel());
             SceneController.getInstance().switchToHomePage(event);
             System.out.println("Voyage désarchivé !");
         } catch (Exception e) {

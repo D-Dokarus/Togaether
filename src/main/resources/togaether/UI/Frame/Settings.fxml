@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -10,23 +11,21 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<?import javafx.scene.control.PasswordField?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="togaether.UI.Controller.SettingsController">
    <children>
-      <Text layoutX="206.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings">
+      <Button fx:id="returnButton" layoutX="30.0" layoutY="30.0" mnemonicParsing="false" onAction="#onReturnButtonClicked" prefHeight="33.0" prefWidth="103.0" text="Retour">
          <font>
-            <Font size="39.0" />
-         </font>
-      </Text>
-      <Button fx:id="returnButton" layoutX="20.0" layoutY="24.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="102.0" text="Return">
-         <font>
-            <Font size="17.0" />
+            <Font name="Garamond" size="14.0" />
          </font>
       </Button>
-      <Pane layoutX="98.0" layoutY="108.0" prefHeight="241.0" prefWidth="375.0" style="-fx-background-color: lightgrey;">
+      <Text layoutX="242.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Paramètres" wrappingWidth="115.55615234375">
+         <font>
+            <Font name="Garamond" size="25.0" />
+         </font>
+      </Text>
+      <Pane layoutX="112.0" layoutY="92.0" prefHeight="241.0" prefWidth="375.0" style="-fx-background-color: lightgrey;">
          <children>
-            <GridPane layoutX="42.0" layoutY="18.0" prefHeight="128.0" prefWidth="292.0">
+            <GridPane layoutX="42.0" layoutY="26.0" prefHeight="128.0" prefWidth="292.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -38,18 +37,47 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField fx:id="newname" promptText="Name" />
-                  <TextField fx:id="newsurname" promptText="Surname" GridPane.columnIndex="1" />
-                  <TextField fx:id="newpseudo" promptText="Pseudo" GridPane.rowIndex="1" />
-                  <TextField fx:id="newemail" promptText="Email" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <PasswordField fx:id="newpassword" promptText="Password" GridPane.rowIndex="2" />
-                  <PasswordField fx:id="newconfirmPassword" prefWidth="134.0" promptText="Confirm New Password" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField fx:id="newcountry" promptText="Country" GridPane.rowIndex="3" />
+                  <TextField fx:id="newname" promptText="Nom">
+                     <font>
+                        <Font name="Garamond" size="14.0" />
+                     </font></TextField>
+                  <TextField fx:id="newsurname" promptText="Prénom" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="Garamond" size="14.0" />
+                     </font></TextField>
+                  <TextField fx:id="newpseudo" promptText="Pseudo" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Garamond" size="14.0" />
+                     </font></TextField>
+                  <TextField fx:id="newemail" promptText="Email" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Garamond" size="14.0" />
+                     </font></TextField>
+                  <PasswordField fx:id="newpassword" promptText="Mot de passe" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Garamond" size="14.0" />
+                     </font></PasswordField>
+                  <PasswordField fx:id="newconfirmPassword" prefWidth="134.0" promptText="Confirme le mot de passe" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Garamond" size="14.0" />
+                     </font></PasswordField>
+                  <TextField fx:id="newcountry" promptText="Pays" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Garamond" size="14.0" />
+                     </font></TextField>
                </children>
             </GridPane>
-            <Button fx:id="saveChangeButton" onAction="#onSaveChangeButtonClick" layoutX="107.0" layoutY="184.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="162.0" style="-fx-background-color: lightgreen; -fx-border-color: black;" text="Change Information" />
+            <Button fx:id="saveChangeButton" layoutX="107.0" layoutY="175.0" mnemonicParsing="false" onAction="#onSaveChangeButtonClick" prefHeight="43.0" prefWidth="162.0" style="-fx-background-color: lightgreen;" text="Sauvegarder">
+               <font>
+                  <Font name="Garamond" size="14.0" />
+               </font></Button>
          </children>
       </Pane>
-      <Button fx:id="deleteAccountButton" onAction="#switchToDeleteAccountFrame" layoutX="456.0" layoutY="360.0" mnemonicParsing="false" style="-fx-background-color: pink; -fx-border-color: black;" text="Delete Account" />
+      <Button fx:id="deleteAccountButton" layoutX="235.0" layoutY="359.0" mnemonicParsing="false" onAction="#switchToDeleteAccountFrame" style="-fx-background-color: pink;" text="Supprimer le compte" />
+      <Button fx:id="logoutButton" layoutX="474.0" layoutY="31.0" mnemonicParsing="false" onAction="#onLogoutButtonClicked" prefHeight="33.0" prefWidth="103.0" text="Déconnexion">
+         <font>
+            <Font name="Garamond" size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

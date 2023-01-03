@@ -87,7 +87,7 @@ public class TravelDAOPostgres implements TravelDAO {
     @Override
     public List<Travel> findTravelsByUserId(int Id) throws SQLException {
         try (Connection connection = this.postgres.getConnection()) {
-            String query = "SELECT * FROM travel INNER JOIN public.user u ON travel.owner=u.user_id WHERE owner = ? ; ";
+            String query = "SELECT * FROM travel INNER JOIN public.user u ON travel.owner=u.user_id WHERE owner = ? AND is_archive = false; ";
             try (PreparedStatement statement = connection.prepareStatement(query);) {
                 statement.setInt(1, Id);
                 try(ResultSet resultSet = statement.executeQuery()){

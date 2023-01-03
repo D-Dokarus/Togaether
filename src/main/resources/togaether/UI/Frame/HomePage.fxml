@@ -17,7 +17,7 @@
          <font>
             <Font name="Garamond" size="14.0" />
          </font></Button>
-      <Button layoutX="15.0" layoutY="81.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="570.0" />
+      <Button fx:id="unusable" layoutX="15.0" layoutY="81.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="570.0" />
       <Button fx:id="createTravel" layoutX="476.0" layoutY="91.0" mnemonicParsing="false" onAction="#onCreateTravelButtonClicked" prefHeight="33.0" prefWidth="103.0" text="Créer voyage">
          <font>
             <Font name="Garamond" size="14.0" />
@@ -61,7 +61,7 @@
             <Font name="Garamond" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="trophiesAdminButton" layoutX="14.0" layoutY="359.0" mnemonicParsing="false" onAction="#onTrophiesAdminButtonClicked" prefHeight="33.0" prefWidth="103.0" text="Gérer Trophées">
+      <Button fx:id="trophiesAdminButton" layoutX="14.0" layoutY="359.0" mnemonicParsing="false" onAction="#onTrophiesAdminButtonClicked" prefHeight="33.0" prefWidth="109.0" text="Gérer Trophées">
          <font>
             <Font name="Garamond" size="14.0" />
          </font>

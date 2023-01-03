@@ -92,4 +92,13 @@ public class SettingsController {
     public void switchToDeleteAccountFrame(ActionEvent event) {
         SceneController.getInstance().switchToDeleteAccount(event);
     }
+
+    public void onReturnButtonClicked(ActionEvent event) {
+        SceneController.getInstance().switchToHomePage(event);
+    }
+
+    public void onLogoutButtonClicked(ActionEvent event) {
+        System.exit(0);
+    }
+
 }

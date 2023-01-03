@@ -38,6 +38,8 @@ public class HomePageController {
   @FXML
   private Button createTravel;
   @FXML
+  private Button unusable;
+  @FXML
   private ListView travelList;
   @FXML
   private Label labelError;
@@ -50,6 +52,7 @@ public class HomePageController {
   }
 
   private void loadTravels() {
+    this.unusable.setDisable(true);
     TravelFacade travelFacade = TravelFacade.getInstance();
     ArrayList<Travel> travels = (ArrayList<Travel>) travelFacade.findTravelsByUserId(UserFacade.getInstance().getConnectedUser().getId());
 
