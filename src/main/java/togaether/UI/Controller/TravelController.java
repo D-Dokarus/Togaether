@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import togaether.App;
+import togaether.BL.Facade.CollaboratorFacade;
 import togaether.BL.Facade.TravelFacade;
 import togaether.BL.Facade.UserFacade;
 import togaether.BL.Model.Travel;
@@ -52,11 +53,10 @@ public class TravelController {
     protected void initialize() {
         TravelFacade travelFacade = TravelFacade.getInstance();
         UserFacade userFacade = UserFacade.getInstance();
-        AbstractFactory abstractFactory = PostgresFactory.createInstance();
-        CollaboratorDAO collaboratorDB = abstractFactory.getCollaboratorDAO();
+        CollaboratorFacade collaboratorFacade = CollaboratorFacade.getInstance();
 
         try {
-            travelFacade.setCollaborator(collaboratorDB.getCollaboratorByUserIdAndTravelId(userFacade.getConnectedUser().getId(), travelFacade.getTravel().getIdTravel()));
+            travelFacade.setCollaborator(collaboratorFacade.findCollaboratorByUserAndTravel(userFacade.getConnectedUser(), travelFacade.getTravel()));
         } catch (Exception e) {
             System.out.println("Attention : Le voyage n'a pas pu être trouvé, veuillez réessayer");
             this.labelError.setText("Attention : Le voyage n'a pas pu être trouvé, veuillez réessayer");

@@ -59,7 +59,7 @@ public class SceneController {
     App.getInstance().switchScene("UnarchiveTravel", (Stage)((Node)event.getSource()).getScene().getWindow());
   }
   public void switchToListArchivedTravel(ActionEvent event) {
-    App.getInstance().switchScene("ListArchivedTravel", (Stage)((Node)event.getSource()).getScene().getWindow());
+    App.getInstance().switchScene("ArchiveListTravel", (Stage)((Node)event.getSource()).getScene().getWindow());
   }
   public void switchToCreateTravel(ActionEvent event) {
     App.getInstance().switchScene("CreateTravel", (Stage)((Node)event.getSource()).getScene().getWindow());

@@ -50,7 +50,6 @@ public class TravelArchiveListController {
             observableTravels.add(travel);
         }
 
-        // We need to create a new CellFactory so we can display our layout for each individual notification
         this.travelList.setCellFactory((Callback<ListView<Travel>, ListCell<Travel>>) param -> {
             return new ListCell<Travel>() {
                 @Override
