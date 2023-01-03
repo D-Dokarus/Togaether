@@ -68,6 +68,10 @@ public class SceneController {
     App.getInstance().switchScene("CreateTravel", (Stage)((Node)event.getSource()).getScene().getWindow());
   }
 
+  public void switchToCollaborator(ActionEvent event) {
+    App.getInstance().switchScene("Collaborator", (Stage)((Node)event.getSource()).getScene().getWindow());
+  }
+
   public void newPopupNotification(ActionEvent event){
     Parent root;
     try {
