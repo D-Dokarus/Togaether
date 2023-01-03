@@ -100,7 +100,7 @@ public class HomePageController {
             Button btnDeleteTravel = new Button("Supprimer");
             btnDeleteTravel.setOnAction(event -> {
               TravelFacade.getInstance().setTravel(travel);
-              //TO DO pop-up delete
+              SceneController.getInstance().switchToDeleteTravel(event);
             });
             root.getChildren().addAll(btnGoTravel, btnArchiveTravel, btnDeleteTravel);
 
