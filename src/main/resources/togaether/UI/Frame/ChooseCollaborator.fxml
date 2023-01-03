@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:controller="togaether.UI.Controller.ChooseCollaboratorController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ListView layoutX="137.0" layoutY="119.0" prefHeight="200.0" prefWidth="301.0" />
       <Label layoutX="179.0" layoutY="55.0" text="Quel collaborateur êtes-vous ?">

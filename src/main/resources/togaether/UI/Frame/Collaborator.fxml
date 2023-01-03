@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:controller="togaether.UI.Controller.CollaboratorController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="buttonToTravel" onAction="#onClickButtonToTravel" layoutX="24.0" layoutY="23.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="117.0" text="Retour au voyage" />
+      <ListView fx:id="collaboratorsListView" layoutX="69.0" layoutY="157.0" prefHeight="154.0" prefWidth="212.0" />
+      <Label  fx:id="labelCollaboratorsList" alignment="CENTER" layoutX="83.0" layoutY="100.0" prefHeight="45.0" prefWidth="184.0" text="Collaborateurs">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelFriendsList"  alignment="CENTER" layoutX="360.0" layoutY="100.0" prefHeight="45.0" prefWidth="184.0" text="Inviter des amis">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ListView fx:id="friendsListView"  layoutX="346.0" layoutY="196.0" prefHeight="114.0" prefWidth="213.0" />
+      <TextField fx:id="collaboratorNameInput"  alignment="CENTER" layoutX="69.0" layoutY="323.0" promptText="Ajouter un collaborateur" />
+      <TextField fx:id="friendSearchBar"  alignment="CENTER" layoutX="379.0" layoutY="157.0" promptText="Barre de recherche" />
+      <Button  fx:id="buttonAddCollaborator" onAction="#onClickAddNewCollaborator" layoutX="221.0" layoutY="322.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="61.0" text="Inviter" />
+   </children>
+</AnchorPane>

@@ -1,9 +1,16 @@
 package togaether.UI;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import togaether.App;
+import togaether.UI.Frame.NotificationFrame;
+
+import java.io.IOException;
 
 public class SceneController {
   public static SceneController instance = new SceneController();
@@ -53,5 +60,20 @@ public class SceneController {
   }
   public void switchToCreateTravel(ActionEvent event) {
     App.getInstance().switchScene("CreateTravel", (Stage)((Node)event.getSource()).getScene().getWindow());
+  }
+
+  public void newPopupNotification(ActionEvent event){
+    Parent root;
+    try {
+      root = FXMLLoader.load(NotificationFrame.class.getResource("NotificationCenter"+".fxml"));
+      Stage stage = new Stage();
+      stage.setTitle("NotificationCenter");
+      stage.setScene(new Scene(root));
+      stage.initModality(Modality.WINDOW_MODAL);
+      stage.show();
+    }
+    catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 }
