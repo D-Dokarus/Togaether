@@ -40,6 +40,9 @@ public class SceneController {
   public void switchToTravel(ActionEvent event) {
     App.getInstance().switchScene("Travel", (Stage)((Node)event.getSource()).getScene().getWindow());
   }
+  public void switchToDeleteTravel(ActionEvent event) {
+    App.getInstance().switchScene("DeleteTravel", (Stage)((Node)event.getSource()).getScene().getWindow());
+  }
   public void switchToDeleteAccount(ActionEvent event) {
     App.getInstance().switchScene("DeleteAccount", (Stage)((Node)event.getSource()).getScene().getWindow());
   }
