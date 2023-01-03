@@ -50,6 +50,10 @@ public class User {
         this.dateCreation = createDate();
     }
 
+    public User(int id) {
+        this.id = id;
+    }
+
     public User(int id, String name, String surname, String pseudo, String email, String country) {
         this.id = id;
         this.name = name;

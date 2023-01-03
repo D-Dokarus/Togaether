@@ -17,9 +17,9 @@ public class TravelDAOPostgres implements TravelDAO {
     }
 
     @Override
-    public void createTravel(Travel travel) throws SQLException {
+    public int createTravel(Travel travel) throws SQLException {
         try (Connection connection = this.postgres.getConnection()){
-            String query = "INSERT INTO travel(owner,name_travel,description_travel,date_start,date_end,is_archive) VALUES(?,?,?,?,?,?);";
+            String query = "INSERT INTO travel(owner,name_travel,description_travel,date_start,date_end,is_archive) VALUES(?,?,?,?,?,?) RETURNING travel_id;";
             try(PreparedStatement statement = connection.prepareStatement(query);){
                 statement.setInt(1,travel.getOwner().getId());
                 statement.setString(2,travel.getNameTravel());
@@ -27,7 +27,10 @@ public class TravelDAOPostgres implements TravelDAO {
                 statement.setDate(4, (Date) travel.getDateStart());
                 statement.setDate(5, (Date) travel.getDateEnd());
                 statement.setBoolean(6,travel.isArchive());
-                statement.executeUpdate();
+                statement.execute();
+                ResultSet result = statement.getResultSet();
+                result.next();
+                return result.getInt(1);
             }
         }
         finally {

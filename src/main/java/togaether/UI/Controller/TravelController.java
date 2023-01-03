@@ -17,6 +17,8 @@ import togaether.DB.Postgres.PostgresFactory;
 import togaether.DB.UserDAO;
 import togaether.UI.SceneController;
 
+import java.sql.SQLException;
+
 public class TravelController {
 
     @FXML

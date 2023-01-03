@@ -50,6 +50,9 @@ public class Travel {
         this.is_archive = is_archive;
     }
 
+    public Travel(int travel_id) {
+        this.travel_id = travel_id;
+    }
     // GETTER AND SETTER
 
     // IdTravel

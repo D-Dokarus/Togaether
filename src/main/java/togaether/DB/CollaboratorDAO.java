@@ -10,7 +10,7 @@ import java.util.List;
 public interface CollaboratorDAO {
 
   public Collaborator getCollaboratorByUserIdAndTravelId(int user_id, int travel_id) throws SQLException;
-  public void createCollaborator(Collaborator collaborator) throws SQLException;
+  public int createCollaborator(Collaborator collaborator) throws SQLException;
   public void deleteCollaborator(Collaborator collaborator) throws SQLException;
   public void deleteAllCollaboratorByTravel(Travel travel) throws SQLException;
   public void updateCollaborator(Collaborator collaborator) throws SQLException;

@@ -39,26 +39,34 @@ public class CollaboratorDAOPostgres implements CollaboratorDAO {
   }
 
   @Override
-  public void createCollaborator(Collaborator collaborator) throws SQLException {
+  public int createCollaborator(Collaborator collaborator) throws SQLException {
     Collaborator returned_collaborator = null;
-    try(Connection connection = this.postgres.getConnection()){
-      String query = "INSERT INTO collaborator(collaborator_name,travel_id) VALUES(?,?);";
-      try(PreparedStatement statement = connection.prepareStatement(query)){
-        statement.setString(1,collaborator.getName());
-        statement.setInt(2,collaborator.getTravel().getIdTravel());
-        statement.executeUpdate();
-        /*
-        statement.execute();
-        ResultSet result  = statement.getResultSet();
-        if(result.next()){
-          Travel returned_travel = new Travel(result.getInt("travel_id"),null,null,null,null,null,false);
-          returned_collaborator = new Collaborator(result.getInt("collaborator_id"),returned_travel,result.getString("collaborator_name"));
+    try(Connection connection = this.postgres.getConnection()) {
+      if (collaborator.getUser() == null) {
+        String query = "INSERT INTO collaborator(collaborator_name,travel_id) VALUES(?,?) RETURNING collaborator_id;";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+          statement.setString(1, collaborator.getName());
+          statement.setInt(2, collaborator.getTravel().getIdTravel());
+          statement.execute();
+          ResultSet result = statement.getResultSet();
+          result.next();
+          return result.getInt(1);
         }
-        */
-      }
+      } else {
+        String query = "INSERT INTO collaborator(collaborator_name,travel_id,user_id) VALUES(?,?,?) RETURNING collaborator_id;";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+          statement.setString(1, collaborator.getName());
+          statement.setInt(2, collaborator.getTravel().getIdTravel());
+          statement.setInt(3, collaborator.getUser().getId());
+          statement.execute();
+          ResultSet result = statement.getResultSet();
+          result.next();
+          return result.getInt(1);
+        }
 
+
+      }
     }
-    //return returned_collaborator;
   }
 
   @Override
@@ -194,11 +202,12 @@ public class CollaboratorDAOPostgres implements CollaboratorDAO {
     Travel travel = new Travel(1,null,null,null,null,null,false);
     Collaborator collaborator = new Collaborator(travel,"TEST_NAME");
     try{
-      cdaop.createCollaborator(collaborator);
+      int x = cdaop.createCollaborator(collaborator);
+      System.out.println(x);
     }catch(SQLException e){
       System.out.println(e);
-    }
-    */
+    }*/
+
 
     //On test deleteCollaborator
     /*

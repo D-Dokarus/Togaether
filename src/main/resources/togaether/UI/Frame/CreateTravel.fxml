@@ -5,23 +5,24 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="togaether.UI.Controller.TravelCreateController">
    <children>
-      <Button fx:id="returnButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onReturnButtonClicked" text="Retour" />
-      <DatePicker id="dateStart" fx:id="dateStart" layoutX="404.0" layoutY="140.0" prefHeight="33.0" prefWidth="145.0" promptText="Non défni" />
-      <DatePicker id="dateEnd" fx:id="dateEnd" layoutX="404.0" layoutY="224.0" prefHeight="33.0" prefWidth="145.0" promptText="Non défini" />
-      <Label layoutX="404.0" layoutY="115.0" text="Début" />
-      <Label layoutX="404.0" layoutY="200.0" text="Fin" />
-      <TextArea fx:id="nameTravel" layoutX="66.0" layoutY="68.0" prefHeight="37.0" prefWidth="272.0" promptText="Nom du voyage" />
-      <TextArea fx:id="descriptionTravel" layoutX="66.0" layoutY="122.0" prefHeight="100.0" prefWidth="272.0" promptText="Description" />
-      <Button fx:id="cancelButton" layoutX="152.0" layoutY="344.0" mnemonicParsing="false" onAction="#onCancelButtonClicked" text="Annuler" />
-      <Button fx:id="confirmedButton" layoutX="404.0" layoutY="344.0" mnemonicParsing="false" onAction="#onConfirmedButtonClicked" text="Confirmer" />
-      <ListView layoutX="66.0" layoutY="241.0" prefHeight="25.0" prefWidth="204.0" />
-      <Button layoutX="274.0" layoutY="241.0" mnemonicParsing="false" text="Supprimer" />
-      <ListView layoutX="66.0" layoutY="272.0" prefHeight="25.0" prefWidth="204.0" />
-      <Button layoutX="274.0" layoutY="272.0" mnemonicParsing="false" text="Ajouter" />
+      <Button fx:id="returnButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onReturnButtonClicked" text="Annuler" />
+      <DatePicker id="dateStart" fx:id="dateStart" layoutX="90.0" layoutY="239.0" prefHeight="33.0" prefWidth="145.0" promptText="Non défni" />
+      <DatePicker id="dateEnd" fx:id="dateEnd" layoutX="90.0" layoutY="323.0" prefHeight="33.0" prefWidth="145.0" promptText="Non défini" />
+      <Label layoutX="90.0" layoutY="214.0" text="Début" />
+      <Label layoutX="90.0" layoutY="299.0" text="Fin" />
+      <TextArea fx:id="nameTravel" layoutX="27.0" layoutY="64.0" prefHeight="38.0" prefWidth="261.0" promptText="Nom du voyage" />
+      <TextArea fx:id="descriptionTravel" layoutX="27.0" layoutY="118.0" prefHeight="67.0" prefWidth="260.0" promptText="Description" />
+      <Button fx:id="confirmedButton" layoutX="442.0" layoutY="352.0" mnemonicParsing="false" onAction="#onConfirmedButtonClicked" text="Confirmer" />
+      <ListView fx:id="collaboratorListView" layoutX="325.0" layoutY="143.0" prefHeight="159.0" prefWidth="250.0" />
+      <Button fx:id="addCollaboratorButton" layoutX="520.0" layoutY="102.0" mnemonicParsing="false" onAction="#onClickAddCollaborator" text="Ajouter" />
       <Label fx:id="labelError" layoutX="66.0" layoutY="314.0" textFill="RED" />
+      <TextField fx:id="newCollaboratorInput" layoutX="325.0" layoutY="102.0" prefHeight="25.0" prefWidth="185.0" promptText="Ajouter un collaborateur" />
+      <TextField fx:id="yourCollaboratorInput" layoutX="366.0" layoutY="50.0" prefHeight="25.0" prefWidth="205.0" promptText="Votre nom de collaborateur" />
+      <Label layoutX="325.0" layoutY="54.0" text="Vous :" />
    </children>
 </AnchorPane>

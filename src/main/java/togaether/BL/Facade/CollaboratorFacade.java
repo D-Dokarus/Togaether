@@ -16,15 +16,16 @@ public class CollaboratorFacade {
 
     public static CollaboratorFacade getInstance(){return instance;}
 
-    public void createCollaborator(Collaborator collaborator){
+    public int createCollaborator(Collaborator collaborator){
         AbstractFactory af = AbstractFactory.createInstance();
         CollaboratorDAO cdaop = af.getCollaboratorDAO();
 
         try{
-            cdaop.createCollaborator(collaborator);
+            return cdaop.createCollaborator(collaborator);
         }catch(SQLException e){
             System.out.println(e);
         }
+        return 0;
     }
 
     public void updateCollaborator(Collaborator collaborator){

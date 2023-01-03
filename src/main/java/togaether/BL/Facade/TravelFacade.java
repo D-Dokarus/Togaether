@@ -79,12 +79,12 @@ public class TravelFacade {
      * Query the creation of a specific travel (given in parameters) in DB
      * @param travel
      */
-    public void createTravel(Travel travel) throws DBNotFoundException{
+    public int createTravel(Travel travel) throws DBNotFoundException{
         AbstractFactory fact = AbstractFactory.createInstance();
         TravelDAO travelDB = fact.getTravelDAO();
 
         try {
-            travelDB.createTravel(travel);
+            return travelDB.createTravel(travel);
         } catch (SQLException e) {
             System.out.println(e);
             throw new DBNotFoundException();

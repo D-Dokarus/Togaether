@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface TravelDAO {
 
-    public void createTravel(Travel travel) throws SQLException;
+    public int createTravel(Travel travel) throws SQLException;
 
     public void deleteTravelById(int Id) throws SQLException;
 
