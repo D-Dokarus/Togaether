@@ -52,6 +52,12 @@ public class SceneController {
   public void switchToAdminTrophy(ActionEvent event) {
     App.getInstance().switchScene("AdminTrophy", (Stage)((Node)event.getSource()).getScene().getWindow());
   }
+  public void switchToDeleteTrophy(ActionEvent event) {
+    App.getInstance().switchScene("DeleteTrophy", (Stage)((Node)event.getSource()).getScene().getWindow());
+  }
+  public void switchToModifyTrophy(ActionEvent event) {
+    App.getInstance().switchScene("ModifyTrophy", (Stage)((Node)event.getSource()).getScene().getWindow());
+  }
   public void switchToFriend(ActionEvent event) {
     App.getInstance().switchScene("Friend", (Stage)((Node)event.getSource()).getScene().getWindow());
   }

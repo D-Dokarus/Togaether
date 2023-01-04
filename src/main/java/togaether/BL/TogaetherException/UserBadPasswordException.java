@@ -1,13 +1,13 @@
-package togaether.BL.Facade;
+package togaether.BL.TogaetherException;
 
 /**
  * Exception levée lorsque l'utilisateur a donné un mauvais mot de passe
  */
 public class UserBadPasswordException extends Exception {
-  UserBadPasswordException() {
+  public UserBadPasswordException() {
     super();
   }
-  UserBadPasswordException(String e) {
+  public UserBadPasswordException(String e) {
     super(e);
   }
 }

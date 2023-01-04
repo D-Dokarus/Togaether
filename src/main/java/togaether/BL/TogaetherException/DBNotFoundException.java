@@ -1,13 +1,13 @@
-package togaether.BL.Facade;
+package togaether.BL.TogaetherException;
 
 /**
  * Exception levée lorsque le programme n'arrive pas à se connecter à la base de données
  */
 public class DBNotFoundException extends Exception {
-  DBNotFoundException() {
+  public DBNotFoundException() {
     super();
   }
-  DBNotFoundException(String e) {
+  public DBNotFoundException(String e) {
     super(e);
   }
 }

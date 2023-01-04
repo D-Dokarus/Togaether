@@ -14,13 +14,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.util.Callback;
-import togaether.BL.Facade.DBNotFoundException;
+import togaether.BL.TogaetherException.DBNotFoundException;
 import togaether.BL.Facade.TravelFacade;
 import togaether.BL.Facade.UserFacade;
 import togaether.BL.Model.Travel;
 import togaether.UI.SceneController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TravelArchiveListController {

@@ -20,7 +20,7 @@ public class TrophyDAOPostgres implements TrophyDAO {
   @Override
   public void createTrophy(String trophy_name, int trophy_categorie, int trophy_value, String trophy_image) throws SQLException {
     try (Connection connection = this.postgres.getConnection()){
-      String query = "INSERT INTO trophy(trophy_name, trophy_categorie, trophy_value, trophy_image) VALUES(?,?,?,?);";
+      String query = "INSERT INTO trophy(trophy_name, trophy_category, trophy_value, trophy_image) VALUES(?,?,?,?);";
       try(PreparedStatement statement =
                   connection.prepareStatement(query);){
         statement.setString(1, trophy_name);
@@ -35,11 +35,11 @@ public class TrophyDAOPostgres implements TrophyDAO {
   @Override
   public void updateTrophy(Trophy trophy) throws SQLException {
     try(Connection connection = this.postgres.getConnection()) {
-      String query = "UPDATE trophy SET trophy_name = ? , trophy_categorie = ? , trophy_value = ? , trophy_image = ? WHERE trophy_id = ? ;";
+      String query = "UPDATE trophy SET trophy_name = ? , trophy_category = ? , trophy_value = ? , trophy_image = ? WHERE trophy_id = ? ;";
       try (PreparedStatement statement = connection.prepareStatement(query)) {
         statement.setInt(5, trophy.getId());
         statement.setString(1, trophy.getName());
-        statement.setInt(2, trophy.getValue());
+        statement.setInt(2, trophy.getCategory_id());
         statement.setInt(3, trophy.getValue());
         statement.setString(4, trophy.getImage());
 
@@ -87,6 +87,21 @@ public class TrophyDAOPostgres implements TrophyDAO {
       }
     }
     return trophies;
+  }
+  public List<CategoryTrophy> findAllCategories() throws SQLException {
+    ArrayList<CategoryTrophy> categories = new ArrayList<>();
+    try (Connection connection = this.postgres.getConnection()){
+      String query = "SELECT * FROM trophy_category;";
+      try(PreparedStatement statement = connection.prepareStatement(query);){
+        try (ResultSet resultSet = statement.executeQuery()) {
+
+          while (resultSet.next()) {
+            categories.add(new CategoryTrophy(resultSet.getInt("trophy_category_id"), resultSet.getString("trophy_category_name")));
+          }
+        }
+      }
+    }
+    return categories;
   }
 
   @Override

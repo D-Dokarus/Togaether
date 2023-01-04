@@ -8,13 +8,14 @@ import togaether.BL.Facade.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import togaether.BL.Model.*;
+import togaether.BL.TogaetherException.DBNotFoundException;
+import togaether.BL.TogaetherException.TravelNotFoundException;
 import togaether.UI.SceneController;
 
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class ChatController {
   @FXML

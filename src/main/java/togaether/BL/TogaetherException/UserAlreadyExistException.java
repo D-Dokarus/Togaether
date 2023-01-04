@@ -1,14 +1,14 @@
-package togaether.BL.Facade;
+package togaether.BL.TogaetherException;
 
 /**
  * Exception levée lorsqu'un utilisateur est déjà dans la base de données
  */
 public class UserAlreadyExistException extends Exception {
 
-  UserAlreadyExistException() {
+  public UserAlreadyExistException() {
     super();
   }
-  UserAlreadyExistException(String e) {
+  public UserAlreadyExistException(String e) {
     super(e);
   }
 }

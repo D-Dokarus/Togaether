@@ -1,8 +1,8 @@
 package togaether.BL.Facade;
 
 import togaether.BL.Model.Collaborator;
-import togaether.BL.Model.Notification;
 import togaether.BL.Model.Travel;
+import togaether.BL.TogaetherException.DBNotFoundException;
 import togaether.DB.*;
 
 import java.sql.SQLException;

@@ -1,14 +1,13 @@
-package togaether.BL.Facade;
+package togaether.BL.TogaetherException;
 
 /**
  * Exception levée lorsqu'un pseudo d'utilisateur est déjà dans la base de données
  */
 public class UserPseudoAlreadyExistException extends Exception {
-
-  UserPseudoAlreadyExistException() {
+  public UserPseudoAlreadyExistException() {
     super();
   }
-  UserPseudoAlreadyExistException(String e) {
+  public UserPseudoAlreadyExistException(String e) {
     super(e);
   }
 }

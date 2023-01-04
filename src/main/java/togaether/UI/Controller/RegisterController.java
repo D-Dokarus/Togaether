@@ -2,24 +2,19 @@ package togaether.UI.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import togaether.App;
-import togaether.BL.Facade.DBNotFoundException;
-import togaether.BL.Facade.UserBadPasswordException;
-import togaether.BL.Facade.UserBadConfirmPasswordException;
+import togaether.BL.TogaetherException.DBNotFoundException;
+import togaether.BL.TogaetherException.UserBadPasswordException;
+import togaether.BL.TogaetherException.UserBadConfirmPasswordException;
 import togaether.BL.Facade.UserFacade;
-import togaether.BL.Facade.UserAlreadyExistException;
-import togaether.BL.Facade.UserPseudoAlreadyExistException;
+import togaether.BL.TogaetherException.UserAlreadyExistException;
+import togaether.BL.TogaetherException.UserPseudoAlreadyExistException;
 import togaether.UI.SceneController;
-
-import java.io.IOException;
 
 /**
  * Controller de l'interface graphique Register

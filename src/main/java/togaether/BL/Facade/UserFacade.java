@@ -1,6 +1,7 @@
 package togaether.BL.Facade;
 
 import togaether.BL.Model.User;
+import togaether.BL.TogaetherException.*;
 import togaether.DB.AbstractFactory;
 import togaether.DB.UserDAO;
 import org.springframework.security.crypto.bcrypt.BCrypt;

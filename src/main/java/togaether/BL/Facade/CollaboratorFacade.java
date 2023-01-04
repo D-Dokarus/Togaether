@@ -3,6 +3,7 @@ package togaether.BL.Facade;
 import togaether.BL.Model.Collaborator;
 import togaether.BL.Model.Travel;
 import togaether.BL.Model.User;
+import togaether.BL.TogaetherException.CollaboratorNotFoundException;
 import togaether.DB.AbstractFactory;
 import togaether.DB.CollaboratorDAO;
 

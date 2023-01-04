@@ -1,4 +1,4 @@
-import togaether.BL.Facade.DBNotFoundException;
+import togaether.BL.TogaetherException.DBNotFoundException;
 import togaether.BL.Facade.TravelFacade;
 import org.junit.jupiter.api.*;
 import togaether.BL.Model.Travel;

@@ -1,14 +1,14 @@
-package togaether.BL.Facade;
+package togaether.BL.TogaetherException;
 
 /**
  * Exception levée lorsqu'un utilisateur n'est pas trouver dans la base de données
  */
 public class CollaboratorNotFoundException extends Exception {
 
-  CollaboratorNotFoundException() {
+  public CollaboratorNotFoundException() {
     super();
   }
-  CollaboratorNotFoundException(String e) {
+  public CollaboratorNotFoundException(String e) {
     super(e);
   }
 }

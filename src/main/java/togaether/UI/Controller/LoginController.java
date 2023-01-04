@@ -1,22 +1,19 @@
 package togaether.UI.Controller;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Hyperlink;
 import javafx.stage.Stage;
-import togaether.App;
 import togaether.BL.Facade.*;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import togaether.BL.TogaetherException.DBNotFoundException;
+import togaether.BL.TogaetherException.UserBadPasswordException;
+import togaether.BL.TogaetherException.UserNotFoundException;
 import togaether.UI.SceneController;
-
-import java.io.IOException;
 
 /**
  * Controller de l'interface graphique Login

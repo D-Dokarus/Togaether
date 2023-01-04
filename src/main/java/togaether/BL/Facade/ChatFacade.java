@@ -1,10 +1,13 @@
 package togaether.BL.Facade;
 
 import togaether.BL.Model.*;
+import togaether.BL.TogaetherException.CollaboratorNotFoundException;
+import togaether.BL.TogaetherException.DBNotFoundException;
+import togaether.BL.TogaetherException.TravelNotFoundException;
+import togaether.BL.TogaetherException.UserNotFoundException;
 import togaether.DB.*;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.*;
 
 public class ChatFacade {
