@@ -20,13 +20,14 @@ public class CollaboratorFacade {
     public int createCollaborator(Collaborator collaborator){
         AbstractFactory af = AbstractFactory.createInstance();
         CollaboratorDAO cdaop = af.getCollaboratorDAO();
-
+        int id = 0;
         try{
-            return cdaop.createCollaborator(collaborator);
+            id = cdaop.createCollaborator(collaborator);
+            TrophyFacade.getInstance().isTrophyValidForUser("travel");
         }catch(SQLException e){
             System.out.println(e);
         }
-        return 0;
+        return id;
     }
 
     public void updateCollaborator(Collaborator collaborator){

@@ -13,7 +13,15 @@ public interface TrophyDAO {
   public void deleteTrophyById(int trophy_id) throws SQLException;
   public void createTrophyUser(int trophy_id, int user_id) throws SQLException;
   public List<Trophy> findAllTrophies() throws SQLException;
+  public List<Trophy> findTrophiesByCategories(String category) throws SQLException;
+  public List<Trophy> findNotOwnedTrophiesByCategories(String category, int user_id) throws SQLException;
   public List<CategoryTrophy> findAllCategories() throws SQLException;
   public Trophy findTrophyById(int trophy_id) throws SQLException;
   public List<Trophy> findTrophiesByUserId(int user_id) throws SQLException;
+
+  public int countAllOwnedTravelsByUserId(int user_id) throws SQLException;
+  public int countAllParticipatingTravelsByUserId(int user_id) throws SQLException;
+  public int countMessageByUserId(int user_id) throws SQLException;
+  public int countMaxSumExpensesByUserId(int user_id) throws SQLException;
+  public int countFriendsByUserId(int user_id) throws SQLException;
 }

@@ -45,12 +45,7 @@ public class TrophyController {
         if(mapOwnedTrophies.containsKey(trophy.getId())) {
           addTrophy(trophy, true);
         }else {
-          if(trophyFacade.isTrophyValidForUser(trophy)) {
-            trophyFacade.giveTrophyToUser(trophy.getId());
-            addTrophy(trophy, true);
-          }
-          else
-            addTrophy(trophy, false);
+          addTrophy(trophy, false);
         }
       }
     } catch (SQLException e) {

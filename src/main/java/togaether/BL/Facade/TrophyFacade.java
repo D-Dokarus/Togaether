@@ -2,10 +2,10 @@ package togaether.BL.Facade;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import togaether.BL.Model.CategoryTrophy;
-import togaether.BL.Model.Trophy;
+import togaether.BL.Model.*;
 import togaether.DB.AbstractFactory;
 import togaether.DB.TrophyDAO;
+import togaether.UI.Controller.TrophyController;
 
 import java.io.File;
 import java.sql.SQLException;
@@ -52,20 +52,48 @@ public class TrophyFacade {
     TrophyDAO trophyDB = abstractFactory.getTrophyDAO();
     return trophyDB.findTrophiesByUserId(UserFacade.getInstance().getConnectedUser().getId());
   }
-  public boolean isTrophyValidForUser(Trophy trophy) {
+  public boolean isTrophyValidForUser(String category) {
     Boolean valid = false;
+    try {
+      TrophyDAO trophyDB = AbstractFactory.createInstance().getTrophyDAO();
+      ArrayList<Trophy> trophies = (ArrayList<Trophy>) trophyDB.findNotOwnedTrophiesByCategories(category, UserFacade.getInstance().getConnectedUser().getId());
+      ArrayList<Trophy> trophiesSuccessed = new ArrayList<Trophy>();
+      int count = 0;
+      if(category.equals("travel")) {
+        count = trophyDB.countAllParticipatingTravelsByUserId(UserFacade.getInstance().getConnectedUser().getId());
+      }
+      else if(category.equals("")) {
+
+      }
+      else System.out.println("Cette catégorie n'a pas de test de succès");
+
+      // Vérifier les trophées obtenus
+      for (Trophy trophy: trophies) {
+        if (trophy.getValue() <= count) {
+          trophiesSuccessed.add(trophy);
+        }
+      }
+      //Donner les trophées obtenus réussis
+      for (Trophy trophy: trophiesSuccessed) {
+        this.giveTrophyToUser(trophy.getId());
+        Notification notification = new Notification(UserFacade.getInstance().getConnectedUser(), trophy.getName(), false, NotificationCategory.createNotification("trophyObtained"));
+        NotificationFacade.getInstance().createNotification(notification);
+      }
+    } catch (SQLException e) {
+      System.out.println("Erreur lors du test des trophées :"+e);
+    }
     return valid;
   }
   public String getCondition(Trophy trophy) {
     String category = trophy.getCategory();
     if(category.equals("travel"))
-      return "Être dans au moins "+trophy.getValue()+" voyages";
+      return "Être dans au moins "+trophy.getValue()+" voyage(s)";
     else if(category.equals("message"))
       return "Avoir envoyé un total de "+trophy.getValue()+" messages";
     else if(category.equals("friend"))
-      return "Être ami avec "+trophy.getValue()+" utilisateurs";
+      return "Être ami avec "+trophy.getValue()+" utilisateur(s)";
     else if(category.equals("depense"))
-      return "Avoir dépensé "+trophy.getValue()+" en un seul voyage";
+      return "Avoir dépensé "+trophy.getValue()+" euros en un seul voyage";
     else if(category.equals(""))
       return "";
     else
@@ -96,7 +124,7 @@ public class TrophyFacade {
       return "Messages total";
     else if(name.equals("friend"))
       return "Amis total";
-    else if(name.equals("depense"))
+    else if(name.equals("expense"))
       return "Dépenses en un voyage";
     return "nameToFrench de TrophyFacade";
   }
@@ -108,7 +136,7 @@ public class TrophyFacade {
     else if(french.equals("Amis total"))
       return "friend";
     else if(french.equals("Dépenses en un voyage"))
-      return "depense";
+      return "expense";
     return "frenchToName de TrophyFacade";
   }
 
