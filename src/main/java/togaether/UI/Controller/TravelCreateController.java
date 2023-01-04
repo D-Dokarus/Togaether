@@ -96,18 +96,18 @@ public class TravelCreateController {
                     int idTravel = travelFacade.createTravel(newTravel);
                     Travel travelTemporary = new Travel(idTravel);
                     String yourName = yourCollaboratorInput.getText();
-                    System.out.println("hehe1");
+
 
                     //Création de votre collaborateur
                     Collaborator you = new Collaborator(travelTemporary,UserFacade.getInstance().getConnectedUser(),yourName);
                     CollaboratorFacade.getInstance().createCollaborator(you);
-                    System.out.println("hehe2");
+
                     //Création de tous les collaborateurs
                     for(String str : collaborators){
                         Collaborator newCollaborator = new Collaborator(travelTemporary,str);
                         CollaboratorFacade.getInstance().createCollaborator(newCollaborator);
                     }
-                    System.out.println("hehe3");
+
 
 
                     /*

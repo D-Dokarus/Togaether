@@ -93,19 +93,25 @@ public class CollaboratorDAOPostgres implements CollaboratorDAO {
 
   @Override
   public void updateCollaborator(Collaborator collaborator) throws SQLException {
-    try(Connection connection = this.postgres.getConnection()){
-      String query = "UPDATE collaborator SET travel_id = ?, user_id = ?, collaborator_name = ? WHERE collaborator_id = ?;";
-      try(PreparedStatement statement = connection.prepareStatement(query)){
-        statement.setInt(1,collaborator.getTravel().getIdTravel());
-        if(collaborator.getUser() != null){
-          statement.setInt(2,collaborator.getUser().getId());
-        }else{
-          statement.setNull(2,Types.INTEGER);
+    try(Connection connection = this.postgres.getConnection()) {
+      if (collaborator.getUser() != null && collaborator.getUser().getId() != 0l) {
+        String query = "UPDATE collaborator SET travel_id = ?, user_id = ?, collaborator_name = ? WHERE collaborator_id = ?;";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+          statement.setInt(1, collaborator.getTravel().getIdTravel());
+          statement.setInt(2, collaborator.getUser().getId());
+          statement.setString(3, collaborator.getName());
+          statement.setInt(4, collaborator.getId());
+          statement.executeUpdate();
         }
-        statement.setString(3,collaborator.getName());
-        statement.setInt(4,collaborator.getId());
+      } else {
+        String query = "UPDATE collaborator SET travel_id = ?, collaborator_name = ? WHERE collaborator_id = ?;";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+          statement.setInt(1, collaborator.getTravel().getIdTravel());
+          statement.setString(2, collaborator.getName());
+          statement.setInt(3, collaborator.getId());
+          statement.executeUpdate();
+        }
 
-        statement.executeUpdate();
       }
     }
   }

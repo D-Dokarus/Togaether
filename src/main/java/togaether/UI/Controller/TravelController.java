@@ -103,8 +103,7 @@ public class TravelController {
     }
 
     public void showCollaborator(ActionEvent event){
-        //TO DO return collaborator
-        System.exit(1);
+        SceneController.getInstance().switchToCollaborator(event);
     }
 
     public void showItinerary(ActionEvent event){
