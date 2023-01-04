@@ -78,6 +78,17 @@ public class CollaboratorFacade {
         }
     }
 
+    public List<Collaborator> findCollaboratorNotChosenByTravel(Travel travel) throws CollaboratorNotFoundException {
+        AbstractFactory af = AbstractFactory.createInstance();
+        CollaboratorDAO cdaop = af.getCollaboratorDAO();
+
+        try{
+            return cdaop.findCollaboratorNotChosenByTravel(travel);
+        }catch(SQLException e){
+            throw new CollaboratorNotFoundException();
+        }
+    }
+
     public Collaborator findCollaboratorById(int id) throws CollaboratorNotFoundException{
         AbstractFactory af = AbstractFactory.createInstance();
         CollaboratorDAO cdaop = af.getCollaboratorDAO();

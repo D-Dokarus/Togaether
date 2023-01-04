@@ -39,6 +39,9 @@ public class CollaboratorController {
     @FXML
     private Button buttonAddCollaborator;
 
+    @FXML
+    private Label labelError;
+
     List<Collaborator> collaborators = new ArrayList<>();
     ObservableList<Collaborator> observableCollaborators = FXCollections.observableArrayList();
 
@@ -78,41 +81,84 @@ public class CollaboratorController {
                             root.getChildren().add(new Label("(Vous)"));
                         }
                         // Within the root, we'll show the username on the left and our two buttons to the right
-                        //root.getChildren().add(new Label(collaborator.getName()));
-                        //TESTTTT
+
                         TextField inputName = new TextField(collaborator.getName());
-                        inputName.setEditable(false);
+                        inputName.setVisible(false);
+                        inputName.setManaged(false);
+                        Label name = new Label(collaborator.getName());
+                        name.setVisible(true);
+                        name.setManaged(true);
+
                         root.getChildren().add(inputName);
+                        root.getChildren().add(name);
 
                         // Add another Region here to expand, pushing the buttons to the right
                         Region region = new Region();
                         HBox.setHgrow(region, Priority.ALWAYS);
                         root.getChildren().add(region);
 
-                        //BUTTON Editable
+
+                        Button btnValidate = new Button("Valider");
+                        btnValidate.setManaged(false);
+                        btnValidate.setVisible(false);
                         Button btnEditable = new Button("Renommer");
-                        btnEditable.setOnAction(event -> {
-                            inputName.setEditable(!inputName.isEditable());
+                        btnEditable.setManaged(true);
+                        btnEditable.setVisible(true);
+                        //BUTTON Validate
+                        btnValidate.setOnAction(event -> {
+
+
+                            String value = inputName.getText();
+                            if(!containsName(collaborators,value,collaborator)){
+                                labelError.setText("");
+
+                                inputName.setVisible(!inputName.isVisible());
+                                name.setVisible(!name.isVisible());
+                                inputName.setManaged(!inputName.isManaged());
+                                name.setManaged(!name.isManaged());
+
+                                btnValidate.setVisible(!btnValidate.isVisible());
+                                btnValidate.setManaged(!btnValidate.isManaged());
+                                btnEditable.setVisible(!btnEditable.isVisible());
+                                btnEditable.setManaged(!btnEditable.isManaged());
+
+                                collaborator.setName(inputName.getText());
+                                CollaboratorFacade.getInstance().updateCollaborator(collaborator);
+                                initializeCollaboratorsList();
+                            }else{
+                                labelError.setText("Vous ne pouvez pas avoir deux collaborateurs avec le même nom !");
+                            }
+
                         });
 
-                        //BUTTON Validate
-                        Button btnValidate = new Button("V");
-                        btnValidate.setOnAction(event -> {
-                            collaborator.setName(inputName.getText());
-                            CollaboratorFacade.getInstance().updateCollaborator(collaborator);
-                            initializeCollaboratorsList();
+                        //BUTTON Editable
+                        btnEditable.setOnAction(event -> {
+                            //inputName.setEditable(!inputName.isEditable());
+                            inputName.setVisible(!inputName.isVisible());
+                            name.setVisible(!name.isVisible());
+                            inputName.setManaged(!inputName.isManaged());
+                            name.setManaged(!name.isManaged());
+
+                            btnValidate.setVisible(!btnValidate.isVisible());
+                            btnValidate.setManaged(!btnValidate.isManaged());
+                            btnEditable.setVisible(!btnEditable.isVisible());
+                            btnEditable.setManaged(!btnEditable.isManaged());
                         });
 
                         root.getChildren().addAll(btnEditable,btnValidate);
 
                         //BUTTON REMOVE collaborator
                         if(collaborator.getUser() == null || collaborator.getUser().getId() != UserFacade.getInstance().getConnectedUser().getId()){
-                            Button btnRemove = new Button("X");
+                            Button btnRemove = new Button("Supprimer");
                             btnRemove.setOnAction(event -> {
                                 onClickButtonRemove(collaborator);
                                 initializeCollaboratorsList();
                             });
                             root.getChildren().add(btnRemove);
+                        }else{
+                            Button inactiveBtn = new Button("Supprimer");
+                            inactiveBtn.setVisible(false);
+                            root.getChildren().add(inactiveBtn);
                         }
 
                         // Finally, set our cell to display the root HBox
@@ -161,4 +207,7 @@ public class CollaboratorController {
         CollaboratorFacade.getInstance().deleteColaborator(collaborator);
     }
 
+    public boolean containsName(final List<Collaborator> list, final String name, Collaborator collab){
+        return list.stream().filter(o -> o.getId() != collab.getId()).filter(o -> o.getName().equals(name)).findFirst().isPresent();
+    }
 }

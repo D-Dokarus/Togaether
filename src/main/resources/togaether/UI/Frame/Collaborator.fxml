@@ -24,6 +24,7 @@
       <ListView fx:id="friendsListView" layoutX="401.0" layoutY="190.0" prefHeight="122.0" prefWidth="287.0" />
       <TextField fx:id="collaboratorNameInput" alignment="CENTER" layoutX="79.0" layoutY="350.0" promptText="Ajouter un collaborateur" />
       <TextField fx:id="friendSearchBar" alignment="CENTER" layoutX="401.0" layoutY="157.0" prefHeight="25.0" prefWidth="287.0" promptText="Barre de recherche" />
-      <Button fx:id="buttonAddCollaborator" layoutX="238.0" layoutY="349.0" mnemonicParsing="false" onAction="#onClickAddNewCollaborator" prefHeight="27.0" prefWidth="61.0" text="Inviter" />
+      <Button fx:id="buttonAddCollaborator" layoutX="238.0" layoutY="349.0" mnemonicParsing="false" onAction="#onClickAddNewCollaborator" prefHeight="27.0" prefWidth="61.0" text="Ajouter" />
+      <Label fx:id="labelError" alignment="CENTER" contentDisplay="CENTER" layoutX="19.0" layoutY="409.0" prefHeight="18.0" prefWidth="665.0" textFill="RED" />
    </children>
 </AnchorPane>

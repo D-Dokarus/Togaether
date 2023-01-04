@@ -198,6 +198,24 @@ public class CollaboratorDAOPostgres implements CollaboratorDAO {
     }
   }
 
+  @Override
+  public List<Collaborator> findCollaboratorNotChosenByTravel(Travel travel) throws SQLException{
+    ArrayList<Collaborator> collaborators = new ArrayList<>();
+    try(Connection connection = this.postgres.getConnection()){
+      String query = "SELECT * FROM collaborator WHERE travel_id = ? AND user_id = null;";
+      try(PreparedStatement statement = connection.prepareStatement(query)){
+        statement.setInt(1,travel.getIdTravel());
+        statement.executeQuery();
+        ResultSet result = statement.getResultSet();
+        while(result.next()){
+          Collaborator collab = new Collaborator(result.getInt("collaborator_id"),travel,result.getString("collaborator_name"));
+          collaborators.add(collab);
+        }
+        return collaborators;
+      }
+    }
+  }
+
 
   public static void main(String args[]){
       AbstractFactory af = AbstractFactory.createInstance();

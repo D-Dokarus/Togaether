@@ -6,15 +6,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane fx:controller="togaether.UI.Controller.ChooseCollaboratorController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="togaether.UI.Controller.ChooseCollaboratorController">
    <children>
-      <ListView layoutX="137.0" layoutY="119.0" prefHeight="200.0" prefWidth="301.0" />
-      <Label layoutX="179.0" layoutY="55.0" text="Quel collaborateur êtes-vous ?">
+      <ListView fx:id="collaboratorsListView" layoutX="149.0" layoutY="115.0" prefHeight="200.0" prefWidth="301.0" />
+      <Label layoutX="178.0" layoutY="53.0" text="Quel collaborateur êtes-vous ?">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Retour à l'accueil" />
+      <Button fx:id="buttonGoBack" onAction="#onClickButtonToHomePage" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Retour à l'accueil" />
    </children>
 </AnchorPane>

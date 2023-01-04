@@ -21,4 +21,6 @@ public interface CollaboratorDAO {
   public void deleteAllColaboratorByUser(User user) throws SQLException;
   public void setAllUser_IdToNullByUser(User user) throws SQLException;
 
+  public List<Collaborator> findCollaboratorNotChosenByTravel(Travel travel) throws SQLException;
+
 }

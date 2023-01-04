@@ -14,12 +14,13 @@
          </font></Label>
       <Button fx:id="returnButton" layoutX="52.0" layoutY="198.0" mnemonicParsing="false" onAction="#onReturnButtonClicked" text="Annuler" />
       <Button fx:id="confirmedButton" layoutX="254.0" layoutY="198.0" mnemonicParsing="false" onAction="#onConfirmedButtonClicked" text="Confirmer" />
-      <Text layoutX="27.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Une suppression de voyage est une action définitive," textAlignment="CENTER" wrappingWidth="347.7109375" />
+      <Text layoutX="26.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Une suppression de voyage est une action définitive," textAlignment="CENTER" wrappingWidth="347.7109375" />
       <Label layoutX="52.0" layoutY="56.0" text="Voyage" />
       <Label fx:id="nameTravel" layoutX="118.0" layoutY="56.0" text="nomVoyage" />
       <Label layoutX="51.0" layoutY="80.0" text="Description" />
       <Text fx:id="descriptionTravel" layoutX="118.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DescriptionVoyage" wrappingWidth="232.7109375" />
       <Label fx:id="labelError" layoutX="181.0" layoutY="181.0" textAlignment="CENTER" textFill="RED" />
-      <Text layoutX="27.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="vous devez être certain.e avant d'effectuer cette action" textAlignment="CENTER" wrappingWidth="347.7109375" />
+      <Text layoutX="26.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vous devez être certain.e avant d'effectuer cette action !" textAlignment="CENTER" wrappingWidth="347.7109375" />
+      <Text layoutX="27.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="tous les voyages dont vous êtes le créateur seront supprimés." textAlignment="CENTER" wrappingWidth="347.7109375" />
    </children>
 </AnchorPane>

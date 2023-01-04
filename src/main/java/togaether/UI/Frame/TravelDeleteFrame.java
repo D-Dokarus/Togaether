@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class DeleteFrame extends Application {
+public class TravelDeleteFrame extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(LoginFrame.class.getResource("DeleteTravel.fxml"));
