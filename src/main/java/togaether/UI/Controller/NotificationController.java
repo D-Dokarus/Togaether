@@ -14,8 +14,8 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.util.Callback;
 import togaether.BL.Facade.NotificationFacade;
+import togaether.BL.Facade.UserFacade;
 import togaether.BL.Model.Notification;
-import togaether.BL.Model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,10 +38,6 @@ public class NotificationController {
     ObservableList<Notification> observableNotifications = FXCollections.observableArrayList();
 
     /**
-     * The connected user
-     */
-    User user;
-    /**
      * Number of Notifications in the DB
      * Refreshed each time you fetch new notifications OR open the NotificationFrame
      */
@@ -61,10 +57,7 @@ public class NotificationController {
      */
     @FXML
     protected void initialize(){
-        //Code à utiliser une fois le projet fonctionnel
-        //this.user = UserFacade.getConnectedUser();
-        this.user = new User(4,"Maxime","maxime@gmail.com","password");
-        this.count = NotificationFacade.getInstance().getNbNotificationsByUserId(this.user);
+        this.count = NotificationFacade.getInstance().getNbNotificationsByUserId(UserFacade.getInstance().getConnectedUser());
         updateLabel();
         updateList();
         initializeListView();
@@ -139,8 +132,8 @@ public class NotificationController {
      */
     public void updateList(){
         if(notifications.size() < this.count & notifications.size() < this.limit){
-            this.count = NotificationFacade.getInstance().getNbNotificationsByUserId(user);
-            List<Notification> temp = NotificationFacade.getInstance().getSpecificAmountOfNotificationsByUserIdAndStartingId(user,limit,maxNotifId);
+            this.count = NotificationFacade.getInstance().getNbNotificationsByUserId(UserFacade.getInstance().getConnectedUser());
+            List<Notification> temp = NotificationFacade.getInstance().getSpecificAmountOfNotificationsByUserIdAndStartingId(UserFacade.getInstance().getConnectedUser(),limit,maxNotifId);
             int max = 0;
             boolean firstTime = notifications.isEmpty(); //Because this method is used both to initialize and update
             for(Notification notification : temp){
