@@ -90,7 +90,7 @@ public class UserFacade {
     UserDAO userDB = fact.getUserDAO();
 
     try {
-      userDB.updateName(name, 6);
+      userDB.updateName(name, connectedUser.getId());
     } catch (SQLException e) {
       throw new DBNotFoundException();
     }
@@ -101,7 +101,7 @@ public class UserFacade {
         UserDAO userDB = fact.getUserDAO();
 
         try {
-        userDB.updateSurname(surname, 6);
+        userDB.updateSurname(surname, connectedUser.getId());
         } catch (SQLException e) {
         throw new DBNotFoundException();
         }
@@ -115,7 +115,7 @@ public class UserFacade {
         if (userDB.findByPseudo(pseudo) != null)
           throw new UserPseudoAlreadyExistException();
 
-        userDB.updatePseudo(pseudo, 6);
+        userDB.updatePseudo(pseudo, connectedUser.getId());
       } catch (SQLException e) {
         throw new DBNotFoundException();
       }
@@ -130,7 +130,7 @@ public class UserFacade {
           if(userDB.findByEmail(email) != null)
             throw new UserAlreadyExistException();
 
-        userDB.updateEmail(email, 6);
+        userDB.updateEmail(email, connectedUser.getId());
         } catch (SQLException e) {
         throw new DBNotFoundException();
         }
@@ -158,12 +158,15 @@ public class UserFacade {
         UserDAO userDB = fact.getUserDAO();
 
         try {
-        userDB.updateCountry(country, 6);
+        userDB.updateCountry(country, connectedUser.getId());
         } catch (SQLException e) {
         throw new DBNotFoundException();
         }
     }
 
+    public void logout() {
+        connectedUser = null;
+    }
 
 
   public static UserFacade getInstance() {

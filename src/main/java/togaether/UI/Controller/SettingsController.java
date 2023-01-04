@@ -95,7 +95,8 @@ public class SettingsController {
     }
 
     public void onLogoutButtonClicked(ActionEvent event) {
-        System.exit(0);
+        UserFacade.getInstance().logout();
+        SceneController.getInstance().switchToLogin(event);
     }
 
 }

@@ -18,7 +18,7 @@
             <Font name="Garamond" size="14.0" />
          </font>
       </Button>
-      <Text layoutX="242.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Paramètres" wrappingWidth="115.55615234375">
+      <Text layoutX="227.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Paramètres" wrappingWidth="146.0">
          <font>
             <Font name="Garamond" size="25.0" />
          </font>
