@@ -1,6 +1,6 @@
 package togaether.DB;
 
-import togaether.BL.Model.CategoryTrophy;
+import togaether.BL.Model.TrophyCategory;
 import togaether.BL.Model.Trophy;
 
 import java.sql.SQLException;
@@ -15,7 +15,7 @@ public interface TrophyDAO {
   public List<Trophy> findAllTrophies() throws SQLException;
   public List<Trophy> findTrophiesByCategories(String category) throws SQLException;
   public List<Trophy> findNotOwnedTrophiesByCategories(String category, int user_id) throws SQLException;
-  public List<CategoryTrophy> findAllCategories() throws SQLException;
+  public List<TrophyCategory> findAllCategories() throws SQLException;
   public Trophy findTrophyById(int trophy_id) throws SQLException;
   public List<Trophy> findTrophiesByUserId(int user_id) throws SQLException;
 

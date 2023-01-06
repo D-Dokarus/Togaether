@@ -9,8 +9,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import togaether.BL.Facade.TrophyFacade;
-import togaether.BL.Model.CategoryTrophy;
-import togaether.BL.Model.Travel;
+import togaether.BL.Model.TrophyCategory;
 import togaether.BL.Model.Trophy;
 import togaether.UI.SceneController;
 
@@ -40,11 +39,11 @@ public class TrophyModifyController {
 
   @FXML
   protected void initialize() {
-    ArrayList<CategoryTrophy> categories;
+    ArrayList<TrophyCategory> categories;
     try {
-      categories = (ArrayList<CategoryTrophy>) TrophyFacade.getInstance().getAllCategories();
+      categories = (ArrayList<TrophyCategory>) TrophyFacade.getInstance().getAllCategories();
       this.mapCategories =
-              categories.stream().collect(Collectors.toMap(CategoryTrophy::getName, item -> ((CategoryTrophy)item).getId()));
+              categories.stream().collect(Collectors.toMap(TrophyCategory::getName, item -> ((TrophyCategory)item).getId()));
       this.observableCategories = FXCollections.observableArrayList();
       for(String name : mapCategories.keySet()) {
         observableCategories.add(TrophyFacade.getInstance().nameToFrench(name));

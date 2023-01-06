@@ -1,11 +1,9 @@
 package togaether.BL.Facade;
 
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import togaether.BL.Model.*;
 import togaether.DB.AbstractFactory;
 import togaether.DB.TrophyDAO;
-import togaether.UI.Controller.TrophyController;
 
 import java.io.File;
 import java.sql.SQLException;
@@ -42,7 +40,7 @@ public class TrophyFacade {
     TrophyDAO trophyDB = abstractFactory.getTrophyDAO();
     return trophyDB.findAllTrophies();
   }
-  public List<CategoryTrophy> getAllCategories() throws SQLException {
+  public List<TrophyCategory> getAllCategories() throws SQLException {
     AbstractFactory abstractFactory = AbstractFactory.createInstance();
     TrophyDAO trophyDB = abstractFactory.getTrophyDAO();
     return trophyDB.findAllCategories();

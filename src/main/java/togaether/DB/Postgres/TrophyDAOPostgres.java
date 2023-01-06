@@ -2,11 +2,9 @@ package togaether.DB.Postgres;
 
 import togaether.BL.Model.*;
 import togaether.DB.TrophyDAO;
-import togaether.DB.UserDAO;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class TrophyDAOPostgres implements TrophyDAO {
@@ -126,15 +124,15 @@ public class TrophyDAOPostgres implements TrophyDAO {
   }
 
   @Override
-  public List<CategoryTrophy> findAllCategories() throws SQLException {
-    ArrayList<CategoryTrophy> categories = new ArrayList<>();
+  public List<TrophyCategory> findAllCategories() throws SQLException {
+    ArrayList<TrophyCategory> categories = new ArrayList<>();
     try (Connection connection = this.postgres.getConnection()){
       String query = "SELECT * FROM trophy_category;";
       try(PreparedStatement statement = connection.prepareStatement(query);){
         try (ResultSet resultSet = statement.executeQuery()) {
 
           while (resultSet.next()) {
-            categories.add(new CategoryTrophy(resultSet.getInt("trophy_category_id"), resultSet.getString("trophy_category_name")));
+            categories.add(new TrophyCategory(resultSet.getInt("trophy_category_id"), resultSet.getString("trophy_category_name")));
           }
         }
       }
@@ -250,7 +248,7 @@ public class TrophyDAOPostgres implements TrophyDAO {
     int count = 0;
 
     try (Connection connection = this.postgres.getConnection()){
-      String query = "SELECT COUNT(*) FROM friend WHERE c.user_id1 =? OR c.user_id2 =?";
+      String query = "SELECT COUNT(*) FROM friend WHERE c.user_id_1 =? OR c.user_id_2 =?";
       try(PreparedStatement statement = connection.prepareStatement(query);){
         statement.setInt(1, user_id);
         statement.setInt(2, user_id);
