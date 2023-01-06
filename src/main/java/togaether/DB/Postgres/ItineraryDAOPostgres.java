@@ -1,10 +1,13 @@
 package togaether.DB.Postgres;
 
+import togaether.BL.Model.Itinerary;
+import togaether.DB.ItineraryDAO;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItineraryDAOPostgres implements ItneraryDAO {
+public class ItineraryDAOPostgres implements ItineraryDAO {
 
     PostgresFactory postgres;
 
@@ -19,7 +22,7 @@ public class ItineraryDAOPostgres implements ItneraryDAO {
             try(PreparedStatement statement = connection.prepareStatement(query);){
                 statement.setInt(1,itinerary.getTravel());
                 statement.setString(2,itinerary.getName());
-                statement.setString(3,itinerary.getDateItinerary());
+                statement.setString(3,itinerary.getDateItinerary()); //FAUT MODIFIER LE MODEL D'UN USER
                 statement.setString(4,itinerary.getIndex());
                 statement.setDate(5, (Date) itinerary.getCategory());
                 statement.execute();

@@ -1,11 +1,13 @@
 package togaether.DB;
 
+import togaether.BL.Model.Itinerary;
+
 import java.sql.SQLException;
 import java.util.List;
 
 public interface ItineraryDAO {
 
-    public void createItinerary(Itinerary itinerary) throws SQLException;
+    public int createItinerary(Itinerary itinerary) throws SQLException;
 
     public void deleteItineraryById(int Id) throws SQLException;
 
