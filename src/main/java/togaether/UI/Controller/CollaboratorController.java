@@ -11,9 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.util.Callback;
-import togaether.BL.Facade.CollaboratorFacade;
-import togaether.BL.Facade.TravelFacade;
-import togaether.BL.Facade.UserFacade;
+import togaether.BL.Facade.*;
 import togaether.BL.Model.*;
 import togaether.DB.CollaboratorDAO;
 import togaether.UI.SceneController;
@@ -50,7 +48,8 @@ public class CollaboratorController {
         //Chopper la liste des collaborateurs et l'initialiser
         collaborators = CollaboratorFacade.getInstance().findCollaboratorByTravel(TravelFacade.getInstance().getTravel());
         initializeCollaboratorsList();
-        //Chopper la liste des 10 premiers amis et l'initialiser
+        friends = FriendFacade.getInstance().findAllFriends(UserFacade.getInstance().getConnectedUser());
+        initializeFriendsList();
 
     }
 
@@ -176,7 +175,7 @@ public class CollaboratorController {
             observableFriends.add(friend);
         }
         // We need to create a new CellFactory so we can display our layout for each individual notification
-        collaboratorsListView.setCellFactory((Callback<ListView<Friend>, ListCell<Friend>>) param -> {
+        friendsListView.setCellFactory((Callback<ListView<Friend>, ListCell<Friend>>) param -> {
             return new ListCell<Friend>() {
                 @Override
                 protected void updateItem(Friend friend, boolean empty) {
@@ -217,10 +216,11 @@ public class CollaboratorController {
                         root.getChildren().add(region);
 
                         //BUTTON INVITER AU VOYAGE
-                        Button btnAdd= new Button("Ajouterr");
+                        Button btnAdd= new Button("Ajouter");
                         btnAdd.setOnAction(event -> {
-
-                            initializeCollaboratorsList();
+                            onClickInviteFriend(friend);
+                            btnAdd.setText("Ajouté");
+                            btnAdd.setDisable(true);
                         });
                         root.getChildren().add(btnAdd);
 
@@ -232,7 +232,7 @@ public class CollaboratorController {
             };
 
         });
-        collaboratorsListView.setItems(observableCollaborators);
+        friendsListView.setItems(observableFriends);
     }
 
 
@@ -265,6 +265,32 @@ public class CollaboratorController {
 
     public boolean containsName(final List<Collaborator> list, final String name, Collaborator collab){
         return list.stream().filter(o -> o.getId() != collab.getId()).filter(o -> o.getName().equals(name)).findFirst().isPresent();
+    }
+
+    public void onClickInviteFriend(Friend friend){
+        User you = null;
+        User other = null;
+        if(friend.getUser1().getId() == UserFacade.getInstance().getConnectedUser().getId()){
+            you = friend.getUser1();
+            other = friend.getUser2();
+        }else{
+            you = friend.getUser1();
+            other = friend.getUser2();
+        }
+        Travel travel = TravelFacade.getInstance().getTravel();
+        Notification notification = new Notification(other,you,you.getPseudo() + " vous invite à rejoindre le voyage : " + travel.getNameTravel(),true,NotificationCategory.createNotification("travelInvitation"),travel.getIdTravel());
+        NotificationFacade.getInstance().createNotification(notification);
+    }
+
+    @FXML
+    private void onUpdateSearchBar(){
+
+        String user_name = friendSearchBar.getText().trim();
+        if(user_name.length() >= 3 && !user_name.isBlank()){
+            String test = "%"+user_name+"%";
+            friends = FriendFacade.getInstance().findAllFriendsByPseudo(UserFacade.getInstance().getConnectedUser(), test);
+            initializeFriendsList();
+        }
     }
 
 
