@@ -10,13 +10,16 @@ public class Itinerary {
     private int index;
     private int category;
 
-    public Itinerary(int itinerary_id, int travel, String name, Date dateItinerary, int index, int category) {
+    private String description;
+
+    public Itinerary(int itinerary_id, int travel, String name, Date dateItinerary, int index, int category, String description) {
         this.itinerary_id = itinerary_id;
         this.travel = travel;
         this.name = name;
         this.dateItinerary = dateItinerary;
         this.index = index;
         this.category = category;
+        this.description = description;
     }
 
     public int getItinerary_id() {
@@ -63,6 +66,14 @@ public class Itinerary {
         this.category = category;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public String toString() {
         return "Itinerary{" +
@@ -72,6 +83,7 @@ public class Itinerary {
                 ", dateItinerary=" + dateItinerary +
                 ", index=" + index +
                 ", category=" + category +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

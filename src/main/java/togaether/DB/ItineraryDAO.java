@@ -1,6 +1,7 @@
 package togaether.DB;
 
 import togaether.BL.Model.Itinerary;
+import togaether.BL.Model.TransportCategory;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -18,4 +19,10 @@ public interface ItineraryDAO {
     public void updateItinerary(Itinerary itinerary) throws SQLException;
 
     public void deleteItinerariesByTravelId(int Id) throws SQLException;
+
+    public String findNameCatTransportById(int Id) throws SQLException;
+
+    public int findIdCatTransportByName(String name) throws SQLException;
+
+    public List<TransportCategory> findAllCatTransport() throws SQLException;
 }

@@ -81,10 +81,10 @@ public class TravelFacade {
      */
     public int createTravel(Travel travel) throws DBNotFoundException{
         AbstractFactory fact = AbstractFactory.createInstance();
-        TravelDAO travelDB = fact.getTravelDAO();
+        TravelDAO travelDAO = fact.getTravelDAO();
 
         try {
-            return travelDB.createTravel(travel);
+            return travelDAO.createTravel(travel);
         } catch (SQLException e) {
             System.out.println(e);
             throw new DBNotFoundException();
