@@ -52,7 +52,7 @@ public class TravelUpdateController {
         // Récupérer travel connected
         TravelFacade travelFacade = TravelFacade.getInstance();
         try {
-            this.travel = travelFacade.findTravelById(4);
+            this.travel = travelFacade.getTravel();
         } catch (Exception e) {
             System.out.println("Attention : Le voyage n'a pas pu être trouvé, veuillez réessayer");
             this.labelError.setText("Attention : Le voyage n'a pas pu être trouvé, veuillez réessayer");

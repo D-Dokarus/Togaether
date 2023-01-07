@@ -29,6 +29,9 @@ public class PostgresFactory extends AbstractFactory {
   @Override
   public CollaboratorDAO getCollaboratorDAO() { return new CollaboratorDAOPostgres(this);}
 
+  @Override
+  public FriendDAO getFriendDAO(){return new FriendDAOPostgres(this);}
+
   public Connection getConnection() throws SQLException {
     return this.connection.getConnection();
   }

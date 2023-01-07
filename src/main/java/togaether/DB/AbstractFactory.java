@@ -30,6 +30,7 @@ public abstract class AbstractFactory {
    */
   abstract public TravelDAO getTravelDAO();
   abstract public CollaboratorDAO getCollaboratorDAO();
+  abstract public FriendDAO getFriendDAO();
 
   /**
    * Retourne l'instance de la classe implémentant AbstractFactory
