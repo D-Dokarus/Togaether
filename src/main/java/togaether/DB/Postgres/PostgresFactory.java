@@ -33,6 +33,9 @@ public class PostgresFactory extends AbstractFactory {
   @Override
   public FriendDAO getFriendDAO(){return new FriendDAOPostgres(this);}
 
+  @Override
+  public ItineraryDAO getItinerary() {return new ItineraryDAOPostgres(this);}
+
   public Connection getConnection() throws SQLException {
     return this.connection.getConnection();
   }

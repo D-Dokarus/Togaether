@@ -1,6 +1,7 @@
 package togaether.DB.Postgres;
 
 import togaether.BL.Model.Itinerary;
+import togaether.BL.Model.TransportCategory;
 import togaether.DB.ItineraryDAO;
 
 import java.sql.*;
@@ -18,11 +19,11 @@ public class ItineraryDAOPostgres implements ItineraryDAO {
     @Override
     public int createItinerary(Itinerary itinerary) throws SQLException {
         try (Connection connection = this.postgres.getConnection()){
-            String query = "INSERT INTO itinerary(travel,name,date,index,category) VALUES(?,?,?,?,?) RETURNING travel_id;";
+            String query = "INSERT INTO itinerary(travel,name,date,index,category, description) VALUES(?,?,?,?,?, ?) RETURNING travel_id;";
             try(PreparedStatement statement = connection.prepareStatement(query);){
                 statement.setInt(1,itinerary.getTravel());
                 statement.setString(2,itinerary.getName());
-                statement.setString(3,itinerary.getDateItinerary().toString()); //FAUT MODIFIER LE MODEL D'UN USER
+                statement.setDate(3, (Date) itinerary.getDateItinerary());
                 statement.setInt(4,itinerary.getIndex());
                 statement.setInt(5, itinerary.getCategory());
                 statement.execute();
@@ -66,7 +67,8 @@ public class ItineraryDAOPostgres implements ItineraryDAO {
                             resultSet.getString("name"),
                             resultSet.getDate("dateItinerary"),
                             resultSet.getInt("index"),
-                            resultSet.getInt("category"));
+                            resultSet.getInt("category"),
+                            resultSet.getString("description"));
                     return itinerary;
                 }
             }
@@ -90,7 +92,8 @@ public class ItineraryDAOPostgres implements ItineraryDAO {
                                 resultSet.getString("name"),
                                 resultSet.getDate("dateItinerary"),
                                 resultSet.getInt("index"),
-                                resultSet.getInt("category"));
+                                resultSet.getInt("category"),
+                                resultSet.getString("description"));
 
                         itineraries.add(itinerary);
                     }
@@ -107,12 +110,13 @@ public class ItineraryDAOPostgres implements ItineraryDAO {
     public void updateItinerary(Itinerary itinerary) throws SQLException {
 
         try(Connection connection = this.postgres.getConnection()){
-            String query = "UPDATE itinerary SET  name = ? , dateItinerary = ? , index = ? WHERE itinerary_id = ? ;";
+            String query = "UPDATE itinerary SET  name = ? , dateItinerary = ? , index = ?, description = ? WHERE itinerary_id = ? ;";
             try(PreparedStatement statement = connection.prepareStatement(query)){
-                statement.setInt(4,itinerary.getItinerary_id());
+                statement.setInt(5,itinerary.getItinerary_id());
                 statement.setString(1,itinerary.getName());
                 statement.setDate(2, (Date) itinerary.getDateItinerary());
-                statement.setInt(3, itinerary.getIndex());
+                statement.setInt(3,  itinerary.getIndex());
+                statement.setString(4,itinerary.getDescription());
                 statement.executeUpdate();
             }
         }
@@ -132,6 +136,59 @@ public class ItineraryDAOPostgres implements ItineraryDAO {
             }
         }
         finally{
+            this.postgres.getConnection().close();
+        }
+    }
+
+    @Override
+    public String findNameCatTransportById(int Id) throws SQLException {
+        try (Connection connection = this.postgres.getConnection()) {
+            String query = "SELECT nameTransportCat FROM transport_category cat WHERE cat_transport_id = ?; ";
+            try (PreparedStatement statement = connection.prepareStatement(query);) {
+                statement.setInt(1, Id);
+                try(ResultSet resultSet = statement.executeQuery()){
+                    return resultSet.getString("nameTransportCat");
+                }
+            }
+        }
+        finally {
+            this.postgres.getConnection().close();
+        }
+    }
+
+    @Override
+    public int findIdCatTransportByName(String name) throws SQLException {
+        try (Connection connection = this.postgres.getConnection()) {
+            String query = "SELECT cat_transport_id FROM transport_category cat WHERE nameTransportCat = ?; ";
+            try (PreparedStatement statement = connection.prepareStatement(query);) {
+                statement.setString(1, name);
+                try(ResultSet resultSet = statement.executeQuery()){
+                    return resultSet.getInt("cat_transport_id");
+                }
+            }
+        }
+        finally {
+            this.postgres.getConnection().close();
+        }
+    }
+
+    @Override
+    public List<TransportCategory> findAllCatTransport() throws SQLException {
+        try (Connection connection = this.postgres.getConnection()) {
+            String query = "SELECT * FROM transport_category ; ";
+            try (PreparedStatement statement = connection.prepareStatement(query);) {
+                try(ResultSet resultSet = statement.executeQuery()){
+                    ArrayList<TransportCategory> categories = new ArrayList<>();
+                    while(resultSet.next()){
+                        TransportCategory transportCategory = new TransportCategory(resultSet.getInt("cat_transport_id"),
+                                resultSet.getString("nameTransportCat"));
+                        categories.add(transportCategory);
+                    }
+                    return categories;
+                }
+            }
+        }
+        finally {
             this.postgres.getConnection().close();
         }
     }
