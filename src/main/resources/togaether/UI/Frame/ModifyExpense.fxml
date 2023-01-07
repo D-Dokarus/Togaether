@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
@@ -19,5 +20,6 @@
       <ChoiceBox fx:id="selectCategory" layoutX="31.0" layoutY="268.0" prefWidth="150.0" />
       <Label layoutX="31.0" layoutY="244.0" text="Catégorie" />
       <Label layoutX="425.0" layoutY="39.0" text="Qui rembourse :" />
+      <ListView fx:id="participantList" layoutX="368.0" layoutY="61.0" prefHeight="254.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

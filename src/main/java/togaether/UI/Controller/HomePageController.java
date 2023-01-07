@@ -57,9 +57,7 @@ public class HomePageController {
     ArrayList<Travel> travels = (ArrayList<Travel>) travelFacade.findTravelsByUserId(UserFacade.getInstance().getConnectedUser().getId());
 
     ObservableList<Travel> observableTravels = FXCollections.observableArrayList();
-    for(Travel travel : travels){
-      observableTravels.add(travel);
-    }
+    observableTravels.addAll(travels);
 
     this.travelList.setCellFactory(param -> new ListCell<>() {
       @Override

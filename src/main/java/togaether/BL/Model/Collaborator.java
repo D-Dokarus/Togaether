@@ -64,4 +64,8 @@ public class Collaborator {
             + "; Name : " + getName()
             + "; User : " + getUser() +"}";
   }
+  @Override
+  public boolean equals(Object o) {
+    return this.id == ((Collaborator)o).getId();
+  }
 }

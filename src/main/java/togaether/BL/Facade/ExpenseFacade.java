@@ -1,5 +1,6 @@
 package togaether.BL.Facade;
 
+import togaether.BL.Model.Collaborator;
 import togaether.BL.Model.Expense;
 import togaether.BL.Model.ExpenseCategory;
 import togaether.BL.Model.Trophy;
@@ -64,6 +65,21 @@ public class ExpenseFacade {
     AbstractFactory abstractFactory = AbstractFactory.createInstance();
     ExpenseDAO expenseDB = abstractFactory.getExpenseDAO();
     return expenseDB.findAllExpenseCategories();
+  }
+  public List<Collaborator> findParticipantsByExpense(Expense expense) throws SQLException {
+    AbstractFactory abstractFactory = AbstractFactory.createInstance();
+    ExpenseDAO expenseDB = abstractFactory.getExpenseDAO();
+    return expenseDB.findParticipantByExpenseId(expense.getId());
+  }
+  public void addParticipant(int expense_id, int collaborator_id) throws SQLException {
+    AbstractFactory abstractFactory = AbstractFactory.createInstance();
+    ExpenseDAO expenseDB = abstractFactory.getExpenseDAO();
+    expenseDB.createParticipant(expense_id, collaborator_id);
+  }
+  public void removeParticipant(int expense_id, int collaborator_id) throws SQLException {
+    AbstractFactory abstractFactory = AbstractFactory.createInstance();
+    ExpenseDAO expenseDB = abstractFactory.getExpenseDAO();
+    expenseDB.deleteParticipant(expense_id, collaborator_id);
   }
 
   public String nameToFrench(String name) {

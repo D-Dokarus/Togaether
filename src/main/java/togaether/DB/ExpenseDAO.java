@@ -1,5 +1,6 @@
 package togaether.DB;
 
+import togaether.BL.Model.Collaborator;
 import togaether.BL.Model.Expense;
 import togaether.BL.Model.ExpenseCategory;
 
@@ -13,6 +14,11 @@ public interface ExpenseDAO {
   public void deleteExpenseById(int expense_id) throws SQLException;
   public void updateExpense(Expense expense) throws SQLException;
   public Expense findExpenseById(int expense_id) throws SQLException;
+  public void createParticipant(int expense_id, int collaborator_id) throws SQLException;
+  public void deleteParticipant(int expense_id, int collaborator_id) throws SQLException;
+  public List<Collaborator> findParticipantByExpenseId(int expense_id) throws SQLException;
+  public double calcAmountByCollaboratorId(int collaborator_id) throws SQLException;
+  public double calcAmountByCollaboratorIdAndCategoryExpense(int collaborator_id, int category_id) throws SQLException;
   public List<Expense> findExpensesByTravelId(int travel_id) throws SQLException;
   public List<Expense> findExpensesByCollaboratorId(int collaborator_id) throws SQLException;
   public List<Expense> findExpensesByUserId(int user_id) throws SQLException;

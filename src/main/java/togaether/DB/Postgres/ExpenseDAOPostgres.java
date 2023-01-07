@@ -1,7 +1,6 @@
 package togaether.DB.Postgres;
 
-import togaether.BL.Model.Expense;
-import togaether.BL.Model.ExpenseCategory;
+import togaether.BL.Model.*;
 import togaether.DB.ExpenseDAO;
 
 import java.sql.*;
@@ -74,6 +73,89 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
       }
     }
     return expense;
+  }
+  @Override
+  public void createParticipant(int expense_id, int collaborator_id) throws SQLException {
+    try (Connection connection = this.postgres.getConnection()){
+      String query = "INSERT INTO participate(expense, collaborator) VALUES(?,?);";
+      try(PreparedStatement statement = connection.prepareStatement(query);){
+        statement.setInt(1, expense_id);
+        statement.setInt(2, collaborator_id);
+
+        statement.executeUpdate();
+      }
+    }
+  }
+  @Override
+  public void deleteParticipant(int expense_id, int collaborator_id) throws SQLException {
+    try(Connection connection = this.postgres.getConnection()){
+      String query = "DELETE FROM participate WHERE expense=? AND collaborator= ?;";
+      try(PreparedStatement statement = connection.prepareStatement(query)){
+        statement.setInt(1,expense_id);
+        statement.setInt(2,collaborator_id);
+        statement.executeUpdate();
+      }
+    }
+  }
+  @Override
+  public List<Collaborator> findParticipantByExpenseId(int expense_id) throws SQLException {
+    ArrayList<Collaborator> liste = new ArrayList<>();
+    try (Connection connection = this.postgres.getConnection()){
+      String query = "SELECT * FROM participate p INNER JOIN collaborator c ON p.collaborator=c.collaborator_id WHERE p.expense =?;";
+      try(PreparedStatement statement = connection.prepareStatement(query);){
+        statement.setInt(1, expense_id);
+        try (ResultSet resultSet = statement.executeQuery()) {
+
+          while (resultSet.next()) {
+            liste.add(new Collaborator(resultSet.getInt("collaborator_id"), new Travel(resultSet.getInt("travel_id")), new User(resultSet.getInt("user_id")), resultSet.getString("collaborator_name")));
+          }
+        }
+      }
+    }
+    return liste;
+  }
+
+  @Override
+  public double calcAmountByCollaboratorId(int collaborator_id) throws SQLException {
+    double count = 0.0;
+
+    try (Connection connection = this.postgres.getConnection()){
+      String query = "SELECT SUM(s1.expense_value/s1.nb) FROM \n" +
+              "  (SELECT expense_id, expense_value, count(*) as nb FROM participate p INNER JOIN expense e ON p.expense=e.expense_id\n" +
+              "  WHERE p.expense IN (SELECT p2.expense FROM participate p2 WHERE collaborator=?)\n" +
+              "  GROUP BY expense_id, expense_value) AS s1";
+      try(PreparedStatement statement = connection.prepareStatement(query);){
+        statement.setInt(1, collaborator_id);
+        try (ResultSet resultSet = statement.executeQuery()) {
+          while (resultSet.next()) {
+            count = resultSet.getInt(1);}
+        }
+      }
+    }
+
+    return count;
+  }
+
+  @Override
+  public double calcAmountByCollaboratorIdAndCategoryExpense(int collaborator_id, int category_id) throws SQLException {
+    double count = 0.0;
+
+    try (Connection connection = this.postgres.getConnection()){
+      String query = "SELECT SUM(s1.expense_value/s1.nb) FROM \n" +
+              "  (SELECT expense_id, expense_value, count(*) as nb FROM participate p INNER JOIN expense e ON p.expense=e.expense_id\n" +
+              "  WHERE p.expense IN (SELECT p2.expense FROM participate p2 INNER JOIN expense e2 ON p2.expense=e2.expense_id WHERE collaborator=? and expense_category=?)\n" +
+              "  GROUP BY expense_id, expense_value) AS s1";
+      try(PreparedStatement statement = connection.prepareStatement(query);){
+        statement.setInt(1, collaborator_id);
+        statement.setInt(2, category_id);
+        try (ResultSet resultSet = statement.executeQuery()) {
+          while (resultSet.next()) {
+            count = resultSet.getInt(1);}
+        }
+      }
+    }
+
+    return count;
   }
 
 
