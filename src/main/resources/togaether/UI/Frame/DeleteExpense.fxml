@@ -6,18 +6,18 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="258.0" prefWidth="390.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="togaether.UI.Controller.TrophyDeleteController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="258.0" prefWidth="390.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="togaether.UI.Controller.ExpenseDeleteController">
    <children>
-      <Label layoutX="43.0" layoutY="27.0" text="Souhaitez vous vraiment supprimer ce trophée ?">
+      <Label layoutX="24.0" layoutY="26.0" text="Souhaitez vous vraiment supprimer cette dépense ?">
          <font>
             <Font size="15.0" />
          </font></Label>
       <Button fx:id="returnButton" layoutX="52.0" layoutY="198.0" mnemonicParsing="false" onAction="#onReturnButtonClicked" text="Annuler" />
       <Button fx:id="confirmedButton" layoutX="254.0" layoutY="198.0" mnemonicParsing="false" onAction="#onConfirmedButtonClicked" text="Confirmer" />
       <Label layoutX="54.0" layoutY="87.0" text="Nom :" />
-      <Label fx:id="nameTrophy" layoutX="120.0" layoutY="87.0" />
-      <Label layoutX="53.0" layoutY="111.0" text="Condition" />
-      <Text fx:id="conditionTrophy" layoutX="120.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="232.7109375" />
+      <Label fx:id="nameExpense" layoutX="120.0" layoutY="87.0" prefHeight="17.0" prefWidth="124.0" />
+      <Label layoutX="53.0" layoutY="111.0" text="Valeur :" />
+      <Text fx:id="valueExpense" layoutX="120.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="232.7109375" />
       <Label fx:id="labelError" layoutX="181.0" layoutY="181.0" textAlignment="CENTER" textFill="RED" />
    </children>
 </AnchorPane>

@@ -43,7 +43,7 @@ public class TrophyModifyController {
     try {
       categories = (ArrayList<TrophyCategory>) TrophyFacade.getInstance().getAllCategories();
       this.mapCategories =
-              categories.stream().collect(Collectors.toMap(TrophyCategory::getName, item -> ((TrophyCategory)item).getId()));
+              categories.stream().collect(Collectors.toMap(TrophyCategory::getName, TrophyCategory::getId));
       this.observableCategories = FXCollections.observableArrayList();
       for(String name : mapCategories.keySet()) {
         observableCategories.add(TrophyFacade.getInstance().nameToFrench(name));
@@ -93,7 +93,7 @@ public class TrophyModifyController {
         }
         TrophyFacade.getInstance().setTrophy(null);
         SceneController.getInstance().switchToAdminTrophy(event);
-        System.out.println("Trophée créer/modifié !");
+        System.out.println("Trophée créé/modifié !");
       } catch (Exception e) {
         System.out.println(e);
         this.displayInfo("Attention : Les modifications n'ont pas pu être effectué, veuillez réessayer");

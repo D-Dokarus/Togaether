@@ -22,9 +22,9 @@ public class ItineraryDAOPostgres implements ItineraryDAO {
             try(PreparedStatement statement = connection.prepareStatement(query);){
                 statement.setInt(1,itinerary.getTravel());
                 statement.setString(2,itinerary.getName());
-                statement.setString(3,itinerary.getDateItinerary()); //FAUT MODIFIER LE MODEL D'UN USER
-                statement.setString(4,itinerary.getIndex());
-                statement.setDate(5, (Date) itinerary.getCategory());
+                statement.setString(3,itinerary.getDateItinerary().toString()); //FAUT MODIFIER LE MODEL D'UN USER
+                statement.setInt(4,itinerary.getIndex());
+                statement.setInt(5, itinerary.getCategory());
                 statement.execute();
                 ResultSet result = statement.getResultSet();
                 result.next();
@@ -112,7 +112,7 @@ public class ItineraryDAOPostgres implements ItineraryDAO {
                 statement.setInt(4,itinerary.getItinerary_id());
                 statement.setString(1,itinerary.getName());
                 statement.setDate(2, (Date) itinerary.getDateItinerary());
-                statement.setDate(3, (Date) itinerary.getIndex());
+                statement.setInt(3, itinerary.getIndex());
                 statement.executeUpdate();
             }
         }

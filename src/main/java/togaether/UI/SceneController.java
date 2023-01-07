@@ -58,6 +58,18 @@ public class SceneController {
   public void switchToModifyTrophy(ActionEvent event) {
     App.getInstance().switchScene("ModifyTrophy", (Stage)((Node)event.getSource()).getScene().getWindow());
   }
+  public void switchToExpense(ActionEvent event) {
+    App.getInstance().switchScene("Expense", (Stage)((Node)event.getSource()).getScene().getWindow());
+  }
+  public void switchToBalance(ActionEvent event) {
+    App.getInstance().switchScene("Balance", (Stage)((Node)event.getSource()).getScene().getWindow());
+  }
+  public void switchToDeleteExpense(ActionEvent event) {
+    App.getInstance().switchScene("DeleteExpense", (Stage)((Node)event.getSource()).getScene().getWindow());
+  }
+  public void switchToModifyExpense(ActionEvent event) {
+    App.getInstance().switchScene("ModifyExpense", (Stage)((Node)event.getSource()).getScene().getWindow());
+  }
   public void switchToFriend(ActionEvent event) {
     App.getInstance().switchScene("Friend", (Stage)((Node)event.getSource()).getScene().getWindow());
   }

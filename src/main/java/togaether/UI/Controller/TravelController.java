@@ -59,6 +59,7 @@ public class TravelController {
 
         try {
             travelFacade.setCollaborator(collaboratorFacade.findCollaboratorByUserAndTravel(userFacade.getConnectedUser(), travelFacade.getTravel()));
+            travelFacade.setCollaborators(collaboratorFacade.findCollaboratorByTravel(travelFacade.getTravel()));
         } catch (Exception e) {
             System.out.println("Attention : Le voyage n'a pas pu être trouvé, veuillez réessayer");
             this.labelError.setText("Attention : Le voyage n'a pas pu être trouvé, veuillez réessayer");
@@ -89,7 +90,10 @@ public class TravelController {
     }
 
     public void onReturnButtonClicked(ActionEvent event) {
-       SceneController.getInstance().switchToHomePage(event);
+        TravelFacade.getInstance().setTravel(null);
+        TravelFacade.getInstance().setCollaborator(null);
+        TravelFacade.getInstance().setCollaborators(null);
+        SceneController.getInstance().switchToHomePage(event);
     }
 
     public void editBudget(ActionEvent event){
@@ -98,8 +102,7 @@ public class TravelController {
     }
 
     public void showExpense(ActionEvent event){
-        //TO DO return expense
-        System.exit(1);
+        SceneController.getInstance().switchToExpense(event);
     }
 
     public void showCollaborator(ActionEvent event){

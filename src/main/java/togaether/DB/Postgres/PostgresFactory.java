@@ -21,6 +21,7 @@ public class PostgresFactory extends AbstractFactory {
   public MessageDAO getMessageDAO() {return new MessageDAOPostgres(this);}
   @Override
   public TrophyDAO getTrophyDAO() {return new TrophyDAOPostgres(this);}
+  public ExpenseDAO getExpenseDAO() {return new ExpenseDAOPostgres(this);}
   @Override
   public NotificationDAO getNotificationDAO(){ return new NotificationDAOPostgres(this);}
   @Override

@@ -89,17 +89,6 @@ public class ChatController {
     }
   }
 
-  private String formatText(String str) {
-    String userName = "";
-    if(UserFacade.getInstance().getConnectedUser() != null)
-      userName = UserFacade.getInstance().getConnectedUser().getName();
-    LocalDateTime t = new Timestamp(System.currentTimeMillis()).toLocalDateTime();
-    String minute = ((t.getMinute()+"").length() > 1 ? ""+t.getMinute() : "0"+t.getMinute()); //car par exemple si il est 12h07, getMinute renvoie juste 7
-    String date = t.getDayOfMonth()+"/"+t.getMonthValue()+"/"+t.getYear()+" "+t.getHour()+":"+ minute;
-    String text = date + " " + userName + " : " + str;
-    return text;
-  }
-
   public void addMessage(String s) {
     Platform.runLater(() -> messageList.getItems().add(s));
   }

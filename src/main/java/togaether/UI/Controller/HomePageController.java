@@ -40,7 +40,7 @@ public class HomePageController {
   @FXML
   private Button unusable;
   @FXML
-  private ListView travelList;
+  private ListView<Travel> travelList;
   @FXML
   private Label labelError;
 
@@ -60,61 +60,52 @@ public class HomePageController {
     for(Travel travel : travels){
       observableTravels.add(travel);
     }
-    // We need to create a new CellFactory so we can display our layout for each individual notification
-    this.travelList.setCellFactory((Callback<ListView<Travel>, ListCell<Travel>>) param -> {
-      return new ListCell<Travel>() {
-        @Override
-        protected void updateItem(Travel travel, boolean empty) {
-          super.updateItem(travel, empty);
 
-          //TO DO ajouter un && avec un string de recherche de nom (si pas "")
-          if (travel == null || empty) {
-            setText(null);
-          } else {
-            // Here we can build the layout we want for each ListCell.
-            HBox root = new HBox(10);
-            root.setAlignment(Pos.CENTER_LEFT);
-            root.setPadding(new Insets(5, 10, 5, 10));
+    this.travelList.setCellFactory(param -> new ListCell<>() {
+      @Override
+      protected void updateItem(Travel travel, boolean empty) {
+        super.updateItem(travel, empty);
 
-            // Within the root, we'll show the username on the left and our two buttons to the right
-            root.getChildren().add(new Label(travel.getNameTravel()));
+        //TO DO ajouter un && avec un string de recherche de nom (si pas "")
+        if (travel == null || empty) {
+          setText(null);
+        } else {
 
-            // Add another Region here to expand, pushing the buttons to the right
-            Region region = new Region();
-            HBox.setHgrow(region, Priority.ALWAYS);
-            root.getChildren().add(region);
+          HBox root = new HBox(10);
+          root.setAlignment(Pos.CENTER_LEFT);
+          root.setPadding(new Insets(5, 10, 5, 10));
 
-            //BUTTON GOTRAVEL
-            Button btnGoTravel = new Button("Voir");
-            btnGoTravel.setOnAction(event -> {
-              TravelFacade.getInstance().setTravel(travel);
-              SceneController.getInstance().switchToTravel(event);
-            });
-            //BUTTON ARCHIVETRAVEL
-            Button btnArchiveTravel = new Button("Archiver");
-            btnArchiveTravel.setOnAction(event -> {
-              TravelFacade.getInstance().setTravel(travel);
-              SceneController.getInstance().switchToArchiveTravel(event);
-            });
-            //BUTTON DELETETRAVEL
-            Button btnDeleteTravel = new Button("Supprimer");
-            btnDeleteTravel.setOnAction(event -> {
-              TravelFacade.getInstance().setTravel(travel);
-              SceneController.getInstance().switchToDeleteTravel(event);
-            });
-            root.getChildren().addAll(btnGoTravel, btnArchiveTravel, btnDeleteTravel);
+          root.getChildren().add(new Label(travel.getNameTravel()));
 
-            // Finally, set our cell to display the root HBox
-            setText(null);
-            setGraphic(root);
-          }
+          Region region = new Region();
+          HBox.setHgrow(region, Priority.ALWAYS);
+          root.getChildren().add(region);
 
+          //BUTTON GOTRAVEL
+          Button btnGoTravel = new Button("Voir");
+          btnGoTravel.setOnAction(event -> {
+            TravelFacade.getInstance().setTravel(travel);
+            SceneController.getInstance().switchToTravel(event);
+          });
+          //BUTTON ARCHIVETRAVEL
+          Button btnArchiveTravel = new Button("Archiver");
+          btnArchiveTravel.setOnAction(event -> {
+            TravelFacade.getInstance().setTravel(travel);
+            SceneController.getInstance().switchToArchiveTravel(event);
+          });
+          //BUTTON DELETETRAVEL
+          Button btnDeleteTravel = new Button("Supprimer");
+          btnDeleteTravel.setOnAction(event -> {
+            TravelFacade.getInstance().setTravel(travel);
+            SceneController.getInstance().switchToDeleteTravel(event);
+          });
+          root.getChildren().addAll(btnGoTravel, btnArchiveTravel, btnDeleteTravel);
+
+          setText(null);
+          setGraphic(root);
         }
-      };
-
+      }
     });
-
-    // Set our users to display in the ListView
     travelList.setItems(observableTravels);
   }
 
