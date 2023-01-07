@@ -14,10 +14,7 @@ import javafx.util.Callback;
 import togaether.BL.Facade.CollaboratorFacade;
 import togaether.BL.Facade.TravelFacade;
 import togaether.BL.Facade.UserFacade;
-import togaether.BL.Model.Collaborator;
-import togaether.BL.Model.Notification;
-import togaether.BL.Model.Travel;
-import togaether.BL.Model.User;
+import togaether.BL.Model.*;
 import togaether.DB.CollaboratorDAO;
 import togaether.UI.SceneController;
 
@@ -45,8 +42,8 @@ public class CollaboratorController {
     List<Collaborator> collaborators = new ArrayList<>();
     ObservableList<Collaborator> observableCollaborators = FXCollections.observableArrayList();
 
-    List<User> friends = new ArrayList<>();
-    ObservableList<User> observableFriends = FXCollections.observableArrayList();
+    List<Friend> friends = new ArrayList<>();
+    ObservableList<Friend> observableFriends = FXCollections.observableArrayList();
 
     @FXML
     protected void initialize() {
@@ -174,12 +171,71 @@ public class CollaboratorController {
 
 
     public void initializeFriendsList(){
+        observableFriends.clear();
+        for(Friend friend: friends){
+            observableFriends.add(friend);
+        }
+        // We need to create a new CellFactory so we can display our layout for each individual notification
+        collaboratorsListView.setCellFactory((Callback<ListView<Friend>, ListCell<Friend>>) param -> {
+            return new ListCell<Friend>() {
+                @Override
+                protected void updateItem(Friend friend, boolean empty) {
+                    super.updateItem(friend, empty);
 
+                    if (friend == null || empty) {
+                        setText(null);
+                    } else {
+
+                        User you = null;
+                        User other = null;
+                        if(friend.getUser1().getId() == UserFacade.getInstance().getConnectedUser().getId()){
+                            you = friend.getUser1();
+                            other = friend.getUser2();
+                        }else{
+                            you = friend.getUser2();
+                            other = friend.getUser1();
+                        }
+
+                        // Here we can build the layout we want for each ListCell.
+                        HBox root = new HBox(10);
+                        root.setAlignment(Pos.CENTER_LEFT);
+                        root.setPadding(new Insets(5, 10, 5, 10));
+
+
+                        // Within the root, we'll show the username on the left and our two buttons to the right
+
+
+                        Label name = new Label(other.getPseudo());
+                        name.setVisible(true);
+                        name.setManaged(true);
+
+                        root.getChildren().add(name);
+
+                        // Add another Region here to expand, pushing the buttons to the right
+                        Region region = new Region();
+                        HBox.setHgrow(region, Priority.ALWAYS);
+                        root.getChildren().add(region);
+
+                        //BUTTON INVITER AU VOYAGE
+                        Button btnAdd= new Button("Ajouterr");
+                        btnAdd.setOnAction(event -> {
+
+                            initializeCollaboratorsList();
+                        });
+                        root.getChildren().add(btnAdd);
+
+                        // Finally, set our cell to display the root HBox
+                        setText(null);
+                        setGraphic(root);
+                    }
+                }
+            };
+
+        });
+        collaboratorsListView.setItems(observableCollaborators);
     }
 
-    public void reloadFriendsList(){
 
-    }
 
     public void onClickButtonToTravel(ActionEvent event){
         SceneController.getInstance().switchToTravel(event);
@@ -210,4 +266,6 @@ public class CollaboratorController {
     public boolean containsName(final List<Collaborator> list, final String name, Collaborator collab){
         return list.stream().filter(o -> o.getId() != collab.getId()).filter(o -> o.getName().equals(name)).findFirst().isPresent();
     }
+
+
 }
