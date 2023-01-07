@@ -149,12 +149,10 @@ public class UserDAOPostgres implements UserDAO {
     public void updateUser(User user, int userId) throws SQLException {
         try (Connection connection = this.postgres.getConnection()) {
             String query = "UPDATE public.user SET user_name=?, user_email=?, user_password=?, user_surname=?, user_pseudo=?, user_country=? WHERE user_id=?;";
-            System.out.println("aa");
             try (PreparedStatement statement =
                          connection.prepareStatement(query);) {
 
                 if (!user.getName().isBlank()) {
-                    System.out.println("bb");
                     statement.setString(1, user.getName());
                 }
                 if (!user.getEmail().isBlank()) {
@@ -174,7 +172,6 @@ public class UserDAOPostgres implements UserDAO {
                 if (!user.getCountry().isBlank()) {
                     statement.setString(6, user.getCountry());
                 }
-                System.out.println("cc");
                 statement.setInt(7, userId);
                 statement.executeUpdate();
             }

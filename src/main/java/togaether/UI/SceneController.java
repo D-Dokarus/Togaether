@@ -90,6 +90,10 @@ public class SceneController {
     App.getInstance().switchScene("Collaborator", (Stage)((Node)event.getSource()).getScene().getWindow());
   }
 
+  public void switchToActivity(ActionEvent event) {
+    App.getInstance().switchScene("Activity", (Stage)((Node)event.getSource()).getScene().getWindow());
+  }
+
   public void newPopupNotification(ActionEvent event){
     Parent root;
     try {
@@ -103,5 +107,15 @@ public class SceneController {
     catch (IOException e) {
       e.printStackTrace();
     }
+  }
+
+  public void switchToCreateActivity(ActionEvent actionEvent) {
+  App.getInstance().switchScene("CreateActivity", (Stage)((Node)actionEvent.getSource()).getScene().getWindow());
+  }
+  public void switchToUpdateActivity(ActionEvent actionEvent) {
+    App.getInstance().switchScene("UpdateActivity", (Stage)((Node)actionEvent.getSource()).getScene().getWindow());
+  }
+  public void switchToDeleteActivity(ActionEvent actionEvent) {
+    App.getInstance().switchScene("DeleteActivity", (Stage)((Node)actionEvent.getSource()).getScene().getWindow());
   }
 }

@@ -81,10 +81,6 @@ public class SettingsController {
         }
 
     }
-    public void test(){
-        System.out.println(newemail.getText().isBlank());
-        System.out.println(newpassword.getText().isEmpty());
-    }
 
     public void switchToDeleteAccountFrame(ActionEvent event) {
         SceneController.getInstance().switchToDeleteAccount(event);

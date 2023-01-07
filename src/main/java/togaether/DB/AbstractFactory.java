@@ -19,7 +19,6 @@ public abstract class AbstractFactory {
    */
   abstract public MessageDAO getMessageDAO();
   abstract public TrophyDAO getTrophyDAO();
-  abstract public ExpenseDAO getExpenseDAO();
   /**
    * Retourne un DAO de Notification
    * @return NotificationDAO
@@ -30,17 +29,17 @@ public abstract class AbstractFactory {
    * @return TravelDAO
    */
   abstract public TravelDAO getTravelDAO();
-
-
+    /**
+     * Retourne un DAO de Collaborator
+     * @return CollaboratorDAO
+     */
   abstract public CollaboratorDAO getCollaboratorDAO();
 
-  abstract public FriendDAO getFriendDAO();
-  /**
-   * Retourne un DAO de Itinerary
-   * @return ItineraryDAO
-   */
-  abstract public ItineraryDAO getItinerary();
-
+    /**
+     * Retourne un DAO de Activity
+     * @return ActivityDAO
+     */
+    abstract public ActivityDAO getActivityDAO();
 
   /**
    * Retourne l'instance de la classe implémentant AbstractFactory

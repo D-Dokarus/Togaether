@@ -121,7 +121,7 @@ public class TravelController {
 
     public void showActivity(ActionEvent event){
         //TO DO return activity
-        System.exit(1);
+        SceneController.getInstance().switchToActivity(event);
     }
 
     public void showChat(ActionEvent event){
