@@ -1,10 +1,11 @@
 package togaether.BL.Facade;
 
-import togaether.BL.Model.Notification;
-import togaether.BL.Model.NotificationCategory;
-import togaether.BL.Model.User;
+import javafx.event.ActionEvent;
+import togaether.BL.Model.*;
+import togaether.BL.TogaetherException.DBNotFoundException;
 import togaether.DB.AbstractFactory;
 import togaether.DB.NotificationDAO;
+import togaether.UI.SceneController;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -13,6 +14,11 @@ import java.util.List;
 public class NotificationFacade {
     private static NotificationFacade instance = new NotificationFacade();
 
+    private Notification notification;
+
+    public Notification getNotification() {
+        return notification;
+    }
 
     public static NotificationFacade getInstance(){return instance;}
 
@@ -83,13 +89,20 @@ public class NotificationFacade {
      * Method that handle notification acceptance depending on its category
      * @param notification
      */
-    public void acceptNotification(Notification notification){
+    public void acceptNotification(Notification notification, ActionEvent event){
         switch(notification.getCatNotification().getNameCatNotification()){
             case "friendInvitation":
                 acceptFriendInvitation(notification);
                 break;
             case "travelInvitation":
-                acceptTravelInvitation(notification);
+                try{
+                    TravelFacade.getInstance().setTravel(TravelFacade.getInstance().findTravelById(notification.getSpecialId()));
+                    SceneController.getInstance().switchToTravel(event);
+                }catch(DBNotFoundException e){
+                    System.out.println(e);
+                }
+
+
                 break;
             case "serverNotification":
                 deleteNotification(notification);
@@ -110,17 +123,18 @@ public class NotificationFacade {
     public void acceptFriendInvitation(Notification notification){
         AbstractFactory fact = AbstractFactory.createInstance();
         NotificationDAO notificationDB = fact.getNotificationDAO();
-
         try{
-            //Create second notification
+            //DB CALLS
+            User other = new User(notification.getSpecialId());
+            Friend friend = new Friend(UserFacade.getInstance().getConnectedUser(),other);
+            FriendFacade.getInstance().createFriend(friend);
+            notificationDB.deleteNotificationById(notification.getId());
+
+            //Create serverNotification
             Notification secondNotification = new Notification(notification.getFrom(),
-                    "L'utilisateur " + notification.getTo().getName() + " a accepté votre demande d'ami",
+                    "L'utilisateur " + UserFacade.getInstance().getConnectedUser().getPseudo() + " a accepté votre demande d'ami",
                     notification.isAccept(),
                     NotificationCategory.createNotification("serverNotification"));
-
-            //DB CALLS
-            notificationDB.deleteNotificationById(notification.getId());
-            //should call FriendFacade to create the new Friend instance
             notificationDB.createNotification(secondNotification);
         }catch(SQLException e){
             System.out.println(e);

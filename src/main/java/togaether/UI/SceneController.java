@@ -118,4 +118,10 @@ public class SceneController {
   public void switchToDeleteActivity(ActionEvent actionEvent) {
     App.getInstance().switchScene("DeleteActivity", (Stage)((Node)actionEvent.getSource()).getScene().getWindow());
   }
+
+  public void switchToChooseCollaborator(){
+    Parent root = App.getInstance().getRoot();
+    App.getInstance().switchScene("ChooseCollaborator",(Stage)root.getScene().getWindow());
+  }
+
 }

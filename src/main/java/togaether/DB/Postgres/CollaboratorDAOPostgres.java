@@ -202,7 +202,7 @@ public class CollaboratorDAOPostgres implements CollaboratorDAO {
   public List<Collaborator> findCollaboratorNotChosenByTravel(Travel travel) throws SQLException{
     ArrayList<Collaborator> collaborators = new ArrayList<>();
     try(Connection connection = this.postgres.getConnection()){
-      String query = "SELECT * FROM collaborator WHERE travel_id = ? AND user_id = null;";
+      String query = "SELECT * FROM collaborator WHERE travel_id = ? AND user_id IS NULL;";
       try(PreparedStatement statement = connection.prepareStatement(query)){
         statement.setInt(1,travel.getIdTravel());
         statement.executeQuery();

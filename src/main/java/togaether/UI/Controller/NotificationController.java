@@ -2,6 +2,7 @@ package togaether.UI.Controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -98,7 +99,7 @@ public class NotificationController {
                         Button btnAccept = new Button("V");
                         btnAccept.setOnAction(event -> {
 
-                            acceptNotification(notification);
+                            acceptNotification(notification,event);
                             updateList();
                         });
                         //BUTTON REMOVE
@@ -179,8 +180,9 @@ public class NotificationController {
      * - We remove the notification from listView
      * @param notification
      */
-    public void acceptNotification(Notification notification){
-        NotificationFacade.getInstance().acceptNotification(notification);
+    public void acceptNotification(Notification notification, ActionEvent event){
+        NotificationFacade.getInstance().setNotification(notification);
+        NotificationFacade.getInstance().acceptNotification(notification,event);
         removeNotificationFromList(notification);
     }
 
