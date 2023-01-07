@@ -88,6 +88,6 @@ public interface UserDAO {
    */
   public List<User> getAll() throws SQLException;
 
-
+  abstract public List<User> findAllUsersByPseudo(String string)throws SQLException;
 
 }

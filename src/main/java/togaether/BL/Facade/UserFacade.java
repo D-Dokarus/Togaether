@@ -7,6 +7,8 @@ import togaether.DB.UserDAO;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Classe singleton regroupant différentes foncionnalité lié à l'utilisateur courant
@@ -168,6 +170,19 @@ public class UserFacade {
         connectedUser = null;
     }
 
+
+    public List<User> findAllUsersByPseudo(String string){
+        AbstractFactory fact = AbstractFactory.createInstance();
+        UserDAO userDB = fact.getUserDAO();
+
+        List<User> users = new ArrayList<>();
+        try {
+            users = userDB.findAllUsersByPseudo(string);
+        } catch (SQLException e) {
+           System.out.println(e);
+        }
+        return users;
+    }
 
   public static UserFacade getInstance() {
     return instance;

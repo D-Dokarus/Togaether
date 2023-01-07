@@ -31,16 +31,19 @@ public abstract class AbstractFactory {
    * @return TravelDAO
    */
   abstract public TravelDAO getTravelDAO();
-
-
+    /**
+     * Retourne un DAO de Collaborator
+     * @return CollaboratorDAO
+     */
   abstract public CollaboratorDAO getCollaboratorDAO();
 
-  abstract public FriendDAO getFriendDAO();
-  /**
-   * Retourne un DAO de Itinerary
-   * @return ItineraryDAO
-   */
-  abstract public ItineraryDAO getItinerary();
+    /**
+     * Retourne un DAO de Activity
+     * @return ActivityDAO
+     */
+    abstract public ActivityDAO getActivityDAO();
+    abstract public FriendDAO getFriendDAO();
+   abstract public ItineraryDAO getItinerary();
 
 
   /**

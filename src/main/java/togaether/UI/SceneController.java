@@ -71,7 +71,7 @@ public class SceneController {
     App.getInstance().switchScene("ModifyExpense", (Stage)((Node)event.getSource()).getScene().getWindow());
   }
   public void switchToFriend(ActionEvent event) {
-    App.getInstance().switchScene("Friend", (Stage)((Node)event.getSource()).getScene().getWindow());
+    App.getInstance().switchScene("Friends", (Stage)((Node)event.getSource()).getScene().getWindow());
   }
   public void switchToArchiveTravel(ActionEvent event) {
     App.getInstance().switchScene("ArchiveTravel", (Stage)((Node)event.getSource()).getScene().getWindow());
@@ -90,6 +90,10 @@ public class SceneController {
     App.getInstance().switchScene("Collaborator", (Stage)((Node)event.getSource()).getScene().getWindow());
   }
 
+  public void switchToActivity(ActionEvent event) {
+    App.getInstance().switchScene("Activity", (Stage)((Node)event.getSource()).getScene().getWindow());
+  }
+
   public void newPopupNotification(ActionEvent event){
     Parent root;
     try {
@@ -104,4 +108,20 @@ public class SceneController {
       e.printStackTrace();
     }
   }
+
+  public void switchToCreateActivity(ActionEvent actionEvent) {
+  App.getInstance().switchScene("CreateActivity", (Stage)((Node)actionEvent.getSource()).getScene().getWindow());
+  }
+  public void switchToUpdateActivity(ActionEvent actionEvent) {
+    App.getInstance().switchScene("UpdateActivity", (Stage)((Node)actionEvent.getSource()).getScene().getWindow());
+  }
+  public void switchToDeleteActivity(ActionEvent actionEvent) {
+    App.getInstance().switchScene("DeleteActivity", (Stage)((Node)actionEvent.getSource()).getScene().getWindow());
+  }
+
+  public void switchToChooseCollaborator(){
+    Parent root = App.getInstance().getRoot();
+    App.getInstance().switchScene("ChooseCollaborator",(Stage)root.getScene().getWindow());
+  }
+
 }

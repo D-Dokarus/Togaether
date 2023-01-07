@@ -12,6 +12,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.util.Callback;
 import togaether.BL.Facade.CollaboratorFacade;
+import togaether.BL.Facade.NotificationFacade;
 import togaether.BL.TogaetherException.*;
 import togaether.BL.Facade.TravelFacade;
 import togaether.BL.Facade.UserFacade;
@@ -38,6 +39,9 @@ public class ChooseCollaboratorController {
             collaborators = CollaboratorFacade.getInstance().findCollaboratorNotChosenByTravel(TravelFacade.getInstance().getTravel());
         }catch(CollaboratorNotFoundException e){
             System.out.println(e);
+        }
+        for(Collaborator collaborator : collaborators){
+            System.out.println(collaborator.getName());
         }
         initializeCollaboratorsList();
 
@@ -77,10 +81,12 @@ public class ChooseCollaboratorController {
 
 
                         //BUTTON Validate
-                        Button btnValidate = new Button("V");
+                        Button btnValidate = new Button("C'est moi !");
                         btnValidate.setOnAction(event -> {
                             collaborator.setUser(UserFacade.getInstance().getConnectedUser());
                             CollaboratorFacade.getInstance().updateCollaborator(collaborator);
+                            onClickButtonToHomePage(event);
+                            NotificationFacade.getInstance().deleteNotification(NotificationFacade.getInstance().getNotification());
                         });
                         root.getChildren().addAll(btnValidate);
 

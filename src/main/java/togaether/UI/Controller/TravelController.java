@@ -3,6 +3,7 @@ package togaether.UI.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -60,10 +61,12 @@ public class TravelController {
         try {
             travelFacade.setCollaborator(collaboratorFacade.findCollaboratorByUserAndTravel(userFacade.getConnectedUser(), travelFacade.getTravel()));
             travelFacade.setCollaborators(collaboratorFacade.findCollaboratorByTravel(travelFacade.getTravel()));
+            System.out.println(travelFacade.getCollaborator().getUser().getPseudo());
+            System.out.println("p");
         } catch (Exception e) {
-            System.out.println("Attention : Le voyage n'a pas pu être trouvé, veuillez réessayer");
-            this.labelError.setText("Attention : Le voyage n'a pas pu être trouvé, veuillez réessayer");
-            throw new RuntimeException(e);
+            //System.out.println("Attention : Le voyage n'a pas pu être trouvé, veuillez réessayer");
+            //this.labelError.setText("Attention : Le voyage n'a pas pu être trouvé, veuillez réessayer");
+            SceneController.getInstance().switchToChooseCollaborator();
         }
         initializeInfo();
     }
@@ -121,7 +124,7 @@ public class TravelController {
 
     public void showActivity(ActionEvent event){
         //TO DO return activity
-        System.exit(1);
+        SceneController.getInstance().switchToActivity(event);
     }
 
     public void showChat(ActionEvent event){

@@ -43,6 +43,10 @@ public class App extends Application {
     stage.show();
   }
 
+  public Parent getRoot() {
+    return root;
+  }
+
   public static void main(String[] args) {
     App.instance = new App();
     launch();
