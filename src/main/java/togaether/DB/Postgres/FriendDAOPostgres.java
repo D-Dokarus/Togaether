@@ -64,7 +64,7 @@ public class FriendDAOPostgres implements FriendDAO {
     public List<Friend> findAllFriends(User user) throws SQLException {
         List<Friend> friends = new ArrayList<>();
         try(Connection connection = this.postgres.getConnection()){
-            String query = "SELECT u1.user_id as u1_id, u2.user_id as u2_id, u1.user_name as u1_name, u2.user_name as u2_name, u1.user_surname as u1_surname, u2.user_surname as u2_surname, u1.user_pseudo as u1_pseudo, u2.user_pseudo as u2_pseudo, beginning_of_friendship FROM friend, public.user as u1, public.user as u2 WHERE u1.user_id = friend.user_id_1 AND u2.user_id = friend.user_id_2 AND (u1.user_id = ? OR u2.user_id = ?)";
+            String query = "SELECT u1.user_id as u1_id, u2.user_id as u2_id, u1.user_name as u1_name, u2.user_name as u2_name, u1.user_surname as u1_surname, u2.user_surname as u2_surname, u1.user_pseudo as u1_pseudo, u2.user_pseudo as u2_pseudo,u1.user_country as u1_country,u2.user_country as u2_country, beginning_of_friendship FROM friend, public.user as u1, public.user as u2 WHERE u1.user_id = friend.user_id_1 AND u2.user_id = friend.user_id_2 AND (u1.user_id = ? OR u2.user_id = ?)";
             try(PreparedStatement statement = connection.prepareStatement(query)){
                 statement.setInt(1,user.getId());
                 statement.setInt(2,user.getId());
@@ -72,8 +72,8 @@ public class FriendDAOPostgres implements FriendDAO {
                 ResultSet result = statement.getResultSet();
 
                 while(result.next()){
-                    User u1 = new User(result.getInt("u1_id"),result.getString("u1_name"),result.getString("u1_surname"),result.getString("u1_pseudo"));
-                    User u2 = new User(result.getInt("u2_id"),result.getString("u2_name"),result.getString("u2_surname"),result.getString("u2_pseudo"));
+                    User u1 = new User(result.getInt("u1_id"),result.getString("u1_name"),result.getString("u1_surname"),result.getString("u1_pseudo"),result.getString("u1_country"));
+                    User u2 = new User(result.getInt("u2_id"),result.getString("u2_name"),result.getString("u2_surname"),result.getString("u2_pseudo"),result.getString("u2_country"));
                     Friend friend = new Friend(u1,u2,result.getDate("beginning_of_friendship"));
                     friends.add(friend);
                 }
@@ -106,6 +106,28 @@ public class FriendDAOPostgres implements FriendDAO {
                 statement.executeUpdate();
             }
         }
+    }
+    public List<Friend> findAllFriendsByPseudo(User user, String string) throws SQLException{
+        List<Friend> friends = new ArrayList<>();
+        try(Connection connection = this.postgres.getConnection()){
+            String query = "SELECT u1.user_id as u1_id, u2.user_id as u2_id, u1.user_name as u1_name, u2.user_name as u2_name, u1.user_surname as u1_surname, u2.user_surname as u2_surname, u1.user_pseudo as u1_pseudo, u2.user_pseudo as u2_pseudo, u1.user_country as u2_country,u1.user_country as u1_country, beginning_of_friendship FROM friend, public.user as u1, public.user as u2 WHERE u1.user_id = friend.user_id_1 AND u2.user_id = friend.user_id_2 AND ((u1.user_id = ? AND u2.user_pseudo like ?) OR (u2.user_id = ? AND u1.user_pseudo like ?));";
+            try(PreparedStatement statement = connection.prepareStatement(query)){
+                statement.setInt(1,user.getId());
+                statement.setString(2,string);
+                statement.setInt(3,user.getId());
+                statement.setString(4,string);
+                statement.executeQuery();
+                ResultSet result = statement.getResultSet();
+
+                while(result.next()){
+                    User u1 = new User(result.getInt("u1_id"),result.getString("u1_name"),result.getString("u1_surname"),result.getString("u1_pseudo"),result.getString("u1_country"));
+                    User u2 = new User(result.getInt("u2_id"),result.getString("u2_name"),result.getString("u2_surname"),result.getString("u2_pseudo"),result.getString("u2_country"));
+                    Friend friend = new Friend(u1,u2,result.getDate("beginning_of_friendship"));
+                    friends.add(friend);
+                }
+            }
+        }
+        return friends;
     }
 
     public static void main(String args[]){

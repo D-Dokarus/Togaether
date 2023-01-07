@@ -71,7 +71,7 @@ public class SceneController {
     App.getInstance().switchScene("ModifyExpense", (Stage)((Node)event.getSource()).getScene().getWindow());
   }
   public void switchToFriend(ActionEvent event) {
-    App.getInstance().switchScene("Friend", (Stage)((Node)event.getSource()).getScene().getWindow());
+    App.getInstance().switchScene("Friends", (Stage)((Node)event.getSource()).getScene().getWindow());
   }
   public void switchToArchiveTravel(ActionEvent event) {
     App.getInstance().switchScene("ArchiveTravel", (Stage)((Node)event.getSource()).getScene().getWindow());

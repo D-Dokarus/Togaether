@@ -179,9 +179,6 @@ public class FriendsController {
         if(user_name.length() >= 3 && !user_name.isBlank()){
             String test = "%"+user_name+"%";
             users = UserFacade.getInstance().findAllUsersByPseudo(test);
-            for(User user : users){
-                System.out.println(user.getPseudo());
-            }
             initializeUsersList();
         }
     }

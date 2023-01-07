@@ -111,7 +111,7 @@ public class UserDAOPostgres implements UserDAO {
                 try (ResultSet resultSet = statement.executeQuery()) {
                     ArrayList<User> users = new ArrayList<>();
                     while (resultSet.next())
-                        u = new User(resultSet.getInt("user_id"), resultSet.getString("user_name"), resultSet.getString("user_email"), resultSet.getString("user_password"));
+                        u = new User(resultSet.getInt("user_id"), resultSet.getString("user_name"), resultSet.getString("user_surname"), resultSet.getString("user_pseudo"), resultSet.getString("user_email"), resultSet.getString("user_password"),resultSet.getString("user_country"),String.valueOf(resultSet.getTimestamp("user_createDate")),resultSet.getBoolean("user_isAdmin"));
                 }
             }
         }
@@ -253,6 +253,22 @@ public class UserDAOPostgres implements UserDAO {
                 statement.executeUpdate();
             }
         }
+    }
+
+    @Override
+    public List<User> findAllUsersByPseudo(String string) throws SQLException{
+        ArrayList<User> users = new ArrayList<>();
+        try (Connection connection = this.postgres.getConnection()) {
+            String query = "SELECT * FROM public.user WHERE user_pseudo like ?";
+            try (PreparedStatement statement = connection.prepareStatement(query);) {
+                statement.setString(1,string);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while (resultSet.next())
+                        users.add(new User(resultSet.getInt("user_id"), resultSet.getString("user_name"), resultSet.getString("user_surname"), resultSet.getString("user_pseudo"),resultSet.getString("user_country")));
+                }
+            }
+        }
+        return users;
     }
 
 

@@ -13,4 +13,6 @@ public interface FriendDAO {
     public List<Friend> findAllFriends(User user) throws SQLException;
     public void deleteFriend(Friend friend) throws SQLException;
     public void deleteAllFriends(User user) throws SQLException;
+
+    public List<Friend> findAllFriendsByPseudo(User user, String string) throws SQLException;
 }

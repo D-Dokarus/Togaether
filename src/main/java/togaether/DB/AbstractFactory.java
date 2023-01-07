@@ -41,7 +41,9 @@ public abstract class AbstractFactory {
      */
     abstract public ActivityDAO getActivityDAO();
     abstract public FriendDAO getFriendDAO();
-  abstract public ItineraryDAO getItinirerary();
+   abstract public ItineraryDAO getItinerary();
+   abstract public ExpenseDAO getExpenseDAO();
+
 
   /**
    * Retourne l'instance de la classe implémentant AbstractFactory

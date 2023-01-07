@@ -15,7 +15,7 @@ public class User {
     private String password;
     private String country;
     private String dateCreation;
-    private Boolean isAdmin = true;
+    private Boolean isAdmin;
 
 
     public User(int id, String name, String surname, String pseudo, String email, String password, String country, String dateCreation) {
@@ -75,6 +75,26 @@ public class User {
         LocalDateTime t = LocalDateTime.now();
         String date = t.getDayOfMonth() + "/" + t.getMonthValue() + "/" + t.getYear();
         return date;
+    }
+
+    public User(int id, String name, String surname, String pseudo, String country) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.pseudo = pseudo;
+        this.country = country;
+    }
+
+    public User(int id, String name, String surname, String pseudo, String email, String password, String country, String dateCreation, Boolean isAdmin) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.pseudo = pseudo;
+        this.email = email;
+        this.password = password;
+        this.country = country;
+        this.dateCreation = dateCreation;
+        this.isAdmin = isAdmin;
     }
 
     public int getId() {
