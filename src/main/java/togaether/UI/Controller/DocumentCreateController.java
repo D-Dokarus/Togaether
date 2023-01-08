@@ -70,30 +70,39 @@ public class DocumentCreateController {
             documentFacade.createDocument(document);
             SceneController.getInstance().switchToDocument(event);
         } catch (Exception e) {
-            this.labelError.setText("Problème lors de la création du document, veuillez réessayer");
+            this.labelError.setText("Problème lors de la création du document,\n veuillez réessayer (Possible que le document existe déjà\n ou que le nom du document soit trop long).");
 
         };
+    }
+
+    private static double getFileSizeMegaBytes(File file) {
+        return file.length() / (1024 * 1024);
     }
 
     public void onBrowseButtonClicked(ActionEvent event) throws FileNotFoundException {
         JFileChooser chooser = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                "JPG, PNG & PDF Images", "jpg", "png", "pdf");
+                "JPG, JPEG, PNG & PDF", "jpg", "png", "pdf", "jpeg");
         chooser.setFileFilter(filter);
         int returnVal = chooser.showOpenDialog(null);
         if(returnVal == JFileChooser.APPROVE_OPTION) {
             file = chooser.getSelectedFile();
-            path = file.getAbsolutePath();
-            pathDocument.setText(file.getAbsolutePath());
-            fname = file.getName();
-            s = (int) file.length();
-            data = new byte[s];
-            fis = new FileInputStream(file);
-            try {
-                fis.read(data);
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (getFileSizeMegaBytes(file) < 1 ){
+                path = file.getAbsolutePath();
+                pathDocument.setText(file.getAbsolutePath());
+                fname = file.getName();
+                s = (int) file.length();
+                data = new byte[s];
+                fis = new FileInputStream(file);
+                try {
+                    fis.read(data);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                this.labelError.setText("Document trop volumineux, veuillez réessayer");
             }
+
         }
     }
 

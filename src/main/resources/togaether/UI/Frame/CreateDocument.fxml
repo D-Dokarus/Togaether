@@ -10,9 +10,9 @@
    <children>
       <Button fx:id="returnButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onReturnButtonClicked" text="Annuler" />
       <TextArea fx:id="pathDocument" layoutX="27.0" layoutY="64.0" prefHeight="38.0" prefWidth="261.0" promptText="Chemin du document *" />
-      <Button fx:id="browseButton" onAction="#onBrowseButtonClicked" layoutX="310.0" layoutY="71.0" mnemonicParsing="false" text="Ouvrir..." />
+      <Button fx:id="browseButton" layoutX="310.0" layoutY="71.0" mnemonicParsing="false" onAction="#onBrowseButtonClicked" text="Ouvrir..." />
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="58.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="labelError" layoutX="274.0" layoutY="248.0" prefHeight="96.0" prefWidth="308.0" textFill="RED" />
+      <Label fx:id="labelError" layoutX="112.0" layoutY="216.0" prefHeight="119.0" prefWidth="397.0" textFill="RED" />
       <Button fx:id="confirmedButton" layoutX="442.0" layoutY="352.0" mnemonicParsing="false" onAction="#onConfirmedButtonClicked" text="Envoyer" />
    </children>
 </AnchorPane>
