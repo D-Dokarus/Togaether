@@ -11,6 +11,7 @@ import togaether.BL.Model.*;
 import togaether.UI.SceneController;
 
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -51,8 +52,8 @@ public class ExpenseController {
           totalUser += expense.getValue();
         }
       }
-        totalTravelLabel.setText(String.valueOf(totalTravel));
-        totalUserLabel.setText(String.valueOf(totalUser));
+        totalTravelLabel.setText(new DecimalFormat("##.##").format(totalTravel));
+        totalUserLabel.setText(new DecimalFormat("##.##").format(totalUser));
     } catch (SQLException e) {
       System.out.println("Erreur lors de la récupération des Dépenses : "+e);
     }
@@ -62,9 +63,8 @@ public class ExpenseController {
     idNameCollaborators = tempCollaborators.stream().collect(Collectors.toMap(Collaborator::getId, Collaborator::getName));
 
     ObservableList<Expense> observableExpense = FXCollections.observableArrayList();
-    for(Expense expense : expensesTravel){
-      observableExpense.add(expense);
-    }
+    observableExpense.addAll(expensesTravel);
+
     this.expenseList.setCellFactory(param -> new ListCell<>() {
       @Override
       protected void updateItem(Expense expense, boolean empty) {

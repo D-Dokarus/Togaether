@@ -11,6 +11,7 @@ import togaether.DB.TrophyDAO;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ExpenseFacade {
@@ -56,10 +57,10 @@ public class ExpenseFacade {
     ExpenseDAO expenseDB = abstractFactory.getExpenseDAO();
     return expenseDB.findExpensesByUserId(user_id);
   }
-  public List<Expense> findExpensesByCollaboratorId() throws SQLException {
+  public List<Expense> findExpensesByCollaboratorId(int collaborator_id) throws SQLException {
     AbstractFactory abstractFactory = AbstractFactory.createInstance();
     ExpenseDAO expenseDB = abstractFactory.getExpenseDAO();
-    return expenseDB.findExpensesByUserId(TravelFacade.getInstance().getCollaborator().getId());
+    return expenseDB.findExpensesByCollaboratorId(collaborator_id);
   }
   public List<ExpenseCategory> findAllCategories() throws SQLException {
     AbstractFactory abstractFactory = AbstractFactory.createInstance();
@@ -80,6 +81,24 @@ public class ExpenseFacade {
     AbstractFactory abstractFactory = AbstractFactory.createInstance();
     ExpenseDAO expenseDB = abstractFactory.getExpenseDAO();
     expenseDB.deleteParticipant(expense_id, collaborator_id);
+  }
+  public double getSumExpenseToPaidByCollaboratorId(int collaborator_id) throws SQLException {
+    AbstractFactory abstractFactory = AbstractFactory.createInstance();
+    ExpenseDAO expenseDB = abstractFactory.getExpenseDAO();
+    return expenseDB.calcAmountByCollaboratorId(collaborator_id);
+  }
+  public double getSumExpenseToPaidByCollaboratorIdAndCategoryId(int collaborator_id, int category_id) throws SQLException {
+    AbstractFactory abstractFactory = AbstractFactory.createInstance();
+    ExpenseDAO expenseDB = abstractFactory.getExpenseDAO();
+    return expenseDB.calcAmountByCollaboratorIdAndCategoryExpense(collaborator_id, category_id);
+  }
+  public double getSumExpenseToGainByCollaboratorId(int collaborator_id) throws SQLException {
+    ArrayList<Expense> expenses = (ArrayList<Expense>) findExpensesByCollaboratorId(collaborator_id);
+    double sum = 0.0;
+    for (Expense expense: expenses) {
+      sum += expense.getValue();
+    }
+    return sum;
   }
 
   public String nameToFrench(String name) {

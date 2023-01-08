@@ -66,6 +66,7 @@ public class Collaborator {
   }
   @Override
   public boolean equals(Object o) {
+    if (o == null) return false;
     return this.id == ((Collaborator)o).getId();
   }
 }
