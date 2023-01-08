@@ -61,8 +61,6 @@ public class TravelController {
         try {
             travelFacade.setCollaborator(collaboratorFacade.findCollaboratorByUserAndTravel(userFacade.getConnectedUser(), travelFacade.getTravel()));
             travelFacade.setCollaborators(collaboratorFacade.findCollaboratorByTravel(travelFacade.getTravel()));
-            System.out.println(travelFacade.getCollaborator().getUser().getPseudo());
-            System.out.println("p");
         } catch (Exception e) {
             //System.out.println("Attention : Le voyage n'a pas pu être trouvé, veuillez réessayer");
             //this.labelError.setText("Attention : Le voyage n'a pas pu être trouvé, veuillez réessayer");

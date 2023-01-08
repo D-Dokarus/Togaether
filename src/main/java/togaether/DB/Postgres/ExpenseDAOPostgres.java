@@ -128,11 +128,10 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
         statement.setInt(1, collaborator_id);
         try (ResultSet resultSet = statement.executeQuery()) {
           while (resultSet.next()) {
-            count = resultSet.getInt(1);}
+            count = resultSet.getDouble(1);}
         }
       }
     }
-
     return count;
   }
 
@@ -150,7 +149,7 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
         statement.setInt(2, category_id);
         try (ResultSet resultSet = statement.executeQuery()) {
           while (resultSet.next()) {
-            count = resultSet.getInt(1);}
+            count = resultSet.getDouble(1);}
         }
       }
     }
@@ -176,6 +175,7 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
     return liste;
   }
 
+  @Override
   public List<Expense> findExpensesByCollaboratorId(int collaborator_id) throws SQLException {
     ArrayList<Expense> liste = new ArrayList<>();
     try (Connection connection = this.postgres.getConnection()){
