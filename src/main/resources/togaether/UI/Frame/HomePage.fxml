@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="togaether.UI.Controller.HomePageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="togaether.UI.Controller.HomePageController">
    <children>
       <Button fx:id="settingsButton" layoutX="438.0" layoutY="19.0" mnemonicParsing="false" onAction="#onSettingsButtonClicked" prefHeight="33.0" prefWidth="103.0" text="Paramètres">
          <font>
@@ -28,10 +28,6 @@
             <Font name="Garamond" size="25.0" />
          </font>
       </Label>
-      <Label layoutX="34.0" layoutY="99.0" prefHeight="17.0" prefWidth="37.0" text="Date">
-         <font>
-            <Font name="Garamond" size="14.0" />
-         </font></Label>
       <Button fx:id="friendsButton" layoutX="217.0" layoutY="19.0" mnemonicParsing="false" onAction="#onFriendsButtonClicked" prefHeight="33.0" prefWidth="103.0" text="Amis">
          <font>
             <Font name="Garamond" size="14.0" />
@@ -46,12 +42,7 @@
             <Font name="Garamond" size="14.0" />
          </font>
       </TextField>
-      <Label layoutX="211.0" layoutY="99.0" prefHeight="17.0" prefWidth="72.0" text="Description">
-         <font>
-            <Font name="Garamond" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="106.0" layoutY="95.0" prefHeight="25.0" prefWidth="46.0" text="Titre">
+      <Label layoutX="69.0" layoutY="97.0" prefHeight="25.0" prefWidth="46.0" text="Titre">
          <font>
             <Font name="Garamond" size="18.0" />
          </font>
