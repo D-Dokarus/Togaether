@@ -69,17 +69,17 @@ public class TravelController {
         initializeInfo();
     }
 
-    public void initializeInfo(){
+    public void initializeInfo() {
         TravelFacade travelFacade = TravelFacade.getInstance();
         Travel travel = travelFacade.getTravel();
         String dateString = "";
-        if(travel.getDateStart()!=null){
+        if (travel.getDateStart() != null) {
             dateString = travel.getDateStart().toString();
         } else {
             dateString = "Date de début indéfini";
         }
         dateString += " - ";
-        if(travel.getDateEnd()!=null){
+        if (travel.getDateEnd() != null) {
             dateString += travel.getDateEnd().toString();
         } else {
             dateString += "Date de fin indéfini";
@@ -87,7 +87,7 @@ public class TravelController {
         this.dateTravel.setText(dateString);
         this.nameTravel.setText(travel.getNameTravel());
         this.descriptionTravel.setText(travel.getDescriptionTravel());
-        this.collaborator.setText("Collaborateurs :\n"+travel.getOwner().getName());
+        this.collaborator.setText("Collaborateurs :\n" + travel.getOwner().getName());
     }
 
     public void onReturnButtonClicked(ActionEvent event) {
@@ -97,35 +97,34 @@ public class TravelController {
         SceneController.getInstance().switchToHomePage(event);
     }
 
-    public void editBudget(ActionEvent event){
+    public void editBudget(ActionEvent event) {
         //TO DO return budget
         System.exit(1);
     }
 
-    public void showExpense(ActionEvent event){
+    public void showExpense(ActionEvent event) {
         SceneController.getInstance().switchToExpense(event);
     }
 
-    public void showCollaborator(ActionEvent event){
+    public void showCollaborator(ActionEvent event) {
         SceneController.getInstance().switchToCollaborator(event);
     }
 
-    public void showItinerary(ActionEvent event){
+    public void showItinerary(ActionEvent event) {
         //TO DO return itinerary
         System.exit(1);
     }
 
-    public void showDocument(ActionEvent event){
-        //TO DO return document
-        System.exit(1);
+    public void showDocument(ActionEvent event) {
+        SceneController.getInstance().switchToDocument(event);
     }
 
-    public void showActivity(ActionEvent event){
+    public void showActivity(ActionEvent event) {
         //TO DO return activity
         SceneController.getInstance().switchToActivity(event);
     }
 
-    public void showChat(ActionEvent event){
+    public void showChat(ActionEvent event) {
         SceneController.getInstance().switchToChat(event);
     }
 

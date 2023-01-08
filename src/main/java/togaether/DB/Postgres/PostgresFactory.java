@@ -42,6 +42,9 @@ public class PostgresFactory extends AbstractFactory {
   @Override
   public ExpenseDAO getExpenseDAO(){return new ExpenseDAOPostgres(this);}
 
+  @Override
+  public DocumentDAO getDocumentDAO(){return new DocumentDAOPostgres(this);}
+
   public Connection getConnection() throws SQLException {
     return this.connection.getConnection();
   }

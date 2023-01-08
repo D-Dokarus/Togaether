@@ -2,7 +2,6 @@ package togaether.BL.Facade;
 
 
 import togaether.BL.Model.Activity;
-import togaether.BL.Model.Travel;
 import togaether.BL.TogaetherException.DBNotFoundException;
 import togaether.DB.*;
 

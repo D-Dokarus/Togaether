@@ -94,6 +94,14 @@ public class SceneController {
     App.getInstance().switchScene("Activity", (Stage)((Node)event.getSource()).getScene().getWindow());
   }
 
+  public void switchToDocument(ActionEvent event) {
+    App.getInstance().switchScene("Document", (Stage)((Node)event.getSource()).getScene().getWindow());
+  }
+
+  public void switchToCreateDocument(ActionEvent event) {
+    App.getInstance().switchScene("CreateDocument", (Stage)((Node)event.getSource()).getScene().getWindow());
+  }
+
   public void newPopupNotification(ActionEvent event){
     Parent root;
     try {

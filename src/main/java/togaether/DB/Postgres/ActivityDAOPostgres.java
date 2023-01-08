@@ -1,9 +1,6 @@
 package togaether.DB.Postgres;
 
-import togaether.BL.Model.Travel;
-import togaether.BL.Model.User;
 import togaether.BL.Model.Activity;
-import togaether.DB.TravelDAO;
 import togaether.DB.ActivityDAO;
 
 
