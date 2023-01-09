@@ -97,6 +97,10 @@ public class TravelController {
         SceneController.getInstance().switchToHomePage(event);
     }
 
+    public void onUpdateTravelButtonClicked(ActionEvent event) {
+        SceneController.getInstance().switchToUpdateTravel(event);
+    }
+
     public void editBudget(ActionEvent event) {
         //TO DO return budget
         System.exit(1);

@@ -39,11 +39,24 @@ public abstract class AbstractFactory {
    * @return FriendDAO
    */
   abstract public FriendDAO getFriendDAO();
+
+  /**
+   * Retourne un DAO de Activity
+   * @return ActivityDAO
+   */
+  abstract public ActivityDAO getActivityDAO();
+
   /**
    * Retourne un DAO de Itinerary
    * @return ItineraryDAO
    */
   abstract public ItineraryDAO getItinerary();
+
+  /**
+   * Retourne un DAO de Friend
+   * @return FriendDAO
+   */
+  abstract public ExpenseDAO getExpenseDAO();
 
     /**
      * Retourne un DAO de Document

@@ -6,25 +6,25 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="togaether.UI.Controller.TravelController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="togaether.UI.Controller.TravelController">
    <children>
       <Button fx:id="returnButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onReturnButtonClicked" text="Retour" />
       <Button fx:id="showActivity" layoutX="346.0" layoutY="96.0" mnemonicParsing="false" onAction="#showActivity" prefHeight="33.0" prefWidth="140.0" text="Voir les activités" />
-      <Button fx:id="editBudget" layoutX="132.0" layoutY="236.0" mnemonicParsing="false" onAction="#editBudget" text="Modifier Budget" />
+      <Button fx:id="editBudget" layoutX="132.0" layoutY="254.0" mnemonicParsing="false" onAction="#editBudget" text="Modifier Budget" />
       <Button fx:id="showExpense" layoutX="69.0" layoutY="293.0" mnemonicParsing="false" onAction="#showExpense" prefHeight="33.0" prefWidth="103.0" text="Voir dépenses" />
       <Label fx:id="labelError" layoutX="102.0" layoutY="18.0" textFill="RED" />
-      <Label fx:id="nameTravel" layoutX="52.0" layoutY="57.0" text="Nom">
+      <Label fx:id="nameTravel" layoutX="52.0" layoutY="57.0" prefHeight="21.0" prefWidth="239.0" text="Nom">
          <font>
             <Font name="System Bold Italic" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="dateTravel" layoutX="54.0" layoutY="78.0" prefHeight="17.0" prefWidth="175.0" text="date">
+      <Label fx:id="dateTravel" layoutX="54.0" layoutY="78.0" prefHeight="17.0" prefWidth="239.0" text="date">
          <font>
             <Font name="System Italic" size="11.0" />
          </font></Label>
       <Text fx:id="descriptionTravel" layoutX="52.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" wrappingWidth="262.13671875" />
       <Text fx:id="collaborator" layoutX="52.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Collaborateurs" wrappingWidth="262.13671875" />
-      <Text layoutX="151.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Budget prev" />
+      <Text layoutX="151.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Budget prev" />
       <Button fx:id="showCollaborator" layoutX="195.0" layoutY="293.0" mnemonicParsing="false" onAction="#showCollaborator" prefHeight="33.0" prefWidth="103.0" text="Collaborateurs" />
       <Button fx:id="showDocument" layoutX="134.0" layoutY="336.0" mnemonicParsing="false" onAction="#showDocument" prefHeight="33.0" prefWidth="103.0" text="Documents" />
       <Text fx:id="textActivity" layoutX="346.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dernière activité" wrappingWidth="239.13671875" />
@@ -32,5 +32,10 @@
       <Text fx:id="textItinerary" layoutX="346.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dernier itinéraire" wrappingWidth="239.13671875" />
       <Button fx:id="showChat" layoutX="346.0" layoutY="333.0" mnemonicParsing="false" onAction="#showChat" prefHeight="33.0" prefWidth="103.0" text="Voir le chat" />
       <Text fx:id="textChat" layoutX="346.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dernier message" wrappingWidth="239.13671875" />
+      <Button fx:id="updateTravel" layoutX="121.0" layoutY="184.0" mnemonicParsing="false" onAction="#onUpdateTravelButtonClicked" prefHeight="33.0" prefWidth="124.0" text="Modifier voyage 🖋">
+         <font>
+            <Font name="Garamond" size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

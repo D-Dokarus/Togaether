@@ -97,11 +97,10 @@ public class TravelUpdateController {
     }
 
     public void onReturnButtonClicked(ActionEvent event) {
-        SceneController.getInstance().switchToHomePage(event);
+        SceneController.getInstance().switchToTravel(event);
     }
-
     public void onCancelButtonClicked(ActionEvent event) {
-        SceneController.getInstance().switchToHomePage(event);
+        SceneController.getInstance().switchToTravel(event);
     }
 
     public void onConfirmedButtonClicked(ActionEvent event) {
