@@ -1,12 +1,14 @@
 package togaether.BL.Facade;
 
 import togaether.BL.Model.Collaborator;
+import togaether.BL.Model.Itinerary;
 import togaether.BL.Model.Travel;
 import togaether.BL.TogaetherException.DBNotFoundException;
 import togaether.DB.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class TravelFacade {
@@ -16,6 +18,8 @@ public class TravelFacade {
     private Collaborator collaborator = null;
 
     private List<Collaborator> collaborators = null;
+
+    private LinkedList<Itinerary> itineraries = new LinkedList<Itinerary>();
 
     static private TravelFacade instance = new TravelFacade();
 
@@ -47,6 +51,13 @@ public class TravelFacade {
         this.collaborators = collaborators;
     }
 
+    public LinkedList<Itinerary> getItineraries() {
+        return itineraries;
+    }
+
+    public void setItineraries(LinkedList<Itinerary> itineraries) {
+        this.itineraries = itineraries;
+    }
     /**
      * Query the archiving of the actual travel in DB
      */
@@ -173,5 +184,54 @@ public class TravelFacade {
             liste = (ArrayList<Travel>) travelDB.findTravelsByUserId(id);
         } catch (SQLException e) {}
         return liste;
+    }
+
+    public LinkedList<Itinerary> findItineraries(int id){
+        ArrayList<Itinerary> list = new ArrayList<Itinerary>();
+        AbstractFactory fact = AbstractFactory.createInstance();
+        ItineraryDAO itineraryDAO = fact.getItinerary();
+        this.itineraries.clear();
+        try {
+            list.addAll(itineraryDAO.findItinerariesByTravelId(id));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        if(list.size()!=0){
+            int i = 0;
+            boolean found = false;
+            int searchItinerary = 0;
+            while(!found){
+                if(list.get(i).getIndexBefore()==-1){ // First indexBefore element of the linkedlist in DB have the value -1
+                    this.itineraries.addFirst(list.get(i));
+                    searchItinerary = list.get(i).getIndexAfter();
+                    list.remove(i);
+                    found = true;
+                }
+                i++;
+            }
+            if(searchItinerary==-1){// Last indexAfter element of the linkedlist in DB have the value -1
+                return this.itineraries;
+            }else {
+                found = false;
+                i = 0;
+                while(list.size() > 0){
+                    while(!found){
+                        if(list.get(i).getItinerary_id()==searchItinerary){
+                            this.itineraries.addLast(list.get(i));
+                            if((list.size()-1)>0){
+                                searchItinerary = list.get(i).getIndexAfter();
+                            }
+                            list.remove(i);
+                            found = true;
+                        }
+                        i++;
+                    }
+                    found = false;
+                    i = 0;
+                }
+            }
+        }
+
+        return this.itineraries;
     }
 }

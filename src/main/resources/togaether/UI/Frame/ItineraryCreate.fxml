@@ -23,49 +23,50 @@
             <Font name="Garamond" size="14.0" />
          </font>
       </Button>
-      <TextArea fx:id="nameItinerary" layoutX="39.0" layoutY="112.0" prefHeight="38.0" prefWidth="261.0" promptText="Nom" />
-      <TextArea fx:id="descriptionItinerary" layoutX="39.0" layoutY="166.0" prefHeight="136.0" prefWidth="260.0" promptText="Description" />
-      <ChoiceBox fx:id="selectCategory" layoutX="368.0" layoutY="239.0" prefWidth="150.0" />
+      <TextArea fx:id="nameItinerary" layoutX="39.0" layoutY="112.0" prefHeight="38.0" prefWidth="261.0" promptText="Nom*" />
+      <TextArea fx:id="descriptionItinerary" layoutX="39.0" layoutY="166.0" prefHeight="136.0" prefWidth="260.0" promptText="Description*" />
+      <ChoiceBox fx:id="selectCategory" layoutX="345.0" layoutY="226.0" onAction="#onTypeCatSelected" prefHeight="38.0" prefWidth="227.0" />
       <DatePicker fx:id="dateItinerary" layoutX="345.0" layoutY="112.0" prefHeight="38.0" prefWidth="227.0" promptText="Date" />
       <Pane layoutX="316.0" layoutY="276.0" prefHeight="71.0" prefWidth="268.0">
          <children>
-            <RadioButton fx:id="CatTransportCar" layoutX="9.0" layoutY="13.0" mnemonicParsing="false" onAction="#onCatTransportButtonClicked" text="Voiture 🚗">
+            <RadioButton fx:id="CatTransportCar" layoutX="9.0" layoutY="13.0" mnemonicParsing="false" text="Voiture 🚗">
                <font>
                   <Font name="Garamond" size="14.0" />
                </font>
             </RadioButton>
-            <RadioButton fx:id="CatTransportPlane" layoutX="99.0" layoutY="13.0" mnemonicParsing="false" onAction="#onCatTransportButtonClicked" text="Avion ✈">
+            <RadioButton fx:id="CatTransportPlane" layoutX="99.0" layoutY="13.0" mnemonicParsing="false" text="Avion ✈">
                <font>
                   <Font name="Garamond" size="14.0" />
                </font>
             </RadioButton>
-            <RadioButton fx:id="CatTransportBus" layoutX="10.0" layoutY="40.0" mnemonicParsing="false" onAction="#onCatTransportButtonClicked" text="Bus 🚌">
+            <RadioButton fx:id="CatTransportBus" layoutX="10.0" layoutY="40.0" mnemonicParsing="false" text="Bus 🚌">
                <font>
                   <Font name="Garamond" size="14.0" />
                </font>
             </RadioButton>
-            <RadioButton fx:id="CatTransportTrain" layoutX="185.0" layoutY="13.0" mnemonicParsing="false" onAction="#onCatTransportButtonClicked" text="Train 🚂">
+            <RadioButton fx:id="CatTransportTrain" layoutX="185.0" layoutY="13.0" mnemonicParsing="false" text="Train 🚂">
                <font>
                   <Font name="Garamond" size="14.0" />
                </font>
             </RadioButton>
-            <RadioButton fx:id="CatTransportBoat" layoutX="99.0" layoutY="40.0" mnemonicParsing="false" onAction="#onCatTransportButtonClicked" text="Bateau ⛵">
+            <RadioButton fx:id="CatTransportBoat" layoutX="99.0" layoutY="40.0" mnemonicParsing="false" text="Bateau ⛵">
                <font>
                   <Font name="Garamond" size="14.0" />
                </font>
             </RadioButton>
-            <RadioButton fx:id="CatTransportWalk" layoutX="184.0" layoutY="40.0" mnemonicParsing="false" onAction="#onCatTransportButtonClicked" text="Pied 🚶">
+            <RadioButton fx:id="CatTransportWalk" layoutX="184.0" layoutY="40.0" mnemonicParsing="false" text="Pied 🚶">
                <font>
                   <Font name="Garamond" size="14.0" />
                </font>
             </RadioButton>
          </children>
       </Pane>
-      <DatePicker fx:id="timeItinerary" layoutX="345.0" layoutY="162.0" prefHeight="38.0" prefWidth="227.0" promptText="Heure" />
       <Button fx:id="confirmedButton" layoutX="262.0" layoutY="351.0" mnemonicParsing="false" onAction="#onConfirmedButtonClicked" prefHeight="33.0" prefWidth="76.0" text="Confirmer">
          <font>
             <Font name="Garamond" size="14.0" />
          </font>
       </Button>
+      <TextArea fx:id="hourItinerary" layoutX="345.0" layoutY="162.0" prefHeight="38.0" prefWidth="227.0" promptText="Heure (format 00:00)" />
+      <Label fx:id="labelErrorHour" alignment="CENTER" layoutX="345.0" layoutY="202.0" prefHeight="17.0" prefWidth="227.0" textFill="RED" />
    </children>
 </AnchorPane>

@@ -111,8 +111,7 @@ public class TravelController {
     }
 
     public void showItinerary(ActionEvent event) {
-        //TO DO return itinerary
-        System.exit(1);
+        SceneController.getInstance().switchToItinerary(event);
     }
 
     public void showDocument(ActionEvent event) {

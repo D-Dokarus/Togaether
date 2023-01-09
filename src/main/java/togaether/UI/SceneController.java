@@ -89,6 +89,13 @@ public class SceneController {
   public void switchToCollaborator(ActionEvent event) {
     App.getInstance().switchScene("Collaborator", (Stage)((Node)event.getSource()).getScene().getWindow());
   }
+  public void switchToItinerary(ActionEvent event) {
+    App.getInstance().switchScene("Itinerary", (Stage)((Node)event.getSource()).getScene().getWindow());
+  }
+
+  public void switchToCreateItinerary(ActionEvent event) {
+    App.getInstance().switchScene("ItineraryCreate", (Stage)((Node)event.getSource()).getScene().getWindow());
+  }
 
   public void switchToActivity(ActionEvent event) {
     App.getInstance().switchScene("Activity", (Stage)((Node)event.getSource()).getScene().getWindow());

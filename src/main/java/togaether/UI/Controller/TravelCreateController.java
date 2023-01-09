@@ -14,10 +14,7 @@ import javafx.util.Callback;
 import togaether.BL.Facade.CollaboratorFacade;
 import togaether.BL.Facade.TravelFacade;
 import togaether.BL.Facade.UserFacade;
-import togaether.BL.Model.Collaborator;
-import togaether.BL.Model.Notification;
-import togaether.BL.Model.Travel;
-import togaether.BL.Model.User;
+import togaether.BL.Model.*;
 import togaether.DB.AbstractFactory;
 import togaether.DB.CollaboratorDAO;
 import togaether.DB.Postgres.PostgresFactory;
@@ -57,6 +54,7 @@ public class TravelCreateController {
     private ListView collaboratorListView;
     List<String> collaborators = new ArrayList<>();
     ObservableList<String> observableCollaborators = FXCollections.observableArrayList();
+
 
     @FXML
     protected void initialize() {
