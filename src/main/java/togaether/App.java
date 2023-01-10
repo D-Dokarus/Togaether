@@ -21,6 +21,7 @@ public class App extends Application {
       this.root = FXMLLoader.load(LoginFrame.class.getResource("Login.fxml"));
       this.scene = new Scene(this.root);
       stage.setTitle("Togaether");
+      scene.getStylesheets().add(LoginFrame.class.getResource("application.css").toExternalForm());
       stage.setScene(this.scene);
       stage.show();
 
@@ -39,6 +40,7 @@ public class App extends Application {
       throw new RuntimeException(e);
     }
     scene = new Scene(root);
+    scene.getStylesheets().add(LoginFrame.class.getResource("application.css").toExternalForm());
     stage.setScene(scene);
     stage.show();
   }
