@@ -71,7 +71,7 @@ public interface UserDAO {
      * @param userId
      * @throws SQLException
      */
-  public void updateUser(User u, int userId) throws SQLException;
+  public void updateAccount(User u, int userId) throws SQLException;
 
   public void updateName(String name, int userId) throws SQLException;
     public void updateSurname(String surname, int userId) throws SQLException;

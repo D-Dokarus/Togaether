@@ -49,9 +49,6 @@ public class ActivityUpdateController {
     private CheckBox nonDefineEnd;
 
 
-    /**
-     * The connected Travel
-     */
     Activity activity;
 
     @FXML
@@ -71,11 +68,11 @@ public class ActivityUpdateController {
         this.priceActivity.setText(String.valueOf(this.activity.getPriceActivity()));
         this.placeActivity.setText(this.activity.getAddressActivity());
 
-        if (this.activity.getDateStart()!= null) {
+        if (this.activity.getDateStart() != null) {
             LocalDate dateLocal = Instant.ofEpochMilli(this.activity.getDateStart().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
             this.dateStart.setValue(dateLocal);
         }
-        if (this.activity.getDateEnd()!= null) {
+        if (this.activity.getDateEnd() != null) {
             LocalDate dateLocal = Instant.ofEpochMilli(this.activity.getDateEnd().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
             this.dateEnd.setValue(dateLocal);
         }

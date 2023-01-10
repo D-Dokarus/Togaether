@@ -9,11 +9,11 @@ import java.util.*;
 
 public class UserDAOPostgres implements UserDAO {
 
-  PostgresFactory postgres;
+    PostgresFactory postgres;
 
-  public UserDAOPostgres(PostgresFactory postgres) {
-    this.postgres = postgres;
-  }
+    public UserDAOPostgres(PostgresFactory postgres) {
+        this.postgres = postgres;
+    }
 
     @Override
     public void insertUser(String user_name, String user_surname, String user_pseudo, String user_country, String user_dateCreation, String user_email, String user_password) throws SQLException {
@@ -111,7 +111,7 @@ public class UserDAOPostgres implements UserDAO {
                 try (ResultSet resultSet = statement.executeQuery()) {
                     ArrayList<User> users = new ArrayList<>();
                     while (resultSet.next())
-                        u = new User(resultSet.getInt("user_id"), resultSet.getString("user_name"), resultSet.getString("user_surname"), resultSet.getString("user_pseudo"), resultSet.getString("user_email"), resultSet.getString("user_password"),resultSet.getString("user_country"),String.valueOf(resultSet.getTimestamp("user_createDate")),resultSet.getBoolean("user_isAdmin"));
+                        u = new User(resultSet.getInt("user_id"), resultSet.getString("user_name"), resultSet.getString("user_surname"), resultSet.getString("user_pseudo"), resultSet.getString("user_email"), resultSet.getString("user_password"), resultSet.getString("user_country"), String.valueOf(resultSet.getTimestamp("user_createDate")), resultSet.getBoolean("user_isAdmin"));
                 }
             }
         }
@@ -130,23 +130,23 @@ public class UserDAOPostgres implements UserDAO {
         }
     }
 
-  @Override
-  public List<User> getAll() throws SQLException {
+    @Override
+    public List<User> getAll() throws SQLException {
 
-    ArrayList<User> users = new ArrayList<>();
-    try (Connection connection = this.postgres.getConnection()) {
-      String query = "SELECT * FROM public.user";
-      try (PreparedStatement statement = connection.prepareStatement(query);) {
-        try (ResultSet resultSet = statement.executeQuery()) {
-          while (resultSet.next())
-            users.add(new User(resultSet.getInt("user_id"), resultSet.getString("user_name"), resultSet.getString("user_email"), resultSet.getString("user_password")));
+        ArrayList<User> users = new ArrayList<>();
+        try (Connection connection = this.postgres.getConnection()) {
+            String query = "SELECT * FROM public.user";
+            try (PreparedStatement statement = connection.prepareStatement(query);) {
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while (resultSet.next())
+                        users.add(new User(resultSet.getInt("user_id"), resultSet.getString("user_name"), resultSet.getString("user_email"), resultSet.getString("user_password")));
+                }
+            }
         }
-      }
+        return users;
     }
-    return users;
-  }
 
-    public void updateUser(User user, int userId) throws SQLException {
+    public void updateAccount(User user, int userId) throws SQLException {
         try (Connection connection = this.postgres.getConnection()) {
             String query = "UPDATE public.user SET user_name=?, user_email=?, user_password=?, user_surname=?, user_pseudo=?, user_country=? WHERE user_id=?;";
             try (PreparedStatement statement =
@@ -157,8 +157,6 @@ public class UserDAOPostgres implements UserDAO {
                 }
                 if (!user.getEmail().isBlank()) {
                     statement.setString(2, user.getEmail());
-                } else {
-                    statement.setString(2, null);
                 }
                 if (!user.getPassword().isBlank()) {
                     statement.setString(3, user.getPassword());
@@ -242,6 +240,7 @@ public class UserDAOPostgres implements UserDAO {
             }
         }
     }
+
     @Override
     public void updatePassword(String user_password, int user_id) throws SQLException {
         try (Connection connection = this.postgres.getConnection()) {
@@ -256,21 +255,20 @@ public class UserDAOPostgres implements UserDAO {
     }
 
     @Override
-    public List<User> findAllUsersByPseudo(String string) throws SQLException{
+    public List<User> findAllUsersByPseudo(String string) throws SQLException {
         ArrayList<User> users = new ArrayList<>();
         try (Connection connection = this.postgres.getConnection()) {
             String query = "SELECT * FROM public.user WHERE user_pseudo like ?";
             try (PreparedStatement statement = connection.prepareStatement(query);) {
-                statement.setString(1,string);
+                statement.setString(1, string);
                 try (ResultSet resultSet = statement.executeQuery()) {
                     while (resultSet.next())
-                        users.add(new User(resultSet.getInt("user_id"), resultSet.getString("user_name"), resultSet.getString("user_surname"), resultSet.getString("user_pseudo"),resultSet.getString("user_country")));
+                        users.add(new User(resultSet.getInt("user_id"), resultSet.getString("user_name"), resultSet.getString("user_surname"), resultSet.getString("user_pseudo"), resultSet.getString("user_country")));
                 }
             }
         }
         return users;
     }
-
 
 
 }

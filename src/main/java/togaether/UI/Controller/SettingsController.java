@@ -5,13 +5,16 @@ import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import togaether.BL.Facade.*;
+import togaether.BL.Facade.UserFacade;
+import togaether.BL.Model.User;
 import togaether.BL.TogaetherException.*;
 import togaether.UI.SceneController;
 
+import java.sql.SQLException;
 /**
  * Controller de l'interface graphique Login
  */
@@ -42,42 +45,57 @@ public class SettingsController {
     private Scene scene;
     @FXML
     private Parent root;
+    @FXML
+    private Label labelError;
 
-    /**
-     * Action effectuée lors d'une tentative de login
-     */
-    public void onSaveChangeButtonClick() {
+    User user;
+
+    @FXML
+    protected void initialize() {
+        // Récupérer activity connected
+        UserFacade userFacade = UserFacade.getInstance();
         try {
-            //Update if not empty
-            if(!newname.getText().isEmpty()){
-                UserFacade.getInstance().updateName(newname.getText());
-            }
-            if(!newsurname.getText().isEmpty()){
-                UserFacade.getInstance().updateSurname(newsurname.getText());
-            }
-            if(!newemail.getText().isEmpty()){
-                UserFacade.getInstance().updateEmail(newemail.getText());
-            }
-            if(!newpseudo.getText().isEmpty()){
-                UserFacade.getInstance().updatePseudo(newpseudo.getText());
-            }
-            if(!newpassword.getText().isEmpty()){
-                UserFacade.getInstance().updatePassword(newpassword.getText(), newconfirmPassword.getText());
-            }
-            if(!newcountry.getText().isEmpty()){
-                UserFacade.getInstance().updateCountry(newcountry.getText());
-            }
-            System.out.println("Update réussi");
+            this.user = userFacade.getConnectedUser();
+        } catch (Exception e) {
+            System.out.println("Attention : Aucun user connecté, veuillez réessayer");
+            //this.labelError.setText("Attention : L'activité n'a pas pu être trouvée, veuillez réessayer");
+            throw new RuntimeException(e);
+        }
+        // Remplir les champs avec les informations de l'activité
+        this.newname.setText(this.user.getName());
+        this.newsurname.setText(this.user.getSurname());
+        this.newemail.setText(this.user.getEmail());
+        this.newpseudo.setText(this.user.getPseudo());
+        this.newcountry.setText(this.user.getCountry());
+
+
+    }
+    public void onSaveChangeButtonClick() {
+
+        try {
+            UserFacade.getInstance().updateAccount(newname.getText(), newsurname.getText(), newpseudo.getText(), newemail.getText(), newpassword.getText(), newconfirmPassword.getText(), newcountry.getText(), this.user.getId());
+
+            System.out.println("Inscription réussie");
         } catch (UserBadPasswordException e) {
             System.out.println("Mauvais mot de passe");
+            this.labelError.setText("Mauvais mot de passe");
+        } catch (UserBadConfirmPasswordException e) {
+            System.out.println("Mots de passe différents");
+            this.labelError.setText("Mots de passe différents");
+        } catch (UserAlreadyExistException e) {
+            System.out.println("Mail déjà utilisé");
+            this.labelError.setText("Mail déjà utilisé");
+        } catch (UserPseudoAlreadyExistException e) {
+            System.out.println("Pseudo déjà utilisé");
+            this.labelError.setText("Pseudo déjà utilisé");
         } catch (DBNotFoundException e) {
             System.out.println("Erreur lors de la connexion à la DB");
-        } catch (UserAlreadyExistException e) {
-            System.out.println("Cet utilisateur existe déjà");
-        } catch (UserBadConfirmPasswordException e) {
-            System.out.println("Mauvais mot de passe de confirmation");
-        } catch (UserPseudoAlreadyExistException e) {
-            System.out.println("Ce pseudo existe déjà");
+            this.labelError.setText("Erreur lors de la connexion à la DB");
+        }catch (UserBadEmailException e) {
+            System.out.println("Email invalide");
+            this.labelError.setText("Email invalide");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
     }
