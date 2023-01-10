@@ -33,7 +33,6 @@ public class UserFacade {
 
     try {
       User u = userDB.findByEmail(email);
-      System.out.println(u.getIsAdmin());
       if(u != null) {
         if (BCrypt.checkpw(password, u.getPassword())) {
           this.connectedUser = u;

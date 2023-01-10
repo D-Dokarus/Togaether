@@ -114,7 +114,7 @@ public class TrophyFacade {
             //Donner les trophées obtenus réussis
             for (Trophy trophy : trophiesSuccessed) {
                 this.giveTrophyToUser(trophy.getId());
-                Notification notification = new Notification(UserFacade.getInstance().getConnectedUser(), trophy.getName(), false, NotificationCategory.createNotification("trophyObtained"));
+                Notification notification = new Notification(UserFacade.getInstance().getConnectedUser(), "Nouveau trophée obtenu ! : "+trophy.getName(), false, NotificationCategory.createNotification("trophyObtained"));
                 NotificationFacade.getInstance().createNotification(notification);
             }
         } catch (SQLException e) {
