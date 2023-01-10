@@ -237,7 +237,6 @@ public class DocumentController {
         String sep = File.separator;
         String path = "";
         path = System.getProperty("user.dir") + sep + "Documents" + sep;
-        System.out.println(path);
         try {
             FileOutputStream fos;
             fos = new FileOutputStream(path+document.getName());
