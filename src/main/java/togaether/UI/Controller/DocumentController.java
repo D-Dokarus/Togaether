@@ -17,6 +17,7 @@ import togaether.BL.Model.Document;
 import togaether.BL.TogaetherException.DBNotFoundException;
 import togaether.UI.SceneController;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -233,14 +234,13 @@ public class DocumentController {
 
 
     public void downloadDocument(Document document) throws IOException {
+        String sep = File.separator;
+        String path = "";
+        path = System.getProperty("user.dir") + sep + "Documents" + sep;
+        System.out.println(path);
         try {
             FileOutputStream fos;
-            //Ceck the language of the user computer and download to the good folder
-            if (language.equals("fr")) {
-                fos = new FileOutputStream(homeFr + document.getName());
-            } else {
-                fos = new FileOutputStream(homeEn + document.getName());
-            }
+            fos = new FileOutputStream(path+document.getName());
             fos.write(document.getFile());
             fos.close();
         } catch (FileNotFoundException e) {
