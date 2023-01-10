@@ -10,7 +10,7 @@ public class FriendComparator implements Comparator {
     ComparatorType method;
     User user;
 
-    public FriendComparator(ComparatorType ct){
+    public FriendComparator(ComparatorType ct, User user){
         this.method = ct;
         this.user = user;
     }
@@ -22,21 +22,25 @@ public class FriendComparator implements Comparator {
         if(o1 instanceof Friend f1 && o2 instanceof Friend f2){
             User u1 = null;
             User u2 = null;
-            if(f1.getUser1() != user){
+            if(f1.getUser1().getId() != user.getId()){
                 u1 = f1.getUser1();
+            }else{
+                u1 = f1.getUser2();
             }
-            if(f2.getUser1() != user){
-                u2 = f1.getUser1();
+            if(f2.getUser1().getId() != user.getId()){
+                u2 = f2.getUser1();
+            }else{
+                u2 = f2.getUser2();
             }
 
-            if(this.method == ComparatorType.PseudoAsc){
+            if(this.method == ComparatorType.PseudoInvAlph){
                 result = u1.getPseudo().compareTo(u2.getPseudo());
-            }else if(this.method == ComparatorType.PseudoDesc) {
+            }else if(this.method == ComparatorType.PseudoAlph) {
                 result = -1 * u1.getPseudo().compareTo(u2.getPseudo());
-            }else if(this.method == ComparatorType.CountryAsc){
+            }else if(this.method == ComparatorType.CountryInvAlph){
                 result = u1.getCountry().compareTo(u2.getCountry());
-            }else if(this.method == ComparatorType.CountryDesc){
-                result = -1 * u2.getCountry().compareTo(u2.getCountry());
+            }else if(this.method == ComparatorType.CountryAlph){
+                result = -1 * u1.getCountry().compareTo(u2.getCountry());
             }
         }
         return result;

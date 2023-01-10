@@ -20,8 +20,6 @@ import togaether.BL.Tools.FriendComparator;
 import togaether.UI.SceneController;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.EventListener;
 import java.util.List;
 
 public class FriendsController {
@@ -50,15 +48,14 @@ public class FriendsController {
         /*searchBar.textProperty().addListener((obs) -> {
             onUpdateSearchBar();
         });*/
-        MenuItem item1 = new Menu("Par pseudo décroissant");
-        MenuItem item2 = new Menu("Par pseudo croissant");
-        MenuItem item3 = new Menu("Par pays décroissant");
-        MenuItem item4 = new Menu("Par pays croissant");
-        item1.setOnAction(setEvent(ComparatorType.PseudoDesc));
-        item2.setOnAction(setEvent(ComparatorType.PseudoAsc));
-        item3.setOnAction(setEvent(ComparatorType.CountryDesc));
-        item4.setOnAction(setEvent(ComparatorType.CountryAsc));
-
+        MenuItem item1 = new Menu("Par pseudo alphabétique");
+        MenuItem item2 = new Menu("Par pseudo anti-alphabétique");
+        MenuItem item3 = new Menu("Par pays alphabétique");
+        MenuItem item4 = new Menu("Par pays anti-alphabétique");
+        item1.setOnAction(setEvent(ComparatorType.PseudoAlph));
+        item2.setOnAction(setEvent(ComparatorType.PseudoInvAlph));
+        item3.setOnAction(setEvent(ComparatorType.CountryInvAlph));
+        item4.setOnAction(setEvent(ComparatorType.CountryAlph));
         splitMenuButton.getItems().addAll(item1,item2,item3,item4);
 
         friends = FriendFacade.getInstance().findAllFriends(UserFacade.getInstance().getConnectedUser());
@@ -105,6 +102,12 @@ public class FriendsController {
                         HBox.setHgrow(region, Priority.ALWAYS);
                         root.getChildren().add(region);
 
+                        Label country = new Label(other.getCountry());
+                        name.setVisible(true);
+                        name.setManaged(true);
+
+                        root.getChildren().add(country);
+
                         //BUTTON REMOVE collaborator
 
                         Button btnRemove = new Button("Supprimer");
@@ -130,6 +133,7 @@ public class FriendsController {
         for(User user: users){
             observableUsers.add(user);
         }
+
         // We need to create a new CellFactory so we can display our layout for each individual notification
         usersListView.setCellFactory((Callback<ListView<User>, ListCell<User>>) param -> {
             return new ListCell<User>() {
@@ -190,7 +194,6 @@ public class FriendsController {
 
     @FXML
     private void onUpdateSearchBar(){
-
         String user_name = searchBar.getText().trim();
         if(user_name.length() >= 3 && !user_name.isBlank()){
             String test = "%"+user_name+"%";
@@ -205,17 +208,17 @@ public class FriendsController {
         if(friend == null){
             Notification notification = new Notification(user,you,you.getPseudo() + " vous demande en ami(e)",true, NotificationCategory.createNotification("friendInvitation"),you.getId());
             NotificationFacade.getInstance().createNotification(notification);
-
         }
     }
 
 
-    private EventHandler setEvent(ComparatorType e){
+    private EventHandler setEvent(ComparatorType e) {
         return new EventHandler() {
             @Override
             public void handle(Event event) {
-                Collections.sort(friends,new FriendComparator(e));
+                friends.sort(new FriendComparator(e, UserFacade.getInstance().getConnectedUser()));
                 initializeFriendsList();
+
             }
         };
     }
