@@ -17,6 +17,7 @@ import javafx.util.Callback;
 import togaether.BL.Facade.NotificationFacade;
 import togaether.BL.Facade.UserFacade;
 import togaether.BL.Model.Notification;
+import togaether.BL.TogaetherException.DBNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -134,7 +135,12 @@ public class NotificationController {
     public void updateList(){
         if(notifications.size() < this.count & notifications.size() < this.limit){
             this.count = NotificationFacade.getInstance().getNbNotificationsByUserId(UserFacade.getInstance().getConnectedUser());
-            List<Notification> temp = NotificationFacade.getInstance().getSpecificAmountOfNotificationsByUserIdAndStartingId(UserFacade.getInstance().getConnectedUser(),limit,maxNotifId);
+            List<Notification> temp = new ArrayList<>();
+            try{
+                temp = NotificationFacade.getInstance().getSpecificAmountOfNotificationsByUserIdAndStartingId(UserFacade.getInstance().getConnectedUser(),limit,maxNotifId);
+            }catch(DBNotFoundException e){
+                //TO DO SOMETHING => LABEL
+            }
             int max = 0;
             boolean firstTime = notifications.isEmpty(); //Because this method is used both to initialize and update
             for(Notification notification : temp){

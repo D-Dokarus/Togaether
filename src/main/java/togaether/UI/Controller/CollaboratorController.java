@@ -181,7 +181,7 @@ public class CollaboratorController {
                 protected void updateItem(Friend friend, boolean empty) {
                     super.updateItem(friend, empty);
 
-                    if (friend == null || empty) {
+                    if (friend == null || empty ) {
                         setText(null);
                     } else {
 
@@ -190,7 +190,7 @@ public class CollaboratorController {
                         if(friend.getUser1().getId() == UserFacade.getInstance().getConnectedUser().getId()){
                             you = friend.getUser1();
                             other = friend.getUser2();
-                        }else{
+                        }else {
                             you = friend.getUser2();
                             other = friend.getUser1();
                         }
@@ -218,9 +218,9 @@ public class CollaboratorController {
                         //BUTTON INVITER AU VOYAGE
                         Button btnAdd= new Button("Ajouter");
                         btnAdd.setOnAction(event -> {
-                            onClickInviteFriend(friend);
-                            btnAdd.setText("Ajouté");
-                            btnAdd.setDisable(true);
+                                onClickInviteFriend(friend);
+                                btnAdd.setText("Ajouté");
+                                btnAdd.setDisable(true);
                         });
                         root.getChildren().add(btnAdd);
 
@@ -267,6 +267,7 @@ public class CollaboratorController {
         return list.stream().filter(o -> o.getId() != collab.getId()).filter(o -> o.getName().equals(name)).findFirst().isPresent();
     }
 
+
     public void onClickInviteFriend(Friend friend){
         User you = null;
         User other = null;
@@ -286,12 +287,14 @@ public class CollaboratorController {
     private void onUpdateSearchBar(){
 
         String user_name = friendSearchBar.getText().trim();
-        if(user_name.length() >= 3 && !user_name.isBlank()){
+        if(!user_name.isBlank()){
             String test = "%"+user_name+"%";
             friends = FriendFacade.getInstance().findAllFriendsByPseudo(UserFacade.getInstance().getConnectedUser(), test);
             initializeFriendsList();
         }
     }
+
+
 
 
 }

@@ -18,10 +18,8 @@
          <font>
             <Font size="20.0" />
          </font></Label>
-      <SplitMenuButton fx:id="splitMenuButton" layoutX="127.0" layoutY="350.0" mnemonicParsing="false" text="Ordonner par">
+      <SplitMenuButton fx:id="splitMenuButton"  layoutX="127.0" layoutY="350.0" mnemonicParsing="false" text="Ordonner par">
         <items>
-          <MenuItem mnemonicParsing="false" text="Par nom décroissant" />
-          <MenuItem mnemonicParsing="false" text="Par nom croissant" />
         </items>
       </SplitMenuButton>
       <Label alignment="CENTER" layoutX="374.0" layoutY="82.0" prefHeight="21.0" prefWidth="191.0" text="Rechercher un utilisateur">

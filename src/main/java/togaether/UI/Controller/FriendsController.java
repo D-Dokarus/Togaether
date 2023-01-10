@@ -3,6 +3,8 @@ package togaether.UI.Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -13,9 +15,12 @@ import javafx.scene.layout.Region;
 import javafx.util.Callback;
 import togaether.BL.Facade.*;
 import togaether.BL.Model.*;
+import togaether.BL.Tools.ComparatorType;
+import togaether.BL.Tools.FriendComparator;
 import togaether.UI.SceneController;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.EventListener;
 import java.util.List;
 
@@ -45,6 +50,17 @@ public class FriendsController {
         /*searchBar.textProperty().addListener((obs) -> {
             onUpdateSearchBar();
         });*/
+        MenuItem item1 = new Menu("Par pseudo décroissant");
+        MenuItem item2 = new Menu("Par pseudo croissant");
+        MenuItem item3 = new Menu("Par pays décroissant");
+        MenuItem item4 = new Menu("Par pays croissant");
+        item1.setOnAction(setEvent(ComparatorType.PseudoDesc));
+        item2.setOnAction(setEvent(ComparatorType.PseudoAsc));
+        item3.setOnAction(setEvent(ComparatorType.CountryDesc));
+        item4.setOnAction(setEvent(ComparatorType.CountryAsc));
+
+        splitMenuButton.getItems().addAll(item1,item2,item3,item4);
+
         friends = FriendFacade.getInstance().findAllFriends(UserFacade.getInstance().getConnectedUser());
         initializeFriendsList();
     }
@@ -61,9 +77,9 @@ public class FriendsController {
                 protected void updateItem(Friend friend, boolean empty) {
                     super.updateItem(friend, empty);
 
-                    if (friend == null || empty) {
+                    if(friend == null || empty){
                         setText(null);
-                    } else {
+                    }else{
                         User other = null;
                         if(friend.getUser1().getId() == UserFacade.getInstance().getConnectedUser().getId()){
                             other = friend.getUser2();
@@ -121,7 +137,7 @@ public class FriendsController {
                 protected void updateItem(User user, boolean empty) {
                     super.updateItem(user, empty);
 
-                    if (user == null || empty) {
+                    if (user == null || empty || user.getId() == UserFacade.getInstance().getConnectedUser().getId()) {
                         setText(null);
                     } else {
 
@@ -185,10 +201,24 @@ public class FriendsController {
 
     private void onClickButtonAdd(User user){
         User you = UserFacade.getInstance().getConnectedUser();
-        Notification notification = new Notification(user,you,you.getPseudo() + " vous demande en ami(e)",true, NotificationCategory.createNotification("friendInvitation"),you.getId());
-        NotificationFacade.getInstance().createNotification(notification);
+        Friend friend = FriendFacade.getInstance().isAlreadyFriendWith(you,user);
+        if(friend == null){
+            Notification notification = new Notification(user,you,you.getPseudo() + " vous demande en ami(e)",true, NotificationCategory.createNotification("friendInvitation"),you.getId());
+            NotificationFacade.getInstance().createNotification(notification);
+
+        }
     }
 
+
+    private EventHandler setEvent(ComparatorType e){
+        return new EventHandler() {
+            @Override
+            public void handle(Event event) {
+                Collections.sort(friends,new FriendComparator(e));
+                initializeFriendsList();
+            }
+        };
+    }
 
     public void onClickButtonToHomePage(ActionEvent event){
         SceneController.getInstance().switchToHomePage(event);
