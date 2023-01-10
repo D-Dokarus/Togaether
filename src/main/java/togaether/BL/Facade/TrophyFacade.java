@@ -98,16 +98,20 @@ public class TrophyFacade {
       return "";
   }
   public String getImagePath(Trophy trophy, boolean isOwned) {
-    File image;
+    String sep = File.separator;
+    String path = "";
     if(isOwned)
-      image = new File(System.getProperty("user.dir")+"\\image\\trophy\\owned_"+trophy.getImage());
+      path = System.getProperty("user.dir")+sep+"image"+sep+"trophy"+sep+"owned_"+trophy.getImage();
     else
-      image = new File(System.getProperty("user.dir")+"\\image\\trophy\\"+trophy.getImage());
+      path = System.getProperty("user.dir")+sep+"image"+sep+"trophy"+sep+trophy.getImage();
+
+    File image = new File(path);
     ImageView imageView;
     if(image.exists())
-      return image.getAbsolutePath();
+      path = image.getAbsolutePath();
     else
-      return System.getProperty("user.dir")+".\\image\\trophy\\unknow.jpg";
+      path = System.getProperty("user.dir")+"."+sep+"image"+sep+"trophy"+sep+"unknow.jpg";
+    return path;
   }
   public void giveTrophyToUser(int trophy_id) throws SQLException {
     AbstractFactory abstractFactory = AbstractFactory.createInstance();
