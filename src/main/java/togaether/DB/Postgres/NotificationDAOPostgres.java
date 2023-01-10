@@ -6,6 +6,8 @@ import togaether.BL.Model.User;
 import togaether.DB.AbstractFactory;
 import togaether.DB.NotificationDAO;
 
+import javax.swing.*;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -301,7 +303,7 @@ public class NotificationDAOPostgres implements NotificationDAO {
     public List<Notification> getSpecificAmountOfNotificationsByUserIdAndStartingId(int user_id, int limit,int min_notif_id) throws SQLException {
         ArrayList<Notification> notifications = new ArrayList<>();
         try(Connection connection = this.postgres.getConnection()){
-            String query = "SELECT * FROM notification, notification_categories WHERE to_user = ? and notif_id > ? and cat_notif = id_notification_cat ORDER BY notif_id ASC LIMIT ?; ";
+            String query = "SELECT notif_id, to_user, from_user, content_notif, accept, cat_notif, special_id, name_notification_cat, u1.user_name as u1_name, u1.user_surname as u1_surname, u1.user_pseudo as u1_pseudo, u1.user_country as u1_country, u2.user_name as u2_name, u2.user_surname as u2_surname, u2.user_pseudo as u2_pseudo, u2.user_country as u2_country FROM public.user as u1, notification_categories, notification LEFT JOIN public.user as u2 ON from_user = u2.user_id WHERE to_user = ? and notif_id > ? and cat_notif = id_notification_cat AND u1.user_id = to_user ORDER BY notif_id ASC LIMIT ? ;";
             try(PreparedStatement statement = connection.prepareStatement(query)){
                 statement.setInt(1,user_id);
                 statement.setInt(2,min_notif_id);
@@ -311,15 +313,24 @@ public class NotificationDAOPostgres implements NotificationDAO {
                 try(ResultSet resultSet = statement.getResultSet()){
 
                     while(resultSet.next()){
-                        NotificationCategory category = NotificationCategory.createNotification(resultSet.getString("name_notification_cat"));
-                        Notification notification = new Notification(resultSet.getInt("notif_id"),
-                                null,
-                                null,
-                                resultSet.getString("content_notif"),
-                                resultSet.getBoolean("accept"),
-                                category,
-                                resultSet.getInt("special_id"));
+                        User to = new User(resultSet.getInt("to_user"),resultSet.getString("u1_name"),resultSet.getString("u1_surname"),resultSet.getString("u1_pseudo"),resultSet.getString("u1_country"));
+                        User from = null;
+                        if(resultSet.getInt("from_user") != 0 ){
+                           from = new User(resultSet.getInt("from_user"),resultSet.getString("u2_name"),resultSet.getString("u2_surname"),resultSet.getString("u2_pseudo"),resultSet.getString("u2_country"));
+                            System.out.println(from.getId() + " " +from.getPseudo() + " " + from.getName() + " " + from.getSurname()+ " " + to.getCountry());
 
+                        }
+                        System.out.println(to.getId() + " " +to.getPseudo() + " " + to.getName() + " " + to.getSurname()+ " " + to.getCountry());
+                        NotificationCategory category = NotificationCategory.createNotification(resultSet.getString("name_notification_cat"));
+                        System.out.println("hehe");
+                        Notification notification = null;
+                        notification = new Notification(resultSet.getInt("notif_id"),
+                                    to,
+                                    from,
+                                    resultSet.getString("content_notif"),
+                                    resultSet.getBoolean("accept"),
+                                    category,
+                                    resultSet.getInt("special_id"));
                         notifications.add(notification);
                     }
                 }
