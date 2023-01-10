@@ -6,147 +6,228 @@ import togaether.DB.AbstractFactory;
 import togaether.DB.TrophyDAO;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TrophyFacade {
 
-  private Trophy trophy = null;
+    private Trophy trophy = null;
 
-  static private final TrophyFacade instance = new TrophyFacade();
+    static private final TrophyFacade instance = new TrophyFacade();
 
-  public static TrophyFacade getInstance() {
-    return instance;
-  }
-
-  public void createTrophy(Trophy trophy) throws SQLException {
-    AbstractFactory abstractFactory = AbstractFactory.createInstance();
-    TrophyDAO trophyDB = abstractFactory.getTrophyDAO();
-    trophyDB.createTrophy(trophy.getName(), trophy.getCategory_id(), trophy.getValue(), trophy.getImage());
-  }
-  public void updateTrophy(Trophy trophy) throws SQLException {
-    AbstractFactory abstractFactory = AbstractFactory.createInstance();
-    TrophyDAO trophyDB = abstractFactory.getTrophyDAO();
-    trophyDB.updateTrophy(trophy);
-  }
-  public void deleteTrophy(Trophy trophy) throws SQLException {
-    AbstractFactory abstractFactory = AbstractFactory.createInstance();
-    TrophyDAO trophyDB = abstractFactory.getTrophyDAO();
-    trophyDB.deleteTrophyById(trophy.getId());
-  }
-  public List<Trophy> getAllTrophies() throws SQLException {
-    AbstractFactory abstractFactory = AbstractFactory.createInstance();
-    TrophyDAO trophyDB = abstractFactory.getTrophyDAO();
-    return trophyDB.findAllTrophies();
-  }
-  public List<TrophyCategory> getAllCategories() throws SQLException {
-    AbstractFactory abstractFactory = AbstractFactory.createInstance();
-    TrophyDAO trophyDB = abstractFactory.getTrophyDAO();
-    return trophyDB.findAllCategories();
-  }
-  public List<Trophy> getTrophiesOfUser() throws SQLException {
-    AbstractFactory abstractFactory = AbstractFactory.createInstance();
-    TrophyDAO trophyDB = abstractFactory.getTrophyDAO();
-    return trophyDB.findTrophiesByUserId(UserFacade.getInstance().getConnectedUser().getId());
-  }
-  public boolean isTrophyValidForUser(String category) {
-    Boolean valid = false;
-    try {
-      TrophyDAO trophyDB = AbstractFactory.createInstance().getTrophyDAO();
-      ArrayList<Trophy> trophies = (ArrayList<Trophy>) trophyDB.findNotOwnedTrophiesByCategories(category, UserFacade.getInstance().getConnectedUser().getId());
-      ArrayList<Trophy> trophiesSuccessed = new ArrayList<Trophy>();
-      int count = 0;
-      if(category.equals("travel")) {
-        count = trophyDB.countAllParticipatingTravelsByUserId(UserFacade.getInstance().getConnectedUser().getId());
-      }
-      else if(category.equals("")) {
-
-      }
-      else System.out.println("Cette catégorie n'a pas de test de succès");
-
-      // Vérifier les trophées obtenus
-      for (Trophy trophy: trophies) {
-        if (trophy.getValue() <= count) {
-          trophiesSuccessed.add(trophy);
-        }
-      }
-      //Donner les trophées obtenus réussis
-      for (Trophy trophy: trophiesSuccessed) {
-        this.giveTrophyToUser(trophy.getId());
-        Notification notification = new Notification(UserFacade.getInstance().getConnectedUser(), trophy.getName(), false, NotificationCategory.createNotification("trophyObtained"));
-        NotificationFacade.getInstance().createNotification(notification);
-      }
-    } catch (SQLException e) {
-      System.out.println("Erreur lors du test des trophées :"+e);
+    public static TrophyFacade getInstance() {
+        return instance;
     }
-    return valid;
-  }
-  public String getCondition(Trophy trophy) {
-    String category = trophy.getCategory();
-    if(category.equals("travel"))
-      return "Être dans au moins "+trophy.getValue()+" voyage(s)";
-    else if(category.equals("message"))
-      return "Avoir envoyé un total de "+trophy.getValue()+" messages";
-    else if(category.equals("friend"))
-      return "Être ami avec "+trophy.getValue()+" utilisateur(s)";
-    else if(category.equals("depense"))
-      return "Avoir dépensé "+trophy.getValue()+" euros en un seul voyage";
-    else if(category.equals(""))
-      return "";
-    else
-      return "";
-  }
-  public String getImagePath(Trophy trophy, boolean isOwned) {
-    String sep = File.separator;
-    String path = "";
-    if(isOwned)
-      path = System.getProperty("user.dir")+sep+"image"+sep+"trophy"+sep+"owned_"+trophy.getImage();
-    else
-      path = System.getProperty("user.dir")+sep+"image"+sep+"trophy"+sep+trophy.getImage();
 
-    File image = new File(path);
-    ImageView imageView;
-    if(image.exists())
-      path = image.getAbsolutePath();
-    else
-      path = System.getProperty("user.dir")+"."+sep+"image"+sep+"trophy"+sep+"unknow.jpg";
-    return path;
-  }
-  public void giveTrophyToUser(int trophy_id) throws SQLException {
-    AbstractFactory abstractFactory = AbstractFactory.createInstance();
-    TrophyDAO trophyDB = abstractFactory.getTrophyDAO();
-    trophyDB.createTrophyUser(trophy_id, UserFacade.getInstance().getConnectedUser().getId());
-  }
+    /**
+     * Create a Trophy
+     * @param trophy
+     * @throws SQLException
+     */
+    public void createTrophy(Trophy trophy) throws SQLException {
+        AbstractFactory abstractFactory = AbstractFactory.createInstance();
+        TrophyDAO trophyDB = abstractFactory.getTrophyDAO();
+        trophyDB.createTrophy(trophy.getName(), trophy.getCategory_id(), trophy.getValue(), trophy.getImage());
+    }
 
-  public String nameToFrench(String name) {
-    if(name.equals("travel"))
-      return "Voyages total";
-    else if(name.equals("message"))
-      return "Messages total";
-    else if(name.equals("friend"))
-      return "Amis total";
-    else if(name.equals("expense"))
-      return "Dépenses en un voyage";
-    return "nameToFrench de TrophyFacade";
-  }
-  public String frenchToName(String french) {
-    if(french.equals("Voyages total"))
-      return "travel";
-    else if(french.equals("Messages total"))
-      return "message";
-    else if(french.equals("Amis total"))
-      return "friend";
-    else if(french.equals("Dépenses en un voyage"))
-      return "expense";
-    return "frenchToName de TrophyFacade";
-  }
+    /**
+     * Update a Trophy
+     * @param trophy
+     * @throws SQLException
+     */
+    public void updateTrophy(Trophy trophy) throws SQLException {
+        AbstractFactory abstractFactory = AbstractFactory.createInstance();
+        TrophyDAO trophyDB = abstractFactory.getTrophyDAO();
+        trophyDB.updateTrophy(trophy);
+    }
 
-  public Trophy getTrophy() {
-    return trophy;
-  }
+    /**
+     * Delete a Trophy
+     * @param trophy
+     * @throws SQLException
+     */
+    public void deleteTrophy(Trophy trophy) throws SQLException {
+        AbstractFactory abstractFactory = AbstractFactory.createInstance();
+        TrophyDAO trophyDB = abstractFactory.getTrophyDAO();
+        trophyDB.deleteTrophyById(trophy.getId());
+    }
 
-  public void setTrophy(Trophy trophy) {
-    this.trophy = trophy;
-  }
+    /**
+     * Return a List of all the trophies
+     * @return
+     * @throws SQLException
+     */
+    public List<Trophy> getAllTrophies() throws SQLException {
+        AbstractFactory abstractFactory = AbstractFactory.createInstance();
+        TrophyDAO trophyDB = abstractFactory.getTrophyDAO();
+        return trophyDB.findAllTrophies();
+    }
+
+    /**
+     * Return a List of all TrophyCategories
+     * @return
+     * @throws SQLException
+     */
+    public List<TrophyCategory> getAllCategories() throws SQLException {
+        AbstractFactory abstractFactory = AbstractFactory.createInstance();
+        TrophyDAO trophyDB = abstractFactory.getTrophyDAO();
+        return trophyDB.findAllCategories();
+    }
+
+    /**
+     * Return a List of the trophies owned by the connected User
+     * @return
+     * @throws SQLException
+     */
+    public List<Trophy> getTrophiesOfUser() throws SQLException {
+        AbstractFactory abstractFactory = AbstractFactory.createInstance();
+        TrophyDAO trophyDB = abstractFactory.getTrophyDAO();
+        return trophyDB.findTrophiesByUserId(UserFacade.getInstance().getConnectedUser().getId());
+    }
+
+    /**
+     * Verify if the trophies of a category can be give to the connected User, and give them if yes
+     * @param category
+     * @return
+     */
+    public boolean isTrophyValidForUser(String category) {
+        Boolean valid = false;
+        try {
+            TrophyDAO trophyDB = AbstractFactory.createInstance().getTrophyDAO();
+            ArrayList<Trophy> trophies = (ArrayList<Trophy>) trophyDB.findNotOwnedTrophiesByCategories(category, UserFacade.getInstance().getConnectedUser().getId());
+            ArrayList<Trophy> trophiesSuccessed = new ArrayList<Trophy>();
+            int count = 0;
+            if (category.equals("travel")) {
+                count = trophyDB.countAllParticipatingTravelsByUserId(UserFacade.getInstance().getConnectedUser().getId());
+            } else if (category.equals("")) {
+
+            } else System.out.println("Cette catégorie n'a pas de test de succès");
+
+            // Vérifier les trophées obtenus
+            for (Trophy trophy : trophies) {
+                if (trophy.getValue() <= count) {
+                    trophiesSuccessed.add(trophy);
+                }
+            }
+            //Donner les trophées obtenus réussis
+            for (Trophy trophy : trophiesSuccessed) {
+                this.giveTrophyToUser(trophy.getId());
+                Notification notification = new Notification(UserFacade.getInstance().getConnectedUser(), trophy.getName(), false, NotificationCategory.createNotification("trophyObtained"));
+                NotificationFacade.getInstance().createNotification(notification);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors du test des trophées :" + e);
+        }
+        return valid;
+    }
+
+    /**
+     * Return a String that specify the condition to gain the specific Trophy
+     * @param trophy
+     * @return
+     */
+    public String getCondition(Trophy trophy) {
+        String category = trophy.getCategory();
+        if (category.equals("travel"))
+            return "Être dans au moins " + trophy.getValue() + " voyage(s)";
+        else if (category.equals("message"))
+            return "Avoir envoyé un total de " + trophy.getValue() + " messages";
+        else if (category.equals("friend"))
+            return "Être ami avec " + trophy.getValue() + " utilisateur(s)";
+        else if (category.equals("depense"))
+            return "Avoir dépensé " + trophy.getValue() + " euros en un seul voyage";
+        else if (category.equals(""))
+            return "";
+        else
+            return "";
+    }
+
+    /**
+     * Return the path of the Trophy's image
+     * @param trophy
+     * @param isOwned
+     * @return
+     * @throws MalformedURLException
+     */
+    public String getImagePath(Trophy trophy, boolean isOwned) throws MalformedURLException {
+        String sep = File.separator;
+        String path = "";
+        if (isOwned)
+            path = System.getProperty("user.dir") + sep + "image" + sep + "trophy" + sep + "owned_" + trophy.getImage();
+        else
+            path = System.getProperty("user.dir") + sep + "image" + sep + "trophy" + sep + trophy.getImage();
+
+        File image = new File(path);
+        if (image.exists()) {
+
+            path = image.toURI().toURL().toExternalForm();
+
+        } else {
+            path = new File(System.getProperty("user.dir") + sep + "image" + sep + "trophy" + sep + "unknow.jpg").toURI().toURL().toExternalForm();
+        }
+        return path;
+    }
+
+    /**
+     * Give a Trophy to the connected User
+     * @param trophy_id
+     * @throws SQLException
+     */
+    public void giveTrophyToUser(int trophy_id) throws SQLException {
+        AbstractFactory abstractFactory = AbstractFactory.createInstance();
+        TrophyDAO trophyDB = abstractFactory.getTrophyDAO();
+        trophyDB.createTrophyUser(trophy_id, UserFacade.getInstance().getConnectedUser().getId());
+    }
+
+    /**
+     * Return a String that represents the description of a TrophyCategory name
+     * @param name
+     * @return
+     */
+    public String nameToFrench(String name) {
+        if (name.equals("travel"))
+            return "Voyages total";
+        else if (name.equals("message"))
+            return "Messages total";
+        else if (name.equals("friend"))
+            return "Amis total";
+        else if (name.equals("expense"))
+            return "Dépenses en un voyage";
+        return "nameToFrench de TrophyFacade";
+    }
+
+    /**
+     * Return a String that give the name of a TrophyCategory from a description
+     * @param french
+     * @return
+     */
+    public String frenchToName(String french) {
+        if (french.equals("Voyages total"))
+            return "travel";
+        else if (french.equals("Messages total"))
+            return "message";
+        else if (french.equals("Amis total"))
+            return "friend";
+        else if (french.equals("Dépenses en un voyage"))
+            return "expense";
+        return "frenchToName de TrophyFacade";
+    }
+
+    /**
+     * Return the actual Trophy
+     * @return
+     */
+    public Trophy getTrophy() {
+        return trophy;
+    }
+
+    /**
+     * Set the actual Trophy
+     * @param trophy
+     */
+    public void setTrophy(Trophy trophy) {
+        this.trophy = trophy;
+    }
 }
