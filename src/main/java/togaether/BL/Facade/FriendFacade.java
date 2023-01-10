@@ -35,8 +35,8 @@ public class FriendFacade {
         List<Friend> friends = new ArrayList<>();
 
         try{
-            User u1 = new User(4,"","","");
-            friends = fdaop.findAllFriends(u1);
+
+            friends = fdaop.findAllFriends(user);
         }catch (SQLException e) {
             System.out.println(e);
         }

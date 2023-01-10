@@ -3,6 +3,7 @@ package togaether.BL.Facade;
 import javafx.event.ActionEvent;
 import togaether.BL.Model.*;
 import togaether.BL.TogaetherException.DBNotFoundException;
+import togaether.BL.TogaetherException.NotificationNotFound;
 import togaether.DB.AbstractFactory;
 import togaether.DB.NotificationDAO;
 import togaether.UI.SceneController;
@@ -80,7 +81,7 @@ public class NotificationFacade {
         try{
             notificationDB.deleteNotificationById(notification.getId());
         }catch(SQLException e){
-            System.out.println(e);
+           System.out.println(e);
         }
 
     }
@@ -101,13 +102,15 @@ public class NotificationFacade {
                 }catch(DBNotFoundException e){
                     System.out.println(e);
                 }
-
-
                 break;
             case "serverNotification":
                 deleteNotification(notification);
                 break;
+            case "trophyObtained":
+                deleteNotification(notification);
+                break;
             default:
+                deleteNotification(notification);
                 System.out.println("Category not found");
 
         }
@@ -200,7 +203,7 @@ public class NotificationFacade {
      * @param min
      * @return a list of these notifications (can be empty)
      */
-    public List<Notification> getSpecificAmountOfNotificationsByUserIdAndStartingId(User user, int limit, int min){
+    public List<Notification> getSpecificAmountOfNotificationsByUserIdAndStartingId(User user, int limit, int min) throws DBNotFoundException{
         AbstractFactory fact = AbstractFactory.createInstance();
         NotificationDAO notificationDB = fact.getNotificationDAO();
         List<Notification> notifications = new ArrayList<>();
@@ -208,7 +211,7 @@ public class NotificationFacade {
         try{
             notifications = notificationDB.getSpecificAmountOfNotificationsByUserIdAndStartingId(user.getId(),limit,min);
         }catch (SQLException e){
-            System.out.println(e);
+           throw new DBNotFoundException();
         }
         return notifications;
     }
@@ -218,17 +221,32 @@ public class NotificationFacade {
      * @param id
      * @return a specific notification
      */
-    public Notification getNotificationById(int id){
+    public Notification getNotificationById(int id) throws NotificationNotFound{
         AbstractFactory fact = AbstractFactory.createInstance();
         NotificationDAO notificationDB = fact.getNotificationDAO();
         try{
             Notification notif = notificationDB.findNotificationById(id);
             return notif;
         }catch(SQLException e ){
-            System.out.println(e);
+            throw new NotificationNotFound("La notification n'a pas été trouvée");
         }
-        return null;
 
     }
 
+
+
+    public static void main(String args[]){
+        NotificationFacade facade = NotificationFacade.getInstance();
+
+        Notification n = new Notification(0,null,null,"",false,null,0);
+        //facade.deleteNotification(n);
+
+
+           int x = facade.getNbNotificationsByUserId(new User(0));
+           System.out.println(x);
+
+
+
+
+    }
 }

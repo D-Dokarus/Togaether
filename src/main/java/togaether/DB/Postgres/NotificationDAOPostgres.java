@@ -103,21 +103,58 @@ public class NotificationDAOPostgres implements NotificationDAO {
      * @throws SQLException
      */
     @Override
-    public Notification findNotificationById(int id) throws  SQLException{
+    public Notification findUsersRelatedNotificationById(int id) throws  SQLException{
         try (Connection connection = this.postgres.getConnection()) {
-            String query = "SELECT * FROM notification, users u1, users u2, notification_categories WHERE notif_id = ? and to_user = u1.user_id and from_user = u2.user_id and cat_notif = id_notification_cat; ";
+            String query = "SELECT notif_id, to_user, from_user, content_notif, accept, cat_notif, special_id, u1.user_name as u1_name, u1.user_surname as u1_surname, u1.user_pseudo as u1_pseudo, u1.user_country as u1_country, u2.user_name as u2_name, u2.user_surname as u2_surname, u2.user_pseudo as u2_pseudo, u2.user_country as u2_country, name_notification_cat FROM notification, public.user u1, public.user u2, notification_categories WHERE notif_id = ? and to_user = u1.user_id and from_user = u2.user_id and cat_notif = id_notification_cat; ";
             try (PreparedStatement statement = connection.prepareStatement(query);) {
                 statement.setInt(1, id);
                 try(ResultSet resultSet = statement.executeQuery()){
                     resultSet.next();
                     User to = new User(Integer.valueOf(resultSet.getString("to_user")),
-                            resultSet.getString(9),
-                            resultSet.getString(10),
-                            resultSet.getString(11));
+                            resultSet.getString("u1_name"),
+                            resultSet.getString("u1_surname"),
+                            resultSet.getString("u1_pseudo"),
+                            resultSet.getString("u1_country"));
                     User from = new User(Integer.valueOf(resultSet.getString("from_user")),
-                            resultSet.getString(13),
-                            resultSet.getString(14),
-                            resultSet.getString(15));
+                            resultSet.getString("u2_name"),
+                            resultSet.getString("u2_surname"),
+                            resultSet.getString("u2_pseudo"),
+                            resultSet.getString("u2_country"));
+                    NotificationCategory category = NotificationCategory.createNotification(resultSet.getString("name_notification_cat"));
+
+                    Notification notification = new Notification(resultSet.getInt("notif_id"),
+                            to,
+                            from,
+                            resultSet.getString("content_notif"),
+                            resultSet.getBoolean("accept"),
+                            category,
+                            resultSet.getInt("special_id"));
+                    return notification;
+                }
+            }
+        }
+        finally {
+            this.postgres.getConnection().close();
+        }
+    }
+
+    /**
+     * Query the finding of a specific notification depending on its id and return it if exist
+     * @param id
+     * @return
+     * @throws SQLException
+     */
+    @Override
+    public Notification findNotificationById(int id) throws  SQLException{
+        try (Connection connection = this.postgres.getConnection()) {
+            String query = "SELECT * FROM notification, notification_categories WHERE notif_id = ? and cat_notif = id_notification_cat; ";
+            try (PreparedStatement statement = connection.prepareStatement(query);) {
+                statement.setInt(1, id);
+                try(ResultSet resultSet = statement.executeQuery()){
+                    resultSet.next();
+                    User to = new User(resultSet.getInt("to_user"));
+                    User from = new User(resultSet.getInt("from_user"));
+
                     NotificationCategory category = NotificationCategory.createNotification(resultSet.getString("name_notification_cat"));
 
                     Notification notification = new Notification(resultSet.getInt("notif_id"),
@@ -262,6 +299,7 @@ public class NotificationDAOPostgres implements NotificationDAO {
      * @throws SQLException
      */
     public List<Notification> getSpecificAmountOfNotificationsByUserIdAndStartingId(int user_id, int limit,int min_notif_id) throws SQLException {
+        ArrayList<Notification> notifications = new ArrayList<>();
         try(Connection connection = this.postgres.getConnection()){
             String query = "SELECT * FROM notification, notification_categories WHERE to_user = ? and notif_id > ? and cat_notif = id_notification_cat ORDER BY notif_id ASC LIMIT ?; ";
             try(PreparedStatement statement = connection.prepareStatement(query)){
@@ -271,10 +309,9 @@ public class NotificationDAOPostgres implements NotificationDAO {
                 statement.executeQuery();
 
                 try(ResultSet resultSet = statement.getResultSet()){
-                    ArrayList<Notification> notifications = new ArrayList<>();
+
                     while(resultSet.next()){
                         NotificationCategory category = NotificationCategory.createNotification(resultSet.getString("name_notification_cat"));
-
                         Notification notification = new Notification(resultSet.getInt("notif_id"),
                                 null,
                                 null,
@@ -285,13 +322,13 @@ public class NotificationDAOPostgres implements NotificationDAO {
 
                         notifications.add(notification);
                     }
-                    return notifications;
                 }
             }
         }
         finally{
             this.postgres.getConnection().close();
         }
+        return notifications;
     }
 
     public static void main(String args[]){

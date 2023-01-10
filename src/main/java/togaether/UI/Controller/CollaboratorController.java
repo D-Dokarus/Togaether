@@ -267,6 +267,7 @@ public class CollaboratorController {
         return list.stream().filter(o -> o.getId() != collab.getId()).filter(o -> o.getName().equals(name)).findFirst().isPresent();
     }
 
+
     public void onClickInviteFriend(Friend friend){
         User you = null;
         User other = null;
@@ -286,12 +287,14 @@ public class CollaboratorController {
     private void onUpdateSearchBar(){
 
         String user_name = friendSearchBar.getText().trim();
-        if(user_name.length() >= 3 && !user_name.isBlank()){
+        if(!user_name.isBlank()){
             String test = "%"+user_name+"%";
             friends = FriendFacade.getInstance().findAllFriendsByPseudo(UserFacade.getInstance().getConnectedUser(), test);
             initializeFriendsList();
         }
     }
+
+
 
 
 }
