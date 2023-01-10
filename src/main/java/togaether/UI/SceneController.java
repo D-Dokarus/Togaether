@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import togaether.App;
+import togaether.UI.Frame.LoginFrame;
 import togaether.UI.Frame.NotificationFrame;
 
 import java.io.IOException;
@@ -120,7 +121,9 @@ public class SceneController {
       root = FXMLLoader.load(NotificationFrame.class.getResource("NotificationCenter"+".fxml"));
       Stage stage = new Stage();
       stage.setTitle("NotificationCenter");
-      stage.setScene(new Scene(root));
+      Scene scene = new Scene(root);
+      scene.getStylesheets().add(LoginFrame.class.getResource("application.css").toExternalForm());
+      stage.setScene(scene);
       stage.initModality(Modality.WINDOW_MODAL);
       stage.show();
     }
