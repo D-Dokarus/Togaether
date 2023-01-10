@@ -21,42 +21,77 @@ public class TrophyFacade {
         return instance;
     }
 
+    /**
+     * Create a Trophy
+     * @param trophy
+     * @throws SQLException
+     */
     public void createTrophy(Trophy trophy) throws SQLException {
         AbstractFactory abstractFactory = AbstractFactory.createInstance();
         TrophyDAO trophyDB = abstractFactory.getTrophyDAO();
         trophyDB.createTrophy(trophy.getName(), trophy.getCategory_id(), trophy.getValue(), trophy.getImage());
     }
 
+    /**
+     * Update a Trophy
+     * @param trophy
+     * @throws SQLException
+     */
     public void updateTrophy(Trophy trophy) throws SQLException {
         AbstractFactory abstractFactory = AbstractFactory.createInstance();
         TrophyDAO trophyDB = abstractFactory.getTrophyDAO();
         trophyDB.updateTrophy(trophy);
     }
 
+    /**
+     * Delete a Trophy
+     * @param trophy
+     * @throws SQLException
+     */
     public void deleteTrophy(Trophy trophy) throws SQLException {
         AbstractFactory abstractFactory = AbstractFactory.createInstance();
         TrophyDAO trophyDB = abstractFactory.getTrophyDAO();
         trophyDB.deleteTrophyById(trophy.getId());
     }
 
+    /**
+     * Return a List of all the trophies
+     * @return
+     * @throws SQLException
+     */
     public List<Trophy> getAllTrophies() throws SQLException {
         AbstractFactory abstractFactory = AbstractFactory.createInstance();
         TrophyDAO trophyDB = abstractFactory.getTrophyDAO();
         return trophyDB.findAllTrophies();
     }
 
+    /**
+     * Return a List of all TrophyCategories
+     * @return
+     * @throws SQLException
+     */
     public List<TrophyCategory> getAllCategories() throws SQLException {
         AbstractFactory abstractFactory = AbstractFactory.createInstance();
         TrophyDAO trophyDB = abstractFactory.getTrophyDAO();
         return trophyDB.findAllCategories();
     }
 
+    /**
+     * Return a List of the trophies owned by the connected User
+     * @return
+     * @throws SQLException
+     */
     public List<Trophy> getTrophiesOfUser() throws SQLException {
         AbstractFactory abstractFactory = AbstractFactory.createInstance();
         TrophyDAO trophyDB = abstractFactory.getTrophyDAO();
         return trophyDB.findTrophiesByUserId(UserFacade.getInstance().getConnectedUser().getId());
     }
 
+    /**
+     * Verify if the trophies of a category can be give to the connected User, and give them if yes
+     * @param category
+     * @return
+     */
     public boolean isTrophyValidForUser(String category) {
         Boolean valid = false;
         try {
@@ -88,6 +123,11 @@ public class TrophyFacade {
         return valid;
     }
 
+    /**
+     * Return a String that specify the condition to gain the specific Trophy
+     * @param trophy
+     * @return
+     */
     public String getCondition(Trophy trophy) {
         String category = trophy.getCategory();
         if (category.equals("travel"))
@@ -104,6 +144,13 @@ public class TrophyFacade {
             return "";
     }
 
+    /**
+     * Return the path of the Trophy's image
+     * @param trophy
+     * @param isOwned
+     * @return
+     * @throws MalformedURLException
+     */
     public String getImagePath(Trophy trophy, boolean isOwned) throws MalformedURLException {
         String sep = File.separator;
         String path = "";
@@ -123,12 +170,22 @@ public class TrophyFacade {
         return path;
     }
 
+    /**
+     * Give a Trophy to the connected User
+     * @param trophy_id
+     * @throws SQLException
+     */
     public void giveTrophyToUser(int trophy_id) throws SQLException {
         AbstractFactory abstractFactory = AbstractFactory.createInstance();
         TrophyDAO trophyDB = abstractFactory.getTrophyDAO();
         trophyDB.createTrophyUser(trophy_id, UserFacade.getInstance().getConnectedUser().getId());
     }
 
+    /**
+     * Return a String that represents the description of a TrophyCategory name
+     * @param name
+     * @return
+     */
     public String nameToFrench(String name) {
         if (name.equals("travel"))
             return "Voyages total";
@@ -141,6 +198,11 @@ public class TrophyFacade {
         return "nameToFrench de TrophyFacade";
     }
 
+    /**
+     * Return a String that give the name of a TrophyCategory from a description
+     * @param french
+     * @return
+     */
     public String frenchToName(String french) {
         if (french.equals("Voyages total"))
             return "travel";
@@ -153,10 +215,18 @@ public class TrophyFacade {
         return "frenchToName de TrophyFacade";
     }
 
+    /**
+     * Return the actual Trophy
+     * @return
+     */
     public Trophy getTrophy() {
         return trophy;
     }
 
+    /**
+     * Set the actual Trophy
+     * @param trophy
+     */
     public void setTrophy(Trophy trophy) {
         this.trophy = trophy;
     }

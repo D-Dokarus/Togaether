@@ -17,6 +17,11 @@ public class ChatFacade {
     return instance;
   }
 
+  /**
+   * Send a message in the actual Travel's chat
+   * @param text
+   * @return
+   */
   public boolean sendMessage(String text) {
     TravelFacade travelFacade = TravelFacade.getInstance();
 
@@ -31,6 +36,13 @@ public class ChatFacade {
     return true;
   }
 
+  /**
+   * Return a List of Messages of a Collaborator
+   * @param id
+   * @return
+   * @throws CollaboratorNotFoundException
+   * @throws DBNotFoundException
+   */
   public List<Message> getMessagesByCollaboratorId(int id) throws CollaboratorNotFoundException, DBNotFoundException {
     AbstractFactory fact = AbstractFactory.createInstance();
     MessageDAO messageDB = fact.getMessageDAO();
@@ -41,6 +53,14 @@ public class ChatFacade {
       throw new DBNotFoundException();
     }
   }
+
+  /**
+   * Return a List of Messages of an User
+   * @param id
+   * @return
+   * @throws UserNotFoundException
+   * @throws DBNotFoundException
+   */
   public List<Message> getMessagesByUserId(int id) throws UserNotFoundException, DBNotFoundException {
     AbstractFactory fact = AbstractFactory.createInstance();
     MessageDAO messageDB = fact.getMessageDAO();
@@ -58,6 +78,14 @@ public class ChatFacade {
       throw new DBNotFoundException();
     }
   }
+
+  /**
+   * Return a List of Messages of a Travel
+   * @param id
+   * @return
+   * @throws TravelNotFoundException
+   * @throws DBNotFoundException
+   */
   public List<Message> getMessagesByTravelId(int id) throws TravelNotFoundException, DBNotFoundException{
     List<Message> liste;
     try {
@@ -76,6 +104,16 @@ public class ChatFacade {
     }
     return liste;
   }
+
+  /**
+   * Return a List of Messages of a User in a Travel
+   * @param idUser
+   * @param idTravel
+   * @return
+   * @throws UserNotFoundException
+   * @throws TravelNotFoundException
+   * @throws DBNotFoundException
+   */
   public List<Message> getMessagesByUserIdAndTravelId(int idUser, int idTravel) throws UserNotFoundException,TravelNotFoundException, DBNotFoundException{
     AbstractFactory fact = AbstractFactory.createInstance();
     MessageDAO messageDB = fact.getMessageDAO();
