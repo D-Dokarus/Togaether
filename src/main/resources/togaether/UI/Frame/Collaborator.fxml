@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="452.0" prefWidth="703.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="togaether.UI.Controller.CollaboratorController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="452.0" prefWidth="703.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="togaether.UI.Controller.CollaboratorController">
    <children>
       <Button fx:id="buttonToTravel" layoutX="24.0" layoutY="23.0" mnemonicParsing="false" onAction="#onClickButtonToTravel" prefHeight="27.0" prefWidth="117.0" text="Retour au voyage" />
       <ListView fx:id="collaboratorsListView" layoutX="23.0" layoutY="157.0" prefHeight="185.0" prefWidth="351.0" />

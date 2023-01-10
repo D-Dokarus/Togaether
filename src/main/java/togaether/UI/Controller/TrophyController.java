@@ -10,64 +10,70 @@ import togaether.BL.Facade.TrophyFacade;
 import togaether.BL.Model.Trophy;
 import togaether.UI.SceneController;
 
+import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class TrophyController {
-  @FXML
-  FlowPane flowPane;
-  @FXML
-  Button returnButton;
+    @FXML
+    FlowPane flowPane;
+    @FXML
+    Button returnButton;
 
-  @FXML
-  protected void initialize() {
-    this.loadTrophies();
-  }
-  public void loadTrophies() {
-    TrophyFacade trophyFacade = TrophyFacade.getInstance();
-    try {
-      ArrayList<Trophy> trophies = (ArrayList<Trophy>) trophyFacade.getAllTrophies();
-      ArrayList<Trophy> tempOwned = (ArrayList<Trophy>) trophyFacade.getTrophiesOfUser();
-      Map<Integer, Trophy> mapOwnedTrophies =
-              tempOwned.stream().collect(Collectors.toMap(Trophy::getId, item -> item));
-
-      for (Trophy trophy : trophies) {
-        //Si l'utilisateur a ce trophée
-        if(mapOwnedTrophies.containsKey(trophy.getId())) {
-          addTrophy(trophy, true);
-        }else {
-          addTrophy(trophy, false);
-        }
-      }
-    } catch (SQLException e) {
-      System.out.println("Erreur lors de la récupération des Trophées");
+    @FXML
+    protected void initialize() {
+        this.loadTrophies();
     }
-  }
 
-  public void addTrophy(Trophy trophy, Boolean isOwned) {
-    HBox root = new HBox(2);
-    root.setMinSize(100, 50);
-    root.setAlignment(Pos.CENTER);
-    root.setPadding(new Insets(5, 10, 5, 10));
+    public void loadTrophies() {
+        TrophyFacade trophyFacade = TrophyFacade.getInstance();
+        try {
+            ArrayList<Trophy> trophies = (ArrayList<Trophy>) trophyFacade.getAllTrophies();
+            ArrayList<Trophy> tempOwned = (ArrayList<Trophy>) trophyFacade.getTrophiesOfUser();
+            Map<Integer, Trophy> mapOwnedTrophies =
+                    tempOwned.stream().collect(Collectors.toMap(Trophy::getId, item -> item));
 
-    ImageView imageView = new ImageView(new Image(TrophyFacade.getInstance().getImagePath(trophy, isOwned), 50, 50, false, false));
-    root.getChildren().add(imageView);
+            for (Trophy trophy : trophies) {
+                //Si l'utilisateur a ce trophée
+                if (mapOwnedTrophies.containsKey(trophy.getId())) {
+                    addTrophy(trophy, true);
+                } else {
+                    addTrophy(trophy, false);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la récupération des Trophées");
+        }
+    }
 
-    VBox infos = new VBox(2);
-    infos.setFillWidth(true);
-    infos.getChildren().add(new Label(trophy.getName()));
+    public void addTrophy(Trophy trophy, Boolean isOwned) {
+        HBox root = new HBox(2);
+        root.setMinSize(100, 50);
+        root.setAlignment(Pos.CENTER);
+        root.setPadding(new Insets(5, 10, 5, 10));
+        try {
+            ImageView imageView = new ImageView(new Image(TrophyFacade.getInstance().getImagePath(trophy, isOwned), 50, 50, false, false));
+            root.getChildren().add(imageView);
+        } catch (MalformedURLException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Erreur lors de la récupération de l'image");
+        }
 
-    Label condition = new Label(TrophyFacade.getInstance().getCondition(trophy));
-    condition.setWrapText(true);
-    infos.getChildren().add(condition);
+        VBox infos = new VBox(2);
+        infos.setFillWidth(true);
+        infos.getChildren().add(new Label(trophy.getName()));
 
-    root.getChildren().add(infos);
-    this.flowPane.getChildren().add(root);
-  }
+        Label condition = new Label(TrophyFacade.getInstance().getCondition(trophy));
+        condition.setWrapText(true);
+        infos.getChildren().add(condition);
 
-  public void onReturnButtonClicked(ActionEvent event) {
-    SceneController.getInstance().switchToHomePage(event);
-  }
+        root.getChildren().add(infos);
+        this.flowPane.getChildren().add(root);
+    }
+
+    public void onReturnButtonClicked(ActionEvent event) {
+        SceneController.getInstance().switchToHomePage(event);
+    }
 }

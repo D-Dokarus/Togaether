@@ -16,75 +16,79 @@ import togaether.BL.Facade.TrophyFacade;
 import togaether.BL.Model.Trophy;
 import togaether.UI.SceneController;
 
+import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AdminTrophyController {
-  @FXML
-  FlowPane flowPane;
-  @FXML
-  Button returnButton;
-  @FXML
-  Button addButton;
-  @FXML
-  Label labelInfo;
+    @FXML
+    FlowPane flowPane;
+    @FXML
+    Button returnButton;
+    @FXML
+    Button addButton;
+    @FXML
+    Label labelInfo;
 
-  @FXML
-  protected void initialize() {
-    this.loadTrophies();
-  }
-
-  public void loadTrophies() {
-    TrophyFacade trophyFacade = TrophyFacade.getInstance();
-    try {
-      ArrayList<Trophy> trophies = (ArrayList<Trophy>) trophyFacade.getAllTrophies();
-
-      for (Trophy trophy : trophies) {
-        addTrophy(trophy);
-      }
-    } catch (SQLException e) {
-      System.out.println("Erreur lors de la récupération des Trophées");
+    @FXML
+    protected void initialize() {
+        this.loadTrophies();
     }
-  }
 
-  public void addTrophy(Trophy trophy) {
-    HBox root = new HBox(2);
-    root.setMinSize(100, 50);
-    root.setAlignment(Pos.CENTER);
-    root.setPadding(new Insets(5, 10, 5, 10));
+    public void loadTrophies() {
+        TrophyFacade trophyFacade = TrophyFacade.getInstance();
+        try {
+            ArrayList<Trophy> trophies = (ArrayList<Trophy>) trophyFacade.getAllTrophies();
 
-    ImageView imageView = new ImageView(new Image(TrophyFacade.getInstance().getImagePath(trophy, true), 50, 50, false, false));
-    root.getChildren().add(imageView);
+            for (Trophy trophy : trophies) {
+                addTrophy(trophy);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la récupération des Trophées");
+        }
+    }
 
-    VBox infos = new VBox(4);
-    infos.setFillWidth(true);
-    infos.getChildren().add(new Label(trophy.getName()));
+    public void addTrophy(Trophy trophy) {
+        HBox root = new HBox(2);
+        root.setMinSize(100, 50);
+        root.setAlignment(Pos.CENTER);
+        root.setPadding(new Insets(5, 10, 5, 10));
+        try {
+            ImageView imageView = new ImageView(new Image(TrophyFacade.getInstance().getImagePath(trophy, true), 50, 50, false, false));
+            root.getChildren().add(imageView);
+        } catch (MalformedURLException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Erreur lors de la récupération de l'image");
+        }
+        VBox infos = new VBox(4);
+        infos.setFillWidth(true);
+        infos.getChildren().add(new Label(trophy.getName()));
 
-    Label condition = new Label(TrophyFacade.getInstance().getCondition(trophy));
-    condition.setWrapText(true);
-    infos.getChildren().add(condition);
+        Label condition = new Label(TrophyFacade.getInstance().getCondition(trophy));
+        condition.setWrapText(true);
+        infos.getChildren().add(condition);
 
-    Button deleteButton = new Button("Supprimer");
-    deleteButton.setOnAction(event -> {
-      TrophyFacade.getInstance().setTrophy(trophy);
-      SceneController.getInstance().switchToDeleteTrophy(event);
-    });
-    Button modifyButton = new Button("Modifier");
-    modifyButton.setOnAction(event -> {
-      TrophyFacade.getInstance().setTrophy(trophy);
-      SceneController.getInstance().switchToModifyTrophy(event);
-    });
+        Button deleteButton = new Button("Supprimer");
+        deleteButton.setOnAction(event -> {
+            TrophyFacade.getInstance().setTrophy(trophy);
+            SceneController.getInstance().switchToDeleteTrophy(event);
+        });
+        Button modifyButton = new Button("Modifier");
+        modifyButton.setOnAction(event -> {
+            TrophyFacade.getInstance().setTrophy(trophy);
+            SceneController.getInstance().switchToModifyTrophy(event);
+        });
 
-    root.getChildren().addAll(infos, modifyButton, deleteButton);
-    this.flowPane.getChildren().add(root);
-  }
+        root.getChildren().addAll(infos, modifyButton, deleteButton);
+        this.flowPane.getChildren().add(root);
+    }
 
-  public void onAddButtonClicked(ActionEvent event) {
-    TrophyFacade.getInstance().setTrophy(null);
-    SceneController.getInstance().switchToModifyTrophy(event);
-  }
+    public void onAddButtonClicked(ActionEvent event) {
+        TrophyFacade.getInstance().setTrophy(null);
+        SceneController.getInstance().switchToModifyTrophy(event);
+    }
 
-  public void onReturnButtonClicked(ActionEvent event) {
-    SceneController.getInstance().switchToHomePage(event);
-  }
+    public void onReturnButtonClicked(ActionEvent event) {
+        SceneController.getInstance().switchToHomePage(event);
+    }
 }
