@@ -181,7 +181,7 @@ public class CollaboratorController {
                 protected void updateItem(Friend friend, boolean empty) {
                     super.updateItem(friend, empty);
 
-                    if (friend == null || empty) {
+                    if (friend == null || empty ) {
                         setText(null);
                     } else {
 
@@ -190,7 +190,7 @@ public class CollaboratorController {
                         if(friend.getUser1().getId() == UserFacade.getInstance().getConnectedUser().getId()){
                             you = friend.getUser1();
                             other = friend.getUser2();
-                        }else{
+                        }else {
                             you = friend.getUser2();
                             other = friend.getUser1();
                         }
@@ -218,9 +218,9 @@ public class CollaboratorController {
                         //BUTTON INVITER AU VOYAGE
                         Button btnAdd= new Button("Ajouter");
                         btnAdd.setOnAction(event -> {
-                            onClickInviteFriend(friend);
-                            btnAdd.setText("Ajouté");
-                            btnAdd.setDisable(true);
+                                onClickInviteFriend(friend);
+                                btnAdd.setText("Ajouté");
+                                btnAdd.setDisable(true);
                         });
                         root.getChildren().add(btnAdd);
 

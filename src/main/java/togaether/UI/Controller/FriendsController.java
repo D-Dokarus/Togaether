@@ -77,9 +77,9 @@ public class FriendsController {
                 protected void updateItem(Friend friend, boolean empty) {
                     super.updateItem(friend, empty);
 
-                    if (friend == null || empty) {
+                    if(friend == null || empty){
                         setText(null);
-                    } else {
+                    }else{
                         User other = null;
                         if(friend.getUser1().getId() == UserFacade.getInstance().getConnectedUser().getId()){
                             other = friend.getUser2();
@@ -137,7 +137,7 @@ public class FriendsController {
                 protected void updateItem(User user, boolean empty) {
                     super.updateItem(user, empty);
 
-                    if (user == null || empty) {
+                    if (user == null || empty || user.getId() == UserFacade.getInstance().getConnectedUser().getId()) {
                         setText(null);
                     } else {
 
@@ -201,8 +201,12 @@ public class FriendsController {
 
     private void onClickButtonAdd(User user){
         User you = UserFacade.getInstance().getConnectedUser();
-        Notification notification = new Notification(user,you,you.getPseudo() + " vous demande en ami(e)",true, NotificationCategory.createNotification("friendInvitation"),you.getId());
-        NotificationFacade.getInstance().createNotification(notification);
+        Friend friend = FriendFacade.getInstance().isAlreadyFriendWith(you,user);
+        if(friend == null){
+            Notification notification = new Notification(user,you,you.getPseudo() + " vous demande en ami(e)",true, NotificationCategory.createNotification("friendInvitation"),you.getId());
+            NotificationFacade.getInstance().createNotification(notification);
+
+        }
     }
 
 
