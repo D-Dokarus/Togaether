@@ -73,6 +73,8 @@ public class ActivityController {
 
                         // Within the root, we'll show the username on the left and our two buttons to the right
                         root.getChildren().add(new Label(activity.getNameActivity()));
+                        if(activity.getDateStart() != null)
+                            root.getChildren().add(new Label(activity.getDateStart().toString()));
 
                         // Add another Region here to expand, pushing the buttons to the right
                         Region region = new Region();
@@ -150,6 +152,8 @@ public class ActivityController {
 
                             // Within the root, we'll show the username on the left and our two buttons to the right
                             root.getChildren().add(new Label(activity.getNameActivity()));
+                            if(activity.getDateStart() != null)
+                                root.getChildren().add(new Label(activity.getDateStart().toString()));
 
                             // Add another Region here to expand, pushing the buttons to the right
                             Region region = new Region();

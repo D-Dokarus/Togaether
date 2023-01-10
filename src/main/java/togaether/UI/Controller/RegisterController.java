@@ -56,7 +56,6 @@ public class RegisterController {
         String sep = File.separator;
         String path = "";
         //set logo image with image/logo.png
-        System.out.println(System.getProperty("user.dir") + sep  + "image" + sep + "logo.png");
         File image = new File(System.getProperty("user.dir") + sep  + "image" + sep + "logo.png");
         if (image.exists()) {
             this.logo.setImage(new Image(image.toURI().toURL().toExternalForm(), 200, 200, true, true));

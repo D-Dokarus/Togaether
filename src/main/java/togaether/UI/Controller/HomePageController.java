@@ -26,7 +26,7 @@ public class HomePageController {
   @FXML
   private Button notificationsButton;
   @FXML
-  private Button settingsButton;
+  private Button profilButton;
   @FXML
   private Button trophiesButton;
   @FXML

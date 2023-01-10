@@ -123,7 +123,6 @@ public class ActivityUpdateController {
                 ActivityFacade activityFacade = ActivityFacade.getInstance();
                 try {
                     majActivity.setIdActivity(this.activity.getIdActivity());
-                    System.out.println("idActivity : " + majActivity.getIdActivity());
                     activityFacade.updateActivity(majActivity);
                     SceneController.getInstance().switchToActivity(event);
                     System.out.println("Activité modifiée !");

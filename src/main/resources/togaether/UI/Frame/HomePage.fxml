@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="togaether.UI.Controller.HomePageController">
    <children>
-      <Button fx:id="settingsButton" layoutX="438.0" layoutY="19.0" mnemonicParsing="false" onAction="#onSettingsButtonClicked" prefHeight="33.0" prefWidth="103.0" text="Paramètres">
+      <Button fx:id="profilButton" layoutX="438.0" layoutY="19.0" mnemonicParsing="false" onAction="#onSettingsButtonClicked" prefHeight="33.0" prefWidth="103.0" text="Profil">
          <font>
             <Font name="Garamond" size="14.0" />
          </font></Button>
