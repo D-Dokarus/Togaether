@@ -43,18 +43,23 @@ public class HomePageController {
   private ListView<Travel> travelList;
   @FXML
   private Label labelError;
+  @FXML
+  private TextField searchTravel;
 
   @FXML
   protected void initialize() {
+    this.searchTravel.textProperty().addListener((observable, oldValue, newValue) -> {
+      loadTravels();
+    });
     this.loadTravels();
-    //Cacher le bouton pour gérer les trophées si non admin
+    //The managing of trophies is only allowed for admin
     this.trophiesAdminButton.setVisible(UserFacade.getInstance().getConnectedUser().getIsAdmin());
   }
 
   private void loadTravels() {
     this.unusable.setDisable(true);
     TravelFacade travelFacade = TravelFacade.getInstance();
-    ArrayList<Travel> travels = (ArrayList<Travel>) travelFacade.findTravelsByUserId(UserFacade.getInstance().getConnectedUser().getId());
+    ArrayList<Travel> travels = (ArrayList<Travel>) travelFacade.findTravelsParticipationByUserId(UserFacade.getInstance().getConnectedUser().getId());
 
     ObservableList<Travel> observableTravels = FXCollections.observableArrayList();
     observableTravels.addAll(travels);
@@ -68,39 +73,42 @@ public class HomePageController {
         if (travel == null || empty) {
           setText(null);
         } else {
+          if(travel.getNameTravel().toLowerCase().contains(searchTravel.getText().toLowerCase())) {
+            HBox root = new HBox(10);
+            root.setAlignment(Pos.CENTER_LEFT);
+            root.setPadding(new Insets(5, 10, 5, 10));
 
-          HBox root = new HBox(10);
-          root.setAlignment(Pos.CENTER_LEFT);
-          root.setPadding(new Insets(5, 10, 5, 10));
+            root.getChildren().add(new Label(travel.getNameTravel()));
+            if(travel.getDateStart() != null)
+              root.getChildren().add(new Label(travel.getDateStart().toString()));
 
-          root.getChildren().add(new Label(travel.getNameTravel()));
+            Region region = new Region();
+            HBox.setHgrow(region, Priority.ALWAYS);
+            root.getChildren().add(region);
 
-          Region region = new Region();
-          HBox.setHgrow(region, Priority.ALWAYS);
-          root.getChildren().add(region);
+            //BUTTON GOTRAVEL
+            Button btnGoTravel = new Button("Voir");
+            btnGoTravel.setOnAction(event -> {
+              TravelFacade.getInstance().setTravel(travel);
+              SceneController.getInstance().switchToTravel(event);
+            });
+            //BUTTON ARCHIVETRAVEL
+            Button btnArchiveTravel = new Button("Archiver");
+            btnArchiveTravel.setOnAction(event -> {
+              TravelFacade.getInstance().setTravel(travel);
+              SceneController.getInstance().switchToArchiveTravel(event);
+            });
+            //BUTTON DELETETRAVEL
+            Button btnDeleteTravel = new Button("Supprimer");
+            btnDeleteTravel.setOnAction(event -> {
+              TravelFacade.getInstance().setTravel(travel);
+              SceneController.getInstance().switchToDeleteTravel(event);
+            });
+            root.getChildren().addAll(btnGoTravel, btnArchiveTravel, btnDeleteTravel);
 
-          //BUTTON GOTRAVEL
-          Button btnGoTravel = new Button("Voir");
-          btnGoTravel.setOnAction(event -> {
-            TravelFacade.getInstance().setTravel(travel);
-            SceneController.getInstance().switchToTravel(event);
-          });
-          //BUTTON ARCHIVETRAVEL
-          Button btnArchiveTravel = new Button("Archiver");
-          btnArchiveTravel.setOnAction(event -> {
-            TravelFacade.getInstance().setTravel(travel);
-            SceneController.getInstance().switchToArchiveTravel(event);
-          });
-          //BUTTON DELETETRAVEL
-          Button btnDeleteTravel = new Button("Supprimer");
-          btnDeleteTravel.setOnAction(event -> {
-            TravelFacade.getInstance().setTravel(travel);
-            SceneController.getInstance().switchToDeleteTravel(event);
-          });
-          root.getChildren().addAll(btnGoTravel, btnArchiveTravel, btnDeleteTravel);
-
-          setText(null);
-          setGraphic(root);
+            setText(null);
+            setGraphic(root);
+          }
         }
       }
     });

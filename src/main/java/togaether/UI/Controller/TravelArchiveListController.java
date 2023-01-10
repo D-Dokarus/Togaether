@@ -20,6 +20,7 @@ import togaether.BL.Facade.UserFacade;
 import togaether.BL.Model.Travel;
 import togaether.UI.SceneController;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class TravelArchiveListController {
@@ -41,12 +42,9 @@ public class TravelArchiveListController {
         this.unusable.setDisable(true);
         TravelFacade travelFacade = TravelFacade.getInstance();
         UserFacade userFacade = UserFacade.getInstance();
-        try {
-            travelsArchived = (List<Travel>) travelFacade.travelsArchived(userFacade.getConnectedUser().getId());
-        } catch (DBNotFoundException e) {
-            this.labelError.setText("Problème lors du chargement des voyages archivés, veuillez réessayer plus tard...");
-            throw new RuntimeException(e);
-        }
+
+        travelsArchived = (List<Travel>) travelFacade.findTravelsArchivedParticipationByUserId(userFacade.getConnectedUser().getId());
+
         ObservableList<Travel> observableTravels = FXCollections.observableArrayList();
         for(Travel travel : travelsArchived){
             observableTravels.add(travel);

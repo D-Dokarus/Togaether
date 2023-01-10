@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="togaether.UI.Controller.HomePageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="togaether.UI.Controller.HomePageController">
    <children>
       <Button fx:id="settingsButton" layoutX="438.0" layoutY="19.0" mnemonicParsing="false" onAction="#onSettingsButtonClicked" prefHeight="33.0" prefWidth="103.0" text="Paramètres">
          <font>
@@ -57,5 +57,10 @@
             <Font name="Garamond" size="14.0" />
          </font>
       </Button>
+      <Label layoutX="194.0" layoutY="97.0" prefHeight="25.0" prefWidth="46.0" text="Date">
+         <font>
+            <Font name="Garamond" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

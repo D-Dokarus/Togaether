@@ -158,7 +158,7 @@ public class TravelFacade {
         AbstractFactory fact = AbstractFactory.createInstance();
         TravelDAO travelDB = fact.getTravelDAO();
         try {
-             return travelDB.travelsArchived(Id);
+             return travelDB.findTravelsArchivedByUserId(Id);
         } catch (SQLException e) {
             System.out.println(e);
             throw new DBNotFoundException();
@@ -181,7 +181,23 @@ public class TravelFacade {
         ArrayList<Travel> liste = new ArrayList<>();
         TravelDAO travelDB = AbstractFactory.createInstance().getTravelDAO();
         try {
-            liste = (ArrayList<Travel>) travelDB.findTravelsByUserId(id);
+            return liste = (ArrayList<Travel>) travelDB.findTravelsByUserId(id);
+        } catch (SQLException e) {}
+        return liste;
+    }
+    public List<Travel> findTravelsParticipationByUserId(int id) {
+        ArrayList<Travel> liste = new ArrayList<>();
+        TravelDAO travelDB = AbstractFactory.createInstance().getTravelDAO();
+        try {
+            liste = (ArrayList<Travel>) travelDB.findTravelsParticipationByUserId(id);
+        } catch (SQLException e) {}
+        return liste;
+    }
+    public List<Travel> findTravelsArchivedParticipationByUserId(int id) {
+        ArrayList<Travel> liste = new ArrayList<>();
+        TravelDAO travelDB = AbstractFactory.createInstance().getTravelDAO();
+        try {
+            liste = (ArrayList<Travel>) travelDB.findTravelsArchivedParticipationByUserId(id);
         } catch (SQLException e) {}
         return liste;
     }

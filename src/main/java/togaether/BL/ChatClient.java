@@ -2,6 +2,7 @@ package togaether.BL;
 
 import com.lloseng.ocsf.client.ObservableClient;
 import com.lloseng.ocsf.server.ObservableServer;
+import togaether.BL.Facade.TravelFacade;
 import togaether.UI.Controller.ChatController;
 
 import java.io.IOException;
@@ -27,10 +28,8 @@ public class ChatClient implements Observer {
     this.service.addObserver(this);
 
     //TO DO
-    //TravelFacade travelFacade = TravelFacade.createInstance();
-    int id = 1; //travelFacade.getTravel().getId();
     this.service.openConnection();
-    this.service.sendToServer(""+id);
+    this.service.sendToServer(""+ TravelFacade.getInstance().getTravel().getIdTravel());
   }
 
 
