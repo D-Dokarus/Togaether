@@ -139,9 +139,6 @@ public class ItineraryController {
                                 } else if (itinerary.getIndexAfter() != -1) { // Pour A B C D qui se suivent pour changement B-C avec itinerary = B
                                     itineraryFacade.switchIndexFor4ItinerariesById(itinerary.getIndexBefore(), itinerary.getItinerary_id(), itinerary.getIndexAfter(), linkedList.get(indexLinkedList + 2).getItinerary_id());
                                 } else { // Premier itineraire de la liste
-                                    System.out.println(itinerary.getItinerary_id());
-                                    System.out.println(itinerary.getIndexAfter());
-                                    System.out.println(linkedList.get(indexLinkedList + 1).getIndexAfter());
                                     itineraryFacade.switchIndexBeforeFor3ItinerariesById(itinerary.getItinerary_id(), itinerary.getIndexAfter(), linkedList.get(indexLinkedList + 1).getIndexAfter());
                                 }
                             }

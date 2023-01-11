@@ -232,21 +232,4 @@ public class NotificationFacade {
         }
 
     }
-
-
-
-    public static void main(String args[]){
-        NotificationFacade facade = NotificationFacade.getInstance();
-
-        Notification n = new Notification(0,null,null,"",false,null,0);
-        //facade.deleteNotification(n);
-
-
-           int x = facade.getNbNotificationsByUserId(new User(0));
-           System.out.println(x);
-
-
-
-
-    }
 }
