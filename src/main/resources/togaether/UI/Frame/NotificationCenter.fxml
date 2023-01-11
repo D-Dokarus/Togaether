@@ -13,7 +13,7 @@
          <font>
             <Font name="Garamond" size="24.0" />
          </font></Label>
-      <Button disable="true" layoutX="193.0" layoutY="367.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="107.0" text="Retour">
+      <Button onAction="#goBackHomePage" layoutX="193.0" layoutY="367.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="107.0" text="Retour">
          <font>
             <Font name="Garamond" size="24.0" />
          </font></Button>

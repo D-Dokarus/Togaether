@@ -2,6 +2,7 @@ package togaether.BL.Facade;
 
 import javafx.event.ActionEvent;
 import togaether.BL.Model.*;
+import togaether.BL.TogaetherException.CollaboratorNotFoundException;
 import togaether.BL.TogaetherException.DBNotFoundException;
 import togaether.BL.TogaetherException.NotificationNotFound;
 import togaether.DB.AbstractFactory;
@@ -20,6 +21,8 @@ public class NotificationFacade {
     public Notification getNotification() {
         return notification;
     }
+
+    public void setNotificationInFacade(Notification notification){this.notification = notification;}
 
     public static NotificationFacade getInstance(){return instance;}
 
@@ -97,10 +100,19 @@ public class NotificationFacade {
                 break;
             case "travelInvitation":
                 try{
+
                     TravelFacade.getInstance().setTravel(TravelFacade.getInstance().findTravelById(notification.getSpecialId()));
+                    Travel travel = TravelFacade.getInstance().getTravel();
+
+                    User user = UserFacade.getInstance().getConnectedUser();
+
+                    NotificationFacade.getInstance().setNotificationInFacade(notification);
+                    Collaborator collab = CollaboratorFacade.getInstance().findCollaboratorByUserAndTravel(user,travel);
                     SceneController.getInstance().switchToTravel(event);
                 }catch(DBNotFoundException e){
                     System.out.println(e);
+                } catch (CollaboratorNotFoundException e) {
+                    SceneController.getInstance().switchToChooseCollaborator(event);
                 }
                 break;
             case "serverNotification":

@@ -116,8 +116,8 @@ public class HomePageController {
   }
 
   public void onNotificationsButtonClicked(ActionEvent event) {
-    //SceneController.getInstance().switchToNotificationCenter(event);
-    SceneController.getInstance().newPopupNotification(event);
+    SceneController.getInstance().switchToNotificationCenter(event);
+    //SceneController.getInstance().newPopupNotification(event);
   }
   public void onSettingsButtonClicked(ActionEvent event) {
     SceneController.getInstance().switchToSettings(event);
