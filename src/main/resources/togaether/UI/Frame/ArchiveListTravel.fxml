@@ -6,23 +6,32 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="togaether.UI.Controller.TravelArchiveListController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="togaether.UI.Controller.TravelArchiveListController">
    <children>
       <Button fx:id="unusable" layoutX="19.0" layoutY="82.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="762.0" />
       <Label fx:id="labelError" layoutX="300.0" layoutY="35.0" prefHeight="17.0" prefWidth="226.0" textFill="RED" />
-      <Button fx:id="returnButton" layoutX="19.0" layoutY="21.0" mnemonicParsing="false" onAction="#onReturnButtonClicked" prefHeight="46.0" prefWidth="122.0" text="Retour">
+      <Label layoutX="31.0" layoutY="102.0" prefHeight="30.0" prefWidth="59.0" text="Date">
          <font>
-            <Font size="22.0" />
+            <Font name="Garamond" size="24.0" />
+         </font></Label>
+      <Button fx:id="returnButton" layoutX="20.0" layoutY="10.0" mnemonicParsing="false" onAction="#onReturnButtonClicked" prefHeight="59.0" prefWidth="140.0" text="Retour">
+         <font>
+            <Font name="Garamond" size="24.0" />
          </font></Button>
       <ListView fx:id="travelList" layoutX="19.0" layoutY="161.0" prefHeight="417.0" prefWidth="762.0" />
-      <Label layoutX="90.0" layoutY="103.0" prefHeight="31.0" prefWidth="69.0" text="Titre">
+      <Label layoutX="204.0" layoutY="102.0" prefHeight="30.0" prefWidth="121.0" text="Description">
          <font>
-            <Font size="22.0" />
+            <Font name="Garamond" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="231.0" layoutY="23.0" prefHeight="59.0" prefWidth="338.0" text="Voyages archivés">
+      <Label layoutX="113.0" layoutY="102.0" prefHeight="31.0" prefWidth="69.0" text="Titre">
          <font>
-            <Font size="37.0" />
+            <Font name="Garamond" size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="245.0" layoutY="12.0" prefHeight="57.0" prefWidth="337.0" text="Voyages archivés">
+         <font>
+            <Font name="Garamond" size="48.0" />
          </font>
       </Label>
    </children>

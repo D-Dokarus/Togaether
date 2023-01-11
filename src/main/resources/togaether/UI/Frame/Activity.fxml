@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="togaether.UI.Controller.ActivityController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="togaether.UI.Controller.ActivityController">
    <children>
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onReturnButtonClicked" prefHeight="59.0" prefWidth="140.0" text="Retour">
          <font>
@@ -16,9 +16,9 @@
          </font></Button>
       <ListView fx:id="activityList" layoutX="26.0" layoutY="192.0" prefHeight="385.0" prefWidth="740.0" />
       <Button fx:id="unusable" layoutX="26.0" layoutY="105.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="740.0" />
-      <Label layoutX="62.0" layoutY="127.0" prefHeight="36.0" prefWidth="75.0" text="Titre">
+      <Label layoutX="62.0" layoutY="127.0" prefHeight="35.0" prefWidth="66.0" text="Titre">
          <font>
-            <Font size="22.0" />
+            <Font name="Garamond" size="30.0" />
          </font>
       </Label>
       <TextField fx:id="searchActivity" layoutX="380.0" layoutY="117.0" onAction="#onSearchActivityButtonClicked" prefHeight="59.0" prefWidth="170.0" promptText="Rechercher">
@@ -31,14 +31,14 @@
             <Font name="Garamond" size="24.0" />
          </font>
       </Button>
-      <Text layoutX="243.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mes activités">
+      <Text layoutX="261.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mes activités">
          <font>
             <Font name="Garamond" size="48.0" />
          </font>
       </Text>
-      <Label layoutX="240.0" layoutY="130.0" prefHeight="30.0" prefWidth="75.0" text="Date">
+      <Label layoutX="170.0" layoutY="133.0" prefHeight="25.0" prefWidth="46.0" text="Date">
          <font>
-            <Font size="22.0" />
+            <Font name="Garamond" size="24.0" />
          </font>
       </Label>
    </children>

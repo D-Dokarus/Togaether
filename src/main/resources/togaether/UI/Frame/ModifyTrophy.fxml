@@ -7,45 +7,45 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="togaether.UI.Controller.TrophyModifyController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="togaether.UI.Controller.TrophyModifyController">
    <children>
       <Button fx:id="returnButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onReturnButtonClicked" prefHeight="59.0" prefWidth="140.0" text="Annuler">
          <font>
-            <Font size="22.0" />
+            <Font name="Garamond" size="24.0" />
          </font></Button>
-      <Label layoutX="65.0" layoutY="247.0" prefHeight="30.0" prefWidth="88.0" text="Valeur">
+      <Label layoutX="65.0" layoutY="240.0" prefHeight="30.0" prefWidth="88.0" text="Valeur">
          <font>
-            <Font size="22.0" />
+            <Font name="Garamond" size="24.0" />
          </font></Label>
       <TextArea fx:id="nameTrophy" layoutX="62.0" layoutY="169.0" prefHeight="38.0" prefWidth="288.0" promptText="Nom du Trophée">
          <font>
-            <Font size="22.0" />
+            <Font name="Garamond" size="24.0" />
          </font></TextArea>
-      <TextArea fx:id="valueTrophy" layoutX="62.0" layoutY="285.0" prefHeight="70.0" prefWidth="288.0" promptText="Minimum 0">
+      <TextArea fx:id="valueTrophy" layoutX="62.0" layoutY="277.0" prefHeight="70.0" prefWidth="288.0" promptText="Minimum 0">
          <font>
-            <Font size="22.0" />
+            <Font name="Garamond" size="24.0" />
          </font></TextArea>
-      <Button fx:id="confirmedButton" layoutX="569.0" layoutY="480.0" mnemonicParsing="false" onAction="#onConfirmedButtonClicked" prefHeight="59.0" prefWidth="153.0" text="Confirmer">
+      <Button fx:id="confirmedButton" layoutX="582.0" layoutY="480.0" mnemonicParsing="false" onAction="#onConfirmedButtonClicked" prefHeight="59.0" prefWidth="140.0" text="Confirmer">
          <font>
-            <Font size="22.0" />
+            <Font name="Garamond" size="24.0" />
          </font></Button>
-      <Label fx:id="labelError" layoutX="62.0" layoutY="485.0" prefHeight="70.0" prefWidth="288.0" textFill="RED" />
+      <Label fx:id="labelError" layoutX="66.0" layoutY="314.0" textFill="RED" />
       <ChoiceBox fx:id="selectCategory" layoutX="478.0" layoutY="264.0" prefHeight="59.0" prefWidth="254.0" />
-      <Label layoutX="478.0" layoutY="222.0" prefHeight="30.0" prefWidth="140.0" text="Catégorie">
+      <Label layoutX="478.0" layoutY="222.0" prefHeight="18.0" prefWidth="102.0" text="Catégorie">
          <font>
-            <Font size="22.0" />
+            <Font name="Garamond" size="24.0" />
          </font></Label>
       <Label layoutX="63.0" layoutY="135.0" prefHeight="30.0" prefWidth="68.0" text="Nom">
          <font>
-            <Font size="22.0" />
+            <Font name="Garamond" size="24.0" />
          </font></Label>
-      <TextArea fx:id="imageTrophy" layoutX="62.0" layoutY="392.0" prefHeight="38.0" prefWidth="288.0" promptText="Nom du fichier">
+      <TextArea fx:id="imageTrophy" layoutX="62.0" layoutY="381.0" prefHeight="38.0" prefWidth="288.0" promptText="Nom du fichier">
          <font>
-            <Font size="22.0" />
+            <Font name="Garamond" size="24.0" />
          </font></TextArea>
-      <Label layoutX="65.0" layoutY="357.0" prefHeight="30.0" prefWidth="88.0" text="Image">
+      <Label layoutX="66.0" layoutY="349.0" prefHeight="30.0" prefWidth="68.0" text="Image">
          <font>
-            <Font size="22.0" />
+            <Font name="Garamond" size="24.0" />
          </font></Label>
    </children>
 </AnchorPane>

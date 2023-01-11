@@ -7,20 +7,20 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="togaether.UI.Controller.TrophyController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="togaether.UI.Controller.TrophyController">
    <children>
       <Button fx:id="returnButton" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#onReturnButtonClicked" prefHeight="46.0" prefWidth="108.0" text="Retour">
          <font>
-            <Font size="22.0" />
+            <Font name="Garamond" size="24.0" />
          </font></Button>
       <ScrollPane layoutX="19.0" layoutY="62.0" prefHeight="515.0" prefWidth="762.0">
          <content>
-            <FlowPane fx:id="flowPane" prefHeight="474.0" prefWidth="745.0" />
+            <FlowPane fx:id="flowPane" prefHeight="506.0" prefWidth="758.0" />
          </content>
       </ScrollPane>
-      <Label fx:id="title" alignment="CENTER" layoutX="283.0" layoutY="2.0" prefHeight="59.0" prefWidth="234.0" text="Trophées">
+      <Label fx:id="title" alignment="CENTER" layoutX="303.0" layoutY="3.0" prefHeight="30.0" prefWidth="195.0" text="Trophées">
          <font>
-            <Font size="43.0" />
+            <Font name="Garamond" size="48.0" />
          </font>
       </Label>
    </children>
