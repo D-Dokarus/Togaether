@@ -204,6 +204,7 @@ public class ActivityController {
     }
 
     public void onAddActivityButtonClicked(ActionEvent actionEvent) {
+
         SceneController.getInstance().switchToCreateActivity(actionEvent);
     }
 }

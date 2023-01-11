@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
-public class ActivityUpdateController {
+public class ActivityCreateUpdateController {
 
     //BUTTON
     @FXML
@@ -50,37 +50,42 @@ public class ActivityUpdateController {
 
 
     Activity activity;
-
+    ActivityFacade activityFacade = ActivityFacade.getInstance();
     @FXML
     protected void initialize() {
         // Récupérer activity connected
-        ActivityFacade activityFacade = ActivityFacade.getInstance();
-        try {
-            this.activity = activityFacade.getActivity();
-        } catch (Exception e) {
-            System.out.println("Attention : L'activité n'a pas pu être trouvée, veuillez réessayer");
-            this.labelError.setText("Attention : L'activité n'a pas pu être trouvée, veuillez réessayer");
-            throw new RuntimeException(e);
-        }
-        // Remplir les champs avec les informations de l'activité
-        this.nameActivity.setText(this.activity.getNameActivity());
-        if(this.activity.getDescriptionActivity()!=null)
-            this.descriptionActivity.setText(this.activity.getDescriptionActivity());
-        this.priceActivity.setText(String.valueOf(this.activity.getPriceActivity()));
-        if(this.activity.getAddressActivity() != null)
-            this.placeActivity.setText(this.activity.getAddressActivity());
+        if (activityFacade.getActivity() != null) {
+            try {
+                this.activity = activityFacade.getActivity();
+            } catch (Exception e) {
+                System.out.println("Attention : L'activité n'a pas pu être trouvée, veuillez réessayer");
+                this.labelError.setText("Attention : L'activité n'a pas pu être trouvée, veuillez réessayer");
+                throw new RuntimeException(e);
+            }
+            // Remplir les champs avec les informations de l'activité
+            this.nameActivity.setText(this.activity.getNameActivity());
+            if (this.activity.getDescriptionActivity() != null)
+                this.descriptionActivity.setText(this.activity.getDescriptionActivity());
+            this.priceActivity.setText(String.valueOf(this.activity.getPriceActivity()));
+            if (this.activity.getAddressActivity() != null)
+                this.placeActivity.setText(this.activity.getAddressActivity());
 
-        if (this.activity.getDateStart() != null) {
-            LocalDate dateLocal = Instant.ofEpochMilli(this.activity.getDateStart().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
-            this.dateStart.setValue(dateLocal);
-        }
-        if (this.activity.getDateEnd() != null) {
-            LocalDate dateLocal = Instant.ofEpochMilli(this.activity.getDateEnd().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
-            this.dateEnd.setValue(dateLocal);
+            if (this.activity.getDateStart() != null) {
+                LocalDate dateLocal = Instant.ofEpochMilli(this.activity.getDateStart().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+                this.dateStart.setValue(dateLocal);
+            }
+            if (this.activity.getDateEnd() != null) {
+                LocalDate dateLocal = Instant.ofEpochMilli(this.activity.getDateEnd().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+                this.dateEnd.setValue(dateLocal);
+            }
         }
     }
 
     public void onReturnButtonClicked(ActionEvent event) {
+        if (activityFacade.getActivity() != null) {
+            activityFacade.setActivity(null);
+        }
+
         SceneController.getInstance().switchToActivity(event);
     }
 

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="togaether.UI.Controller.TravelArchiveListController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="togaether.UI.Controller.TravelArchiveListController">
    <children>
       <Button fx:id="unusable" layoutX="19.0" layoutY="82.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="762.0" />
       <Label fx:id="labelError" layoutX="300.0" layoutY="35.0" prefHeight="17.0" prefWidth="226.0" textFill="RED" />
