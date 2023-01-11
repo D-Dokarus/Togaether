@@ -7,40 +7,40 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="togaether.UI.Controller.CollaboratorController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="togaether.UI.Controller.CollaboratorController">
    <children>
-      <Button fx:id="buttonToTravel" layoutX="24.0" layoutY="23.0" mnemonicParsing="false" onAction="#onClickButtonToTravel" prefHeight="59.0" prefWidth="140.0" text="Retour">
+      <Button fx:id="buttonToTravel" layoutX="24.0" layoutY="29.0" mnemonicParsing="false" onAction="#onClickButtonToTravel" prefHeight="40.0" prefWidth="122.0" text="Retour">
          <font>
             <Font name="Garamond" size="24.0" />
          </font></Button>
-      <ListView fx:id="collaboratorsListView" layoutX="24.0" layoutY="197.0" prefHeight="192.0" prefWidth="360.0" />
-      <Label fx:id="labelCollaboratorsList" alignment="CENTER" layoutX="104.0" layoutY="112.0" prefHeight="45.0" prefWidth="218.0" text="Collaborateurs">
+      <ListView fx:id="collaboratorsListView" layoutX="24.0" layoutY="197.0" prefHeight="192.0" prefWidth="388.0" />
+      <Label fx:id="labelCollaboratorsList" alignment="CENTER" layoutX="86.0" layoutY="128.0" prefHeight="45.0" prefWidth="265.0" text="Collaborateurs">
          <font>
-            <Font name="Garamond" size="36.0" />
+            <Font size="28.0" />
          </font>
       </Label>
-      <Label fx:id="labelFriendsList" alignment="CENTER" layoutX="486.0" layoutY="112.0" prefHeight="45.0" prefWidth="236.0" text="Inviter des amis">
+      <Label fx:id="labelFriendsList" alignment="CENTER" layoutX="469.0" layoutY="128.0" prefHeight="45.0" prefWidth="305.0" text="Inviter des amis">
          <font>
-            <Font name="Garamond" size="36.0" />
+            <Font size="28.0" />
          </font>
       </Label>
       <ListView fx:id="friendsListView" layoutX="433.0" layoutY="258.0" prefHeight="185.0" prefWidth="341.0" />
-      <TextField fx:id="collaboratorNameInput" layoutX="24.0" layoutY="399.0" prefHeight="59.0" prefWidth="208.0" promptText="Ajouter un collaborateur">
+      <TextField fx:id="collaboratorNameInput" layoutX="24.0" layoutY="399.0" prefHeight="59.0" prefWidth="244.0" promptText="Ajouter collaborateur">
          <font>
             <Font name="Garamond" size="19.0" />
          </font></TextField>
-      <TextField fx:id="friendSearchBar" layoutX="433.0" layoutY="206.0" prefHeight="46.0" prefWidth="194.0" promptText="Barre de recherche">
+      <TextField fx:id="friendSearchBar" layoutX="433.0" layoutY="206.0" prefHeight="46.0" prefWidth="170.0" promptText="Chercher amis">
          <font>
             <Font name="Garamond" size="20.0" />
          </font></TextField>
-      <Button fx:id="buttonAddCollaborator" layoutX="242.0" layoutY="398.0" mnemonicParsing="false" onAction="#onClickAddNewCollaborator" prefHeight="59.0" prefWidth="140.0" text="Ajouter">
+      <Button fx:id="buttonAddCollaborator" layoutX="286.0" layoutY="402.0" mnemonicParsing="false" onAction="#onClickAddNewCollaborator" prefHeight="53.0" prefWidth="126.0" text="Ajouter">
          <font>
-            <Font name="Garamond" size="24.0" />
+            <Font size="22.0" />
          </font></Button>
-      <Label fx:id="labelError" alignment="CENTER" contentDisplay="CENTER" layoutX="19.0" layoutY="409.0" prefHeight="18.0" prefWidth="665.0" textFill="RED" />
-      <Button fx:id="btnSearch" layoutX="636.0" layoutY="204.0" mnemonicParsing="false" onAction="#onUpdateSearchBar" text="Rechercher">
+      <Label fx:id="labelError" alignment="CENTER" contentDisplay="CENTER" layoutX="52.0" layoutY="495.0" prefHeight="72.0" prefWidth="701.0" textFill="RED" />
+      <Button fx:id="btnSearch" layoutX="617.0" layoutY="209.0" mnemonicParsing="false" onAction="#onUpdateSearchBar" text="Rechercher">
          <font>
-            <Font name="Garamond" size="24.0" />
+            <Font size="22.0" />
          </font></Button>
    </children>
 </AnchorPane>
