@@ -18,19 +18,28 @@ public class CollaboratorFacade {
 
     public static CollaboratorFacade getInstance(){return instance;}
 
+    /**
+     * Query the creation of a new Collaborator in the Database
+     * @param collaborator
+     * @return the id of the newly created Collaborator
+     */
     public int createCollaborator(Collaborator collaborator){
         AbstractFactory af = AbstractFactory.createInstance();
         CollaboratorDAO cdaop = af.getCollaboratorDAO();
         int id = 0;
         try{
             id = cdaop.createCollaborator(collaborator);
-            TrophyFacade.getInstance().isTrophyValidForUser("travel");
+            TrophyFacade.getInstance().isTrophyValidForUser(UserFacade.getInstance().getConnectedUser().getId(),"travel");
         }catch(SQLException e){
             System.out.println(e);
         }
         return id;
     }
 
+    /**
+     * Query the update of a specific Collaborator
+     * @param collaborator
+     */
     public void updateCollaborator(Collaborator collaborator){
         AbstractFactory af = AbstractFactory.createInstance();
         CollaboratorDAO cdaop = af.getCollaboratorDAO();
@@ -42,6 +51,11 @@ public class CollaboratorFacade {
         }
     }
 
+    /**
+     * Query the list of all Collaborator of a specific Travel
+     * @param travel
+     * @return a list of collaborator
+     */
     public List<Collaborator> findCollaboratorByTravel(Travel travel){
         AbstractFactory af = AbstractFactory.createInstance();
         CollaboratorDAO cdaop = af.getCollaboratorDAO();
@@ -55,6 +69,11 @@ public class CollaboratorFacade {
         return collaborators;
     }
 
+    /**
+     * Fetch a list of collaborator that a user is.
+     * @param user
+     * @return a list of Collaborator
+     */
     public List<Collaborator> findCollaboratorByUser(User user){
         AbstractFactory af = AbstractFactory.createInstance();
         CollaboratorDAO cdaop = af.getCollaboratorDAO();
@@ -69,6 +88,13 @@ public class CollaboratorFacade {
         return collaborators;
     }
 
+    /**
+     * Quuery the collaborator associate to a user and a specific travel
+     * @param user
+     * @param travel
+     * @return
+     * @throws CollaboratorNotFoundException
+     */
     public Collaborator findCollaboratorByUserAndTravel(User user, Travel travel) throws CollaboratorNotFoundException {
         AbstractFactory af = AbstractFactory.createInstance();
         CollaboratorDAO cdaop = af.getCollaboratorDAO();
@@ -80,6 +106,12 @@ public class CollaboratorFacade {
         }
     }
 
+    /**
+     * Fetch all collaborators that still are not associate to a user in a specific travel given in parameter
+     * @param travel
+     * @return a list of Collaborators
+     * @throws CollaboratorNotFoundException
+     */
     public List<Collaborator> findCollaboratorNotChosenByTravel(Travel travel) throws CollaboratorNotFoundException {
         AbstractFactory af = AbstractFactory.createInstance();
         CollaboratorDAO cdaop = af.getCollaboratorDAO();
@@ -91,6 +123,12 @@ public class CollaboratorFacade {
         }
     }
 
+    /**
+     * Fetch a specific collaborator depending on its id
+     * @param id
+     * @return a specific collaborator
+     * @throws CollaboratorNotFoundException
+     */
     public Collaborator findCollaboratorById(int id) throws CollaboratorNotFoundException{
         AbstractFactory af = AbstractFactory.createInstance();
         CollaboratorDAO cdaop = af.getCollaboratorDAO();
@@ -102,6 +140,10 @@ public class CollaboratorFacade {
         }
     }
 
+    /**
+     * Delete all collaborator associated to a user
+     * @param user
+     */
     public void deleteAllColaboratorByUser(User user){
         AbstractFactory af = AbstractFactory.createInstance();
         CollaboratorDAO cdaop = af.getCollaboratorDAO();
@@ -113,6 +155,10 @@ public class CollaboratorFacade {
         }
     }
 
+    /**
+     * Delete all collaborator associated to a specific travel
+     * @param travel
+     */
     public void deleteAllColaboratorByTravel(Travel travel){
         AbstractFactory af = AbstractFactory.createInstance();
         CollaboratorDAO cdaop = af.getCollaboratorDAO();
@@ -124,6 +170,10 @@ public class CollaboratorFacade {
         }
     }
 
+    /**
+     * Delete a specific collaborator
+     * @param collaborator
+     */
     public void deleteColaborator(Collaborator collaborator){
         AbstractFactory af = AbstractFactory.createInstance();
         CollaboratorDAO cdaop = af.getCollaboratorDAO();

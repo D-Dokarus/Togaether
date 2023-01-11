@@ -89,6 +89,7 @@ public class BudgetController {
         this.ConfirmedButton.setVisible(false);
         try {
             this.budgetsList = this.budgetFacade.findBudgetSByCollaboratorId(this.travelFacade.getCollaborator().getId());
+            System.out.println(budgetsList.size());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

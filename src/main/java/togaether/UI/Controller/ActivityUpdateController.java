@@ -64,9 +64,11 @@ public class ActivityUpdateController {
         }
         // Remplir les champs avec les informations de l'activité
         this.nameActivity.setText(this.activity.getNameActivity());
-        this.descriptionActivity.setText(this.activity.getDescriptionActivity());
+        if(this.activity.getDescriptionActivity()!=null)
+            this.descriptionActivity.setText(this.activity.getDescriptionActivity());
         this.priceActivity.setText(String.valueOf(this.activity.getPriceActivity()));
-        this.placeActivity.setText(this.activity.getAddressActivity());
+        if(this.activity.getAddressActivity() != null)
+            this.placeActivity.setText(this.activity.getAddressActivity());
 
         if (this.activity.getDateStart() != null) {
             LocalDate dateLocal = Instant.ofEpochMilli(this.activity.getDateStart().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();

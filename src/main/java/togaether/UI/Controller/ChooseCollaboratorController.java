@@ -40,19 +40,15 @@ public class ChooseCollaboratorController {
         }catch(CollaboratorNotFoundException e){
             System.out.println(e);
         }
-        for(Collaborator collaborator : collaborators){
-            System.out.println(collaborator.getName());
-        }
         initializeCollaboratorsList();
-
-
     }
 
+    /**
+     * Initialize the listViewCollaborators with the list of collaborator "collaborators" already filled by setting up the behavior of a cell;
+     */
     public void initializeCollaboratorsList(){
         observableCollaborators.clear();
-        for(Collaborator collaborator: collaborators){
-            observableCollaborators.add(collaborator);
-        }
+        observableCollaborators.addAll(collaborators);
         // We need to create a new CellFactory so we can display our layout for each individual notification
         collaboratorsListView.setCellFactory((Callback<ListView<Collaborator>, ListCell<Collaborator>>) param -> {
             return new ListCell<Collaborator>() {
@@ -102,6 +98,10 @@ public class ChooseCollaboratorController {
     }
 
 
+    /**
+     * Switch to HomePage
+     * @param event
+     */
     public void onClickButtonToHomePage(ActionEvent event){
         SceneController.getInstance().switchToHomePage(event);
     }

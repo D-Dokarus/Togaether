@@ -62,6 +62,9 @@ public class FriendsController {
         initializeFriendsList();
     }
 
+    /**
+     * Initialize the listView Friends with the list of friend "friends" already filled by setting up the behavior of a cell
+     */
     public void initializeFriendsList(){
         observableFriends.clear();
         for(Friend friend: friends){
@@ -128,6 +131,9 @@ public class FriendsController {
         friendsListView.setItems(observableFriends);
     }
 
+    /**
+     * Initialize the listView Users with the list of users "users" already filled by setting up the behavior of a cell;
+     */
     public void initializeUsersList(){
         observableUsers.clear();
         for(User user: users){
@@ -186,12 +192,22 @@ public class FriendsController {
     }
 
 
+    /**
+     * Implement the behavior of a friend when it's button remove is clicked :
+     * - Remove from list friends
+     * - Remove from listView friends
+     * - Remove from dataBase
+     * @param friend
+     */
     private void onClickButtonRemove(Friend friend){
         friends.remove(friend);
         friendsListView.getItems().remove(friend);
         FriendFacade.getInstance().deleteFriend(friend);
     }
 
+    /**
+     * Query in the database, a list of user depending on if it's contains the string filled in the searchBar
+     */
     @FXML
     private void onUpdateSearchBar(){
         String user_name = searchBar.getText().trim();

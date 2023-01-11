@@ -1,0 +1,14 @@
+module:Togaether
+com.lloseng.ocsf.client
+com.lloseng.ocsf.server
+togaether
+togaether.BL
+togaether.BL.Facade
+togaether.BL.Model
+togaether.BL.TogaetherException
+togaether.BL.Tools
+togaether.DB
+togaether.DB.Postgres
+togaether.UI
+togaether.UI.Controller
+togaether.UI.Frame

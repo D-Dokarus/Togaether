@@ -4,8 +4,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
+import togaether.BL.Facade.BudgetFacade;
 import togaether.BL.Facade.CollaboratorFacade;
 import togaether.BL.Facade.TravelFacade;
+import togaether.BL.Model.Budget;
+import togaether.BL.Model.Collaborator;
 import togaether.UI.SceneController;
 
 public class TravelDeleteController {
@@ -26,6 +29,10 @@ public class TravelDeleteController {
     public void onConfirmedButtonClicked(ActionEvent event) {
         TravelFacade travelFacade = TravelFacade.getInstance();
         try {
+            for(Collaborator c : CollaboratorFacade.getInstance().findCollaboratorByTravel(travelFacade.getTravel())) {
+                BudgetFacade.getInstance().deleteBudgetByCollaboratorId(c.getId());
+            }
+
             CollaboratorFacade.getInstance().deleteAllColaboratorByTravel(travelFacade.getTravel());
             travelFacade.deleteTravel(travelFacade.getTravel());
             SceneController.getInstance().switchToHomePage(event);
