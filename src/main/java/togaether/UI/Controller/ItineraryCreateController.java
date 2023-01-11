@@ -139,6 +139,12 @@ public class ItineraryCreateController {
 
         }else {
             isSelected = -1;
+            this.CatTransportCar.setVisible(false);
+            this.CatTransportBoat.setVisible(false);
+            this.CatTransportBus.setVisible(false);
+            this.CatTransportPlane.setVisible(false);
+            this.CatTransportTrain.setVisible(false);
+            this.CatTransportWalk.setVisible(false);
         }
     }
 
@@ -171,40 +177,43 @@ public class ItineraryCreateController {
                         this.catSelected = 6; // "Walk"
                         break;
                 }
-            }
+            } else if (isSelected == 0){
+                LinkedList<Itinerary> linkedList = this.travelFacade.findItineraries(this.travelFacade.getTravel().getIdTravel());
+                int indexBeforeItinerary = -1;
+                if(linkedList.size()!=0){
+                    indexBeforeItinerary = linkedList.getLast().getItinerary_id();
+                }
 
-            LinkedList<Itinerary> linkedList = this.travelFacade.findItineraries(this.travelFacade.getTravel().getIdTravel());
-            int indexBeforeItinerary = -1;
-            if(linkedList.size()!=0){
-                indexBeforeItinerary = linkedList.getLast().getItinerary_id();
-            }
+                Date dateNewItinerary = null;
+                if(this.dateItinerary.getValue() != null)
+                    dateNewItinerary = java.sql.Date.valueOf(this.dateItinerary.getValue());
 
-            Date dateNewItinerary = null;
-            if(this.dateItinerary.getValue() != null)
-            dateNewItinerary = java.sql.Date.valueOf(this.dateItinerary.getValue());
-
-            Pattern pattern = Pattern.compile(PATTERN);
-            Matcher matcher = pattern.matcher(this.hourItinerary.getText());
-            if(matcher.matches()){
-                this.correctHour = true;
-            }
-            if((correctHour || this.hourItinerary.getText().isEmpty())){
-                try {
-                    Itinerary iti = new Itinerary(this.travelFacade.getTravel().getIdTravel(),this.nameItinerary.getText(),dateNewItinerary,indexBeforeItinerary,this.catSelected,this.descriptionItinerary.getText(), this.hourItinerary.getText(),-1);
-                    int ret = itineraryFacade.createItinerary(iti);
-                    Itinerary itiResult = itineraryFacade.findItineraryById(ret);
-                    if(linkedList.size()!=0){
-                        itineraryFacade.updateIndexAfterItineraryById(linkedList.getLast().getItinerary_id(), itiResult.getItinerary_id());
+                Pattern pattern = Pattern.compile(PATTERN);
+                Matcher matcher = pattern.matcher(this.hourItinerary.getText());
+                if(matcher.matches()){
+                    this.correctHour = true;
+                }
+                if((correctHour || this.hourItinerary.getText().isEmpty())){
+                    try {
+                        Itinerary iti = new Itinerary(this.travelFacade.getTravel().getIdTravel(),this.nameItinerary.getText(),dateNewItinerary,indexBeforeItinerary,this.catSelected,this.descriptionItinerary.getText(), this.hourItinerary.getText(),-1);
+                        System.out.println(iti);
+                        int ret = itineraryFacade.createItinerary(iti);
+                        Itinerary itiResult = itineraryFacade.findItineraryById(ret);
+                        if(linkedList.size()!=0){
+                            itineraryFacade.updateIndexAfterItineraryById(linkedList.getLast().getItinerary_id(), itiResult.getItinerary_id());
+                        }
+                        //this.travelFacade.getItineraries().add(itiResult);
+                        System.out.println("Itineraire créé !");
+                        SceneController.getInstance().switchToItinerary(event);
+                    } catch (Exception e) {
+                        System.out.println("Attention : L'itineraire n'a pas pu être créé, veuillez réessayer");
+                        throw new RuntimeException(e);
                     }
-                    //this.travelFacade.getItineraries().add(itiResult);
-                    System.out.println("Itineraire créé !");
-                    SceneController.getInstance().switchToItinerary(event);
-                } catch (Exception e) {
-                    System.out.println("Attention : L'itineraire n'a pas pu être créé, veuillez réessayer");
-                    throw new RuntimeException(e);
+                }else {
+                    this.labelErrorHour.setText("L'heure n'est pas au bon format,\n pour rappel le bon format est 00:00");
                 }
             }else {
-                this.labelErrorHour.setText("L'heure n'est pas au bon format,\n pour rappel le bon format est 00:00");
+                this.labelError.setText("Choisissez le type d'étape !");
             }
         } else {
             this.labelError.setText("Le nom et la description de votre itinéraire doivent être rempli !");

@@ -16,6 +16,7 @@ import togaether.BL.Model.*;
 import togaether.DB.CollaboratorDAO;
 import togaether.UI.SceneController;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -241,7 +242,7 @@ public class CollaboratorController {
         SceneController.getInstance().switchToTravel(event);
     }
 
-    public void onClickAddNewCollaborator(ActionEvent event){
+    public void onClickAddNewCollaborator(ActionEvent event) throws SQLException {
         String name = collaboratorNameInput.getText();
         if(!name.isBlank()){
             Travel travel = TravelFacade.getInstance().getTravel();
@@ -250,6 +251,10 @@ public class CollaboratorController {
             Collaborator toAdd = new Collaborator(id,travel,name);
             collaboratorsListView.getItems().add(toAdd);
             collaborators.add(toAdd);
+            for (int i = 1; i < 7; i++) {
+                Budget budget = new Budget(travel.getIdTravel(), i, id, (double)-1.);
+                BudgetFacade.getInstance().createBudget(budget);
+            }
 
         }
     }
@@ -257,10 +262,17 @@ public class CollaboratorController {
     public void onClickButtonRemove(Collaborator collaborator){
         collaborators.remove(collaborator);
         collaboratorsListView.getItems().remove(collaborator);
-        deleteInDataBase(collaborator);
+        try {
+            deleteInDataBase(collaborator);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
-    public void deleteInDataBase(Collaborator collaborator){
+    public void deleteInDataBase(Collaborator collaborator) throws SQLException {
         CollaboratorFacade.getInstance().deleteColaborator(collaborator);
+        for (int i = 1; i < 7; i++) {
+            BudgetFacade.getInstance().deleteBudgetByCollaboratorId(collaborator.getId());
+        }
     }
 
     public boolean containsName(final List<Collaborator> list, final String name, Collaborator collab){

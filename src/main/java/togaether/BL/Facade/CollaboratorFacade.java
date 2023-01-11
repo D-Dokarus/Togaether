@@ -1,5 +1,6 @@
 package togaether.BL.Facade;
 
+import togaether.BL.Model.Budget;
 import togaether.BL.Model.Collaborator;
 import togaether.BL.Model.Travel;
 import togaether.BL.Model.User;
@@ -23,7 +24,7 @@ public class CollaboratorFacade {
         int id = 0;
         try{
             id = cdaop.createCollaborator(collaborator);
-            TrophyFacade.getInstance().isTrophyValidForUser("travel");
+            TrophyFacade.getInstance().isTrophyValidForUser(UserFacade.getInstance().getConnectedUser().getId(),"travel");
         }catch(SQLException e){
             System.out.println(e);
         }
@@ -133,4 +134,5 @@ public class CollaboratorFacade {
             System.out.println(e);
         }
     }
+
 }

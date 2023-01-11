@@ -6,20 +6,48 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="573.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="togaether.UI.Controller.TravelUpdateController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="togaether.UI.Controller.TravelUpdateController">
    <children>
-      <Button fx:id="returnButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onReturnButtonClicked" text="Retour" />
-      <DatePicker id="dateStart" fx:id="dateStart" layoutX="383.0" layoutY="118.0" prefHeight="33.0" prefWidth="145.0" promptText="Non défni" />
-      <DatePicker id="dateEnd" fx:id="dateEnd" layoutX="383.0" layoutY="202.0" prefHeight="33.0" prefWidth="145.0" promptText="Non défini" />
-      <Label layoutX="383.0" layoutY="93.0" text="Début" />
-      <Label layoutX="383.0" layoutY="178.0" text="Fin" />
-      <TextArea fx:id="nameTravel" layoutX="45.0" layoutY="100.0" prefHeight="37.0" prefWidth="272.0" promptText="Nom du voyage" />
-      <TextArea fx:id="descriptionTravel" layoutX="45.0" layoutY="161.0" prefHeight="100.0" prefWidth="272.0" promptText="Description" />
-      <Button fx:id="cancelButton" layoutX="126.0" layoutY="330.0" mnemonicParsing="false" onAction="#onCancelButtonClicked" text="Annuler" />
-      <Button fx:id="confirmedButton" layoutX="378.0" layoutY="330.0" mnemonicParsing="false" onAction="#onConfirmedButtonClicked" text="Confirmer" />
-      <Label fx:id="labelError" layoutX="66.0" layoutY="278.0" textFill="RED" />
-      <CheckBox fx:id="nonDefineStart" layoutX="434.0" layoutY="93.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="95.0" onAction="#nonDefineStart" text="Ne pas définir" />
-      <CheckBox fx:id="nonDefineEnd" layoutX="433.0" layoutY="178.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="95.0" onAction="#nonDefineEnd" text="Ne pas définir" />
+      <Button fx:id="returnButton" layoutX="17.0" layoutY="18.0" mnemonicParsing="false" onAction="#onReturnButtonClicked" prefHeight="59.0" prefWidth="140.0" text="Retour">
+         <font>
+            <Font name="Garamond" size="24.0" />
+         </font></Button>
+      <DatePicker id="dateStart" fx:id="dateStart" layoutX="535.0" layoutY="189.0" prefHeight="59.0" prefWidth="184.0" promptText="Non défni" />
+      <DatePicker id="dateEnd" fx:id="dateEnd" layoutX="535.0" layoutY="355.0" prefHeight="59.0" prefWidth="184.0" promptText="Non défini" />
+      <Label layoutX="455.0" layoutY="204.0" text="Début">
+         <font>
+            <Font name="Garamond" size="24.0" />
+         </font></Label>
+      <Label layoutX="475.0" layoutY="370.0" text="Fin">
+         <font>
+            <Font name="Garamond" size="24.0" />
+         </font></Label>
+      <TextArea fx:id="nameTravel" layoutX="35.0" layoutY="130.0" prefHeight="59.0" prefWidth="365.0" promptText="Nom du voyage">
+         <font>
+            <Font name="Garamond" size="24.0" />
+         </font></TextArea>
+      <TextArea fx:id="descriptionTravel" layoutX="35.0" layoutY="203.0" prefHeight="194.0" prefWidth="365.0" promptText="Description">
+         <font>
+            <Font name="Garamond" size="24.0" />
+         </font></TextArea>
+      <Button fx:id="cancelButton" layoutX="142.0" layoutY="463.0" mnemonicParsing="false" onAction="#onCancelButtonClicked" prefHeight="59.0" prefWidth="140.0" text="Annuler">
+         <font>
+            <Font name="Garamond" size="24.0" />
+         </font></Button>
+      <Button fx:id="confirmedButton" layoutX="555.0" layoutY="463.0" mnemonicParsing="false" onAction="#onConfirmedButtonClicked" prefHeight="59.0" prefWidth="140.0" text="Confirmer">
+         <font>
+            <Font name="Garamond" size="24.0" />
+         </font></Button>
+      <Label fx:id="labelError" alignment="CENTER" layoutX="395.0" layoutY="550.0" textFill="RED" />
+      <CheckBox fx:id="nonDefineStart" layoutX="538.0" layoutY="145.0" mnemonicParsing="false" onAction="#nonDefineStart" prefHeight="32.0" prefWidth="178.0" text="Ne pas définir">
+         <font>
+            <Font name="Garamond" size="24.0" />
+         </font></CheckBox>
+      <CheckBox fx:id="nonDefineEnd" layoutX="535.0" layoutY="315.0" mnemonicParsing="false" onAction="#nonDefineEnd" prefHeight="32.0" prefWidth="184.0" text="Ne pas définir">
+         <font>
+            <Font name="Garamond" size="24.0" />
+         </font></CheckBox>
    </children>
 </AnchorPane>

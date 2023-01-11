@@ -1,5 +1,6 @@
 package togaether.DB.Postgres;
 
+import togaether.BL.Facade.BudgetFacade;
 import togaether.BL.Model.Expense;
 import togaether.DB.*;
 import java.sql.*;
@@ -37,13 +38,16 @@ public class PostgresFactory extends AbstractFactory {
   public FriendDAO getFriendDAO(){return new FriendDAOPostgres(this);}
 
   @Override
-  public ItineraryDAO getItinerary(){return new ItineraryDAOPostgres(this);}
+  public ItineraryDAO getItineraryDAO(){return new ItineraryDAOPostgres(this);}
 
   @Override
   public ExpenseDAO getExpenseDAO(){return new ExpenseDAOPostgres(this);}
 
   @Override
   public DocumentDAO getDocumentDAO(){return new DocumentDAOPostgres(this);}
+
+  @Override
+  public BudgetDAO getBudgetDAO(){return new BudgetDAOPostgres(this);}
 
   public Connection getConnection() throws SQLException {
     return this.connection.getConnection();

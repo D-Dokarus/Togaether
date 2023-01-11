@@ -115,6 +115,10 @@ public class SceneController {
     App.getInstance().switchScene("CreateDocument", (Stage)((Node)event.getSource()).getScene().getWindow());
   }
 
+  public void switchToBudget(ActionEvent event) {
+    App.getInstance().switchScene("Budget", (Stage)((Node)event.getSource()).getScene().getWindow());
+  }
+
   public void newPopupNotification(ActionEvent event){
     Parent root;
     try {
