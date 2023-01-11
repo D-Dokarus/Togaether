@@ -7,22 +7,71 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="togaether.UI.Controller.TravelCreateController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="togaether.UI.Controller.TravelCreateController">
    <children>
-      <Button fx:id="returnButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onReturnButtonClicked" text="Annuler" />
-      <DatePicker id="dateStart" fx:id="dateStart" layoutX="90.0" layoutY="239.0" prefHeight="33.0" prefWidth="145.0" promptText="Non défni" />
-      <DatePicker id="dateEnd" fx:id="dateEnd" layoutX="90.0" layoutY="323.0" prefHeight="33.0" prefWidth="145.0" promptText="Non défini" />
-      <Label layoutX="90.0" layoutY="214.0" text="Début" />
-      <Label layoutX="90.0" layoutY="299.0" text="Fin" />
-      <TextArea fx:id="nameTravel" layoutX="27.0" layoutY="64.0" prefHeight="38.0" prefWidth="261.0" promptText="Nom du voyage" />
-      <TextArea fx:id="descriptionTravel" layoutX="27.0" layoutY="118.0" prefHeight="67.0" prefWidth="260.0" promptText="Description" />
-      <Button fx:id="confirmedButton" layoutX="442.0" layoutY="352.0" mnemonicParsing="false" onAction="#onConfirmedButtonClicked" text="Confirmer" />
-      <ListView fx:id="collaboratorListView" layoutX="325.0" layoutY="143.0" prefHeight="159.0" prefWidth="250.0" />
-      <Button fx:id="addCollaboratorButton" layoutX="520.0" layoutY="102.0" mnemonicParsing="false" onAction="#onClickAddCollaborator" text="Ajouter" />
-      <Label fx:id="labelError" layoutX="66.0" layoutY="314.0" textFill="RED" />
-      <TextField fx:id="newCollaboratorInput" layoutX="325.0" layoutY="102.0" prefHeight="25.0" prefWidth="185.0" promptText="Ajouter un collaborateur" />
-      <TextField fx:id="yourCollaboratorInput" layoutX="366.0" layoutY="50.0" prefHeight="25.0" prefWidth="205.0" promptText="Votre nom de collaborateur" />
-      <Label layoutX="325.0" layoutY="54.0" text="Vous :" />
+      <Button fx:id="returnButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onReturnButtonClicked" prefHeight="59.0" prefWidth="140.0" text="Annuler">
+         <font>
+            <Font name="Garamond" size="24.0" />
+         </font></Button>
+      <DatePicker id="dateStart" fx:id="dateStart" layoutX="146.0" layoutY="341.0" prefHeight="46.0" prefWidth="219.0" promptText="Non défni" />
+      <DatePicker id="dateEnd" fx:id="dateEnd" layoutX="146.0" layoutY="427.0" prefHeight="46.0" prefWidth="219.0" promptText="Non défini" />
+      <Label layoutX="75.0" layoutY="349.0" text="Début">
+         <font>
+            <Font name="Garamond" size="24.0" />
+         </font></Label>
+      <Label layoutX="97.0" layoutY="435.0" text="Fin">
+         <font>
+            <Font name="Garamond" size="24.0" />
+         </font></Label>
+      <TextArea fx:id="nameTravel" layoutX="76.0" layoutY="121.0" prefHeight="38.0" prefWidth="261.0" promptText="Nom du voyage*">
+         <font>
+            <Font name="Garamond" size="24.0" />
+         </font></TextArea>
+      <TextArea fx:id="descriptionTravel" layoutX="77.0" layoutY="206.0" prefHeight="67.0" prefWidth="260.0" promptText="Description*">
+         <font>
+            <Font name="Garamond" size="24.0" />
+         </font></TextArea>
+      <Button fx:id="confirmedButton" layoutX="637.0" layoutY="521.0" mnemonicParsing="false" onAction="#onConfirmedButtonClicked" prefHeight="59.0" prefWidth="140.0" text="Confirmer">
+         <font>
+            <Font name="Garamond" size="24.0" />
+         </font></Button>
+      <ListView fx:id="collaboratorListView" layoutX="412.0" layoutY="274.0" prefHeight="226.0" prefWidth="365.0" />
+      <Button fx:id="addCollaboratorButton" layoutX="666.0" layoutY="211.0" mnemonicParsing="false" onAction="#onClickAddCollaborator" prefHeight="53.0" prefWidth="112.0" text="Ajouter">
+         <font>
+            <Font name="Garamond" size="24.0" />
+         </font></Button>
+      <Label fx:id="labelError" alignment="CENTER" layoutX="93.0" layoutY="535.0" prefHeight="30.0" prefWidth="527.0" textFill="RED">
+         <font>
+            <Font name="Garamond" size="24.0" />
+         </font></Label>
+      <TextField fx:id="newCollaboratorInput" layoutX="414.0" layoutY="211.0" prefHeight="53.0" prefWidth="235.0" promptText="Ajouter un collaborateur">
+         <font>
+            <Font name="Garamond" size="20.0" />
+         </font></TextField>
+      <TextField fx:id="yourCollaboratorInput" layoutX="479.0" layoutY="147.0" prefHeight="46.0" prefWidth="299.0" promptText="Votre nom de collaborateur*">
+         <font>
+            <Font name="Garamond" size="24.0" />
+         </font></TextField>
+      <Label layoutX="412.0" layoutY="155.0" text="Vous :">
+         <font>
+            <Font name="Garamond" size="24.0" />
+         </font></Label>
+      <Label layoutX="223.0" layoutY="25.0" text="Informations Voyage">
+         <font>
+            <Font name="Garamond" size="48.0" />
+         </font>
+      </Label>
+      <Label layoutX="414.0" layoutY="104.0" text="Collaborateur">
+         <font>
+            <Font name="Garamond" size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="74.0" layoutY="300.0" text="Dates">
+         <font>
+            <Font name="Garamond" size="30.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

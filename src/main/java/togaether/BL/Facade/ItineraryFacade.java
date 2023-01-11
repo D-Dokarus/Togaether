@@ -1,17 +1,10 @@
 package togaether.BL.Facade;
 
-import org.springframework.security.crypto.bcrypt.BCrypt;
-import togaether.BL.Model.Collaborator;
 import togaether.BL.Model.Itinerary;
 import togaether.BL.Model.TransportCategory;
-import togaether.BL.Model.User;
 import togaether.BL.TogaetherException.DBNotFoundException;
-import togaether.BL.TogaetherException.UserBadPasswordException;
-import togaether.BL.TogaetherException.UserNotFoundException;
 import togaether.DB.AbstractFactory;
 import togaether.DB.ItineraryDAO;
-import togaether.DB.TravelDAO;
-import togaether.DB.UserDAO;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -27,7 +20,7 @@ public class ItineraryFacade {
 
     public int createItinerary(Itinerary itinerary) throws SQLException, DBNotFoundException {
         AbstractFactory fact = AbstractFactory.createInstance();
-        ItineraryDAO itineraryDAO = fact.getItinerary();
+        ItineraryDAO itineraryDAO = fact.getItineraryDAO();
 
         try {
             return itineraryDAO.createItinerary(itinerary);
@@ -39,7 +32,7 @@ public class ItineraryFacade {
 
     public void deleteItineraryById(int Id) throws SQLException, DBNotFoundException {
         AbstractFactory fact = AbstractFactory.createInstance();
-        ItineraryDAO itineraryDAO = fact.getItinerary();
+        ItineraryDAO itineraryDAO = fact.getItineraryDAO();
 
         try {
             itineraryDAO.deleteItineraryById(Id);
@@ -51,7 +44,7 @@ public class ItineraryFacade {
 
     public Itinerary findItineraryById(int Id) throws SQLException, DBNotFoundException {
         AbstractFactory fact = AbstractFactory.createInstance();
-        ItineraryDAO itineraryDAO = fact.getItinerary();
+        ItineraryDAO itineraryDAO = fact.getItineraryDAO();
 
         try {
             return itineraryDAO.findItineraryById(Id);
@@ -63,7 +56,7 @@ public class ItineraryFacade {
 
     public List<Itinerary> findItinerariesByTravelId(int Id) throws SQLException, DBNotFoundException {
         AbstractFactory fact = AbstractFactory.createInstance();
-        ItineraryDAO itineraryDAO = fact.getItinerary();
+        ItineraryDAO itineraryDAO = fact.getItineraryDAO();
 
         try {
             return itineraryDAO.findItinerariesByTravelId(Id);
@@ -80,7 +73,7 @@ public class ItineraryFacade {
 
     public void updateItinerary(Itinerary itinerary) throws SQLException, DBNotFoundException {
         AbstractFactory fact = AbstractFactory.createInstance();
-        ItineraryDAO itineraryDAO = fact.getItinerary();
+        ItineraryDAO itineraryDAO = fact.getItineraryDAO();
 
         try {
             itineraryDAO.updateItinerary(itinerary);
@@ -92,7 +85,7 @@ public class ItineraryFacade {
 
     public void updateIndexBeforeItineraryById(Integer id, Integer indexBefore) throws SQLException, DBNotFoundException {
         AbstractFactory fact = AbstractFactory.createInstance();
-        ItineraryDAO itineraryDAO = fact.getItinerary();
+        ItineraryDAO itineraryDAO = fact.getItineraryDAO();
         try {
             itineraryDAO.updateIndexBeforeItineraryById(id, indexBefore);
         } catch (SQLException e) {
@@ -103,7 +96,7 @@ public class ItineraryFacade {
 
     public void updateIndexAfterItineraryById(Integer id, Integer indexBefore) throws SQLException, DBNotFoundException {
         AbstractFactory fact = AbstractFactory.createInstance();
-        ItineraryDAO itineraryDAO = fact.getItinerary();
+        ItineraryDAO itineraryDAO = fact.getItineraryDAO();
         try {
             itineraryDAO.updateIndexAfterItineraryById(id, indexBefore);
         } catch (SQLException e) {
@@ -114,7 +107,7 @@ public class ItineraryFacade {
 
     public void updateIndexItinerary(Itinerary itinerary) throws SQLException, DBNotFoundException {
         AbstractFactory fact = AbstractFactory.createInstance();
-        ItineraryDAO itineraryDAO = fact.getItinerary();
+        ItineraryDAO itineraryDAO = fact.getItineraryDAO();
 
         try {
             itineraryDAO.updateIndexItinerary(itinerary);
@@ -127,7 +120,7 @@ public class ItineraryFacade {
 
     public void deleteItinerariesByTravelId(int Id) throws SQLException, DBNotFoundException {
         AbstractFactory fact = AbstractFactory.createInstance();
-        ItineraryDAO itineraryDAO = fact.getItinerary();
+        ItineraryDAO itineraryDAO = fact.getItineraryDAO();
 
         try {
             itineraryDAO.deleteItinerariesByTravelId(Id);
@@ -139,7 +132,7 @@ public class ItineraryFacade {
 
     public String findNameCatTransportById(int Id) throws SQLException, DBNotFoundException {
         AbstractFactory fact = AbstractFactory.createInstance();
-        ItineraryDAO itineraryDAO = fact.getItinerary();
+        ItineraryDAO itineraryDAO = fact.getItineraryDAO();
 
         try {
             return itineraryDAO.findNameCatTransportById(Id);
@@ -151,7 +144,7 @@ public class ItineraryFacade {
 
     public int findIdCatTransportByName(String name) throws SQLException, DBNotFoundException {
         AbstractFactory fact = AbstractFactory.createInstance();
-        ItineraryDAO itineraryDAO = fact.getItinerary();
+        ItineraryDAO itineraryDAO = fact.getItineraryDAO();
 
         try {
             return itineraryDAO.findIdCatTransportByName(name);
@@ -163,7 +156,7 @@ public class ItineraryFacade {
 
     public List<TransportCategory> findAllCatTransport() throws SQLException, DBNotFoundException {
         AbstractFactory fact = AbstractFactory.createInstance();
-        ItineraryDAO itineraryDAO = fact.getItinerary();
+        ItineraryDAO itineraryDAO = fact.getItineraryDAO();
         try {
             return itineraryDAO.findAllCatTransport();
         } catch (SQLException e) {
@@ -174,26 +167,26 @@ public class ItineraryFacade {
 
     public void switchIndexFor2ItinerariesById(int A,int B) throws SQLException {
         AbstractFactory fact = AbstractFactory.createInstance();
-        ItineraryDAO itineraryDAO = fact.getItinerary();
+        ItineraryDAO itineraryDAO = fact.getItineraryDAO();
         itineraryDAO.switchIndexFor2ItinerariesById( A, B);
 
     }
 
     public void switchIndexBeforeFor3ItinerariesById(int A,int B,int C) throws SQLException {
         AbstractFactory fact = AbstractFactory.createInstance();
-        ItineraryDAO itineraryDAO = fact.getItinerary();
+        ItineraryDAO itineraryDAO = fact.getItineraryDAO();
         itineraryDAO.switchIndexBeforeFor3ItinerariesById( A, B, C);
     }
 
     public void switchIndexAfterFor3ItinerariesById(int A,int B,int C) throws SQLException {
         AbstractFactory fact = AbstractFactory.createInstance();
-        ItineraryDAO itineraryDAO = fact.getItinerary();
+        ItineraryDAO itineraryDAO = fact.getItineraryDAO();
         itineraryDAO.switchIndexAfterFor3ItinerariesById( A, B, C);
     }
 
     public void switchIndexFor4ItinerariesById(int A,int B,int C, int D) throws SQLException { // Pour A B C D qui se suivent pour changement B-C
         AbstractFactory fact = AbstractFactory.createInstance();
-        ItineraryDAO itineraryDAO = fact.getItinerary();
+        ItineraryDAO itineraryDAO = fact.getItineraryDAO();
         itineraryDAO.switchIndexFor4ItinerariesById(A, B, C, D);
     }
 

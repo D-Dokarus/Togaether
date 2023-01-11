@@ -205,7 +205,7 @@ public class TravelFacade {
     public LinkedList<Itinerary> findItineraries(int id){
         ArrayList<Itinerary> list = new ArrayList<Itinerary>();
         AbstractFactory fact = AbstractFactory.createInstance();
-        ItineraryDAO itineraryDAO = fact.getItinerary();
+        ItineraryDAO itineraryDAO = fact.getItineraryDAO();
         this.itineraries.clear();
         try {
             list.addAll(itineraryDAO.findItinerariesByTravelId(id));

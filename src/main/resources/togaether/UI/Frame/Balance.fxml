@@ -4,12 +4,19 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="togaether.UI.Controller.BalanceController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="togaether.UI.Controller.BalanceController">
    <children>
       <Label fx:id="labelError" layoutX="212.0" layoutY="24.0" prefHeight="17.0" prefWidth="361.0" textFill="RED" />
-      <Button fx:id="travelButton" onAction="#onTravelButtonClicked" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="160.0" text="Retourner au voyage" />
-      <Button fx:id="expenseButton" onAction="#onExpenseButtonClicked" layoutX="14.0" layoutY="48.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="160.0" text="Voir les dépenses" />
-      <ListView fx:id="list" layoutX="200.0" layoutY="61.0" prefHeight="301.0" prefWidth="200.0" />
+      <Button fx:id="travelButton" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" onAction="#onTravelButtonClicked" prefHeight="59.0" prefWidth="201.0" text="Retour">
+         <font>
+            <Font name="Garamond" size="24.0" />
+         </font></Button>
+      <Button fx:id="expenseButton" layoutX="14.0" layoutY="84.0" mnemonicParsing="false" onAction="#onExpenseButtonClicked" prefHeight="59.0" prefWidth="201.0" text="Voir les dépenses">
+         <font>
+            <Font name="Garamond" size="24.0" />
+         </font></Button>
+      <ListView fx:id="list" layoutX="237.0" layoutY="37.0" prefHeight="527.0" prefWidth="327.0" />
    </children>
 </AnchorPane>

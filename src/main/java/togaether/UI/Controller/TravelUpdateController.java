@@ -48,8 +48,6 @@ public class TravelUpdateController {
 
     @FXML
     protected void initialize() {
-        // Récupérer user connected
-        // Récupérer travel connected
         TravelFacade travelFacade = TravelFacade.getInstance();
         try {
             this.travel = travelFacade.getTravel();
@@ -59,6 +57,7 @@ public class TravelUpdateController {
             throw new RuntimeException(e);
         }
         initializeDatePicker();
+        initializeNameAndDescription();
     }
 
     public void initializeDatePicker(){
@@ -76,6 +75,11 @@ public class TravelUpdateController {
             this.nonDefineEnd.setSelected(true);
             nonDefineEnd();
         }
+    }
+
+    public void initializeNameAndDescription(){
+        this.nameTravel.setText(this.travel.getNameTravel());
+        this.descriptionTravel.setText(this.travel.getDescriptionTravel());
     }
 
     public void nonDefineStart(){

@@ -20,12 +20,10 @@ import javafx.util.Callback;
 import togaether.BL.Facade.ItineraryFacade;
 import togaether.BL.Facade.TravelFacade;
 import togaether.BL.Model.Itinerary;
-import togaether.BL.Model.Travel;
 import togaether.BL.TogaetherException.DBNotFoundException;
 import togaether.UI.SceneController;
 
 import java.sql.SQLException;
-import java.sql.SQLOutput;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -76,7 +74,11 @@ public class ItineraryController {
                     HBox root = new HBox(10);
                     root.setAlignment(Pos.CENTER_LEFT);
                     root.setPadding(new Insets(5, 0, 5, 10));
-                    Label firstLabel = new Label(itinerary.getName() +" - "+itinerary.getDateItinerary().toString());
+                    String dateIt = "";
+                    if(itinerary.getDateItinerary()!=null){
+                        dateIt = itinerary.getDateItinerary().toString();
+                    }
+                    Label firstLabel = new Label(itinerary.getName() +" - "+dateIt);
                     root.getChildren().add(firstLabel);
                     Region region = new Region();
                     HBox.setHgrow(region, Priority.ALWAYS);

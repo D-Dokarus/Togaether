@@ -9,64 +9,70 @@ public abstract class AbstractFactory {
   static private PostgresFactory instance = new PostgresFactory();
 
   /**
-   * Retourne un DAO de User
+   * Return a DAO of User
    * @return UserDAO
    */
   abstract public UserDAO getUserDAO();
   /**
-   * Retourne un DAO de Message
+   * Return a DAO of Message
    * @return MessageDAO
    */
   abstract public MessageDAO getMessageDAO();
   abstract public TrophyDAO getTrophyDAO();
   /**
-   * Retourne un DAO de Notification
+   * Return a DAO of Notification
    * @return NotificationDAO
    */
   abstract public NotificationDAO getNotificationDAO();
   /**
-   * Retourne un DAO de Travel
+   * Return a DAO of Travel
    * @return TravelDAO
    */
   abstract public TravelDAO getTravelDAO();
   /**
-   * Retourne un DAO de Collaborator
+   * Return a DAO of Collaborator
    * @return CollaboratorDAO
    */
   abstract public CollaboratorDAO getCollaboratorDAO();
   /**
-   * Retourne un DAO de Friend
+   * Return a DAO of Friend
    * @return FriendDAO
    */
   abstract public FriendDAO getFriendDAO();
 
   /**
-   * Retourne un DAO de Activity
+   * Return a DAO of Activity
    * @return ActivityDAO
    */
   abstract public ActivityDAO getActivityDAO();
 
   /**
-   * Retourne un DAO de Itinerary
+   * Return a DAO of Itinerary
    * @return ItineraryDAO
    */
-  abstract public ItineraryDAO getItinerary();
+  abstract public ItineraryDAO getItineraryDAO();
 
   /**
-   * Retourne un DAO de Friend
+   * Return a DAO of Itinerary
+   * @return ItineraryDAO
+   */
+  abstract public BudgetDAO getBudgetDAO();
+
+  /**
+   * Return a DAO of Friend
    * @return FriendDAO
    */
   abstract public ExpenseDAO getExpenseDAO();
 
     /**
-     * Retourne un DAO de Document
+     * Return a DAO of Document
      *
      * @return DocumentDAO
      */
     abstract public DocumentDAO getDocumentDAO();
 
     /**
-     * Retourne l'instance de la classe implémentant AbstractFactory
+     * return the instance of the implemented class AbstractFactory
      *
      * @return
      */

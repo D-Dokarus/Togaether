@@ -7,57 +7,61 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="togaether.UI.Controller.HomePageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="togaether.UI.Controller.HomePageController">
    <children>
-      <Button fx:id="profilButton" layoutX="438.0" layoutY="19.0" mnemonicParsing="false" onAction="#onSettingsButtonClicked" prefHeight="33.0" prefWidth="103.0" text="Profil">
+      <Button fx:id="profilButton" layoutX="596.0" layoutY="17.0" mnemonicParsing="false" onAction="#onSettingsButtonClicked" prefHeight="53.0" prefWidth="114.0" text="Profil">
          <font>
-            <Font name="Garamond" size="14.0" />
+            <Font name="Garamond" size="24.0" />
          </font></Button>
-      <Button fx:id="trophiesButton" layoutX="327.0" layoutY="19.0" mnemonicParsing="false" onAction="#onTrophiesButtonClicked" prefHeight="33.0" prefWidth="103.0" text="Trophées">
+      <Button fx:id="trophiesButton" layoutX="463.0" layoutY="17.0" mnemonicParsing="false" onAction="#onTrophiesButtonClicked" prefHeight="53.0" prefWidth="125.0" text="Trophées">
          <font>
-            <Font name="Garamond" size="14.0" />
+            <Font name="Garamond" size="24.0" />
          </font></Button>
-      <Button fx:id="unusable" layoutX="15.0" layoutY="81.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="570.0" />
-      <Button fx:id="createTravel" layoutX="476.0" layoutY="91.0" mnemonicParsing="false" onAction="#onCreateTravelButtonClicked" prefHeight="33.0" prefWidth="103.0" text="Créer voyage">
+      <Button fx:id="unusable" layoutX="22.0" layoutY="94.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="761.0" />
+      <Button fx:id="createTravel" layoutX="621.0" layoutY="101.0" mnemonicParsing="false" onAction="#onCreateTravelButtonClicked" prefHeight="46.0" prefWidth="155.0" text="Créer voyage">
          <font>
-            <Font name="Garamond" size="14.0" />
+            <Font name="Garamond" size="24.0" />
          </font></Button>
-      <Label fx:id="labelError" layoutX="22.0" layoutY="367.0" prefHeight="17.0" prefWidth="384.0" textFill="RED" />
-      <Label fx:id="nameTravel" layoutX="52.0" layoutY="25.0" text="Togæther">
+      <Label fx:id="nameTravel" layoutX="38.0" layoutY="19.0" text="Togæther">
          <font>
-            <Font name="Garamond" size="25.0" />
+            <Font name="Garamond" size="48.0" />
          </font>
       </Label>
-      <Button fx:id="friendsButton" layoutX="217.0" layoutY="19.0" mnemonicParsing="false" onAction="#onFriendsButtonClicked" prefHeight="33.0" prefWidth="103.0" text="Amis">
+      <Button fx:id="friendsButton" layoutX="351.0" layoutY="17.0" mnemonicParsing="false" onAction="#onFriendsButtonClicked" prefHeight="53.0" prefWidth="103.0" text="Amis">
          <font>
-            <Font name="Garamond" size="14.0" />
+            <Font name="Garamond" size="24.0" />
          </font></Button>
-      <Button fx:id="archivedTravelsButton" layoutX="456.0" layoutY="359.0" mnemonicParsing="false" onAction="#onArchivedTravelsButtonClicked" prefHeight="33.0" prefWidth="129.0" text="Voyages Archivés">
+      <Button fx:id="archivedTravelsButton" layoutX="574.0" layoutY="525.0" mnemonicParsing="false" onAction="#onArchivedTravelsButtonClicked" prefHeight="59.0" prefWidth="210.0" text="Voyages Archivés">
          <font>
-            <Font name="Garamond" size="14.0" />
+            <Font name="Garamond" size="24.0" />
          </font></Button>
-      <ListView fx:id="travelList" layoutX="15.0" layoutY="140.0" prefHeight="212.0" prefWidth="570.0" />
-      <TextField fx:id="searchTravel" layoutX="360.0" layoutY="95.0" onAction="#onSearchTravelButtonClicked" prefHeight="25.0" prefWidth="103.0" promptText="Rechercher">
+      <ListView fx:id="travelList" layoutX="22.0" layoutY="152.0" prefHeight="360.0" prefWidth="761.0" />
+      <TextField fx:id="searchTravel" layoutX="464.0" layoutY="101.0" onAction="#onSearchTravelButtonClicked" prefHeight="46.0" prefWidth="155.0" promptText="Rechercher">
          <font>
-            <Font name="Garamond" size="14.0" />
+            <Font name="Garamond" size="24.0" />
          </font>
       </TextField>
-      <Label layoutX="69.0" layoutY="97.0" prefHeight="25.0" prefWidth="46.0" text="Titre">
+      <Label layoutX="43.0" layoutY="102.0" prefHeight="43.0" prefWidth="82.0" text="Titre">
          <font>
-            <Font name="Garamond" size="18.0" />
+            <Font name="Garamond" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="notificationsButton" layoutX="550.0" layoutY="19.0" mnemonicParsing="false" onAction="#onNotificationsButtonClicked" prefHeight="33.0" prefWidth="37.0" text="🔔">
+      <Button fx:id="notificationsButton" layoutX="718.0" layoutY="16.0" mnemonicParsing="false" onAction="#onNotificationsButtonClicked" prefHeight="53.0" prefWidth="58.0" text="🔔">
          <font>
-            <Font name="Garamond" size="14.0" />
+            <Font name="Garamond" size="24.0" />
          </font>
       </Button>
-      <Button fx:id="trophiesAdminButton" layoutX="14.0" layoutY="359.0" mnemonicParsing="false" onAction="#onTrophiesAdminButtonClicked" prefHeight="33.0" prefWidth="109.0" text="Gérer Trophées">
+      <Button fx:id="trophiesAdminButton" layoutX="22.0" layoutY="528.0" mnemonicParsing="false" onAction="#onTrophiesAdminButtonClicked" prefHeight="53.0" prefWidth="210.0" text="Gérer Trophées">
          <font>
-            <Font name="Garamond" size="14.0" />
+            <Font name="Garamond" size="24.0" />
          </font>
       </Button>
-      <Label layoutX="194.0" layoutY="97.0" prefHeight="25.0" prefWidth="46.0" text="Date">
+      <Label layoutX="157.0" layoutY="109.0" prefHeight="25.0" prefWidth="46.0" text="Date">
+         <font>
+            <Font name="Garamond" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelError" alignment="CENTER" layoutX="198.0" layoutY="259.0" prefHeight="82.0" prefWidth="409.0" textFill="RED">
          <font>
             <Font name="Garamond" size="18.0" />
          </font>

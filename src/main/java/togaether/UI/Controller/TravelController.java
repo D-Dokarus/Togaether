@@ -9,8 +9,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import togaether.App;
 import togaether.BL.Facade.CollaboratorFacade;
+import togaether.BL.Facade.ExpenseFacade;
 import togaether.BL.Facade.TravelFacade;
 import togaether.BL.Facade.UserFacade;
+import togaether.BL.Model.Collaborator;
+import togaether.BL.Model.Expense;
 import togaether.BL.Model.Travel;
 import togaether.DB.AbstractFactory;
 import togaether.DB.CollaboratorDAO;
@@ -19,6 +22,7 @@ import togaether.DB.UserDAO;
 import togaether.UI.SceneController;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class TravelController {
 
@@ -62,8 +66,8 @@ public class TravelController {
             travelFacade.setCollaborator(collaboratorFacade.findCollaboratorByUserAndTravel(userFacade.getConnectedUser(), travelFacade.getTravel()));
             travelFacade.setCollaborators(collaboratorFacade.findCollaboratorByTravel(travelFacade.getTravel()));
         } catch (Exception e) {
-            //System.out.println("Attention : Le voyage n'a pas pu être trouvé, veuillez réessayer");
-            //this.labelError.setText("Attention : Le voyage n'a pas pu être trouvé, veuillez réessayer");
+            System.out.println("Attention : Le voyage n'a pas pu être trouvé, veuillez réessayer");
+            this.labelError.setText("Attention : Le voyage n'a pas pu être trouvé, veuillez réessayer");
             SceneController.getInstance().switchToChooseCollaborator();
         }
         initializeInfo();
@@ -87,7 +91,15 @@ public class TravelController {
         this.dateTravel.setText(dateString);
         this.nameTravel.setText(travel.getNameTravel());
         this.descriptionTravel.setText(travel.getDescriptionTravel());
-        this.collaborator.setText("Collaborateurs :\n" + travel.getOwner().getName());
+        CollaboratorFacade collaboratorFacade = CollaboratorFacade.getInstance();
+
+        ArrayList<Collaborator> collabos = new ArrayList<>(collaboratorFacade.findCollaboratorByTravel(travelFacade.getTravel()));
+        String collaboString = "";
+        for (int i =0; i < collabos.size(); i++){
+            collaboString = collaboString + " - " + collabos.get(i).getName();
+        }
+        this.collaborator.setText("Collaborateurs :\n"+collaboString);
+
     }
 
     public void onReturnButtonClicked(ActionEvent event) {
@@ -102,8 +114,7 @@ public class TravelController {
     }
 
     public void editBudget(ActionEvent event) {
-        //TO DO return budget
-        System.exit(1);
+        SceneController.getInstance().switchToBudget(event);
     }
 
     public void showExpense(ActionEvent event) {

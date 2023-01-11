@@ -11,6 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.util.Callback;
+import togaether.BL.Facade.BudgetFacade;
 import togaether.BL.Facade.CollaboratorFacade;
 import togaether.BL.Facade.TravelFacade;
 import togaether.BL.Facade.UserFacade;
@@ -98,12 +99,20 @@ public class TravelCreateController {
 
                     //Création de votre collaborateur
                     Collaborator you = new Collaborator(travelTemporary,UserFacade.getInstance().getConnectedUser(),yourName);
-                    CollaboratorFacade.getInstance().createCollaborator(you);
+                    int youId = CollaboratorFacade.getInstance().createCollaborator(you);
+                    for (int i = 1; i < 7; i++) {
+                        Budget budget = new Budget(idTravel, i, youId, (double)-1.);
+                        BudgetFacade.getInstance().createBudget(budget);
+                    }
 
                     //Création de tous les collaborateurs
                     for(String str : collaborators){
                         Collaborator newCollaborator = new Collaborator(travelTemporary,str);
-                        CollaboratorFacade.getInstance().createCollaborator(newCollaborator);
+                        int collabo = CollaboratorFacade.getInstance().createCollaborator(newCollaborator);
+                        for (int i = 1; i < 7; i++) {
+                            Budget budget = new Budget(idTravel, i, collabo, (double)-1.);
+                            BudgetFacade.getInstance().createBudget(budget);
+                        }
                     }
 
                     /*

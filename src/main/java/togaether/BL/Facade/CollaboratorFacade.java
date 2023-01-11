@@ -1,5 +1,6 @@
 package togaether.BL.Facade;
 
+import togaether.BL.Model.Budget;
 import togaether.BL.Model.Collaborator;
 import togaether.BL.Model.Travel;
 import togaether.BL.Model.User;
@@ -133,4 +134,5 @@ public class CollaboratorFacade {
             System.out.println(e);
         }
     }
+
 }
