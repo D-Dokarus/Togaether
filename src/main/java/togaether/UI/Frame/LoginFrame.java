@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * Classe gérant l'interface graphique de Login
+ * Class managing the graphical interface of Login
  */
 public class LoginFrame extends Application {
     @Override

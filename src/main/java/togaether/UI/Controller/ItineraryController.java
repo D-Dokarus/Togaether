@@ -16,7 +16,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
-import javafx.util.Callback;
 import togaether.BL.Facade.ItineraryFacade;
 import togaether.BL.Facade.TravelFacade;
 import togaether.BL.Model.Itinerary;

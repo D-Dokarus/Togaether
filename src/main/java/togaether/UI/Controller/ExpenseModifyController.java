@@ -45,6 +45,7 @@ public class ExpenseModifyController {
   protected void initialize() {
     ArrayList<ExpenseCategory> categories;
     ArrayList<Collaborator> participants;
+    selectedParticipants = new ArrayList<>();
     try {
       //Récupérer les catégories de dépenses
       categories = (ArrayList<ExpenseCategory>) ExpenseFacade.getInstance().findAllCategories();

@@ -28,14 +28,13 @@ public class CollaboratorDAOPostgres implements CollaboratorDAO {
         statement.setInt(1,user_id);
         statement.setInt(2,travel_id);
         try (ResultSet resultSet = statement.executeQuery()) {
-
-          while (resultSet.next()) {
-             collaborator = new Collaborator(resultSet.getInt("collaborator_id"), new Travel(resultSet.getInt("travel_id")), new User(resultSet.getInt("user_id")), resultSet.getString("collaborator_name"));
-          }
+          resultSet.next();
+          collaborator = new Collaborator(resultSet.getInt("collaborator_id"), new Travel(resultSet.getInt("travel_id")), new User(resultSet.getInt("user_id")), resultSet.getString("collaborator_name"));
+          return collaborator;
         }
       }
     }
-    return collaborator;
+
   }
 
   @Override

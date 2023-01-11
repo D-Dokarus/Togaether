@@ -9,7 +9,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
+<<<<<<< HEAD
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/" fx:controller="togaether.UI.Controller.ChatController">
+=======
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="togaether.UI.Controller.ChatController">
+>>>>>>> f578c5c1c3f00813927bd72bec066b08bdcf49b6
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="107.0" minWidth="50.0" prefWidth="107.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="211.0" minWidth="10.0" prefWidth="209.0" />

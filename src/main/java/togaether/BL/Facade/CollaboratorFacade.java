@@ -100,7 +100,12 @@ public class CollaboratorFacade {
         CollaboratorDAO cdaop = af.getCollaboratorDAO();
 
         try{
-            return cdaop.getCollaboratorByUserIdAndTravelId(user.getId(), travel.getIdTravel());
+            Collaborator collab = cdaop.getCollaboratorByUserIdAndTravelId(user.getId(), travel.getIdTravel());
+            if(collab == null){
+                throw new CollaboratorNotFoundException();
+            }else{
+                return collab;
+            }
         }catch(SQLException e){
             throw new CollaboratorNotFoundException();
         }

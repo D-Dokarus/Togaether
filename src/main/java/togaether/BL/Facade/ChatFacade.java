@@ -37,6 +37,28 @@ public class ChatFacade {
   }
 
   /**
+   * Delete a Message
+   * @param message
+   * @throws SQLException
+   */
+  public void deleteMessage(Message message) throws SQLException{
+    AbstractFactory fact = AbstractFactory.createInstance();
+    MessageDAO messageDB = fact.getMessageDAO();
+    messageDB.deleteMessageById(message.getId());
+  }
+
+  /**
+   * Delete Messages in Travel
+   * @param travel
+   * @throws SQLException
+   */
+  public void deleteMessagesInTravel(Travel travel) throws SQLException{
+    AbstractFactory fact = AbstractFactory.createInstance();
+    MessageDAO messageDB = fact.getMessageDAO();
+    messageDB.deleteMessageByTravelId(travel.getIdTravel());
+  }
+
+  /**
    * Return a List of Messages of a Collaborator
    * @param id
    * @return

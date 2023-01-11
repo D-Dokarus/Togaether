@@ -6,7 +6,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<<<<<<< HEAD
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/" fx:controller="togaether.UI.Controller.BalanceController">
+=======
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="togaether.UI.Controller.BalanceController">
+>>>>>>> f578c5c1c3f00813927bd72bec066b08bdcf49b6
    <children>
       <Label fx:id="labelError" layoutX="212.0" layoutY="24.0" prefHeight="17.0" prefWidth="361.0" textFill="RED" />
       <Button fx:id="travelButton" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" onAction="#onTravelButtonClicked" prefHeight="59.0" prefWidth="201.0" text="Retour">
