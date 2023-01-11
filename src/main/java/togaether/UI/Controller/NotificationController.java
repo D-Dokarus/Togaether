@@ -18,6 +18,7 @@ import togaether.BL.Facade.NotificationFacade;
 import togaether.BL.Facade.UserFacade;
 import togaether.BL.Model.Notification;
 import togaether.BL.TogaetherException.DBNotFoundException;
+import togaether.UI.SceneController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -201,5 +202,10 @@ public class NotificationController {
     public void refuseNotification(Notification notification){
         NotificationFacade.getInstance().refuseNotification(notification);
         removeNotificationFromList(notification);
+    }
+
+    @FXML
+    public void goBackHomePage(ActionEvent event){
+        SceneController.getInstance().switchToHomePage(event);
     }
 }

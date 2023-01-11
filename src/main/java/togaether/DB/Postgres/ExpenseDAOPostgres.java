@@ -50,9 +50,11 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
   @Override
   public void deleteExpenseById(int expense_id) throws SQLException {
     try(Connection connection = this.postgres.getConnection()){
-      String query = "DELETE FROM expense WHERE expense_id=?;";
+      String query = "DELETE FROM participate p WHERE p.expense=?;\n"+
+              "DELETE FROM expense e WHERE e.expense_id=?;";
       try(PreparedStatement statement = connection.prepareStatement(query)){
         statement.setInt(1,expense_id);
+        statement.setInt(2,expense_id);
         statement.executeUpdate();
       }
     }

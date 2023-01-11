@@ -31,6 +31,7 @@ public class ExpenseDeleteController {
       SceneController.getInstance().switchToExpense(event);
       System.out.println("Dépense supprimée !");
     } catch (Exception e) {
+      System.out.println(e);
       this.displayInfo("Attention : La dépense n'a pas pu être supprimée, veuillez réessayer");
     }
   }

@@ -34,6 +34,29 @@ public class MessageDAOPostgres implements MessageDAO {
   }
 
   @Override
+  public void deleteMessageById(int message_id) throws SQLException {
+    try(Connection connection = this.postgres.getConnection()){
+      String query = "DELETE FROM message WHERE message_id=?;";
+      try(PreparedStatement statement = connection.prepareStatement(query)){
+        statement.setInt(1, message_id);
+        statement.executeUpdate();
+      }
+    }
+  }
+
+  @Override
+  public void deleteMessageByTravelId(int travel_id) throws SQLException {
+    try(Connection connection = this.postgres.getConnection()){
+      String query = "DELETE FROM message WHERE travel_id=?;";
+      try(PreparedStatement statement = connection.prepareStatement(query)){
+        statement.setInt(1, travel_id);
+        statement.executeUpdate();
+      }
+    }
+  }
+
+
+  @Override
   public List<Message> findMessagesByCollaboratorId(int id) throws SQLException {
     ArrayList<Message> messages = new ArrayList<>();
     try (Connection connection = this.postgres.getConnection()){

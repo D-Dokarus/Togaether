@@ -4,11 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
-import togaether.BL.Facade.BudgetFacade;
-import togaether.BL.Facade.CollaboratorFacade;
-import togaether.BL.Facade.TravelFacade;
-import togaether.BL.Model.Budget;
-import togaether.BL.Model.Collaborator;
+import togaether.BL.Facade.*;
+import togaether.BL.Model.*;
 import togaether.UI.SceneController;
 
 public class TravelDeleteController {
@@ -29,10 +26,20 @@ public class TravelDeleteController {
     public void onConfirmedButtonClicked(ActionEvent event) {
         TravelFacade travelFacade = TravelFacade.getInstance();
         try {
+
             for(Collaborator c : CollaboratorFacade.getInstance().findCollaboratorByTravel(travelFacade.getTravel())) {
                 BudgetFacade.getInstance().deleteBudgetByCollaboratorId(c.getId());
             }
-
+            for(Expense e : ExpenseFacade.getInstance().findExpensesByTravelId(travelFacade.getTravel().getIdTravel())) {
+                ExpenseFacade.getInstance().deleteExpense(e);
+            }
+            for(Itinerary i : ItineraryFacade.getInstance().findItinerariesByTravelId(travelFacade.getTravel().getIdTravel())) {
+                ItineraryFacade.getInstance().deleteItineraryById(i.getItinerary_id());
+            }
+            for(Activity a : ActivityFacade.getInstance().findActivitiesByTravelId(travelFacade.getTravel().getIdTravel())) {
+                ActivityFacade.getInstance().deleteActivity(a);
+            }
+            ChatFacade.getInstance().deleteMessagesInTravel(travelFacade.getTravel());
             CollaboratorFacade.getInstance().deleteAllColaboratorByTravel(travelFacade.getTravel());
             travelFacade.deleteTravel(travelFacade.getTravel());
             SceneController.getInstance().switchToHomePage(event);

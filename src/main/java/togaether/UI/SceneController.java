@@ -150,4 +150,9 @@ public class SceneController {
     App.getInstance().switchScene("ChooseCollaborator",(Stage)root.getScene().getWindow());
   }
 
+  public void switchToChooseCollaborator(ActionEvent actionEvent){
+    App.getInstance().switchScene("ChooseCollaborator", (Stage)((Node)actionEvent.getSource()).getScene().getWindow());
+
+  }
+
 }
