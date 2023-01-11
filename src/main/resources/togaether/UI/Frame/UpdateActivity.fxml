@@ -15,7 +15,7 @@
             <Font name="Garamond" size="24.0" />
          </font>
       </TextArea>
-      <TextArea fx:id="placeActivity1" layoutX="425.0" layoutY="175.0" prefHeight="85.0" prefWidth="327.0" promptText="Adresse de l'activité">
+      <TextArea fx:id="placeActivity" layoutX="425.0" layoutY="175.0" prefHeight="85.0" prefWidth="327.0" promptText="Adresse de l'activité">
          <font>
             <Font name="Garamond" size="24.0" />
          </font>

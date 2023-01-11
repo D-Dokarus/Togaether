@@ -24,7 +24,7 @@ public class CollaboratorFacade {
         int id = 0;
         try{
             id = cdaop.createCollaborator(collaborator);
-            TrophyFacade.getInstance().isTrophyValidForUser("travel");
+            TrophyFacade.getInstance().isTrophyValidForUser(UserFacade.getInstance().getConnectedUser().getId(),"travel");
         }catch(SQLException e){
             System.out.println(e);
         }

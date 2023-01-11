@@ -1,9 +1,6 @@
 package togaether.BL.Facade;
 
-import togaether.BL.Model.Trophy;
-import togaether.BL.Model.Notification;
-import togaether.BL.Model.TrophyCategory;
-import togaether.BL.Model.NotificationCategory;
+import togaether.BL.Model.*;
 import togaether.DB.AbstractFactory;
 import togaether.DB.TrophyDAO;
 
@@ -94,17 +91,16 @@ public class TrophyFacade {
      * @param category
      * @return
      */
-    public boolean isTrophyValidForUser(String category) {
-        Boolean valid = false;
+    public void isTrophyValidForUser(int user_id, String category) {
         try {
             TrophyDAO trophyDB = AbstractFactory.createInstance().getTrophyDAO();
-            ArrayList<Trophy> trophies = (ArrayList<Trophy>) trophyDB.findNotOwnedTrophiesByCategories(category, UserFacade.getInstance().getConnectedUser().getId());
+            ArrayList<Trophy> trophies = (ArrayList<Trophy>) trophyDB.findNotOwnedTrophiesByCategories(category, user_id);
             ArrayList<Trophy> trophiesSuccessed = new ArrayList<Trophy>();
             int count = 0;
             if (category.equals("travel")) {
-                count = trophyDB.countAllParticipatingTravelsByUserId(UserFacade.getInstance().getConnectedUser().getId());
-            } else if (category.equals("")) {
-
+                count = trophyDB.countAllParticipatingTravelsByUserId(user_id);
+            } else if (category.equals("friend")) {
+                count = trophyDB.countFriendsByUserId(user_id);
             } else System.out.println("Cette catégorie n'a pas de test de succès");
 
             // Vérifier les trophées obtenus
@@ -115,14 +111,14 @@ public class TrophyFacade {
             }
             //Donner les trophées obtenus réussis
             for (Trophy trophy : trophiesSuccessed) {
-                this.giveTrophyToUser(trophy.getId());
-                Notification notification = new Notification(UserFacade.getInstance().getConnectedUser(), "Nouveau trophée obtenu ! : "+trophy.getName(), false, NotificationCategory.createNotification("trophyObtained"));
+                this.giveTrophyToUser(user_id, trophy.getId());
+                User faux = new User(user_id);
+                Notification notification = new Notification(faux, "Nouveau trophée obtenu ! : "+trophy.getName(), false, NotificationCategory.createNotification("trophyObtained"));
                 NotificationFacade.getInstance().createNotification(notification);
             }
         } catch (SQLException e) {
             System.out.println("Erreur lors du test des trophées :" + e);
         }
-        return valid;
     }
 
     /**
@@ -177,10 +173,10 @@ public class TrophyFacade {
      * @param trophy_id
      * @throws SQLException
      */
-    public void giveTrophyToUser(int trophy_id) throws SQLException {
+    public void giveTrophyToUser(int user_id, int trophy_id) throws SQLException {
         AbstractFactory abstractFactory = AbstractFactory.createInstance();
         TrophyDAO trophyDB = abstractFactory.getTrophyDAO();
-        trophyDB.createTrophyUser(trophy_id, UserFacade.getInstance().getConnectedUser().getId());
+        trophyDB.createTrophyUser(trophy_id, user_id);
     }
 
     /**

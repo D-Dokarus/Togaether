@@ -21,6 +21,8 @@ public class FriendFacade {
 
         try{
             Friend fr = fdaop.createFriend(friend);
+            TrophyFacade.getInstance().isTrophyValidForUser(friend.getUser1().getId(), "friend");
+            TrophyFacade.getInstance().isTrophyValidForUser(friend.getUser2().getId(), "friend");
             return fr;
         } catch (SQLException e) {
             System.out.println("CREATION FAILED :");

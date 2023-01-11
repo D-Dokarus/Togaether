@@ -248,7 +248,7 @@ public class TrophyDAOPostgres implements TrophyDAO {
     int count = 0;
 
     try (Connection connection = this.postgres.getConnection()){
-      String query = "SELECT COUNT(*) FROM friend WHERE c.user_id_1 =? OR c.user_id_2 =?";
+      String query = "SELECT COUNT(*) FROM friend f WHERE f.user_id_1 =? OR f.user_id_2 =?";
       try(PreparedStatement statement = connection.prepareStatement(query);){
         statement.setInt(1, user_id);
         statement.setInt(2, user_id);
