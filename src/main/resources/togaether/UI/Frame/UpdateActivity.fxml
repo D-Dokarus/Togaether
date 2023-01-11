@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="togaether.UI.Controller.ActivityUpdateController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/" fx:controller="togaether.UI.Controller.ActivityUpdateController">
    <children>
       <Label fx:id="labelError" layoutX="274.0" layoutY="248.0" prefHeight="67.0" prefWidth="302.0" textFill="RED" />
       <TextArea fx:id="priceActivity" layoutX="425.0" layoutY="309.0" prefHeight="57.0" prefWidth="327.0" promptText="Prix de l'activité (en €, ex : 6.94)">

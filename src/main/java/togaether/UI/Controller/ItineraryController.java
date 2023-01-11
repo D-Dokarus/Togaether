@@ -76,9 +76,32 @@ public class ItineraryController {
                     root.setPadding(new Insets(5, 0, 5, 10));
                     String dateIt = "";
                     if(itinerary.getDateItinerary()!=null){
-                        dateIt = itinerary.getDateItinerary().toString();
+                        dateIt = " - " + itinerary.getDateItinerary().toString();
                     }
-                    Label firstLabel = new Label(itinerary.getName() +" - "+dateIt);
+                    String cat = "";
+                    if(itinerary.getCategory()!=-0){
+                        switch (itinerary.getCategory()) {
+                            case 1:
+                                cat = "🚗 - "; // "Car"
+                                break;
+                            case 2:
+                                cat = "✈ - "; // "Plane"
+                                break;
+                            case 3:
+                                cat = "🚌 - "; // "Bus"
+                                break;
+                            case 4:
+                                cat = "🚂 - "; // "Train"
+                                break;
+                            case 5:
+                                cat = "⛵ - "; // "Boat"
+                                break;
+                            case 6:
+                                cat = "🚶 - "; // "Walk"
+                                break;
+                        }
+                    }
+                    Label firstLabel = new Label(cat + itinerary.getName()+dateIt);
                     root.getChildren().add(firstLabel);
                     Region region = new Region();
                     HBox.setHgrow(region, Priority.ALWAYS);
