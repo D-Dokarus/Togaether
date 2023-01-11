@@ -40,19 +40,12 @@ public class ChooseCollaboratorController {
         }catch(CollaboratorNotFoundException e){
             System.out.println(e);
         }
-        for(Collaborator collaborator : collaborators){
-            System.out.println(collaborator.getName());
-        }
         initializeCollaboratorsList();
-
-
     }
 
     public void initializeCollaboratorsList(){
         observableCollaborators.clear();
-        for(Collaborator collaborator: collaborators){
-            observableCollaborators.add(collaborator);
-        }
+        observableCollaborators.addAll(collaborators);
         // We need to create a new CellFactory so we can display our layout for each individual notification
         collaboratorsListView.setCellFactory((Callback<ListView<Collaborator>, ListCell<Collaborator>>) param -> {
             return new ListCell<Collaborator>() {
