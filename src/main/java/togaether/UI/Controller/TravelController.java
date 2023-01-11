@@ -1,5 +1,6 @@
 package togaether.UI.Controller;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -66,14 +67,17 @@ public class TravelController {
             travelFacade.setCollaborator(collaboratorFacade.findCollaboratorByUserAndTravel(userFacade.getConnectedUser(), travelFacade.getTravel()));
             travelFacade.setCollaborators(collaboratorFacade.findCollaboratorByTravel(travelFacade.getTravel()));
             System.out.println(travelFacade.getCollaborator().getName());
+            initializeInfo();
         } catch (Exception e) {
             System.out.println("Attention : Le voyage n'a pas pu être trouvé, veuillez réessayer");
             this.labelError.setText("Attention : Le voyage n'a pas pu être trouvé, veuillez réessayer");
             SceneController.getInstance().switchToChooseCollaborator();
-            Stage stage = (Stage) returnButton.getScene().getWindow();
-            stage.close();
+
+            Platform.runLater(() -> {
+                Stage stage = (Stage) returnButton.getScene().getWindow();
+                stage.close();
+            });
         }
-        initializeInfo();
     }
 
     public void initializeInfo() {

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface MessageDAO {
   /**
-   * Create a new message in a travel
+   * Create a new Message in a travel
    * @param travel_d
    * @param collaborator_id
    * @param message_content
@@ -15,6 +15,19 @@ public interface MessageDAO {
    */
   public void insertMessage(int travel_d, int collaborator_id, String message_content) throws SQLException;
 
+  /**
+   * Delete a Message
+   * @param message_id
+   * @throws SQLException
+   */
+  public void deleteMessageById(int message_id) throws SQLException;
+
+  /**
+   * Delete Messages from a Travel
+   * @param travel_id
+   * @throws SQLException
+   */
+  public void deleteMessageByTravelId(int travel_id) throws SQLException;
   /**
    * Return a List of the messages of a Collaborator
    * @param id
