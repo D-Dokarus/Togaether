@@ -14,20 +14,25 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
     this.postgres = postgres;
   }
   @Override
-  public void createExpense(int travel_id, int pay_master_id, int expense_category_id, double expense_value, String expense_name, Date expense_date) throws SQLException {
-    try (Connection connection = this.postgres.getConnection()){
-      String query = "INSERT INTO expense(travel, pay_master, expense_category, expense_value, expense_name, expense_date) VALUES(?,?,?,?,?,?);";
-      try(PreparedStatement statement = connection.prepareStatement(query);){
+  public int createExpense(int travel_id, int pay_master_id, int expense_category_id, double expense_value, String expense_name, Date expense_date) throws SQLException {
+    int returnedId = 0;
+    try (Connection connection = this.postgres.getConnection()) {
+      String query = "INSERT INTO expense(travel, pay_master, expense_category, expense_value, expense_name, expense_date) VALUES(?,?,?,?,?,?)  RETURNING expense_id;";
+      try(PreparedStatement statement = connection.prepareStatement(query)) {
         statement.setInt(1, travel_id);
         statement.setInt(2, pay_master_id);
         statement.setInt(3, expense_category_id);
         statement.setDouble(4, expense_value);
         statement.setString(5, expense_name);
         statement.setDate(6, expense_date);
-
-        statement.executeUpdate();
+        try (ResultSet resultSet = statement.executeQuery()) {
+          while (resultSet.next()) {
+            returnedId = resultSet.getInt(1);
+          }
+        }
       }
     }
+    return returnedId;
   }
 
   @Override

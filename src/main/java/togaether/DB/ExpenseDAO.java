@@ -20,7 +20,7 @@ public interface ExpenseDAO {
    * @param expense_date
    * @throws SQLException
    */
-  public void createExpense(int travel_id, int pay_master_id, int expense_category_id, double expense_value, String expense_name, Date expense_date) throws SQLException;
+  public int createExpense(int travel_id, int pay_master_id, int expense_category_id, double expense_value, String expense_name, Date expense_date) throws SQLException;
 
   /**
    * Delete an Expense
