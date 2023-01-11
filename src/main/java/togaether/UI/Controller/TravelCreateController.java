@@ -106,8 +106,6 @@ public class TravelCreateController {
                         CollaboratorFacade.getInstance().createCollaborator(newCollaborator);
                     }
 
-
-
                     /*
                     travelFacade.setTravel();
                     SceneController.getInstance().switchToTravel(event);*/
@@ -221,16 +219,15 @@ public class TravelCreateController {
     }
 
     public void onClickAddCollaborator(){
-        if(!newCollaboratorInput.getText().isBlank()){
+        String name = newCollaboratorInput.getText().trim();
+        if(!name.isBlank() && !containsName(collaborators,name)){
             String str = newCollaboratorInput.getText();
             collaborators.add(str);
             collaboratorListView.getItems().add(str);
         }
     }
 
-    public void onClickAddYourselfAsCollaborator(){
-        if(!yourCollaboratorInput.getText().isBlank()){
-            String str = newCollaboratorInput.getText();
-        }
+    public boolean containsName(final List<String> list, final String name){
+        return list.stream().filter(o -> o.equals(name)).findFirst().isPresent();
     }
 }
