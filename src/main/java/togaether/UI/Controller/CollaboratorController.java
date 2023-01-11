@@ -259,6 +259,13 @@ public class CollaboratorController {
         }
     }
 
+    /**
+     * Implement the behavior when the remove button of a collaborator is clicked :
+     * -remove from list collaborators
+     * -remove from list collaboratorsListView
+     * -remove from database
+     * @param collaborator
+     */
     public void onClickButtonRemove(Collaborator collaborator){
         collaborators.remove(collaborator);
         collaboratorsListView.getItems().remove(collaborator);
@@ -268,6 +275,12 @@ public class CollaboratorController {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * Remove from database a specific collaborator given in parameter
+     * @param collaborator
+     * @throws SQLException
+     */
     public void deleteInDataBase(Collaborator collaborator) throws SQLException {
         CollaboratorFacade.getInstance().deleteColaborator(collaborator);
         for (int i = 1; i < 7; i++) {
@@ -275,6 +288,13 @@ public class CollaboratorController {
         }
     }
 
+    /**
+     * Test if a list of collaborators contains a specific name given in parameter
+     * @param list
+     * @param name
+     * @param collab
+     * @return a boolean
+     */
     public boolean containsName(final List<Collaborator> list, final String name, Collaborator collab){
         return list.stream().filter(o -> o.getId() != collab.getId()).filter(o -> o.getName().equals(name)).findFirst().isPresent();
     }

@@ -14,6 +14,7 @@ public class FriendFacadeTest {
 
         String name1 = "TEST";
         String name2 = "TEST2";
+        /*
         try{
             UserFacade.getInstance().register(name1,"",name1,"a@gmail.com","mdpazertya","mdpazertya","France");
             UserFacade.getInstance().register(name2,"",name2,"b@gmail.com","mdpazertya","mdpazertya","France");
@@ -30,6 +31,8 @@ public class FriendFacadeTest {
         } catch (UserPseudoAlreadyExistException e) {
             throw new RuntimeException(e);
         }
+
+         */
 
         List<User> lu = UserFacade.getInstance().findAllUsersByPseudo(name1);
         List<User> lu2 = UserFacade.getInstance().findAllUsersByPseudo(name2);

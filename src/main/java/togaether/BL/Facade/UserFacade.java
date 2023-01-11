@@ -311,6 +311,7 @@ public class UserFacade {
         return users;
     }
 
+    public void setConnectedUser(User user){this.connectedUser = user;}
 
     public static UserFacade getInstance() {
         return instance;

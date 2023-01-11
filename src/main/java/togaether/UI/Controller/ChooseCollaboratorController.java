@@ -48,6 +48,9 @@ public class ChooseCollaboratorController {
 
     }
 
+    /**
+     * Initialize the listViewCollaborators with the list of collaborator "collaborators" already filled by setting up the behavior of a cell;
+     */
     public void initializeCollaboratorsList(){
         observableCollaborators.clear();
         for(Collaborator collaborator: collaborators){
@@ -102,6 +105,10 @@ public class ChooseCollaboratorController {
     }
 
 
+    /**
+     * Switch to HomePage
+     * @param event
+     */
     public void onClickButtonToHomePage(ActionEvent event){
         SceneController.getInstance().switchToHomePage(event);
     }

@@ -15,6 +15,11 @@ public class FriendFacade {
     private static FriendFacade instance = new FriendFacade();
     public static FriendFacade getInstance(){return instance;}
 
+    /**
+     * Query the creation of a Friend
+     * @param friend
+     * @return the friend newly created
+     */
     public Friend createFriend(Friend friend){
         AbstractFactory af = AbstractFactory.createInstance();
         FriendDAO fdaop = af.getFriendDAO();
@@ -31,6 +36,11 @@ public class FriendFacade {
         return null;
     }
 
+    /**
+     * Fetch all friends that are friend with the user given in parameter
+     * @param user
+     * @return a list of Friend
+     */
     public List<Friend> findAllFriends(User user){
         AbstractFactory af = AbstractFactory.createInstance();
         FriendDAO fdaop = af.getFriendDAO();
@@ -45,6 +55,13 @@ public class FriendFacade {
         return friends;
     }
 
+    /**
+     * Query in the database the research of an existing Friend instance
+     * If exists, return it, otherwise return null
+     * @param you
+     * @param other
+     * @return a friend or null
+     */
     public Friend isAlreadyFriendWith(User you, User other){
         AbstractFactory af = AbstractFactory.createInstance();
         FriendDAO fdaop = af.getFriendDAO();
@@ -58,6 +75,10 @@ public class FriendFacade {
         return toReturn;
     }
 
+    /**
+     * Query the suppression of the friend instance given in parameter
+     * @param friend
+     */
     public void deleteFriend(Friend friend){
         AbstractFactory af = AbstractFactory.createInstance();
         FriendDAO fdaop = af.getFriendDAO();
@@ -68,6 +89,10 @@ public class FriendFacade {
         }
     }
 
+    /**
+     * Query the suppression of all users that are friends with the user given in parameter
+     * @param user
+     */
     public void deleteAllFriends(User user){
         AbstractFactory af = AbstractFactory.createInstance();
         FriendDAO fdaop = af.getFriendDAO();
@@ -78,6 +103,12 @@ public class FriendFacade {
         }
     }
 
+    /**
+     * Query the list of all friends that are friend with the user given in parameter, and that contains the specific string in its pseudo.
+     * @param user
+     * @param string
+     * @return a list of Friends
+     */
     public List<Friend> findAllFriendsByPseudo(User user,String string){
         AbstractFactory af = AbstractFactory.createInstance();
         FriendDAO fdaop = af.getFriendDAO();
