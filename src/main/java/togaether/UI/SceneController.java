@@ -126,7 +126,6 @@ public class SceneController {
       Stage stage = new Stage();
       stage.setTitle("NotificationCenter");
       Scene scene = new Scene(root);
-      scene.getStylesheets().add(LoginFrame.class.getResource("application.css").toExternalForm());
       stage.setScene(scene);
       stage.initModality(Modality.WINDOW_MODAL);
       stage.show();
