@@ -200,6 +200,19 @@ public class ExpenseFacade {
   }
 
   /**
+   * Return the sum of all the expenses by collaborator and Category
+   * @param collaborator_id
+   * @param category
+   * @return double
+   * @throws SQLException
+   */
+  public double calcAmountByCollaboratorIdAndCategoryExpense(int collaborator_id, int category) throws SQLException {
+    AbstractFactory abstractFactory = AbstractFactory.createInstance();
+    ExpenseDAO expenseDB = abstractFactory.getExpenseDAO();
+    return expenseDB.calcAmountByCollaboratorIdAndCategoryExpense(collaborator_id, category);
+  }
+
+  /**
    * Return a String that represents the description of a ExpenseCategory name
    * @param name
    * @return

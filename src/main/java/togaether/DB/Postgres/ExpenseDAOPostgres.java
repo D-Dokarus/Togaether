@@ -140,7 +140,6 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
   @Override
   public double calcAmountByCollaboratorIdAndCategoryExpense(int collaborator_id, int category_id) throws SQLException {
     double count = 0.0;
-
     try (Connection connection = this.postgres.getConnection()){
       String query = "SELECT SUM(s1.expense_value/s1.nb) FROM \n" +
               "  (SELECT expense_id, expense_value, count(*) as nb FROM participate p INNER JOIN expense e ON p.expense=e.expense_id\n" +

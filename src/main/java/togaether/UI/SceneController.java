@@ -14,27 +14,57 @@ import togaether.UI.Frame.NotificationFrame;
 import java.io.IOException;
 
 public class SceneController {
+
   public static SceneController instance = new SceneController();
 
   public static SceneController getInstance() {
     return instance;
   }
 
+  /**
+   * Switch to HomePage
+   * @param event
+   */
   public void switchToHomePage(ActionEvent event) {
     App.getInstance().switchScene("HomePage", (Stage)((Node)event.getSource()).getScene().getWindow());
   }
+
+  /**
+   * Switch to NotificationCenter
+   * @param event
+   */
   public void switchToNotificationCenter(ActionEvent event) {
     App.getInstance().switchScene("NotificationCenter", (Stage)((Node)event.getSource()).getScene().getWindow());
   }
+
+  /**
+   * Switch to NotificationCenter
+   * @param event
+   */
   public void switchToSettings(ActionEvent event) {
     App.getInstance().switchScene("Settings", (Stage)((Node)event.getSource()).getScene().getWindow());
   }
+
+  /**
+   * Switch to NotificationCenter
+   * @param event
+   */
   public void switchToChat(ActionEvent event) {
     App.getInstance().switchScene("Chat", (Stage)((Node)event.getSource()).getScene().getWindow());
   }
+
+  /**
+   * Switch to NotificationCenter
+   * @param event
+   */
   public void switchToRegister(ActionEvent event) {
     App.getInstance().switchScene("Register", (Stage)((Node)event.getSource()).getScene().getWindow());
   }
+
+  /**
+   * Switch to NotificationCenter
+   * @param event
+   */
   public void switchToLogin(ActionEvent event) {
     App.getInstance().switchScene("Login", (Stage)((Node)event.getSource()).getScene().getWindow());
   }

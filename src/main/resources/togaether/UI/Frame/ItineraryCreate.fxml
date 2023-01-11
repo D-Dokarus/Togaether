@@ -10,11 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<<<<<<< HEAD
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/" fx:controller="togaether.UI.Controller.ItineraryCreateController">
-=======
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="togaether.UI.Controller.ItineraryCreateController">
->>>>>>> f578c5c1c3f00813927bd72bec066b08bdcf49b6
    <children>
       <Label fx:id="title" alignment="CENTER" layoutX="238.0" layoutY="28.0" prefHeight="57.0" prefWidth="345.0" text="Nouvelle étape">
          <font>
