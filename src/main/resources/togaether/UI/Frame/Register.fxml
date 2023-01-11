@@ -9,84 +9,79 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="togaether.UI.Controller.RegisterController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="togaether.UI.Controller.RegisterController">
    <children>
-      <TextField fx:id="name" layoutX="69.0" layoutY="142.0" promptText="Prénom*">
+      <TextField fx:id="name" layoutX="68.0" layoutY="171.0" promptText="Prénom*">
          <font>
             <Font name="Garamond" size="24.0" />
          </font></TextField>
-      <TextField fx:id="surname" layoutX="69.0" layoutY="227.0" promptText="Nom">
+      <TextField fx:id="surname" layoutX="68.0" layoutY="256.0" promptText="Nom">
          <font>
             <Font name="Garamond" size="24.0" />
          </font></TextField>
-      <TextField fx:id="pseudo" layoutX="69.0" layoutY="315.0" promptText="Pseudo*">
+      <TextField fx:id="pseudo" layoutX="68.0" layoutY="344.0" promptText="Pseudo*">
          <font>
             <Font name="Garamond" size="24.0" />
          </font></TextField>
-      <TextField fx:id="email" layoutX="69.0" layoutY="399.0" promptText="Email*">
+      <TextField fx:id="email" layoutX="68.0" layoutY="428.0" promptText="Email*">
          <font>
             <Font name="Garamond" size="24.0" />
          </font></TextField>
-      <PasswordField fx:id="password" layoutX="422.0" layoutY="186.0" promptText="Mot de passe*">
+      <PasswordField fx:id="password" layoutX="421.0" layoutY="215.0" promptText="Mot de passe*">
          <font>
             <Font name="Garamond" size="24.0" />
          </font></PasswordField>
-      <PasswordField fx:id="confirmPassword" layoutX="422.0" layoutY="271.0" promptText="Confirmation MdP*">
+      <PasswordField fx:id="confirmPassword" layoutX="421.0" layoutY="300.0" promptText="Confirmation MdP*">
          <font>
             <Font name="Garamond" size="24.0" />
          </font></PasswordField>
-      <TextField fx:id="country" layoutX="422.0" layoutY="369.0" promptText="Pays">
+      <TextField fx:id="country" layoutX="421.0" layoutY="398.0" promptText="Pays">
          <font>
             <Font name="Garamond" size="24.0" />
          </font></TextField>
-      <Button fx:id="register" layoutX="496.0" layoutY="501.0" mnemonicParsing="false" onAction="#onRegisterButtonClick" text="S'inscrire">
+      <Button fx:id="register" layoutX="611.0" layoutY="508.0" mnemonicParsing="false" onAction="#onRegisterButtonClick" text="S'inscrire">
          <font>
             <Font name="Garamond" size="24.0" />
          </font></Button>
-      <Hyperlink fx:id="toConnexion" layoutX="141.0" layoutY="508.0" onAction="#switchToSceneLoginFrame" text="Déjà un compte ?">
+      <Hyperlink fx:id="toConnexion" layoutX="36.0" layoutY="538.0" onAction="#switchToSceneLoginFrame" text="Déjà un compte ?">
          <font>
             <Font name="Garamond" size="20.0" />
          </font></Hyperlink>
-      <ImageView fx:id="logo" fitHeight="144.0" fitWidth="190.0" layoutX="232.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="labelError" alignment="CENTER" layoutX="271.0" layoutY="524.0" prefHeight="44.0" prefWidth="258.0" textFill="RED" />
-      <Label layoutX="422.0" layoutY="156.0" prefHeight="17.0" prefWidth="217.0" text="Mot de passe">
+      <ImageView fx:id="logo" fitHeight="144.0" fitWidth="190.0" layoutX="326.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="labelError" alignment="CENTER" layoutX="271.0" layoutY="494.0" prefHeight="85.0" prefWidth="313.0" textFill="RED" />
+      <Label layoutX="421.0" layoutY="185.0" prefHeight="17.0" prefWidth="217.0" text="Mot de passe">
          <font>
             <Font name="Garamond" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="422.0" layoutY="241.0" prefHeight="17.0" prefWidth="217.0" text="Confirmation">
+      <Label layoutX="421.0" layoutY="270.0" prefHeight="17.0" prefWidth="217.0" text="Confirmation">
          <font>
             <Font name="Garamond" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="422.0" layoutY="335.0" prefHeight="17.0" prefWidth="217.0" text="Pays de résidence">
+      <Label layoutX="421.0" layoutY="364.0" prefHeight="17.0" prefWidth="217.0" text="Pays de résidence">
          <font>
             <Font name="Garamond" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="69.0" layoutY="114.0" prefHeight="17.0" prefWidth="217.0" text="Prénom">
+      <Label layoutX="68.0" layoutY="143.0" prefHeight="17.0" prefWidth="217.0" text="Prénom">
          <font>
             <Font name="Garamond" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="69.0" layoutY="196.0" prefHeight="17.0" prefWidth="217.0" text="Nom">
+      <Label layoutX="68.0" layoutY="225.0" prefHeight="17.0" prefWidth="217.0" text="Nom">
          <font>
             <Font name="Garamond" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="69.0" layoutY="285.0" prefHeight="17.0" prefWidth="217.0" text="Pseudo">
+      <Label layoutX="68.0" layoutY="314.0" prefHeight="17.0" prefWidth="217.0" text="Pseudo">
          <font>
             <Font name="Garamond" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="69.0" layoutY="369.0" prefHeight="17.0" prefWidth="217.0" text="Email">
+      <Label layoutX="68.0" layoutY="398.0" prefHeight="17.0" prefWidth="217.0" text="Email">
          <font>
             <Font name="Garamond" size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="281.0" layoutY="36.0" prefHeight="57.0" prefWidth="238.0" text="Inscription !">
-         <font>
-            <Font name="Garamond" size="48.0" />
          </font>
       </Label>
    </children>
