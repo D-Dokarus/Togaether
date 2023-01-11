@@ -11,7 +11,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import togaether.BL.Facade.TravelFacade;
 import togaether.BL.Facade.TrophyFacade;
 import togaether.BL.Model.Trophy;
 import togaether.UI.SceneController;

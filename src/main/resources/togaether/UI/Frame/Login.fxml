@@ -9,11 +9,11 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="togaether.UI.Controller.LoginController">
    <children>
-      <TextField fx:id="email" layoutX="225.0" layoutY="229.0" onAction="#onLoginButtonClick" promptText="Email*" />
-      <PasswordField fx:id="password" layoutX="225.0" layoutY="282.0" onAction="#onLoginButtonClick" promptText="Mot de passe*" />
-      <Button fx:id="seConnecter" layoutX="461.0" layoutY="256.0" mnemonicParsing="false" onAction="#onLoginButtonClick" text="Se connecter" />
-      <Button fx:id="register" layoutX="31.0" layoutY="255.0" mnemonicParsing="false" onAction="#switchToSceneRegisterFrame" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #0598ff;" text="Créer un compte" />
+      <TextField fx:id="email" layoutX="215.0" layoutY="232.0" onAction="#onLoginButtonClick" promptText="Email*" />
+      <PasswordField fx:id="password" layoutX="215.0" layoutY="280.0" onAction="#onLoginButtonClick" promptText="Mot de passe*" />
+      <Button fx:id="seConnecter" layoutX="452.0" layoutY="336.0" mnemonicParsing="false" onAction="#onLoginButtonClick" text="Se connecter" />
+      <Button fx:id="register" layoutX="26.0" layoutY="335.0" mnemonicParsing="false" onAction="#switchToSceneRegisterFrame" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #0598ff;" text="Créer un compte" />
       <Label fx:id="labelError" contentDisplay="CENTER" layoutX="200.0" layoutY="313.0" prefHeight="35.0" prefWidth="200.0" textAlignment="CENTER" textFill="RED" />
-      <ImageView fx:id="logo" fitHeight="167.0" fitWidth="200.0" layoutX="200.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="logo" fitHeight="167.0" fitWidth="200.0" layoutX="201.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

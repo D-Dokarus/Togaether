@@ -1,7 +1,9 @@
 package togaether.BL.Facade;
 
-import javafx.scene.image.ImageView;
-import togaether.BL.Model.*;
+import togaether.BL.Model.Trophy;
+import togaether.BL.Model.Notification;
+import togaether.BL.Model.TrophyCategory;
+import togaether.BL.Model.NotificationCategory;
 import togaether.DB.AbstractFactory;
 import togaether.DB.TrophyDAO;
 

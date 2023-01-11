@@ -189,7 +189,6 @@ public class DocumentController {
                                     throw new RuntimeException(e);
                                 }
 
-                                //SceneController.getInstance().switchToUpdateDocument(event);
                             });
                             //BUTTON DELETEDocument
                             Button btnDeleteDocument = new Button("Supprimer");
@@ -240,11 +239,11 @@ public class DocumentController {
         System.out.println(path);
         try {
             FileOutputStream fos;
-            fos = new FileOutputStream(path+document.getName());
+            fos = new FileOutputStream(path + document.getName());
             fos.write(document.getFile());
             fos.close();
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            throw new FileNotFoundException();
         }
 
     }

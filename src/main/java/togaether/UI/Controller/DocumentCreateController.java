@@ -8,20 +8,16 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import togaether.BL.Facade.DocumentFacade;
 import togaether.BL.Facade.TravelFacade;
-import togaether.BL.Facade.UserFacade;
 import togaether.BL.Model.Document;
-import togaether.DB.AbstractFactory;
-import togaether.DB.Postgres.PostgresFactory;
 import togaether.UI.SceneController;
+
 import javax.swing.filechooser.*;
 import javax.swing.JFileChooser;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.sql.Blob;
-import java.util.Arrays;
-import java.util.Date;
+
 
 public class DocumentCreateController {
 
@@ -52,11 +48,6 @@ public class DocumentCreateController {
     byte[] data = new byte[s];
     FileInputStream fis = null;
 
-    @FXML
-    protected void initialize() {
-        UserFacade userFacade = UserFacade.getInstance();
-        AbstractFactory abstractFactory = PostgresFactory.createInstance();
-    }
 
     public void onReturnButtonClicked(ActionEvent event) {
         SceneController.getInstance().switchToDocument(event);
@@ -72,7 +63,8 @@ public class DocumentCreateController {
         } catch (Exception e) {
             this.labelError.setText("Problème lors de la création du document,\n veuillez réessayer (Possible que le document existe déjà\n ou que le nom du document soit trop long).");
 
-        };
+        }
+        ;
     }
 
     private static double getFileSizeMegaBytes(File file) {
@@ -85,9 +77,9 @@ public class DocumentCreateController {
                 "JPG, JPEG, PNG & PDF", "jpg", "png", "pdf", "jpeg");
         chooser.setFileFilter(filter);
         int returnVal = chooser.showOpenDialog(null);
-        if(returnVal == JFileChooser.APPROVE_OPTION) {
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
             file = chooser.getSelectedFile();
-            if (getFileSizeMegaBytes(file) < 1 ){
+            if (getFileSizeMegaBytes(file) < 1) {
                 path = file.getAbsolutePath();
                 pathDocument.setText(file.getAbsolutePath());
                 fname = file.getName();
