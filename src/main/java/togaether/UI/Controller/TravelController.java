@@ -66,17 +66,10 @@ public class TravelController {
         try {
             travelFacade.setCollaborator(collaboratorFacade.findCollaboratorByUserAndTravel(userFacade.getConnectedUser(), travelFacade.getTravel()));
             travelFacade.setCollaborators(collaboratorFacade.findCollaboratorByTravel(travelFacade.getTravel()));
-            System.out.println(travelFacade.getCollaborator().getName());
             initializeInfo();
         } catch (Exception e) {
             System.out.println("Attention : Le voyage n'a pas pu être trouvé, veuillez réessayer");
             this.labelError.setText("Attention : Le voyage n'a pas pu être trouvé, veuillez réessayer");
-            SceneController.getInstance().switchToChooseCollaborator();
-
-            Platform.runLater(() -> {
-                Stage stage = (Stage) returnButton.getScene().getWindow();
-                stage.close();
-            });
         }
     }
 

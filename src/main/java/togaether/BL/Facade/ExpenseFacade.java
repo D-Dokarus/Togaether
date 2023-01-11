@@ -49,10 +49,10 @@ public class ExpenseFacade {
    * @param date
    * @throws SQLException
    */
-  public void createExpense(int travel_id, int pay_master_id, int expense_category_id, double value, String name, Date date) throws SQLException {
+  public int createExpense(int travel_id, int pay_master_id, int expense_category_id, double value, String name, Date date) throws SQLException {
     AbstractFactory abstractFactory = AbstractFactory.createInstance();
     ExpenseDAO expenseDB = abstractFactory.getExpenseDAO();
-    expenseDB.createExpense(travel_id, pay_master_id, expense_category_id, value, name, date);
+    return expenseDB.createExpense(travel_id, pay_master_id, expense_category_id, value, name, date);
   }
 
   /**

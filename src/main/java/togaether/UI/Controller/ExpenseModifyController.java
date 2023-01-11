@@ -69,6 +69,7 @@ public class ExpenseModifyController {
       this.displayInfo("Erreur avec la base de données, veuillez réessayer");
     }
 
+    // Si modification d'une dépense existante
     if(ExpenseFacade.getInstance().getExpense() != null) {
       this.nameExpense.setText(ExpenseFacade.getInstance().getExpense().getName());
       this.valueExpense.setText(ExpenseFacade.getInstance().getExpense().getValue()+"");
@@ -132,9 +133,10 @@ public class ExpenseModifyController {
         String name = this.nameExpense.getText();
         Date date = java.sql.Date.valueOf(this.dateExpense.getValue());
 
+        int id_expense = 0;
         //Créer ou modifier la dépense
         if(ExpenseFacade.getInstance().getExpense() == null) {
-          ExpenseFacade.getInstance().createExpense(TravelFacade.getInstance().getTravel().getIdTravel(), TravelFacade.getInstance().getCollaborator().getId(), category_id, value, name, date);
+          id_expense = ExpenseFacade.getInstance().createExpense(TravelFacade.getInstance().getTravel().getIdTravel(), TravelFacade.getInstance().getCollaborator().getId(), category_id, value, name, date);
         }
         else {
           Expense expense = ExpenseFacade.getInstance().getExpense();
@@ -143,17 +145,18 @@ public class ExpenseModifyController {
           expense.setValue(value);
           expense.setDate(date);
           ExpenseFacade.getInstance().updateExpense(expense);
+          id_expense = ExpenseFacade.getInstance().getExpense().getId();
         }
 
         //Maintenant il faut ajouter les nouveaux participants
         for (Collaborator collaborator : this.selectedParticipants) {
           //null == on a pas de participant (car on crée la dépense) donc on peut ajouter le participant sans vérifier qu'il l'était déjà
           if(mapParticipant == null) {
-            ExpenseFacade.getInstance().addParticipant(ExpenseFacade.getInstance().getExpense().getId(), collaborator.getId());
+            ExpenseFacade.getInstance().addParticipant(id_expense, collaborator.getId());
           }
           //Sinon, il faut vérifier s'il n'était pas déjà dans la liste
           else if(mapParticipant.get(collaborator.getName()) == null) {
-            ExpenseFacade.getInstance().addParticipant(ExpenseFacade.getInstance().getExpense().getId(), collaborator.getId());
+            ExpenseFacade.getInstance().addParticipant(id_expense, collaborator.getId());
           }
         }
         //et enfin, enlever les ex-participants
@@ -164,7 +167,7 @@ public class ExpenseModifyController {
             for (Collaborator collaborator : this.selectedParticipants) {
               if (collaborator.getId() == entry.getValue()) found = true;
             }
-            if(!found) ExpenseFacade.getInstance().removeParticipant(ExpenseFacade.getInstance().getExpense().getId(), entry.getValue());
+            if(!found) ExpenseFacade.getInstance().removeParticipant(id_expense, entry.getValue());
           }
         }
 
