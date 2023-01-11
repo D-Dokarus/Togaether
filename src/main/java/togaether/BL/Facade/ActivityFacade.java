@@ -30,6 +30,10 @@ public class ActivityFacade {
 
     /**
      * Query the creation of the actual activity in DB
+     * Create a new activity in the database
+     * @param activity
+     * @throws DBNotFoundException
+     * @throws SQLException
      */
     public void createActivity(Activity activity) throws DBNotFoundException {
         AbstractFactory fact = AbstractFactory.createInstance();
@@ -44,6 +48,12 @@ public class ActivityFacade {
 
     /**
      * Query the update of the actual activity in DB
+     * update the activity in the DB
+     * @param activity
+     * @throws DBNotFoundException
+     * @throws SQLException
+     * @throws DBNotFoundException
+     *
      */
     public void updateActivity(Activity activity) throws DBNotFoundException {
         AbstractFactory fact = AbstractFactory.createInstance();
@@ -58,6 +68,11 @@ public class ActivityFacade {
 
     /**
      * Query the update of the activity in DB with an id
+     * update the activity in the DB
+     * @param activity
+     * @throws DBNotFoundException
+     * @throws SQLException
+     * @throws DBNotFoundException
      */
     public void updateActivityById(Activity activity, int activity_id) throws DBNotFoundException {
         AbstractFactory fact = AbstractFactory.createInstance();
@@ -73,6 +88,10 @@ public class ActivityFacade {
 
     /**
      * Query the deletion of the actual activity in DB
+     * delete the activity in the DB
+     * @param activity
+     * @throws DBNotFoundException
+     * @throws SQLException
      */
     public void deleteActivity(Activity activity) throws DBNotFoundException {
         AbstractFactory fact = AbstractFactory.createInstance();
@@ -87,6 +106,9 @@ public class ActivityFacade {
 
     /**
      * Query the finding of the actual activity in DB
+     * find the activity in the DB
+     * @param id
+     * @throws SQLException
      */
     public List<Activity> findActivitiesByTravelId(int id) {
         ArrayList<Activity> liste = new ArrayList<>();
