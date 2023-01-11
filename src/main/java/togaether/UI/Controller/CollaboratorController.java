@@ -307,8 +307,8 @@ public class CollaboratorController {
             you = friend.getUser1();
             other = friend.getUser2();
         }else{
-            you = friend.getUser1();
-            other = friend.getUser2();
+            you = friend.getUser2();
+            other = friend.getUser1();
         }
         Travel travel = TravelFacade.getInstance().getTravel();
         Notification notification = new Notification(other,you,you.getPseudo() + " vous invite à rejoindre le voyage : " + travel.getNameTravel(),true,NotificationCategory.createNotification("travelInvitation"),travel.getIdTravel());

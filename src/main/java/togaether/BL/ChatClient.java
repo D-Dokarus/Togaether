@@ -24,7 +24,7 @@ public class ChatClient implements Observer {
   public ChatClient(String host, int port, ChatController chatController) throws IOException
   {
     this.chatController = chatController;
-    this.service = new ObservableClient(host, port);
+    this.service = new ObservableClient("172.17.32.1", port);
     this.service.addObserver(this);
 
     //TO DO
