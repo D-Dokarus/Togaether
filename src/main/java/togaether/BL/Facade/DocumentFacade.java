@@ -29,6 +29,11 @@ public class DocumentFacade {
 
     /**
      * Query the creation of the actual document in DB
+     * Create a new document in the database
+     *
+     * @param document
+     * @throws DBNotFoundException
+     * @throws SQLException
      */
     public void createDocument(Document document) throws DBNotFoundException {
         AbstractFactory fact = AbstractFactory.createInstance();
@@ -43,6 +48,10 @@ public class DocumentFacade {
 
     /**
      * Query the update of the actual document in DB
+     *
+     * @param document
+     * @throws DBNotFoundException
+     * @throws SQLException
      */
     public void updateDocument(Document document) throws DBNotFoundException {
         AbstractFactory fact = AbstractFactory.createInstance();
@@ -57,6 +66,10 @@ public class DocumentFacade {
 
     /**
      * Query the deletion of the actual document in DB
+     * Delete the document in the DB
+     * @param document
+     * @throws DBNotFoundException
+     * @throws SQLException
      */
     public void deleteDocument(Document document) throws DBNotFoundException {
         AbstractFactory fact = AbstractFactory.createInstance();
@@ -70,7 +83,10 @@ public class DocumentFacade {
     }
 
     /**
-     * Query the finding of the actual document in DB
+     * Query the finding of the actual document in DB by the associated travel id
+     * @param id
+     * @return List<Document>
+     * * @throws DBNotFoundException
      */
     public List<Document> findDocumentsByTravelId(int id) {
         ArrayList<Document> liste = new ArrayList<>();
@@ -84,8 +100,10 @@ public class DocumentFacade {
 
     /**
      * Query the finding of the document by id in DB
-     *
      * @param id
+     * @return Document
+     * @throws DBNotFoundException
+     * @throws SQLException
      */
     public Document findDocumentById(int id) {
         Document document = null;
