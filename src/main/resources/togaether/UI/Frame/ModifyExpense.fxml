@@ -7,19 +7,54 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="togaether.UI.Controller.ExpenseModifyController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/" fx:controller="togaether.UI.Controller.ExpenseModifyController">
    <children>
-      <Button fx:id="returnButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onReturnButtonClicked" text="Annuler" />
-      <DatePicker id="dateStart" fx:id="dateExpense" layoutX="31.0" layoutY="184.0" prefHeight="33.0" prefWidth="145.0" promptText="Non défni" />
-      <Label layoutX="31.0" layoutY="161.0" text="Date :" />
-      <TextArea fx:id="nameExpense" layoutX="27.0" layoutY="64.0" prefHeight="38.0" prefWidth="261.0" promptText="Nom de la dépense" />
-      <Button fx:id="confirmedButton" layoutX="442.0" layoutY="352.0" mnemonicParsing="false" onAction="#onConfirmedButtonClicked" text="Confirmer" />
-      <Label fx:id="labelError" layoutX="66.0" layoutY="314.0" textFill="RED" />
-      <TextArea fx:id="valueExpense" layoutX="27.0" layoutY="111.0" prefHeight="38.0" prefWidth="152.0" promptText="Montant de la dépense" />
-      <ChoiceBox fx:id="selectCategory" layoutX="31.0" layoutY="268.0" prefWidth="150.0" />
-      <Label layoutX="31.0" layoutY="244.0" text="Catégorie" />
-      <Label layoutX="425.0" layoutY="39.0" text="Qui rembourse :" />
-      <ListView fx:id="participantList" layoutX="368.0" layoutY="61.0" prefHeight="254.0" prefWidth="200.0" />
+      <Button fx:id="returnButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onReturnButtonClicked" prefHeight="59.0" prefWidth="140.0" text="Annuler">
+         <font>
+            <Font name="Garamond" size="24.0" />
+         </font></Button>
+      <DatePicker id="dateStart" fx:id="dateExpense" layoutX="84.0" layoutY="341.0" prefHeight="59.0" prefWidth="287.0" promptText="Non défni" />
+      <Label layoutX="84.0" layoutY="308.0" text="Date">
+         <font>
+            <Font name="Garamond" size="24.0" />
+         </font></Label>
+      <TextArea fx:id="nameExpense" layoutX="84.0" layoutY="131.0" prefHeight="59.0" prefWidth="287.0" promptText="Nom de la dépense">
+         <font>
+            <Font name="Garamond" size="24.0" />
+         </font></TextArea>
+      <Button fx:id="confirmedButton" layoutX="545.0" layoutY="513.0" mnemonicParsing="false" onAction="#onConfirmedButtonClicked" prefHeight="59.0" prefWidth="140.0" text="Confirmer">
+         <font>
+            <Font name="Garamond" size="24.0" />
+         </font></Button>
+      <Label fx:id="labelError" alignment="CENTER" layoutX="83.0" layoutY="534.0" prefHeight="30.0" prefWidth="459.0" textFill="RED">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <TextArea fx:id="valueExpense" layoutX="84.0" layoutY="230.0" prefHeight="59.0" prefWidth="287.0" promptText="Montant de la dépense">
+         <font>
+            <Font name="Garamond" size="24.0" />
+         </font></TextArea>
+      <ChoiceBox fx:id="selectCategory" layoutX="84.0" layoutY="448.0" prefHeight="59.0" prefWidth="287.0" />
+      <Label layoutX="84.0" layoutY="417.0" text="Catégorie">
+         <font>
+            <Font name="Garamond" size="24.0" />
+         </font></Label>
+      <Label layoutX="456.0" layoutY="44.0" text="Qui rembourse :">
+         <font>
+            <Font name="Garamond" size="24.0" />
+         </font></Label>
+      <ListView fx:id="participantList" layoutX="456.0" layoutY="82.0" prefHeight="425.0" prefWidth="318.0" />
+      <Label layoutX="84.0" layoutY="198.0" prefHeight="30.0" prefWidth="89.0" text="Montant">
+         <font>
+            <Font name="Garamond" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="86.0" layoutY="97.0" prefHeight="30.0" prefWidth="89.0" text="Nom">
+         <font>
+            <Font name="Garamond" size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

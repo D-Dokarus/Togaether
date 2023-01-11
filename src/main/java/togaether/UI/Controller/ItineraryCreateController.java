@@ -155,29 +155,30 @@ public class ItineraryCreateController {
     public void onConfirmedButtonClicked(ActionEvent event) {
         // if it's a itinerary type transport
         if(!this.nameItinerary.getText().isEmpty() && !this.descriptionItinerary.getText().isEmpty()){
-            if(isSelected == 1){
-                RadioButton rb = (RadioButton) tg.getSelectedToggle();
-                switch (rb.getText()){
-                    case "Voiture 🚗":
-                        this.catSelected = 1; // "Car"
-                        break;
-                    case "Avion ✈":
-                        this.catSelected = 2; // "Plane"
-                        break;
-                    case "Bus 🚌":
-                        this.catSelected = 3; // "Bus"
-                        break;
-                    case "Train 🚂":
-                        this.catSelected = 4; // "Train"
-                        break;
-                    case "Bateau ⛵":
-                        this.catSelected = 5; // "Boat"
-                        break;
-                    case "Pied 🚶":
-                        this.catSelected = 6; // "Walk"
-                        break;
+            if(isSelected != -1){
+                if(isSelected == 1){
+                    RadioButton rb = (RadioButton) tg.getSelectedToggle();
+                    switch (rb.getText()){
+                        case "Voiture 🚗":
+                            this.catSelected = 1; // "Car"
+                            break;
+                        case "Avion ✈":
+                            this.catSelected = 2; // "Plane"
+                            break;
+                        case "Bus 🚌":
+                            this.catSelected = 3; // "Bus"
+                            break;
+                        case "Train 🚂":
+                            this.catSelected = 4; // "Train"
+                            break;
+                        case "Bateau ⛵":
+                            this.catSelected = 5; // "Boat"
+                            break;
+                        case "Pied 🚶":
+                            this.catSelected = 6; // "Walk"
+                            break;
+                    }
                 }
-            } else if (isSelected == 0){
                 LinkedList<Itinerary> linkedList = this.travelFacade.findItineraries(this.travelFacade.getTravel().getIdTravel());
                 int indexBeforeItinerary = -1;
                 if(linkedList.size()!=0){
@@ -211,7 +212,8 @@ public class ItineraryCreateController {
                 }else {
                     this.labelErrorHour.setText("L'heure n'est pas au bon format,\n pour rappel le bon format est 00:00");
                 }
-            }else {
+
+            } else {
                 this.labelError.setText("Choisissez le type d'étape !");
             }
         } else {

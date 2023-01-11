@@ -7,6 +7,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import togaether.BL.Facade.BudgetFacade;
+import togaether.BL.Facade.CollaboratorFacade;
+import togaether.BL.Facade.ExpenseFacade;
 import togaether.BL.Facade.TravelFacade;
 import togaether.BL.Model.Budget;
 import togaether.UI.SceneController;
@@ -81,7 +83,7 @@ public class BudgetController {
     private static final String PATTERN = "[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?";
 
     @FXML
-    protected void initialize() {
+    protected void initialize() throws SQLException {
         this.budgetFacade = BudgetFacade.getInstance();
         this.travelFacade = TravelFacade.getInstance();
         this.labelError.setVisible(false);
@@ -89,7 +91,6 @@ public class BudgetController {
         this.ConfirmedButton.setVisible(false);
         try {
             this.budgetsList = this.budgetFacade.findBudgetSByCollaboratorId(this.travelFacade.getCollaborator().getId());
-            System.out.println(budgetsList.size());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -279,7 +280,7 @@ public class BudgetController {
         return matcher.matches();
     }
 
-    public void init() {
+    public void init() throws SQLException {
         this.food.setVisible(false);
         this.health.setVisible(false);
         this.transport.setVisible(false);
@@ -293,39 +294,46 @@ public class BudgetController {
         this.checkboxHealth.setVisible(false);
         this.checkboxFood.setVisible(false);
 
+        ExpenseFacade expenseFacade = ExpenseFacade.getInstance();
 
         if (this.budgetsList.get(0).getLimit() != -1){
-            this.FoodBudget.setText(Double.toString(this.budgetsList.get(0).getLimit()));
+            double exp = expenseFacade.calcAmountByCollaboratorIdAndCategoryExpense(this.travelFacade.getCollaborator().getId(),1);
+            this.FoodBudget.setText(exp+" / "+Double.toString(this.budgetsList.get(0).getLimit()));
         } else {
             this.FoodBudget.setText("Pas de budget");
         }
 
         if (this.budgetsList.get(1).getLimit() != -1){
-            this.TransportBudget.setText(Double.toString(this.budgetsList.get(1).getLimit()));
+            double exp = expenseFacade.calcAmountByCollaboratorIdAndCategoryExpense(this.travelFacade.getCollaborator().getId(),2);
+            this.TransportBudget.setText(exp+" / "+Double.toString(this.budgetsList.get(1).getLimit()));
         } else {
             this.TransportBudget.setText("Pas de budget");
         }
 
         if (this.budgetsList.get(2).getLimit() != -1){
-            this.OtherBudget.setText(Double.toString(this.budgetsList.get(2).getLimit()));
+            double exp = expenseFacade.calcAmountByCollaboratorIdAndCategoryExpense(this.travelFacade.getCollaborator().getId(),3);
+            this.OtherBudget.setText(exp+" / "+Double.toString(this.budgetsList.get(2).getLimit()));
         } else {
             this.OtherBudget.setText("Pas de budget");
         }
 
         if (this.budgetsList.get(3).getLimit() != -1){
-            this.HealthBudget.setText(Double.toString(this.budgetsList.get(3).getLimit()));
+            double exp = expenseFacade.calcAmountByCollaboratorIdAndCategoryExpense(this.travelFacade.getCollaborator().getId(),4);
+            this.HealthBudget.setText(exp+" / "+Double.toString(this.budgetsList.get(3).getLimit()));
         } else {
             this.HealthBudget.setText("Pas de budget");
         }
 
         if (this.budgetsList.get(4).getLimit() != -1){
-            this.AccommodationBudget.setText(Double.toString(this.budgetsList.get(4).getLimit()));
+            double exp = expenseFacade.calcAmountByCollaboratorIdAndCategoryExpense(this.travelFacade.getCollaborator().getId(),5);
+            this.AccommodationBudget.setText(exp+" / "+Double.toString(this.budgetsList.get(4).getLimit()));
         } else {
             this.AccommodationBudget.setText("Pas de budget");
         }
 
         if (this.budgetsList.get(5).getLimit() != -1){
-            this.EntertainmentBudget.setText(Double.toString(this.budgetsList.get(5).getLimit()));
+            double exp = expenseFacade.calcAmountByCollaboratorIdAndCategoryExpense(this.travelFacade.getCollaborator().getId(),6);
+            this.EntertainmentBudget.setText(exp+" / "+Double.toString(this.budgetsList.get(5).getLimit()));
         } else {
             this.EntertainmentBudget.setText("Pas de budget");
         }
