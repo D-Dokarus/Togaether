@@ -196,7 +196,6 @@ public class ItineraryCreateController {
                 if((correctHour || this.hourItinerary.getText().isEmpty())){
                     try {
                         Itinerary iti = new Itinerary(this.travelFacade.getTravel().getIdTravel(),this.nameItinerary.getText(),dateNewItinerary,indexBeforeItinerary,this.catSelected,this.descriptionItinerary.getText(), this.hourItinerary.getText(),-1);
-                        System.out.println(iti);
                         int ret = itineraryFacade.createItinerary(iti);
                         Itinerary itiResult = itineraryFacade.findItineraryById(ret);
                         if(linkedList.size()!=0){

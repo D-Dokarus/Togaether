@@ -44,6 +44,10 @@ public class DeleteAccountController {
 
     }
 
+    public void onCancelButtonClick(ActionEvent event) {
+        SceneController.getInstance().switchToSettings(event);
+    }
+
     public void switchToSceneRegisterFrame(ActionEvent event) {
         SceneController.getInstance().switchToRegister(event);
     }
