@@ -38,7 +38,7 @@ public class ChatController {
   protected void initialize() {
     this.reloadMessages();
     try {
-      this.chatClient = new ChatClient("127.0.0.1", 5555, this);
+      this.chatClient = new ChatClient("172.17.32.1", 5555, this);
     } catch (IOException e) {
       this.displayInfo("Attention : connection au chat en direct échouée");
     }

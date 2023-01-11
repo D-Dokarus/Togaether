@@ -1,6 +1,7 @@
 package togaether.BL;
 
 import java.io.*;
+import java.net.InetAddress;
 import java.util.Observable;
 
 import com.lloseng.ocsf.server.*;
@@ -70,6 +71,7 @@ public class ChatServer implements java.util.Observer {
   public static void main(String[] args) {
     try{
       new ChatServer(DEFAULT_PORT);
+      System.out.println(InetAddress.getLocalHost().toString().split("/")[1]);
     }
     catch (Exception ex) {
       System.out.println("ERROR - Could not listen for clients!");
