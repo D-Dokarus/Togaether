@@ -317,12 +317,10 @@ public class NotificationDAOPostgres implements NotificationDAO {
                         User from = null;
                         if(resultSet.getInt("from_user") != 0 ){
                            from = new User(resultSet.getInt("from_user"),resultSet.getString("u2_name"),resultSet.getString("u2_surname"),resultSet.getString("u2_pseudo"),resultSet.getString("u2_country"));
-                            System.out.println(from.getId() + " " +from.getPseudo() + " " + from.getName() + " " + from.getSurname()+ " " + to.getCountry());
-
                         }
-                        System.out.println(to.getId() + " " +to.getPseudo() + " " + to.getName() + " " + to.getSurname()+ " " + to.getCountry());
+
                         NotificationCategory category = NotificationCategory.createNotification(resultSet.getString("name_notification_cat"));
-                        System.out.println("hehe");
+
                         Notification notification = null;
                         notification = new Notification(resultSet.getInt("notif_id"),
                                     to,
