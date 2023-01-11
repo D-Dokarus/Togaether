@@ -21,7 +21,7 @@
          <font>
             <Font name="Garamond" size="24.0" />
          </font></Button>
-      <Button fx:id="cancelButton" layoutX="22.0" layoutY="24.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="126.0" text="Annuler">
+      <Button fx:id="cancelButton" onAction="#onCancelButtonClick" layoutX="22.0" layoutY="24.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="126.0" text="Annuler">
          <font>
             <Font name="Garamond" size="24.0" />
          </font>
